@@ -1,0 +1,11 @@
+export function AdviceDisclaimer({ className = '' }: { className?: string }) {
+  return (
+    <p
+      className={`text-vz-gray m-0 border-vz-rule border-t pt-4 text-[13px] leading-[1.45] ${className}`}
+    >
+      General information only. Nothing on this page is personalised investment, tax or legal
+      advice. Decisions should be based on your own circumstances and, where appropriate, a written
+      analysis from a qualified adviser.
+    </p>
+  );
+}

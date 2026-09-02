@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 574 300" width="574" height="300" role="img" aria-label="Table showing the returns on a voluntary pension fund contribution">
+  <rect width="574" height="300" fill="#eeeef0"/>
+  <g transform="rotate(-7 287 150)">
+    <rect x="62" y="34" width="452" height="238" fill="#ffffff"/>
+    <rect x="62" y="34" width="452" height="238" fill="none" stroke="#dddddd"/>
+
+    <text x="86" y="70" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#191919">Returns on a pension fund contribution</text>
+
+    <text x="86" y="97" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#191919">Contribution amount</text>
+    <text x="404" y="97" font-family="Inter, Arial, sans-serif" font-size="10" fill="#666666" text-anchor="end">20&#8217;000 CHF</text>
+    <line x1="86" y1="105" x2="490" y2="105" stroke="#e5e5e5"/>
+
+    <text x="86" y="123" font-family="Inter, Arial, sans-serif" font-size="10" fill="#191919">Tax saving</text>
+    <text x="404" y="123" font-family="Inter, Arial, sans-serif" font-size="10" fill="#666666" text-anchor="end">5&#8217;600 CHF</text>
+    <line x1="86" y1="131" x2="490" y2="131" stroke="#e5e5e5"/>
+
+    <text x="86" y="149" font-family="Inter, Arial, sans-serif" font-size="10" fill="#191919">Actual capital</text>
+    <text x="404" y="149" font-family="Inter, Arial, sans-serif" font-size="10" fill="#666666" text-anchor="end">15&#8217;500 CHF</text>
+    <line x1="86" y1="157" x2="490" y2="157" stroke="#e5e5e5"/>
+
+    <text x="86" y="175" font-family="Inter, Arial, sans-serif" font-size="10" fill="#191919">Capital upon withdrawal</text>
+    <text x="404" y="175" font-family="Inter, Arial, sans-serif" font-size="10" fill="#666666" text-anchor="end">28&#8217;720 CHF</text>
+    <line x1="86" y1="183" x2="490" y2="183" stroke="#e5e5e5"/>
+
+    <text x="86" y="201" font-family="Inter, Arial, sans-serif" font-size="10" fill="#191919">Tax on payment</text>
+    <text x="404" y="201" font-family="Inter, Arial, sans-serif" font-size="10" fill="#666666" text-anchor="end">-1&#8217;380 CHF</text>
+    <line x1="86" y1="209" x2="490" y2="209" stroke="#e5e5e5"/>
+
+    <text x="86" y="227" font-family="Inter, Arial, sans-serif" font-size="10" fill="#191919">Net capital</text>
+    <text x="404" y="227" font-family="Inter, Arial, sans-serif" font-size="10" fill="#666666" text-anchor="end">27&#8217;340 CHF</text>
+
+    <rect x="80" y="234" width="416" height="20" fill="#fff48e"/>
+    <text x="86" y="248" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#191919">Net return per year</text>
+    <text x="404" y="248" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#191919" text-anchor="end">3.90 %</text>
+
+    <text x="86" y="266" font-family="Inter, Arial, sans-serif" font-size="7" fill="#999999">Assumptions: marginal tax rate 28 %, interest paid on contribution amount for 20 years.</text>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite
+.env
+.env.*.local
+
+# scratch folder used for reference analysis / screenshot diffing
+_refdump
+_verify
+.impeccable

@@ -1,0 +1,93 @@
+import { buildEnglishCatalog } from '../fromData';
+import type { Translations } from '../types';
+
+const meta: Translations['meta'] = {
+  siteName: 'Helfenstein Asset Management AG',
+  defaultTitle:
+    'Helfenstein Asset Management AG - Independent wealth management, financial consulting and retirement planning',
+  defaultDescription:
+    'Independent advice on retirement planning, financial investments, estate planning, real estate, taxes, insurance and pensions.',
+  teamDescription: 'Experienced investment professionals at Helfenstein Asset Management AG.',
+  notFoundTitle: 'Page not found',
+};
+
+const ui: Translations['ui'] = {
+  search: 'Search',
+  menu: 'Menu',
+  login: 'Login',
+  makeAppointment: 'Make an appointment',
+  arrangeAppointment: 'Arrange an appointment',
+  orderForFree: 'Order for free',
+  subscribeNow: 'Subscribe now',
+  signUpForFree: 'Sign up for free',
+  readMore: 'Read more',
+  backToHome: 'Back to the home page',
+  popularTopics: 'Popular topics',
+  pageNotFound: 'Page not found',
+  pageNotFoundBody:
+    'The page you were looking for does not exist, or has been moved. Please use the navigation above, or start again from one of the topics below.',
+  news: 'News',
+  ourOffering: 'Our offering',
+  stockExchangeAndMarkets: 'Stock exchange and Markets',
+  moreStockMarketNews: 'More stock market news',
+  marketData: 'Market data',
+  marketDataCaption:
+    'Indicative index and currency levels with the change since the previous close',
+  instrument: 'Instrument',
+  level: 'Level',
+  change: 'Change',
+  moreMandates: 'More mandates',
+  moreOfferings: 'More offerings',
+  propertyType: 'Property type',
+  whatWeDoForYou: 'What we do for you',
+  relatedArticles: 'Related articles',
+  team: 'Team',
+  teamSubtitle: 'Experienced investment professionals',
+  featuredMemberLead:
+    'Friedrich Hartmann leads Helfenstein’s investment philosophy and long-term capital allocation.',
+  about: 'About',
+  results: 'Results',
+  colleagues: 'Colleagues',
+  knowledgeHub: 'Knowledge hub',
+  position: 'Position',
+  skipToSearch: 'Skip to search',
+  skipToNav: 'Skip to main navigation',
+  skipToMain: 'Skip to main content',
+  skipToFooter: 'Skip to footer navigation',
+  searchWebsite: 'Search the website',
+  searchPlaceholder: 'What are you looking for?',
+  reset: 'Reset',
+  searchSubmit: 'Search',
+  noResults: 'No results for',
+  cookieNotice: 'Cookie notice',
+  cookieBody:
+    'This website uses cookies and other tracking technologies. For more information, please read our',
+  legalNotice: 'Legal Notice',
+  privacyPolicy: 'Privacy Policy',
+  dismissCookie: 'Dismiss cookie notice',
+  findUsOn: 'You can also find us on:',
+  externalLink: '(external link)',
+  externalLinkNewWindow: '(external link, opens in a new window)',
+  home: 'Home',
+  finmaAlt: 'FINMA — Authorised institutions, individuals and products',
+  logoAria: 'Helfenstein Asset Management AG — home',
+  mainNav: 'Main navigation',
+  topNav: 'Top navigation',
+  quickLinks: 'Quick links',
+  footerNav: 'Footer navigation',
+  legalNav: 'Legal',
+  subscribeNewsletter: 'Subscribe to newsletter',
+  forIndividuals: 'For individuals',
+  forCompanies: 'For companies',
+  clientStories: 'Client stories',
+  verifyAuthorisation: 'Verify our authorisation',
+  relatedService: 'Related service',
+  allInsights: 'All insights',
+  meetSpecialists: 'Meet our specialists',
+  regulatoryChallenges: 'Regulatory challenges',
+  howWeHelp: 'How we help',
+  adviceDisclaimer:
+    'General information only. Nothing on this page is personalised investment, tax or legal advice.',
+};
+
+export const en: Translations = buildEnglishCatalog(ui, meta);

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 260" width="220" height="260" role="img" aria-label="Printed checklist for retirement planning">
+  <g transform="rotate(9 110 130)">
+    <rect x="34" y="30" width="150" height="200" fill="#ffffff" stroke="#e0dad2"/>
+    <rect x="26" y="22" width="150" height="200" fill="#ffffff" stroke="#e0dad2"/>
+    <rect x="18" y="14" width="150" height="200" fill="#ffffff" stroke="#d8d2ca"/>
+
+    <text x="32" y="38" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" fill="#004388">Checklist</text>
+    <line x1="32" y1="45" x2="154" y2="45" stroke="#d6521c" stroke-width="1.5"/>
+
+    <g fill="none" stroke="#004388" stroke-width="1.2">
+      <rect x="32" y="56" width="7" height="7"/>
+      <rect x="32" y="76" width="7" height="7"/>
+      <rect x="32" y="96" width="7" height="7"/>
+      <rect x="32" y="116" width="7" height="7"/>
+      <rect x="32" y="136" width="7" height="7"/>
+      <rect x="32" y="156" width="7" height="7"/>
+      <rect x="32" y="176" width="7" height="7"/>
+    </g>
+    <g stroke="#d6521c" stroke-width="1.6" fill="none">
+      <path d="M33 59.5l2.5 2.5 4.5-5"/>
+      <path d="M33 79.5l2.5 2.5 4.5-5"/>
+      <path d="M33 99.5l2.5 2.5 4.5-5"/>
+    </g>
+    <g fill="#c9c4bd">
+      <rect x="46" y="57" width="102" height="2.6"/>
+      <rect x="46" y="63" width="72" height="2.6"/>
+      <rect x="46" y="77" width="96" height="2.6"/>
+      <rect x="46" y="83" width="60" height="2.6"/>
+      <rect x="46" y="97" width="104" height="2.6"/>
+      <rect x="46" y="103" width="80" height="2.6"/>
+      <rect x="46" y="117" width="92" height="2.6"/>
+      <rect x="46" y="123" width="66" height="2.6"/>
+      <rect x="46" y="137" width="100" height="2.6"/>
+      <rect x="46" y="143" width="54" height="2.6"/>
+      <rect x="46" y="157" width="88" height="2.6"/>
+      <rect x="46" y="163" width="74" height="2.6"/>
+      <rect x="46" y="177" width="98" height="2.6"/>
+      <rect x="46" y="183" width="62" height="2.6"/>
+    </g>
+    <rect x="32" y="196" width="60" height="12" rx="6" fill="#eaeffb"/>
+  </g>
+</svg>

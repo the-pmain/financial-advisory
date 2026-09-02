@@ -1,0 +1,125 @@
+import { useLocation } from 'react-router';
+import { ROUTES } from '../constants/routes';
+import { findArticle } from '../data/content';
+import { topicByPath } from '../data/topics';
+import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
+import { ArticleSlim } from '../components/widgets/ArticleTeaser';
+import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
+import { ChallengesBenefits } from '../components/widgets/ChallengesBenefits';
+import { DocumentsList } from '../components/widgets/DocumentsList';
+import { NewsletterCta } from '../components/widgets/NewsletterCta';
+import { SpecialistsBand } from '../components/widgets/SpecialistsBand';
+import { TextTeasers } from '../components/widgets/TextTeasers';
+import { VerifyFinma } from '../components/widgets/VerifyFinma';
+import { ButtonOrange, SectionTitle } from '../components/ui/primitives';
+import { NotFoundPage } from './NotFoundPage';
+
+/**
+ * One template for every navigation destination. It reuses the home page's
+ * widgets so type, rhythm and rules stay identical across the site.
+ */
+export function TopicPage() {
+  const { pathname } = useLocation();
+  const topic = topicByPath.get(pathname);
+
+  if (!topic) return <NotFoundPage />;
+
+  const related = (topic.relatedSlugs ?? [])
+    .map((slug) => findArticle(slug))
+    .filter((article): article is NonNullable<typeof article> => Boolean(article));
+
+  return (
+    <>
+      <header className="max-w-[802px]">
+        <h1 className="mb-3">{topic.title}</h1>
+        <p className="text-vz-ink m-0 text-[42px] leading-[1.1875] font-light max-lap:text-[32px] max-mob:text-[24px]">
+          {topic.subtitle}
+        </p>
+      </header>
+
+      <div className="mt-10 max-w-[802px]">
+        {topic.intro.map((paragraph, i) => (
+          <p key={i} className="text-vz-ink text-[19px] leading-[1.45] max-mob:text-[18px]">
+            {paragraph}
+          </p>
+        ))}
+        <ButtonOrange
+          to={
+            topic.ctaLabel === 'Subscribe now'
+              ? ROUTES.newsletter
+              : topic.ctaLabel === 'Sign up for free'
+                ? ROUTES.financialPortal
+                : topic.ctaLabel === 'Order for free'
+                  ? pathname
+                  : ROUTES.appointments
+          }
+          className="mt-2"
+        >
+          {topic.ctaLabel ?? 'Make an appointment'}
+        </ButtonOrange>
+      </div>
+
+      <div className="mt-12 max-lap:mt-10">
+        <TextTeasers
+          title="What we do for you"
+          items={topic.highlights.map((item) => ({
+            title: item.title,
+            text: item.text,
+            to: pathname,
+          }))}
+        />
+      </div>
+
+      {(topic.challenges || topic.benefits) && (
+        <div className="mt-12 max-lap:mt-10">
+          <ChallengesBenefits challenges={topic.challenges} benefits={topic.benefits} />
+        </div>
+      )}
+
+      {topic.showVerifyFinma && (
+        <div className="mt-12 max-lap:mt-10">
+          <VerifyFinma />
+        </div>
+      )}
+
+      {topic.showDocuments && (
+        <div className="mt-12 max-lap:mt-10">
+          <DocumentsList />
+        </div>
+      )}
+
+      {topic.showCaseStudies && (
+        <div className="mt-12 max-lap:mt-10">
+          <CaseStudiesBand />
+        </div>
+      )}
+
+      {topic.expertiseTags && (
+        <div className="mt-12 max-lap:mt-10">
+          <SpecialistsBand tags={topic.expertiseTags} />
+        </div>
+      )}
+
+      {related.length > 0 && (
+        <section className="mt-12 max-lap:mt-10">
+          <SectionTitle>Related articles</SectionTitle>
+          <div className="grid grid-cols-2 gap-x-[68px] max-tab:grid-cols-1 max-tab:gap-x-0">
+            {related.map((article) => (
+              <ArticleSlim key={article.slug} article={article} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {topic.adviceDisclaimer && (
+        <div className="mt-12 max-w-[802px] max-lap:mt-10">
+          <AdviceDisclaimer />
+        </div>
+      )}
+
+      <div className="mt-12 max-lap:mt-10">
+        <NewsletterCta />
+      </div>
+    </>
+  );
+}
