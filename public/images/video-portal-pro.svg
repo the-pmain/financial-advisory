@@ -62,6 +62,6 @@
   <text x="256" y="164" font-family="Inter, Arial, sans-serif" font-size="6" fill="#8f9bb8">Order</text>
   <rect x="256" y="170" width="50" height="12" fill="#1f2b47"/>
   <rect x="312" y="170" width="50" height="12" fill="#1f2b47"/>
-  <rect x="256" y="186" width="106" height="12" rx="6" fill="#c95321"/>
+  <rect x="256" y="186" width="106" height="12" rx="6" fill="#9A5F38"/>
   <text x="309" y="195" font-family="Inter, Arial, sans-serif" font-size="6" font-weight="700" fill="#ffffff" text-anchor="middle">Buy</text>
 </svg>

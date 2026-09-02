@@ -1,12 +1,11 @@
 @import 'tailwindcss';
 
 /* ==========================================================================
-   Design tokens extracted from the reference site (vermoegenszentrum.ch).
-   The reference is a desktop-first stylesheet driven by max-width queries at
-   740 / 860 / 1024 / 1270 / 1280px, so the breakpoint scale below is defined
-   as min-width boundaries one pixel above each of those values. That lets
-   `max-mob:` / `max-tab:` / `max-lap:` / `max-desk:` reflow at exactly the
-   same pixel as the original.
+   Design tokens for Helfenstein Asset Management.
+   Palette tracks the brand mark: deep navy pillars (#0B1F33) and copper
+   bridge (#B2734A), with raised contrast neutrals for body/secondary text.
+   Breakpoints stay desktop-first (min-width one px above 740/860/1024/1270/1280)
+   so `max-mob:` / `max-tab:` / `max-lap:` / `max-desk:` reflow as before.
    ========================================================================== */
 
 @theme {
@@ -18,42 +17,42 @@
   --breakpoint-mast: 1271px;
   --breakpoint-desk: 1281px;
 
-  /* -- brand blues -- */
-  --color-vz-blue: #004388;
-  --color-vz-blue-mid: #005ba6;
-  --color-vz-blue-link: #0061b1;
-  --color-vz-blue-soft: #a1bbf7;
-  --color-vz-blue-tint: #eaeffb;
-  --color-vz-blue-panel: #f4f7fd;
-  --color-vz-blue-panel-alt: #f0f4fd;
-  --color-vz-blue-panel-faint: #f6f8fe;
+  /* -- brand navy (Helfenstein logo pillars) -- */
+  --color-vz-blue: #0b1f33;
+  --color-vz-blue-mid: #14324a;
+  --color-vz-blue-link: #0f2a40;
+  --color-vz-blue-soft: #7a90a6;
+  --color-vz-blue-tint: #e6ecf1;
+  --color-vz-blue-panel: #eef2f5;
+  --color-vz-blue-panel-alt: #e8edf1;
+  --color-vz-blue-panel-faint: #f4f6f8;
 
-  /* -- accent oranges -- */
-  --color-vz-orange: #d6521c;
-  --color-vz-orange-btn: #c95321;
-  --color-vz-orange-light: #e86229;
+  /* -- accent copper (Helfenstein logo bridge) -- */
+  --color-vz-orange: #8f5530;
+  --color-vz-orange-btn: #9a5f38;
+  --color-vz-orange-light: #b2734a;
 
-  /* -- neutrals -- */
-  --color-vz-ink: #191919;
-  --color-vz-gray: #666666;
-  --color-vz-gray-mid: #838383;
-  --color-vz-gray-light: #999999;
-  --color-vz-rule: #e5e5e5;
-  --color-vz-rule-soft: #eaeaea;
-  --color-vz-page: #f5f5f7;
-  --color-vz-page-mobile: #eeeef0;
-  --color-vz-surface: #f5f5f7;
-  --color-vz-slate: #3a3f4d;
+  /* -- neutrals (raised contrast vs previous VZ greys) -- */
+  --color-vz-ink: #0a0a0a;
+  --color-vz-gray: #3f3f3f;
+  --color-vz-gray-mid: #525252;
+  --color-vz-gray-light: #666666;
+  --color-vz-rule: #cfd2d6;
+  --color-vz-rule-soft: #d8dbe0;
+  --color-vz-page: #e8ebef;
+  --color-vz-page-mobile: #dde1e6;
+  --color-vz-surface: #e8ebef;
+  --color-vz-slate: #243040;
 
-  /* -- warm surfaces (offer cards / CTA bands) -- */
-  --color-vz-cream: #f7ecdf;
-  --color-vz-cream-light: #fff7ed;
+  /* -- warm surfaces (copper-tinted, offer cards / CTA bands) -- */
+  --color-vz-cream: #f0e4d6;
+  --color-vz-cream-light: #faf4ee;
 
   /* -- semantic -- */
   --color-vz-down: #d90000;
   --color-vz-up: #4e924a;
   --color-vz-cart: #fff48e;
-  --color-vz-shadow: #aba9bf;
+  --color-vz-shadow: #8a9099;
 
   /* -- typography -- */
   --font-sans:
@@ -99,10 +98,10 @@
   --container-measure: 802px;
 
   /* -- elevation (deliberately very subtle, as per reference) -- */
-  --shadow-vz-card: 1px 1px 2px #aba9bf;
-  --shadow-vz-btn: 1px 1px 2px rgb(0 0 0 / 0.3);
-  --shadow-vz-btn-hover: 0.5px 0.5px 4px rgb(0 0 0 / 0.15);
-  --shadow-vz-header: 0 0.5px 0 #999999;
+  --shadow-vz-card: 1px 1px 3px rgb(11 31 51 / 0.18);
+  --shadow-vz-btn: 1px 1px 2px rgb(11 31 51 / 0.35);
+  --shadow-vz-btn-hover: 0.5px 0.5px 4px rgb(11 31 51 / 0.2);
+  --shadow-vz-header: 0 0.5px 0 #666666;
   --shadow-vz-modal: 0 0 20px rgb(0 0 0 / 0.25);
 
   /* -- motion: the reference uses .25s ease almost everywhere -- */

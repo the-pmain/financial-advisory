@@ -3,7 +3,6 @@ import { ROUTES } from '../constants/routes';
 import { ArticleFeatured, ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { AudienceBands, Hero } from '../components/widgets/Hero';
 import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
-import { CompaniesBand } from '../components/widgets/CompaniesBand';
 import { MarketsSection } from '../components/widgets/MarketsSection';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { OffersGallery } from '../components/widgets/OffersGallery';
@@ -46,10 +45,6 @@ export function HomePage() {
 
       <div className={gap}>
         <OffersGallery offers={offers} />
-      </div>
-
-      <div className={gap}>
-        <CompaniesBand />
       </div>
 
       <div className={gap}>

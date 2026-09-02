@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-import { Outlet, Route, Routes, useLocation } from 'react-router';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 import { PageShell } from './components/layout/PageShell';
 import { DocumentMeta } from './components/seo/DocumentMeta';
-import { StickyCta } from './components/widgets/StickyCta';
-import { ROUTE_PATTERNS } from './constants/routes';
+import { LEGACY_REDIRECTS, ROUTE_PATTERNS } from './constants/routes';
 import { AdminPage } from './pages/AdminPage';
 import { HomePage } from './pages/HomePage';
 import { TopicPage } from './pages/TopicPage';
@@ -26,12 +25,9 @@ function ScrollToTop() {
 
 function MarketingLayout() {
   return (
-    <>
-      <PageShell>
-        <Outlet />
-      </PageShell>
-      <StickyCta />
-    </>
+    <PageShell>
+      <Outlet />
+    </PageShell>
   );
 }
 
@@ -50,7 +46,9 @@ export function App() {
           <Route path={ROUTE_PATTERNS.legalPage} element={<LegalPage />} />
           <Route path={ROUTE_PATTERNS.teamMember} element={<TeamMemberPage />} />
           <Route path={ROUTE_PATTERNS.team} element={<TeamPage />} />
-          <Route path={ROUTE_PATTERNS.companiesSub} element={<TopicPage />} />
+          {Object.entries(LEGACY_REDIRECTS).map(([from, to]) => (
+            <Route key={from} path={from} element={<Navigate to={to} replace />} />
+          ))}
           <Route path={ROUTE_PATTERNS.aboutSub} element={<TopicPage />} />
           <Route path={ROUTE_PATTERNS.topic} element={<TopicPage />} />
           <Route path="*" element={<NotFoundPage />} />

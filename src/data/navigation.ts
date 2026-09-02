@@ -26,17 +26,6 @@ export const mainNavigation: NavGroup[] = [
     ],
   },
   {
-    label: 'Companies',
-    to: ROUTES.companies,
-    children: [
-      { label: 'Corporate succession planning', to: ROUTES.companiesSuccession },
-      { label: 'Pension funds', to: ROUTES.companiesPensionFunds },
-      { label: 'Management pension plans', to: ROUTES.companiesManagementPensionPlans },
-      { label: 'Insurance management', to: ROUTES.companiesInsuranceManagement },
-      { label: 'Establishing a company', to: ROUTES.companiesEstablishing },
-    ],
-  },
-  {
     label: 'About Helfenstein',
     to: ROUTES.about,
     children: [
@@ -54,7 +43,7 @@ export const mainNavigation: NavGroup[] = [
 export const quickLinks: NavLink[] = [
   { label: 'Retirement', to: ROUTES.retirement },
   { label: 'Investments', to: ROUTES.financialInvestments },
-  { label: 'Companies', to: ROUTES.companies },
+  { label: 'Estate planning', to: ROUTES.estatePlanning },
   { label: 'Real estate', to: ROUTES.realEstate },
   { label: 'Taxes', to: ROUTES.taxes },
   { label: 'Pensions', to: ROUTES.pensionPlanning },

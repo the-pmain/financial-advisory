@@ -14,11 +14,6 @@ const groups = [
 
 export function ExpertisePage() {
   const horizon = insightArticles.find((a) => a.slug === 'horizon-report-2026');
-  const calculators = [
-    { title: 'Retirement planner', text: 'Model pension vs lump sum scenarios — coming soon.' },
-    { title: 'Mortgage affordability', text: 'Stress-test imputed rates before you refinance — coming soon.' },
-    { title: 'Pillar 3a contribution', text: 'Check the annual maximum for your situation — coming soon.' },
-  ];
 
   return (
     <>
@@ -68,18 +63,6 @@ export function ExpertisePage() {
           })}
         </div>
       </div>
-
-      <section className="mt-12 max-lap:mt-10">
-        <SectionTitle>Calculators</SectionTitle>
-        <ul className="m-0 grid list-none grid-cols-3 gap-6 p-0 max-tab:grid-cols-1">
-          {calculators.map((item) => (
-            <li key={item.title} className="border-vz-rule border-t pt-4">
-              <h3 className="text-vz-ink m-0 text-[18px] font-bold">{item.title}</h3>
-              <p className="text-vz-gray-mid mt-2 mb-0 text-[15px] leading-[1.45]">{item.text}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       <p className="mt-10 mb-0">
         <UnderlineLink to={ROUTES.insights} bold>

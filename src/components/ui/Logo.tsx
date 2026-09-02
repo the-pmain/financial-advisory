@@ -11,9 +11,9 @@ export function Logo() {
     <Link
       to={ROUTES.home}
       rel="home"
-      aria-label={`${company.legalName} — home`}
+      aria-label={`${company.groupName} — home`}
       className="text-vz-blue hover:opacity-80 mr-auto flex min-w-0 shrink items-center transition-opacity duration-250"
-      title={company.legalName}
+      title={company.groupName}
     >
       <img
         src="/images/helfenstein-logo.png"
@@ -23,7 +23,7 @@ export function Logo() {
         className="block h-[68px] w-auto max-h-full object-contain object-left max-desk:h-[52px] max-mob:h-[40px]"
         decoding="async"
       />
-      <span className="visually-hidden">{company.legalName}</span>
+      <span className="visually-hidden">{company.groupName}</span>
     </Link>
   );
 }
@@ -42,15 +42,15 @@ export function LogoMark({ className }: { className?: string }) {
       className={`block shrink-0 ${className ?? ''}`}
     >
       <title>{company.shortName}</title>
-      {/* Navy pillars */}
-      <rect x="18" y="12" width="22" height="76" rx="2" fill="#0B1F33" />
-      <rect x="60" y="12" width="22" height="76" rx="2" fill="#0B1F33" />
+      {/* Navy pillars — sampled from brand mark */}
+      <rect x="16" y="12" width="24" height="76" rx="2" fill="#0B1F33" />
+      <rect x="60" y="12" width="24" height="76" rx="2" fill="#0B1F33" />
       {/* Copper bridge with concave ends */}
       <path
-        d="M38 42 C44 48, 56 48, 62 42 L62 58 C56 52, 44 52, 38 58 Z"
-        fill="#B87333"
+        d="M38 42 C45 49, 55 49, 62 42 L62 58 C55 51, 45 51, 38 58 Z"
+        fill="#9A5F38"
       />
-      <rect x="38" y="46" width="24" height="8" rx="1" fill="#C4843F" />
+      <rect x="38" y="45" width="24" height="10" rx="1.5" fill="#B2734A" />
     </svg>
   );
 }

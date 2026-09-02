@@ -25,9 +25,6 @@ export function DocumentsList({ title = 'Client documents' }: { title?: string }
           </li>
         ))}
       </ul>
-      <p className="text-vz-gray mt-4 mb-0 text-[13px] leading-[1.4]">
-        Placeholder files for demonstration — replace with current PDFs before production use.
-      </p>
     </section>
   );
 }

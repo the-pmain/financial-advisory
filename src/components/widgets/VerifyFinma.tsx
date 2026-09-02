@@ -33,8 +33,8 @@ export function VerifyFinma() {
             <li>Confirm the authorisation type and any public warnings before you engage.</li>
           </ol>
           <p className="text-vz-gray-mid mt-4 mb-0 text-[14px] leading-[1.4]">
-            {company.regulation.summary} Advisory conduct is also subject to the Swiss Financial
-            Services Act (FinSA).
+            {company.legalName} is {company.regulation.summary} Advisory conduct is also subject to
+            the Swiss Financial Services Act (FinSA).
           </p>
         </div>
         <FinmaLink className="justify-self-end max-mob:justify-self-start" />

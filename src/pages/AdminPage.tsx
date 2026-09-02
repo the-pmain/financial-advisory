@@ -136,8 +136,8 @@ function AdminPasscodeGate({
               key={i}
               className={`flex aspect-square min-w-0 flex-1 items-center justify-center rounded-[3px] text-[28px] font-bold transition-colors duration-150 ${
                 active
-                  ? 'bg-[#c5d8ef] text-vz-blue ring-vz-blue ring-2 ring-inset'
-                  : 'bg-[#d4e3f4] text-vz-ink'
+                  ? 'bg-vz-blue-tint text-vz-blue ring-vz-blue ring-2 ring-inset'
+                  : 'bg-vz-blue-panel text-vz-ink'
               }`}
             >
               {filled ? '•' : ''}

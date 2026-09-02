@@ -13,13 +13,14 @@ import {
   teamMemberPath,
 } from './constants/routes';
 
-export const SITE_NAME = company.legalName;
+/** Marketing surfaces use the group name; the legal entity is named on legal pages. */
+export const SITE_NAME = company.groupName;
 
 export const DEFAULT_TITLE =
-  `${company.legalName} - Independent wealth management, financial consulting and retirement planning`;
+  `${company.groupName} - Independent, fee-only financial advice for private clients in Switzerland`;
 
 export const DEFAULT_DESCRIPTION =
-  'Independent advice on retirement planning, financial investments, estate planning, real estate, taxes, insurance and pensions.';
+  'Independent advice on retirement planning, financial investments, estate planning, real estate, taxes, insurance and pensions. Paid only by our clients; we never hold your assets.';
 
 export type PageMeta = {
   title: string;
@@ -55,7 +56,7 @@ export function getPageMeta(pathname: string): PageMeta {
   if (path === ROUTES.insights) {
     return {
       title: `Insights | ${SITE_NAME}`,
-      description: `Articles, guides and regulatory explainers from ${company.legalName}.`,
+      description: `Articles, guides and regulatory explainers from ${company.groupName}.`,
       robots: 'index, follow',
     };
   }
@@ -79,7 +80,7 @@ export function getPageMeta(pathname: string): PageMeta {
   if (path === ROUTES.aboutTeam) {
     return {
       title: `Team | ${SITE_NAME}`,
-      description: `Experienced investment professionals at ${company.legalName}.`,
+      description: `Independent advisers who answer only to their clients at ${company.groupName}.`,
       robots: 'index, follow',
     };
   }

@@ -32,6 +32,8 @@ export function MegaMenu({
   const isPhone = useMediaQuery('(max-width: 740px)');
   const t = useT();
   const { mainNavigation } = t.nav;
+  // Groups share the row evenly, so the panel stays balanced as the count changes.
+  const columnWidth = mainNavigation.length >= 3 ? 'w-1/3' : 'w-1/2';
 
   useEffect(() => {
     if (!open) return;
@@ -54,7 +56,7 @@ export function MegaMenu({
             {mainNavigation.map((group) => (
               <li
                 key={group.label}
-                className="w-1/3 shrink-0 grow-0 px-[18px] max-lap:w-1/3 max-mob:w-full max-mob:px-0"
+                className={`${columnWidth} shrink-0 grow-0 px-[18px] max-mob:w-full max-mob:px-0`}
               >
                 {isPhone ? (
                   <PhoneGroup group={group} onClose={onClose} />

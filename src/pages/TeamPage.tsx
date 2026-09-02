@@ -54,7 +54,7 @@ export function TeamPage() {
       <header className="max-w-[802px]">
         <h1 className="mb-3">Team</h1>
         <p className="text-vz-ink m-0 text-[42px] leading-[1.1875] font-light max-lap:text-[32px] max-mob:text-[24px]">
-          Experienced investment professionals
+          Independent advisers who answer only to their clients
         </p>
       </header>
 

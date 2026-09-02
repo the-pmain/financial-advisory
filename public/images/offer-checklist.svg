@@ -4,10 +4,10 @@
     <rect x="26" y="22" width="150" height="200" fill="#ffffff" stroke="#e0dad2"/>
     <rect x="18" y="14" width="150" height="200" fill="#ffffff" stroke="#d8d2ca"/>
 
-    <text x="32" y="38" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" fill="#004388">Checklist</text>
-    <line x1="32" y1="45" x2="154" y2="45" stroke="#d6521c" stroke-width="1.5"/>
+    <text x="32" y="38" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" fill="#0B1F33">Checklist</text>
+    <line x1="32" y1="45" x2="154" y2="45" stroke="#B2734A" stroke-width="1.5"/>
 
-    <g fill="none" stroke="#004388" stroke-width="1.2">
+    <g fill="none" stroke="#0B1F33" stroke-width="1.2">
       <rect x="32" y="56" width="7" height="7"/>
       <rect x="32" y="76" width="7" height="7"/>
       <rect x="32" y="96" width="7" height="7"/>
@@ -16,7 +16,7 @@
       <rect x="32" y="156" width="7" height="7"/>
       <rect x="32" y="176" width="7" height="7"/>
     </g>
-    <g stroke="#d6521c" stroke-width="1.6" fill="none">
+    <g stroke="#B2734A" stroke-width="1.6" fill="none">
       <path d="M33 59.5l2.5 2.5 4.5-5"/>
       <path d="M33 79.5l2.5 2.5 4.5-5"/>
       <path d="M33 99.5l2.5 2.5 4.5-5"/>
@@ -37,6 +37,6 @@
       <rect x="46" y="177" width="98" height="2.6"/>
       <rect x="46" y="183" width="62" height="2.6"/>
     </g>
-    <rect x="32" y="196" width="60" height="12" rx="6" fill="#eaeffb"/>
+    <rect x="32" y="196" width="60" height="12" rx="6" fill="#e6ecf1"/>
   </g>
 </svg>

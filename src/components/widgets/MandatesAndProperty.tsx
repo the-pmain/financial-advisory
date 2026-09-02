@@ -1,38 +1,6 @@
 import { Link } from 'react-router';
-import { ROUTES } from '../../constants/routes';
-import { mandates, property } from '../../data/content';
+import { property } from '../../data/content';
 import { UnderlineLink } from '../ui/primitives';
-
-/** Current sales mandates, separated by 4px #f5f5f7 rules. */
-export function MandatesList() {
-  return (
-    <>
-      <ul className="m-0 list-none p-0">
-        {mandates.map((mandate, i) => (
-          <li
-            key={`${mandate.title}-${i}`}
-            className="border-vz-surface border-b-4 max-mob:border-b-black/10"
-          >
-            <Link
-              to={mandate.to}
-              className={`text-vz-ink hover:text-vz-orange tracking-vz-head block pb-[12px] text-[16px] leading-[21px] font-bold transition-colors duration-250 ${
-                i === 0 ? 'pt-[4px] max-mob:pt-0' : 'pt-[12px]'
-              }`}
-            >
-              {mandate.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      <p className="mt-[24px] mb-0 leading-[21px]">
-        <UnderlineLink to={ROUTES.companiesSuccession} bold>
-          More mandates
-        </UnderlineLink>
-      </p>
-    </>
-  );
-}
 
 /**
  * Property card: a 300x210 photo with the key figures in a rule-separated

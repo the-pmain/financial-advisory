@@ -6,15 +6,15 @@ import { SectionTitle, Tagline, UnderlineLink } from '../ui/primitives';
 import { ArticleCompact } from './ArticleTeaser';
 
 /**
- * "Stock exchange and Markets": a pale blue panel with 24/18 padding holding
- * three columns whose *content* boxes are equal width. The middle column is
- * fenced by 4px white borders and carries 36px of padding on both sides, so
- * the track widths are sized with `.bm-grid` in index.css to compensate.
+ * "Markets & analysis": a pale blue panel with 24/18 padding holding three
+ * columns whose *content* boxes are equal width. The middle column is fenced
+ * by 4px white borders and carries 36px of padding on both sides, so the
+ * track widths are sized with `.bm-grid` in index.css to compensate.
  */
 export function MarketsSection() {
   return (
     <section>
-      <SectionTitle>Stock exchange and Markets</SectionTitle>
+      <SectionTitle>Markets &amp; analysis</SectionTitle>
 
       {/* On phones the panel bleeds into the page gutters, the tracks stack and
           the quote table drops out entirely, as it does on the reference. */}
@@ -36,7 +36,7 @@ export function MarketsSection() {
 
       <p className="mt-[18px] mb-0 leading-[30px] max-mob:mt-[20px] max-mob:ml-[2.5px]">
         <UnderlineLink to={ROUTES.stockExchangesAndMarkets} bold>
-          More stock market news
+          More market news and analysis
         </UnderlineLink>
       </p>
     </section>

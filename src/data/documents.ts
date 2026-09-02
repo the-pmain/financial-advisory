@@ -10,13 +10,14 @@ export const clientDocuments: ClientDocument[] = [
   {
     id: 'fee-schedule',
     title: 'Schedule of fees and charges',
-    description: 'Advisory, custody and transaction fees currently in force.',
+    description:
+      'Our advisory and portfolio management fees currently in force. (Custody and transaction fees are charged by your bank and shown separately.)',
     href: '/documents/fee-schedule.txt',
   },
   {
     id: 'gtc',
     title: 'General terms and conditions',
-    description: 'Contractual framework for advisory and banking relationships.',
+    description: 'Contractual framework for our advisory and portfolio management relationship with you.',
     href: '/documents/general-terms-and-conditions.txt',
   },
   {

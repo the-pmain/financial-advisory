@@ -5,6 +5,7 @@ import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { serverConfig } from './config.ts';
 import { createApiRouter } from './routes.ts';
+import { LEGACY_REDIRECTS } from '../src/constants/routes.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
@@ -74,6 +75,17 @@ export function createApp() {
   });
 
   app.use('/api', createApiRouter());
+
+  // Withdrawn URLs answer with a permanent redirect so search engines and old
+  // bookmarks land on the replacement page rather than the SPA shell.
+  app.get(Object.keys(LEGACY_REDIRECTS), (req, res) => {
+    const target = LEGACY_REDIRECTS[req.path.replace(/\/$/, '') || req.path];
+    if (!target) {
+      res.status(404).end();
+      return;
+    }
+    res.redirect(301, target);
+  });
 
   const serveStatic = serverConfig.isProd || process.env.SERVE_STATIC === '1';
   if (serveStatic) {

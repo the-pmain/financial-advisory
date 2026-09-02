@@ -15,17 +15,6 @@ const navPaths = {
       ],
     },
     {
-      label: 'Aziende',
-      to: ROUTES.companies,
-      children: [
-        { label: 'Successione aziendale', to: ROUTES.companiesSuccession },
-        { label: 'Casse pensioni', to: ROUTES.companiesPensionFunds },
-        { label: 'Previdenza per i quadri', to: ROUTES.companiesManagementPensionPlans },
-        { label: 'Gestione assicurativa', to: ROUTES.companiesInsuranceManagement },
-        { label: 'Costituzione di società', to: ROUTES.companiesEstablishing },
-      ],
-    },
-    {
       label: 'Su Helfenstein',
       to: ROUTES.about,
       children: [
@@ -41,7 +30,7 @@ const navPaths = {
   quickLinks: [
     { label: 'Previdenza', to: ROUTES.retirement },
     { label: 'Investimenti', to: ROUTES.financialInvestments },
-    { label: 'Aziende', to: ROUTES.companies },
+    { label: 'Pianificazione successoria', to: ROUTES.estatePlanning },
     { label: 'Immobili', to: ROUTES.realEstate },
     { label: 'Imposte', to: ROUTES.taxes },
     { label: 'Previdenza complementare', to: ROUTES.pensionPlanning },
@@ -68,12 +57,13 @@ const navPaths = {
 
 export const it: Translations = {
   meta: {
-    siteName: 'Helfenstein Asset Management AG',
+    siteName: 'Helfenstein Group',
     defaultTitle:
-      'Helfenstein Asset Management AG – Gestione patrimoniale indipendente, consulenza finanziaria e previdenza',
+      'Helfenstein Group – Consulenza indipendente a onorario per la clientela privata in Svizzera',
     defaultDescription:
-      'Consulenza indipendente su previdenza, investimenti finanziari, pianificazione successoria, immobili, imposte, assicurazioni e casse pensione.',
-    teamDescription: 'Professionisti esperti degli investimenti presso Helfenstein Asset Management AG.',
+      'Consulenza indipendente su previdenza, investimenti finanziari, pianificazione successoria, immobili, imposte, assicurazioni e casse pensione. Siamo remunerati soltanto dai nostri clienti e non deteniamo patrimoni della clientela.',
+    teamDescription:
+      'Consulenti indipendenti che rispondono soltanto ai propri clienti – Helfenstein Group.',
     notFoundTitle: 'Pagina non trovata',
   },
   ui: {
@@ -93,21 +83,20 @@ export const it: Translations = {
       'La pagina cercata non esiste o è stata spostata. Utilizzi la navigazione in alto o scelga uno degli argomenti qui sotto.',
     news: 'Notizie',
     ourOffering: 'La nostra offerta',
-    stockExchangeAndMarkets: 'Borsa e mercati',
-    moreStockMarketNews: 'Altre notizie di borsa',
+    stockExchangeAndMarkets: 'Mercati e analisi',
+    moreStockMarketNews: 'Altre notizie e analisi di mercato',
     marketData: 'Dati di mercato',
     marketDataCaption:
       'Livelli indicativi di indici e valute con variazione rispetto alla chiusura precedente',
     instrument: 'Strumento',
     level: 'Livello',
     change: 'Variazione',
-    moreMandates: 'Altri mandati',
     moreOfferings: 'Altre offerte',
     propertyType: 'Tipo di immobile',
     whatWeDoForYou: 'Cosa facciamo per Lei',
     relatedArticles: 'Articoli correlati',
     team: 'Team',
-    teamSubtitle: 'Professionisti esperti degli investimenti',
+    teamSubtitle: 'Consulenti indipendenti che rispondono soltanto ai propri clienti',
     featuredMemberLead:
       'Friedrich Hartmann guida la filosofia di investimento e l’allocazione del capitale a lungo termine di Helfenstein.',
     about: 'Informazioni',
@@ -135,7 +124,7 @@ export const it: Translations = {
     externalLinkNewWindow: '(link esterno, si apre in una nuova finestra)',
     home: 'Home',
     finmaAlt: 'FINMA — Istituti, persone e prodotti autorizzati',
-    logoAria: 'Helfenstein Asset Management AG — home',
+    logoAria: 'Helfenstein Group — home',
     mainNav: 'Navigazione principale',
     topNav: 'Navigazione superiore',
     quickLinks: 'Link rapidi',
@@ -143,7 +132,6 @@ export const it: Translations = {
     legalNav: 'Note legali',
     subscribeNewsletter: 'Iscriversi alla newsletter',
     forIndividuals: 'Per i privati',
-    forCompanies: 'Per le aziende',
     clientStories: 'Storie di clienti',
     verifyAuthorisation: 'Verificare la nostra autorizzazione',
     relatedService: 'Servizio correlato',
@@ -152,7 +140,7 @@ export const it: Translations = {
     regulatoryChallenges: 'Sfide normative',
     howWeHelp: 'Come aiutiamo',
     adviceDisclaimer:
-      'Solo informazioni generali. Non costituisce consulenza personalizzata in materia di investimenti, fiscalità o diritto.',
+      'Solo informazioni generali. Non costituisce consulenza personalizzata in materia di investimenti, fiscalità o diritto. Helfenstein Group non detiene patrimoni della clientela; la custodia è interamente affidata a banche depositarie svizzere partner.',
   },
   nav: navPaths,
   home: {
@@ -165,8 +153,8 @@ export const it: Translations = {
       ctaLabel: 'Fissare un appuntamento',
     },
     newsletter: {
-      text: 'Riceva aggiornamenti regolari su come ottimizzare AVS, cassa pensione e pilastro 3a.',
-      linkLabel: 'Si iscriva alla newsletter (in tedesco, francese e italiano).',
+      text: 'Aggiornamenti concreti su previdenza, imposte, investimenti e immobili – scritti per la clientela privata, senza pubblicità di prodotti.',
+      linkLabel: 'Si iscriva alla newsletter (in inglese, tedesco, francese e italiano).',
     },
   },
   content: {
@@ -191,7 +179,7 @@ export const it: Translations = {
         teaser:
           'Chi utilizza il pilastro 3a, oltre ai pilastri AVS e cassa pensione, per risparmiare in vista della vecchiaia può dedurre i versamenti dal reddito imponibile.',
         body: [
-          'Il pilastro 3a è il modo più diffuso per risparmiare sulle imposte in Svizzera. I versamenti possono essere dedotti integralmente dal reddito imponibile, fino a un importo massimo annuo periodicamente adeguato.',
+          'Il pilastro 3a è il modo più diffuso per risparmiare sulle imposte in Svizzera. I versamenti possono essere dedotti integralmente dal reddito imponibile, fino a un importo massimo annuo periodicamente adeguato. Poiché siamo remunerati soltanto da Lei, possiamo raccomandare il fornitore 3a più adatto – banca, fondazione o assicuratore – senza alcuna preferenza nostra.',
           'I dipendenti affiliati a una cassa pensione possono versare ogni anno fino a un importo fisso in franchi. I lavoratori indipendenti senza cassa pensione possono contribuire fino al 20 per cento del reddito netto da lavoro dipendente, entro un limite massimo.',
           'I patrimoni del pilastro 3a sono esenti dall\'imposta patrimoniale e i rendimenti sono esenti dall\'imposta sul reddito finché restano sul conto. Al prelievo, il capitale è tassato separatamente dagli altri redditi a un\'aliquota ridotta.',
           'Distribuire i risparmi su più conti e prelevarli in anni diversi mantiene bassa la progressione e può far risparmiare diverse migliaia di franchi.',
@@ -233,7 +221,7 @@ export const it: Translations = {
         body: [
           'Una solida strategia d\'investimento parte dalle Sue circostanze personali: quanto del Suo patrimonio può vincolare, per quanto tempo e quanta oscillazione è in grado di sopportare.',
           'Solo una volta fissata la strategia segue la scelta dei singoli investimenti. Fondi indicizzati diversificati e a basso costo sono il mattoncino più efficiente per la maggior parte degli investitori.',
-          'I costi sono una delle poche certezze negli investimenti. Ogni franco risparmiato sulle commissioni resta investito e si capitalizza per l\'intera durata del detenimento.',
+          'I costi sono una delle poche certezze negli investimenti. Ogni franco risparmiato sulle commissioni resta investito e si capitalizza per l\'intera durata del detenimento – ed è per questo che un consulente che non riceve alcuna parte di quelle commissioni è l\'unico a non avere motivo di trascurarle.',
         ],
       },
       'all-you-need-to-know-about-etfs': {
@@ -278,42 +266,31 @@ export const it: Translations = {
         cta: 'Fissare un appuntamento',
       },
       {
-        id: 'phishing-insurance',
-        title: 'Protegga il Suo patrimonio con l\'assicurazione phishing di Helfenstein',
+        id: 'phishing-protection',
+        title: 'Protegga il Suo patrimonio dal phishing',
         tag: 'Scheda informativa',
         teaser:
-          'L\'assicurazione phishing di Helfenstein La protegge dagli attacchi phishing che si verificano nonostante le misure di sicurezza e le precauzioni adottate.',
+          'La nostra guida gratuita Le mostra come riconoscere i messaggi fraudolenti, che cosa verificare prima di dar seguito a un\'istruzione e cosa fare nella prima ora se qualcosa va storto.',
         cta: 'Ordinare gratuitamente',
       },
     ],
     solutions: [
       {
         title: 'Pianificazione previdenziale',
-        text: 'Pianifichi la Sua previdenza con Helfenstein e potrà contare su una sicurezza finanziaria una volta cessata l\'attività lavorativa.',
+        text: 'Modelliamo il Suo reddito da pensione anno per anno, per iscritto, così da farLe vedere esattamente cosa può permettersi – prima di prendere decisioni irreversibili.',
       },
       {
         title: 'Pilastro 3a con investimenti indicizzati',
-        text: 'Presso Helfenstein può investire i Suoi patrimoni del pilastro 3a nei migliori fondi indicizzati. Grazie a commissioni più basse, può generare rendimenti aggiuntivi di migliaia o persino decine di migliaia di franchi nel corso degli anni.',
+        text: 'La aiutiamo a collocare il pilastro 3a in soluzioni indicizzate a basso costo, depositate presso la banca o la fondazione svizzera di Sua scelta. Nell\'arco di una vita lavorativa, commissioni più basse possono valere decine di migliaia di franchi.',
       },
       {
         title: 'Consulenza fiscale',
-        text: 'I nostri esperti Le mostrano come ottimizzare la Sua situazione fiscale a lungo termine e risparmiare migliaia o persino decine di migliaia di franchi.',
+        text: 'I nostri esperti Le mostrano come strutturare con anni di anticipo le decisioni previdenziali, immobiliari e di domicilio – è lì che si realizzano i veri risparmi fiscali.',
       },
       {
         title: 'Mandati di gestione patrimoniale',
-        text: 'Presso Helfenstein combiniamo una strategia d\'investimento semplice, un\'implementazione efficiente e un\'assistenza attiva. Trovi il mandato adatto a Lei.',
+        text: 'Una strategia chiara, un\'implementazione a basso costo e un\'assistenza continua – gestiti da noi, depositati presso la Sua banca. Sa sempre cosa possiede, quanto costa e perché.',
       },
-    ],
-    mandates: [
-      {
-        title:
-          'Azienda innovativa e in rapida crescita nel settore della tecnologia edilizia e dell\'ottimizzazione energetica',
-      },
-      {
-        title: 'Impresa specializzata in ingegneria di impianti industriali con tecnologia brevettata',
-      },
-      { title: 'Uno dei principali fornitori svizzeri di materiali per imballaggi logistici' },
-      { title: 'Fornitore di servizi di telecomunicazione di successo' },
     ],
     property: {
       type: 'Casa unifamiliare',
@@ -328,14 +305,14 @@ export const it: Translations = {
       ],
     },
     marketVideo: {
-      slug: 'helfenstein-financial-portal-pro',
-      tagline: 'Helfenstein Financial Portal Pro',
-      title: 'La piattaforma per i Suoi negozi in borsa',
-      teaser: 'Video di Helfenstein Asset Management (1:46 minuti)',
-      videoNote: 'Video di Helfenstein Asset Management (1:46 minuti)',
+      slug: 'helfenstein-financial-portal',
+      tagline: 'Helfenstein Financial Portal',
+      title: 'Una visione chiara di tutto ciò che possiede',
+      teaser: 'Video di Helfenstein Group (1:46 minuti)',
+      videoNote: 'Video di Helfenstein Group (1:46 minuti)',
       body: [
-        'Helfenstein Financial Portal Pro riunisce in un\'unica vista prezzi in tempo reale, dati di profondità di mercato, grafici e inserimento ordini.',
-        'Watchlist, alert e analisi del portafoglio sono inclusi senza costi aggiuntivi, e gli ordini possono essere piazzati direttamente su tutte le principali borse svizzere e internazionali.',
+        'Helfenstein Financial Portal riunisce in un\'unica vista le posizioni che detiene presso tutte le Sue banche partner svizzere, i Suoi documenti e i dati di mercato aggiornati.',
+        'Watchlist, alert e analisi del portafoglio sono inclusi senza costi aggiuntivi. I Suoi patrimoni restano sempre presso la Sua banca; le eventuali transazioni sono eseguite dalla banca depositaria.',
       ],
     },
   },
@@ -346,14 +323,14 @@ export const it: Translations = {
       title: 'Privati',
       subtitle: 'Consulenza indipendente per ogni fase della vita.',
       intro: [
-        'Helfenstein consiglia clienti privati in materia di previdenza, investimenti, pianificazione successoria, immobili, imposte e previdenza complementare. Siamo remunerati esclusivamente dai nostri clienti – mai dai fornitori di prodotti – affinché le nostre raccomandazioni siano prive di qualsiasi interesse commerciale.',
+        'Helfenstein Group consiglia persone e famiglie private – e soltanto loro – in materia di previdenza, investimenti, pianificazione successoria, immobili, imposte e previdenza complementare. Siamo remunerati unicamente dai nostri clienti, mai da banche, assicuratori o fornitori di prodotti, e non deteniamo mai i Suoi patrimoni. Ogni raccomandazione ha un solo scopo: il Suo interesse.',
         'Ogni mandato inizia con un\'analisi scritta della Sua situazione. Deciderà in seguito se e come desidera collaborare con noi.',
       ],
       highlights: [
         { title: 'Previdenza', text: 'Determini con precisione quando può permettersi di smettere di lavorare e quanto le costerà.' },
-        { title: 'Investimenti', text: 'Una strategia chiara implementata con fondi indicizzati a basso costo e rivista continuamente.' },
+        { title: 'Investimenti', text: 'Una strategia chiara, implementata con fondi indicizzati a basso costo presso la Sua banca e rivista continuamente.' },
         { title: 'Pianificazione successoria', text: 'Testamenti, contratti matrimoniali e donazioni strutturati affinché le Sue volontà siano legalmente tutelate.' },
-        { title: 'Imposte', text: 'Pianificazione fiscale a lungo termine che fa risparmiare migliaia di franchi in modo affidabile.' },
+        { title: 'Imposte', text: 'Pianificazione fiscale a lungo termine, così che le decisioni importanti siano strutturate prima della dichiarazione.' },
       ],
     },
     [ROUTES.retirement]: {
@@ -378,14 +355,14 @@ export const it: Translations = {
       title: 'Investimenti finanziari e gestione patrimoniale',
       subtitle: 'Una strategia semplice, implementata in modo efficiente.',
       intro: [
-        'Combiniamo una strategia d\'investimento chiaramente definita con un\'implementazione a basso costo e un\'assistenza attiva. Sa sempre cosa possiede, quanto costa e perché è nel Suo portafoglio.',
-        'Poiché Helfenstein non percepisce retrocessioni, l\'unica commissione che paga è quella concordata con noi.',
+        'Combiniamo una strategia d\'investimento chiaramente definita con un\'implementazione a basso costo e un\'assistenza attiva. Il Suo portafoglio è intestato a Lei presso una banca svizzera di Sua scelta; noi lo gestiamo, non lo deteniamo mai. Sa sempre cosa possiede, quanto costa e perché è nel Suo portafoglio.',
+        'Poiché Helfenstein Group non percepisce retrocessioni, l\'unica commissione che paga è quella concordata con noi.',
       ],
       highlights: [
         { title: 'Mandati di gestione patrimoniale', text: 'Gestione discrezionale a partire da un nucleo indicizzato ampiamente diversificato.' },
         { title: 'Investimenti indicizzati', text: 'Costi correnti pari a una frazione di quelli dei fondi gestiti attivamente.' },
         { title: 'Analisi del portafoglio', text: 'Un secondo parere scritto sul portafoglio che detiene oggi.' },
-        { title: 'Custodia presso partner bancari svizzeri', text: 'Costi più bassi e nessun incentivo a ruotare eccessivamente il portafoglio.' },
+        { title: 'I Suoi patrimoni restano presso la Sua banca', text: 'Helfenstein Group non detiene mai patrimoni della clientela. La custodia resta presso banche svizzere consolidate, a Suo nome.' },
       ],
     },
     [ROUTES.estatePlanning]: {
@@ -411,7 +388,7 @@ export const it: Translations = {
       subtitle: 'Finanzi il Suo immobile alle migliori condizioni disponibili.',
       intro: [
         'I tassi ipotecari differiscono sensibilmente tra banche, assicuratori e casse pensioni. Su un\'ipoteca rilevante, lo scarto tra il fornitore più economico e quello più costoso può facilmente ammontare a diverse migliaia di franchi all\'anno.',
-        'Helfenstein confronta continuamente il mercato, negozia per Suo conto e verifica la capacità di sostenere l\'onere finanziario ben prima della scadenza del Suo tasso fisso.',
+        'Helfenstein Group confronta continuamente il mercato, negozia per Suo conto e verifica la capacità di sostenere l\'onere finanziario ben prima della scadenza del Suo tasso fisso. Non riceviamo nulla dagli istituti di credito: la raccomandazione è semplicemente l\'offerta migliore disponibile.',
       ],
       highlights: [
         { title: 'Confronto ipotecario', text: 'Condizioni attuali di oltre cento istituti di credito svizzeri.' },
@@ -427,7 +404,7 @@ export const it: Translations = {
       subtitle: 'Ottimizzi la Sua situazione fiscale a lungo termine.',
       intro: [
         'La maggior parte dei risparmi fiscali non si trova nella dichiarazione annuale, ma in decisioni prese anni prima: come risparmia per la previdenza, quando preleva il capitale pensionistico, dove vive e come detiene i Suoi immobili.',
-        'I nostri esperti Le mostrano come strutturare tali decisioni e risparmiare migliaia o persino decine di migliaia di franchi.',
+        'I nostri esperti Le mostrano come strutturare tali decisioni nell\'ordine giusto – poiché non vendiamo prodotti, la consulenza riguarda la Sua posizione fiscale e nient\'altro.',
       ],
       highlights: [
         { title: 'Dichiarazioni fiscali', text: 'Redazione e presentazione per privati e lavoratori indipendenti.' },
@@ -449,7 +426,7 @@ export const it: Translations = {
         { title: 'Analisi dei rischi', text: 'Cosa pagherebbero realmente AVS e cassa pensione.' },
         { title: 'Vita e invalidità', text: 'Copertura dimensionata sui Suoi obblighi, non su un obiettivo di vendita.' },
         { title: 'Assicurazione malattie', text: 'Franchigia e modello scelti sulla base del calcolo, rivisti ogni anno.' },
-        { title: 'Assicurazione phishing', text: 'Protezione dagli attacchi che riescono nonostante le precauzioni.' },
+        { title: 'Protezione dal phishing', text: 'Una guida gratuita per riconoscere i messaggi fraudolenti e reagire in fretta se uno di essi passa.' },
       ],
     },
     [ROUTES.pensionPlanning]: {
@@ -462,7 +439,7 @@ export const it: Translations = {
         'La aiutiamo a scegliere il veicolo, la strategia e il tempismo del prelievo.',
       ],
       highlights: [
-        { title: 'Pilastro 3a con investimenti indicizzati', text: 'I migliori fondi indicizzati, a una frazione delle commissioni usuali.' },
+        { title: 'Pilastro 3a con investimenti indicizzati', text: 'Soluzioni indicizzate a basso costo, scelte per Lei e depositate presso il fornitore che preferisce.' },
         { title: 'Acquisti volontari', text: 'Quando conviene davvero versare nella cassa pensione.' },
         { title: 'Più conti', text: 'Prelievi scaglionati che riducono l\'imposta sul capitale.' },
         { title: 'Libero passaggio', text: 'Dove collocare il capitale tra un impiego e l\'altro.' },
@@ -470,130 +447,34 @@ export const it: Translations = {
     },
     [ROUTES.banking]: {
       path: ROUTES.banking,
-      breadcrumb: ['Privati', 'Servizi bancari'],
-      title: 'Servizi bancari',
-      subtitle: 'Custodia sicura tramite partner bancari svizzeri.',
+      breadcrumb: ['Privati', 'Custodia e banche partner'],
+      title: 'Custodia e banche partner',
+      subtitle: 'I Suoi patrimoni restano presso la Sua banca.',
       intro: [
-        'I patrimoni dei clienti sono custoditi presso partner di custodia svizzeri selezionati. Helfenstein Asset Management AG fornisce gestione patrimoniale e consulenza; non gestiamo una banca propria.',
-        'I clienti beneficiano di commissioni di custodia trasparenti, nessuna retrocessione e protezione dei depositi svizzera.',
+        'Helfenstein Group non detiene mai patrimoni della clientela. I Suoi titoli e la Sua liquidità restano su un conto intestato a Lei presso una banca depositaria svizzera, che Le invia direttamente i rendiconti; noi vi aggiungiamo la gestione del portafoglio e la consulenza.',
+        'La aiutiamo a scegliere un depositario, a confrontare quanto addebita ciascuno e ad assicurarsi che il reporting sia chiaro. Le commissioni di custodia e di transazione sono fissate e addebitate dalla Sua banca, mai da noi.',
       ],
       highlights: [
-        { title: 'Custodia titoli', text: 'Prezzi di custodia trasparenti e forfettari, senza margini occulti.' },
-        { title: 'Conti e carte', text: 'Servizi bancari quotidiani accanto al Suo portafoglio d\'investimento.' },
+        { title: 'Patrimoni a Suo nome', text: 'Custodia segregata presso una banca svizzera autorizzata di Sua scelta.' },
+        { title: 'Scegliere un depositario', text: 'Un confronto omogeneo di condizioni di custodia e servizio.' },
         { title: 'Ipoteche', text: 'Finanziamento strutturato su condizioni verificate mediante confronto.' },
-        { title: 'Sicurezza', text: 'Accesso multifattoriale e monitoraggio continuo delle frodi.' },
-      ],
-    },
-    [ROUTES.companies]: {
-      path: ROUTES.companies,
-      breadcrumb: ['Aziende'],
-      title: 'Aziende',
-      subtitle: 'Dalle casse pensioni alla pianificazione successoria.',
-      intro: [
-        'Helfenstein consiglia piccole e medie imprese svizzere in materia di previdenza professionale, gestione assicurativa, costituzione societaria e successione aziendale.',
-        'Le aziende che collaborano con Helfenstein risparmiano fino al 30 per cento sui premi di rischio e sui costi amministrativi, riducendo al contempo il carico interno.',
-      ],
-      highlights: [
-        { title: 'Pianificazione successoria aziendale', text: 'Valutazione, ricerca dell\'acquirente e gestione della transazione.' },
-        { title: 'Casse pensioni', text: 'Benchmarking e ristrutturazione del Suo regime previdenziale professionale.' },
-        { title: 'Piani pensionistici di direzione', text: 'Copertura supplementare fiscalmente efficiente per i collaboratori con redditi elevati.' },
-        { title: 'Gestione assicurativa', text: 'Un unico partner per l\'intero portafoglio assicurativo aziendale.' },
-      ],
-    },
-    [ROUTES.companiesSuccession]: {
-      path: ROUTES.companiesSuccession,
-      breadcrumb: ['Aziende', 'Pianificazione successoria aziendale'],
-      title: 'Pianificazione successoria aziendale',
-      subtitle: 'Ceda la Sua azienda secondo le Sue condizioni.',
-      intro: [
-        'Vendere un\'azienda è qualcosa che la maggior parte dei proprietari fa una sola volta. Valutazione, strutturazione fiscale, ricerca dell\'acquirente e negoziazione devono concordare, e il processo richiede in genere uno o due anni.',
-        'Helfenstein gestisce l\'intera transazione e rappresenta i Suoi interessi dalla prima valutazione fino al closing.',
-      ],
-      highlights: [
-        { title: 'Valutazione aziendale', text: 'Una cifra difendibile basata su utili sostenibili.' },
-        { title: 'Ricerca dell\'acquirente', text: 'Approccio discreto verso acquirenti strategici e finanziari.' },
-        { title: 'Strutturazione fiscale', text: 'Organizzazione della vendita affinché il ricavato non sia eroso dalle imposte.' },
-        { title: 'Gestione della transazione', text: 'Due diligence, contratti e closing coordinati per Lei.' },
-      ],
-    },
-    [ROUTES.companiesPensionFunds]: {
-      path: ROUTES.companiesPensionFunds,
-      breadcrumb: ['Aziende', 'Casse pensioni'],
-      title: 'Casse pensioni',
-      subtitle: 'Risparmi fino al 30% su premi e amministrazione.',
-      intro: [
-        'I costi della previdenza professionale sono una delle voci più rilevanti e meno analizzate di un libro paga svizzero. I premi di rischio e gli oneri amministrativi variano sensibilmente tra i fornitori per prestazioni identiche.',
-        'Confrontiamo il Suo regime attuale, lo mettiamo a gara e gestiamo il trasferimento.',
-      ],
-      highlights: [
-        { title: 'Benchmarking', text: 'I Suoi premi attuali confrontati con il mercato.' },
-        { title: 'Procedura di gara', text: 'Offerte comparabili di tutti i fornitori rilevanti.' },
-        { title: 'Progettazione del piano', text: 'Prestazioni strutturate attorno alla Sua forza lavoro.' },
-        { title: 'Amministrazione', text: 'Reporting salariale e variazioni dei membri gestiti per Lei.' },
-      ],
-    },
-    [ROUTES.companiesManagementPensionPlans]: {
-      path: ROUTES.companiesManagementPensionPlans,
-      breadcrumb: ['Aziende', 'Piani pensionistici di direzione'],
-      title: 'Piani pensionistici di direzione',
-      subtitle: 'Copertura supplementare per i collaboratori con redditi elevati.',
-      intro: [
-        'Oltre una certa soglia salariale, il regime professionale standard sostituisce solo una piccola quota del reddito. Un piano di direzione separato colma questa lacuna e crea un ampio margine per versamenti deducibili.',
-        'Progettiamo il piano, lo documentiamo e lo integriamo con il regime di base.',
-      ],
-      highlights: [
-        { title: 'Piani 1e', text: 'Strategie d\'investimento individuali per salari al di sopra della soglia.' },
-        { title: 'Potenziale di acquisto', text: 'Creazione di margine per versamenti volontari deducibili.' },
-        { title: 'Copertura dei rischi', text: 'Prestazioni in caso di decesso e invalidità allineate al reddito.' },
-        { title: 'Governance', text: 'Regolamenti e reporting conformi alle esigenze dei revisori.' },
-      ],
-    },
-    [ROUTES.companiesInsuranceManagement]: {
-      path: ROUTES.companiesInsuranceManagement,
-      breadcrumb: ['Aziende', 'Gestione assicurativa'],
-      title: 'Gestione assicurativa',
-      subtitle: 'Un unico partner per l\'intero portafoglio assicurativo.',
-      intro: [
-        'Le assicurazioni aziendali tendono ad accumularsi piuttosto che essere progettate. Le polizze si sovrappongono, le somme assicurate si allontanano dalla realtà e i premi raramente vengono messi a gara.',
-        'Helfenstein effettua un inventario, elimina le duplicazioni e gestisce i rinnovi e i sinistri per Suo conto.',
-      ],
-      highlights: [
-        { title: 'Revisione del portafoglio', text: 'Ogni polizza valutata per copertura, lacune e prezzo.' },
-        { title: 'Procedure di gara', text: 'Rinnovi messi a mercato su condizioni comparabili.' },
-        { title: 'Gestione sinistri', text: 'La rappresentiamo quando si verifica un danno.' },
-        { title: 'Reporting', text: 'Una panoramica annuale unica di copertura e costi.' },
-      ],
-    },
-    [ROUTES.companiesEstablishing]: {
-      path: ROUTES.companiesEstablishing,
-      breadcrumb: ['Aziende', 'Costituzione di un\'azienda'],
-      title: 'Costituzione di un\'azienda',
-      subtitle: 'La nostra bussola per start-up La accompagna dall\'idea al primo stipendio.',
-      intro: [
-        'Avviare un\'attività in Svizzera comporta una serie di decisioni – forma giuridica, capitale, assicurazioni sociali, registrazione IVA, previdenza – ciascuna difficile da modificare in seguito.',
-        'La bussola start-up di Helfenstein La accompagna nell\'ordine corretto, con la documentazione preparata per Lei.',
-      ],
-      highlights: [
-        { title: 'Forma giuridica', text: 'Ditta individuale, GmbH o SA – cosa significa realmente ciascuna.' },
-        { title: 'Assicurazioni sociali', text: 'Registrazione e copertura di cui i lavoratori indipendenti sono privi.' },
-        { title: 'Previdenza', text: 'Costruzione del pilastro 3a e, ove utile, di un regime professionale.' },
-        { title: 'Imposte e IVA', text: 'Soglie di registrazione e requisiti contabili.' },
+        { title: 'Sicurezza', text: 'Accesso multifattoriale e monitoraggio delle frodi offerto dalla Sua banca.' },
       ],
     },
     [ROUTES.about]: {
       path: ROUTES.about,
       breadcrumb: ['Su Helfenstein'],
       title: 'Su Helfenstein',
-      subtitle: 'Indipendenti dal 1993.',
+      subtitle: 'Consulenza indipendente da Lucerna.',
       intro: [
-        'Helfenstein Asset Management è una società svizzera di consulenza finanziaria. Consigliamo clienti privati in materia di previdenza, investimenti, imposte e immobili.',
-        'Non accettiamo commissioni dai fornitori di prodotti. Il nostro reddito proviene esclusivamente dalle commissioni concordate con i nostri clienti.',
+        'Helfenstein Group è una società svizzera indipendente di consulenza e gestione patrimoniale con sede a Lucerna. Consigliamo persone e famiglie private – mai istituzioni o aziende – in materia di gestione patrimoniale, consulenza finanziaria, previdenza e finanziamenti.',
+        'Siamo iscritti presso la FINMA come gestori patrimoniali autorizzati e sottoposti alla vigilanza di OSFINcontrol AG. Il nostro reddito proviene esclusivamente dagli onorari concordati con i nostri clienti e non deteniamo patrimoni della clientela: la custodia resta presso banche partner svizzere.',
       ],
       highlights: [
         { title: 'Consulenza indipendente', text: 'Nessuna retrocessione, nessun obiettivo di vendita di prodotti.' },
+        { title: 'Come siamo regolamentati', text: 'Autorizzazione FINMA come gestore patrimoniale, vigilanza OSFINcontrol, LSerFi e documenti per la clientela.' },
         { title: 'Team', text: 'Specialisti che La accompagnano a lungo termine.' },
-        { title: 'Lavoro e carriera', text: 'Consulenza valutata sulla qualità, non sui volumi venduti.' },
-        { title: 'Contatto e assistenza', text: 'Ci scriva, ci chiami o fissi un primo colloquio.' },
+        { title: 'Storie di clienti', text: 'Esempi anonimizzati di consulenza nella pratica.' },
       ],
     },
     [ROUTES.aboutIndependentAdvice]: {
@@ -603,7 +484,7 @@ export const it: Translations = {
       subtitle: 'Remunerati dai nostri clienti. Da nessun altro.',
       intro: [
         'La maggior parte della consulenza finanziaria in Svizzera è finanziata dai prodotti che raccomanda. Questo rapporto è invisibile al cliente e favorisce sistematicamente soluzioni costose.',
-        'Helfenstein è remunerata esclusivamente dai propri clienti. Pubblichiamo le nostre commissioni, accreditiamo qualsiasi retrocessione che non possiamo evitare e i nostri consulenti non hanno obiettivi di vendita di prodotti.',
+        'Helfenstein Group è remunerata esclusivamente dai propri clienti – persone e famiglie private, mai istituzioni o aziende. Pubblichiamo i nostri onorari, accreditiamo qualsiasi retrocessione che non possiamo evitare, i nostri consulenti non hanno obiettivi di vendita di prodotti e non deteniamo mai i Suoi patrimoni: la custodia resta presso banche partner svizzere, a Suo nome.',
       ],
       highlights: [
         { title: 'Trasparenza delle commissioni', text: 'Conosce il costo prima di decidere qualsiasi cosa.' },
@@ -612,52 +493,52 @@ export const it: Translations = {
         { title: 'Primo colloquio gratuito', text: 'La consulenza iniziale non Le costa nulla.' },
       ],
     },
-    [ROUTES.aboutBranchOffices]: {
-      path: ROUTES.aboutBranchOffices,
-      breadcrumb: ['Su Helfenstein', 'Filiale'],
-      title: 'Filiale',
-      subtitle: 'Oltre trenta sedi in tutta la Svizzera.',
+    [ROUTES.aboutOffice]: {
+      path: ROUTES.aboutOffice,
+      breadcrumb: ['Su Helfenstein', 'La nostra sede'],
+      title: 'La nostra sede',
+      subtitle: 'Con sede a Lucerna, al servizio di clienti in tutta la Svizzera.',
       intro: [
-        'Helfenstein consiglia clienti da uffici in ogni importante regione economica svizzera, in tedesco, francese, italiano e inglese.',
-        'Trovi l\'ufficio più vicino e fissi un primo colloquio gratuito.',
+        'Helfenstein Asset Management AG ha sede in Pilatusstrasse 23, a Lucerna. Consigliamo i nostri clienti in tedesco, francese, italiano e inglese.',
+        'Ci chiami allo +41 41 211 29 29 oppure fissi un primo colloquio gratuito.',
       ],
       highlights: [
-        { title: 'Svizzera tedesca', text: 'Zurigo, Berna, Basilea, Lucerna, San Gallo, Aarau, Zugo e altre.' },
-        { title: 'Svizzera occidentale', text: 'Ginevra, Losanna, Nyon, Friburgo, Neuchâtel, Sion.' },
-        { title: 'Ticino', text: 'Lugano e Bellinzona.' },
-        { title: 'Orari di apertura', text: 'Giorni feriali 08:00–18:00, appuntamenti al di fuori di questi orari su richiesta.' },
+        { title: 'Ufficio di Lucerna', text: 'Pilatusstrasse 23, 6003 Luzern.' },
+        { title: 'Telefono', text: '+41 41 211 29 29, nei giorni feriali durante gli orari d\'ufficio.' },
+        { title: 'Lingue', text: 'Tedesco, francese, italiano e inglese.' },
+        { title: 'Appuntamenti', text: 'Di persona a Lucerna oppure in videochiamata.' },
       ],
     },
     [ROUTES.aboutPortrait]: {
       path: ROUTES.aboutPortrait,
       breadcrumb: ['Su Helfenstein', 'Ritratto'],
       title: 'Ritratto',
-      subtitle: 'Un gruppo svizzero di servizi finanziari con un unico modello di business.',
+      subtitle: 'Un gestore patrimoniale lucernese con un modello di consulenza chiaro.',
       intro: [
-        'Fondata nel 1993, Helfenstein Asset Management è cresciuta fino a diventare una delle più grandi consulenze finanziarie indipendenti in Svizzera, con una propria banca depositaria e un broker assicurativo.',
-        'Siamo autorizzati dalla FINMA come gestori di portafoglio e sottoposti a vigilanza di OSFINcontrol AG.',
+        'Helfenstein Group consiglia dal proprio ufficio di Lucerna persone e famiglie private in materia di gestione patrimoniale, consulenza finanziaria, previdenza e finanziamenti. Non operiamo per istituzioni o aziende.',
+        'I patrimoni della clientela sono custoditi presso partner di custodia svizzeri selezionati, mai da noi. Siamo autorizzati dalla FINMA come gestori patrimoniali e sottoposti alla vigilanza di OSFINcontrol AG.',
       ],
       highlights: [
-        { title: 'Partner di custodia', text: 'Custodia segregata presso banche svizzere autorizzate.' },
-        { title: 'Helfenstein Insurance Services', text: 'Brokeraggio per clienti privati e aziende.' },
-        { title: 'Direzione', text: 'Direzione generale e consiglio di amministrazione.' },
-        { title: 'Storia', text: 'Tre decenni di consulenza indipendente.' },
+        { title: 'Gestione patrimoniale', text: 'Mandati costruiti attorno a un processo d\'investimento chiaro.' },
+        { title: 'Consulenza finanziaria', text: 'Previdenza, finanziamenti e pianificazione personale accanto agli investimenti.' },
+        { title: 'Partner di custodia', text: 'Custodia segregata a Suo nome presso banche svizzere autorizzate.' },
+        { title: 'Lucerna', text: 'Pilatusstrasse 23, 6003 Luzern.' },
       ],
     },
-    [ROUTES.aboutInvestorRelations]: {
-      path: ROUTES.aboutInvestorRelations,
-      breadcrumb: ['Su Helfenstein', 'Relazioni con gli investitori'],
-      title: 'Relazioni con gli investitori',
-      subtitle: 'Report, cifre chiave e calendario finanziario.',
+    [ROUTES.aboutCompanyInformation]: {
+      path: ROUTES.aboutCompanyInformation,
+      breadcrumb: ['Su Helfenstein', 'Informazioni societarie'],
+      title: 'Informazioni societarie',
+      subtitle: 'Chi siamo sulla carta e come raggiungerci.',
       intro: [
-        'Questa sezione riunisce informazioni societarie, contatti media e risposte per investitori professionali e partner di Helfenstein Asset Management AG.',
-        'Contatti il nostro team investor relations per ulteriori domande.',
+        'Questa pagina riunisce i dati registrati di Helfenstein Asset Management AG, che opera con il nome Helfenstein Group, insieme ai nostri contatti media.',
+        'Per domande sulla consulenza o su un mandato in essere, utilizzi invece la pagina dei contatti.',
       ],
       highlights: [
-        { title: 'Report annuale', text: 'Bilanci completi e commento della direzione.' },
-        { title: 'Report semestrale', text: 'Risultati intermedi e cifre per segmento.' },
-        { title: 'Informazioni sul titolo', text: 'Struttura del capitale, storico dei dividendi e copertura analisti.' },
-        { title: 'Calendario finanziario', text: 'Date di pubblicazione e assemblea generale annuale.' },
+        { title: 'Profilo societario', text: 'Ragione sociale, IDI, LEI e indirizzo a Lucerna.' },
+        { title: 'Regolamentazione', text: 'Gestore patrimoniale FINMA; vigilanza di OSFINcontrol AG.' },
+        { title: 'Servizi', text: 'Consulenza indipendente e gestione patrimoniale per la clientela privata.' },
+        { title: 'Contatto', text: '+41 41 211 29 29 · Pilatusstrasse 23, Luzern.' },
       ],
     },
     [ROUTES.aboutJobs]: {
@@ -666,8 +547,8 @@ export const it: Translations = {
       title: 'Lavoro e carriera',
       subtitle: 'Consulenza senza obiettivi di vendita.',
       intro: [
-        'Poiché Helfenstein non guadagna sui prodotti, i nostri consulenti sono valutati sulla qualità del consiglio e non sui volumi venduti. Questo cambia radicalmente il lavoro.',
-        'Cerchiamo continuamente consulenti, specialisti e neolaureati in tutto il mondo.',
+        'Poiché Helfenstein Group non guadagna sui prodotti e non detiene patrimoni della clientela, i nostri consulenti sono valutati sulla qualità del consiglio e non sui volumi venduti. Questo cambia radicalmente il lavoro.',
+        'Siamo sempre lieti di ricevere candidature da consulenti, specialisti e neolaureati che desiderano lavorare così.',
       ],
       highlights: [
         { title: 'Ruoli di consulenza', text: 'Posizioni a contatto con i clienti in previdenza, imposte e investimenti.' },
@@ -682,14 +563,14 @@ export const it: Translations = {
       title: 'Contatto e assistenza',
       subtitle: 'Siamo lieti di sentirLa.',
       intro: [
-        'Ci chiami, ci scriva o fissi un primo colloquio gratuito presso la filiale più vicina. I nostri consulenti parlano tedesco, francese, italiano e inglese.',
+        'Ci chiami, ci scriva o fissi un primo colloquio gratuito nel nostro ufficio di Lucerna oppure in videochiamata. I nostri consulenti parlano tedesco, francese, italiano e inglese – e nessuno di loro ha qualcosa da venderLe.',
         'Per domande sul Portale finanziario Helfenstein, il nostro team di assistenza è disponibile nei giorni feriali durante l\'orario d\'ufficio.',
       ],
       highlights: [
-        { title: 'Telefono', text: 'Giorni feriali 08:00–18:00 al numero della Sua filiale locale.' },
+        { title: 'Telefono', text: '+41 41 211 29 29, nei giorni feriali 08:00–18:00.' },
+        { title: 'Indirizzo', text: 'Pilatusstrasse 23, 6003 Luzern, Svizzera.' },
         { title: 'Appuntamenti', text: 'Prenoti un primo colloquio gratuito online in pochi minuti.' },
-        { title: 'Assistenza portale', text: 'Aiuto per login, accesso a due fattori e negoziazione.' },
-        { title: 'Richieste media', text: 'Il nostro team comunicazione Le risponderà tempestivamente.' },
+        { title: 'Assistenza portale', text: 'Aiuto per login, accesso a due fattori e reporting.' },
       ],
     },
     [ROUTES.appointments]: {
@@ -698,8 +579,8 @@ export const it: Translations = {
       title: 'Fissare un appuntamento',
       subtitle: 'Il primo colloquio è gratuito.',
       intro: [
-        'Parli con un esperto di Helfenstein della Sua previdenza, dei Suoi investimenti, delle Sue imposte o della Sua ipoteca. La prima consulenza non Le costa nulla e non La vincola in alcun modo.',
-        'Scelga una filiale e un orario adatti a Lei e ci indichi brevemente di cosa desidera parlare.',
+        'Parli con un consulente di Helfenstein Group della Sua previdenza, dei Suoi investimenti, delle Sue imposte o della Sua ipoteca. La prima consulenza non costa nulla e non La vincola in alcun modo – e poiché siamo remunerati soltanto dai nostri clienti, nessuno nella stanza sta cercando di venderLe un prodotto.',
+        'Scelga l\'orario che preferisce – nel nostro ufficio di Lucerna oppure in videochiamata – e ci indichi brevemente di cosa desidera parlare.',
       ],
       highlights: [
         { title: 'Primo colloquio gratuito', text: 'Circa un\'ora, di persona o in videoconferenza.' },
@@ -715,14 +596,14 @@ export const it: Translations = {
       title: 'Competenze',
       subtitle: 'Conoscenze, studi e strumenti dei nostri specialisti.',
       intro: [
-        'Helfenstein pubblica ricerche su previdenza, pensioni, imposte, ipoteche e investimenti, insieme a calcolatrici e checklist che può utilizzare autonomamente.',
-        'Tutto ciò che trova qui è gratuito e non richiede registrazione.',
+        'Helfenstein Group pubblica analisi su previdenza, pensioni, imposte, ipoteche e investimenti, insieme a checklist che può ordinare gratuitamente.',
+        'Inizi dal rapporto Horizon, sfogli gli insights per argomento oppure apra l\'indice completo degli articoli. Poiché non vendiamo prodotti, ciò che legge qui è la nostra analisi e non un argomento di vendita.',
       ],
       highlights: [
-        { title: 'Centro di conoscenza', text: 'Diverse centinaia di articoli sulla finanza personale in Svizzera.' },
-        { title: 'Calcolatrici', text: 'Strumenti per previdenza, capacità ipotecaria e pilastro 3a.' },
+        { title: 'Rapporto Horizon 2026', text: 'Previdenza, ipoteche e novità LSerFi in un linguaggio chiaro.' },
+        { title: 'Indice degli insights', text: 'Tutti gli articoli ordinati per data, con i relativi argomenti.' },
         { title: 'Schede informative', text: 'Guide stampate concise, inviateLe gratuitamente.' },
-        { title: 'Studi', text: 'Ricerche regolari su casse pensioni e prezzi ipotecari.' },
+        { title: 'Primo colloquio gratuito', text: 'Un\'ora con un consulente, a Lucerna o in videochiamata.' },
       ],
     },
     [ROUTES.financialPortal]: {
@@ -731,27 +612,27 @@ export const it: Translations = {
       title: 'Portale finanziario Helfenstein',
       subtitle: 'Il Suo portafoglio, i Suoi documenti, i Suoi mercati.',
       intro: [
-        'Il Portale finanziario Helfenstein Le offre una visione consolidata dei Suoi conti e portafogli, di tutti i Suoi documenti e dei dati di mercato in tempo reale.',
-        'La versione Pro aggiunge dati di profondità di mercato, grafici avanzati e inserimento ordini diretto su tutte le principali borse.',
+        'Il Portale finanziario Helfenstein Le offre una visione consolidata dei conti e dei portafogli che detiene presso le Sue banche partner svizzere, insieme a tutti i Suoi documenti e ai dati di mercato aggiornati.',
+        'I Suoi patrimoni restano presso la Sua banca: il portale è la Sua finestra su di essi, non un luogo in cui viene custodito denaro.',
       ],
       highlights: [
         { title: 'Panoramica del portafoglio', text: 'Performance consolidata di tutte le Sue partecipazioni.' },
         { title: 'Documenti', text: 'Estratti conto e documenti fiscali in un unico archivio.' },
-        { title: 'Negoziazione', text: 'Inserimento ordini su borse svizzere e internazionali.' },
+        { title: 'Reporting', text: 'Performance, costi e allocazione su tutte le posizioni, spiegati in modo chiaro.' },
         { title: 'Sicurezza', text: 'Autenticazione a due fattori ad ogni accesso.' },
       ],
     },
     [ROUTES.stockExchangesAndMarkets]: {
       path: ROUTES.stockExchangesAndMarkets,
-      breadcrumb: ['Prezzi e mercati'],
-      title: 'Borsa e mercati Helfenstein',
-      subtitle: 'Ultimi prezzi azionari, notizie e analisi.',
+      breadcrumb: ['Mercati e analisi'],
+      title: 'Mercati e analisi',
+      subtitle: 'Prezzi, notizie e il nostro punto di vista indipendente.',
       intro: [
-        'Informazioni affidabili, prezzi azionari in tempo reale e strumenti utili – tutto in un unico luogo, gratuito dopo la registrazione.',
+        'Dati di mercato, commenti e strumenti utili in un unico luogo, gratuiti dopo la registrazione. Pubblichiamo analisi proprie perché non vendiamo prodotti: ciò che legge qui è la nostra opinione, non un argomento di vendita.',
         'Segua indici, valute, tassi d\'interesse e singoli titoli e imposti alert sulle posizioni che Le interessano.',
       ],
       highlights: [
-        { title: 'Prezzi in tempo reale', text: 'Azioni, indici e valute svizzeri e internazionali.' },
+        { title: 'Prezzi di mercato', text: 'Azioni, indici e valute svizzeri e internazionali.' },
         { title: 'Watchlist', text: 'Segua i titoli che Le interessano e imposti alert.' },
         { title: 'Analisi', text: 'Commenti dei nostri specialisti d\'investimento.' },
         { title: 'Strumenti', text: 'Screener, grafici e simulazioni di portafoglio.' },
@@ -762,9 +643,9 @@ export const it: Translations = {
       path: ROUTES.newsletter,
       breadcrumb: ['Iscriversi alla newsletter'],
       title: 'Iscriversi alla nostra newsletter',
-      subtitle: 'Aggiornamenti regolari sull\'ottimizzazione della previdenza.',
+      subtitle: 'Aggiornamenti indipendenti, senza nulla da vendere.',
       intro: [
-        'Riceva aggiornamenti regolari su come ottimizzare AVS, previdenza professionale e pilastro 3a. La newsletter è pubblicata in tedesco, francese e italiano.',
+        'Aggiornamenti concreti e indipendenti su previdenza, imposte, investimenti e immobili – scritti per la clientela privata, senza pubblicità di prodotti. Pubblicata in inglese, tedesco, francese e italiano.',
         'Può selezionare gli argomenti che La interessano e disiscriversi in qualsiasi momento con un solo clic.',
       ],
       highlights: [
@@ -792,20 +673,20 @@ export const it: Translations = {
       ],
       ctaLabel: 'Ordinare gratuitamente',
     },
-    [ROUTES.phishingInsurance]: {
-      path: ROUTES.phishingInsurance,
-      breadcrumb: ['Assicurazione phishing Helfenstein'],
-      title: 'Protegga il Suo patrimonio con l\'assicurazione phishing di Helfenstein',
-      subtitle: 'Copertura per attacchi che riescono nonostante ogni precauzione.',
+    [ROUTES.phishingProtection]: {
+      path: ROUTES.phishingProtection,
+      breadcrumb: ['Protegga il Suo patrimonio dal phishing'],
+      title: 'Protegga il Suo patrimonio dal phishing',
+      subtitle: 'Una guida pratica per la clientela privata.',
       intro: [
         'Il phishing è diventato la via più comune per accedere indebitamente a conti finanziari. Anche persone attente e informate possono occasionalmente cadere in una trappola di un messaggio convincente.',
-        'L\'assicurazione phishing di Helfenstein copre la perdita finanziaria se un attacco riesce nonostante le misure di sicurezza e le precauzioni adottate.',
+        'La nostra guida gratuita spiega come i truffatori prendono di mira gli investitori privati, che cosa verificare prima di dar seguito a un messaggio che sembra provenire dalla Sua banca o da noi, e cosa fare – e chi chiamare – nella prima ora se qualcosa va storto. Poiché i Suoi patrimoni sono depositati presso la Sua banca e mai presso Helfenstein Group, spieghiamo anche quali misure di sicurezza offre la Sua banca e come utilizzarle.',
       ],
       highlights: [
-        { title: 'Cosa è coperto', text: 'Perdite da transazioni non autorizzate a seguito di un attacco.' },
-        { title: 'Chi è coperto', text: 'Disponibile per i clienti in consulenza Helfenstein con un accordo di custodia idoneo.' },
-        { title: 'Prevenzione', text: 'Indicazioni pratiche per riconoscere messaggi fraudolenti.' },
-        { title: 'Sinistri', text: 'Un unico punto di contatto se qualcosa va storto.' },
+        { title: 'Come funzionano gli attacchi', text: 'I messaggi, le telefonate e i siti falsi usati contro gli investitori privati.' },
+        { title: 'Cosa verificare', text: 'I pochi controlli che fermano quasi ogni tentativo.' },
+        { title: 'Le protezioni della Sua banca', text: 'Quali misure offre la Sua banca depositaria e come attivarle.' },
+        { title: 'Se qualcosa va storto', text: 'Chi chiamare nella prima ora e in quale ordine.' },
       ],
       ctaLabel: 'Ordinare gratuitamente',
     },
@@ -817,7 +698,7 @@ export const it: Translations = {
       sections: [
         {
           paragraphs: [
-            'Le informazioni pubblicate su questo sito web sono fornite esclusivamente a scopo informativo generale. Non costituiscono un\'offerta, una raccomandazione o un invito ad acquistare o vendere strumenti finanziari, né costituiscono consulenza in materia di investimenti, legale o fiscale.',
+            'Le informazioni pubblicate su questo sito web sono fornite esclusivamente a scopo informativo generale. Non costituiscono un\'offerta, una raccomandazione o un invito ad acquistare o vendere strumenti finanziari, né costituiscono consulenza in materia di investimenti, legale o fiscale. Helfenstein Asset Management AG (Helfenstein Group) è una consulente e gestore patrimoniale indipendente; non detiene patrimoni della clientela, che restano presso la banca depositaria svizzera del cliente.',
           ],
         },
         {
@@ -842,7 +723,7 @@ export const it: Translations = {
         {
           heading: 'Diritto applicabile',
           paragraphs: [
-            'L\'utilizzo di questo sito web è regolato dal diritto svizzero. Il foro esclusivo è Zurigo, Svizzera.',
+            'L\'utilizzo di questo sito web è regolato dal diritto svizzero. Il foro esclusivo è Lucerna, Svizzera.',
           ],
         },
       ],
@@ -882,6 +763,12 @@ export const it: Translations = {
             'Ha il diritto di richiedere informazioni sui dati personali che conserviamo e di far correggere dati inesatti o cancellare dati trattati illecitamente.',
           ],
         },
+        {
+          heading: 'Titolare del trattamento',
+          paragraphs: [
+            'Helfenstein Asset Management AG (Helfenstein Group), Pilatusstrasse 23, 6003 Luzern, Svizzera. Telefono: +41 41 211 29 29.',
+          ],
+        },
       ],
     },
     'documents-and-information': {
@@ -906,9 +793,9 @@ export const it: Translations = {
           ],
         },
         {
-          heading: 'Report',
+          heading: 'Informazioni societarie',
           paragraphs: [
-            'Report annuali e semestrali di Helfenstein Asset Management AG, insieme a comunicati stampa e presentazioni.',
+            'Helfenstein Asset Management AG (operante come Helfenstein Group) pubblica su questo sito web le informazioni regolamentari e quelle destinate alla clientela. La società è una consulente indipendente remunerata esclusivamente a onorario e un gestore patrimoniale autorizzato dalla FINMA; non detiene patrimoni della clientela. Per le iscrizioni più recenti consulti il registro di commercio svizzero (IDI CHE-111.708.730).',
           ],
         },
       ],
@@ -925,24 +812,21 @@ export const it: Translations = {
             'Telefono: +41 41 211 29 29',
             'UID: CHE-111.708.730',
             'LEI: 894500URZFTDV5G7F357',
-            'LEI attivo; rinnovo dovuto il 4 novembre 2026.',
           ],
         },
         {
           heading: 'Attività',
           paragraphs: [
-            'Gestione patrimoniale, consulenza finanziaria, pianificazione della pensione e consulenza sul finanziamento.',
+            'Consulenza finanziaria indipendente remunerata esclusivamente a onorario e gestione patrimoniale per la clientela privata: previdenza, investimenti, imposte, immobili e pianificazione successoria. I patrimoni della clientela sono custoditi presso banche partner svizzere e non dalla società.',
           ],
         },
         {
           heading: 'Sorveglianza',
           paragraphs: [
             'Helfenstein Asset Management AG è iscritta presso la FINMA come gestore di portafoglio ed è sottoposta a vigilanza di OSFINcontrol AG.',
+            'Le autorizzazioni possono essere verificate nel registro ufficiale della FINMA (https://www.finma.ch/it/finma-public/istituti-persone-e-prodotti-autorizzati/).',
+            'Registrazione LEI: https://search.gleif.org/#/record/894500URZFTDV5G7F357',
           ],
-        },
-        {
-          heading: 'Design e realizzazione',
-          paragraphs: ['Realizzato con React, Vite e Tailwind CSS.'],
         },
       ],
     },
@@ -951,7 +835,7 @@ export const it: Translations = {
     sections: {
       investment: 'Team investimenti',
       business: 'Sviluppo commerciale',
-      investors: 'Relazioni con gli investitori',
+      investors: 'Consulenti alla clientela',
     },
     featuredLead:
       'Friedrich Hartmann guida la filosofia d\'investimento e l\'allocazione del capitale a lungo termine di Helfenstein.',
@@ -1048,20 +932,20 @@ export const it: Translations = {
         slug: 'tobias-brandt',
         role: 'Amministratore delegato',
         about:
-          'Tobias Brandt guida lo sviluppo commerciale di Helfenstein dopo esperienze in private banking e equity sales. È la persona più indicata per sapere quale istituzione sia pronta per un dialogo più approfondito.',
+          'Tobias Brandt guida lo sviluppo della clientela di Helfenstein dopo esperienze in private banking e equity sales. Di solito è la prima persona con cui parla un potenziale cliente prima che venga fissato un primo incontro.',
         results: [
-          'Ha fatto crescere la base clienti istituzionali di Helfenstein del 40% in quattro anni.',
-          'Ha lanciato il programma di formazione per consulenti della società, oggi frequentato da oltre 600 professionisti all\'anno.',
-          'In precedenza ha diretto le vendite per Iberia e LatAm presso una piattaforma multi-asset europea.',
+          'Ha fatto crescere la base di clientela privata di Helfenstein del 40% in quattro anni.',
+          'Ha lanciato il programma di formazione per i clienti della società, oggi frequentato da oltre 600 persone all\'anno.',
+          'In precedenza ha diretto la copertura della clientela privata per l\'Iberia presso una piattaforma multi-asset europea.',
         ],
       },
       'markus-engel': {
         slug: 'markus-engel',
-        role: 'Direttore, relazioni con gli investitori',
+        role: 'Direttore, comunicazione con la clientela',
         about:
-          'Markus Engel dirige investor relations, marketing e comunicazione. Cordiale al telefono e preciso nel follow-up, mantiene coerente la voce esterna di Helfenstein con il modo in cui i portafogli sono effettivamente gestiti.',
+          'Markus Engel dirige la comunicazione con la clientela e il marketing. Cordiale al telefono e preciso nel follow-up, mantiene coerente la voce esterna di Helfenstein con il modo in cui i portafogli sono effettivamente gestiti.',
         results: [
-          'Ha incrementato gli asset retail e professionali in consulenza di 850 milioni di euro in tre anni.',
+          'Ha ricostruito il reporting e la corrispondenza con la clientela utilizzati dall\'intero team di consulenza.',
           'Ha introdotto il formato della lettera trimestrale ora citato da diversi titoli economici nazionali.',
           'Guida il team che gestisce oltre 12\'000 contatti clienti all\'anno.',
         ],
@@ -1070,49 +954,49 @@ export const it: Translations = {
         slug: 'marc-weber',
         role: 'Managing Director, Client Operations',
         about:
-          'Marc Weber coordina le operazioni clienti e gli accordi di custodia presso Helfenstein Asset Management AG. Proviene dal private banking e rende accessibile un\'infrastruttura di livello istituzionale ai clienti in consulenza a Lucerna e in Svizzera.',
+          'Marc Weber coordina le operazioni clienti e i rapporti con le nostre banche depositarie. Proviene dal private banking e si assicura che i clienti ricevano un reporting chiaro dalla banca che custodisce i loro patrimoni, a Lucerna e in tutta la Svizzera.',
         results: [
-          'Ha ridotto i costi medi di custodia e regolamento per i clienti Helfenstein del 18% dal 2020.',
-          'Ha supervisionato la migrazione di oltre 4,2 miliardi di euro di patrimoni clienti sui conti segregati della banca.',
-          'Ha ampliato i servizi depositari a casse pensioni, family office e consulenti esterni nella regione DACH.',
+          'Ha ridotto del 18% dal 2020 i costi di custodia e regolamento che i clienti Helfenstein pagano alla propria banca.',
+          'Ha guidato la revisione che ha trasferito i clienti su conti di custodia segregati intestati a loro nome.',
+          'Negozia le condizioni di custodia con le nostre banche partner svizzere per conto della clientela privata.',
         ],
       },
       'anja-hoffmann': {
         slug: 'anja-hoffmann',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
           'Anja Hoffmann è passata alla gestione patrimoniale dalle IR di società quotate. I clienti apprezzano il suo stile diretto e il modo in cui spiega movimenti complessi del portafoglio in linguaggio chiaro.',
         results: [
-          'Gestisce relazioni con oltre 180 famiglie ad alto patrimonio netto.',
+          'Gestisce relazioni con oltre 180 clienti privati e famiglie.',
           'Punteggio di soddisfazione clienti di 4,8/5 nell\'ultimo sondaggio annuale.',
-          'Organizza le giornate investitori semestrali di Helfenstein a Monaco e Zurigo.',
+          'Organizza i seminari semestrali per la clientela di Helfenstein a Lucerna.',
         ],
       },
       'florian-bauer': {
         slug: 'florian-bauer',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
-          'Florian Bauer segue conti istituzionali che si aspettano dettaglio, non dramma. Ex appassionato di tennis convertito a sciatore del weekend, è affidabile sotto pressione e raramente manca una richiamata.',
+          'Florian Bauer segue clienti che si aspettano dettaglio, non dramma. Ex appassionato di tennis convertito a sciatore del weekend, è affidabile sotto pressione e raramente manca una richiamata.',
         results: [
-          'Ha supportato 320 milioni di euro di afflussi netti dai canali di consulenza nel 2024.',
+          'Consiglia le famiglie sulla struttura del portafoglio e sul ribilanciamento annuale.',
           'Ha ridotto il tempo medio di risposta alle richieste a meno di quattro ore lavorative.',
-          'Referente principale per partner distributori del sud della Germania e dell\'Austria.',
+          'Referente principale per i clienti di lingua tedesca residenti fuori dalla Svizzera.',
         ],
       },
       'andrew-ramsden': {
         slug: 'andrew-ramsden',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
-          'Andrew Ramsden porta tre decenni di esperienza nelle relazioni istituzionali al desk investitori di Helfenstein. Misurato e accessibile, è la persona che i consulenti chiamano quando un mandato richiede chiarezza, non spin.',
+          'Andrew Ramsden porta tre decenni di esperienza nella relazione con la clientela al desk di consulenza di Helfenstein. Misurato e accessibile, è la persona che i clienti chiamano quando una decisione richiede chiarezza, non spin.',
         results: [
-          'Ha aperto e approfondito relazioni con oltre 40 clienti pensionistici e endowment in Europa.',
-          'Ha guidato la prima roadshow pan-europea verso i consulenti, ottenendo tre mandati di advisory pluriennali.',
-          'Ex head of client coverage presso un asset manager di Londra prima di entrare in Helfenstein nel 2019.',
+          'Consiglia oltre 40 famiglie su pensionamento e pianificazione dei prelievi.',
+          'Ha sviluppato l\'analisi scritta di pre-pensionamento oggi usata da tutto il team di consulenza.',
+          'Ex responsabile della copertura della clientela privata presso un gestore di Londra prima di entrare in Helfenstein nel 2019.',
         ],
       },
       'erik-schneider': {
         slug: 'erik-schneider',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
           'Erik Schneider ha trascorso due decenni tra fondi e piattaforme di consulenza. Stabile e senza fretta, è spesso la prima persona che i clienti di lunga data chiedono quando i mercati diventano turbolenti.',
         results: [
@@ -1123,18 +1007,18 @@ export const it: Translations = {
       },
       'andrew-savage': {
         slug: 'andrew-savage',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
-          'Andrew Savage si specializza nell\'onboarding di investitori professionali e in reporting accurato. Energico nelle riunioni e meticoloso nel follow-up, collega i team di investimento e i clienti senza perdere il dettaglio.',
+          'Andrew Savage si specializza nell\'onboarding di nuovi clienti e in un reporting accurato. Energico nelle riunioni e meticoloso nel follow-up, collega il team di investimento e i clienti senza perdere il dettaglio.',
         results: [
-          'Ha onboardato 110 nuovi investitori professionali negli ultimi due anni.',
-          'Ha ricostruito il pacchetto di reporting trimestrale usato da tutte le relazioni IR; l\'NPS è salito di otto punti.',
-          'Referente principale per le piattaforme di consulenza UK e irlandesi che distribuiscono le strategie Helfenstein.',
+          'Ha accolto 110 nuovi clienti privati negli ultimi due anni.',
+          'Ha ricostruito il pacchetto di reporting trimestrale inviato a ogni cliente; la soddisfazione è salita di otto punti.',
+          'Referente principale per i clienti con patrimoni presso più di una banca depositaria.',
         ],
       },
       'birgit-schulz': {
         slug: 'birgit-schulz',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
           'Birgit Schulz è entrata nei servizi finanziari dopo una carriera nel controllo qualità – un background che emerge nel modo in cui documenta ogni interazione con i clienti. Calma, metodica e difficile da turbare.',
         results: [
@@ -1145,18 +1029,18 @@ export const it: Translations = {
       },
       'alexander-koch': {
         slug: 'alexander-koch',
-        role: 'Business istituzionale',
+        role: 'Consulente senior alla clientela',
         about:
-          'Alexander Koch gestisce la pipeline istituzionale e le relazioni con i consulenti. Giovane ma già affidabile nelle riunioni di due diligence, collega i team investimenti con i partner esterni giusti.',
+          'Alexander Koch segue clienti con situazioni più complesse: più banche, patrimoni in più di un Paese oppure un\'attività che viene liquidata in vista della pensione. Giovane, ma già un interlocutore affidabile nelle conversazioni difficili.',
         results: [
-          'Ha aggiunto dodici nuove relazioni con consulenti fondi dal 2022.',
-          'Ha supportato la vittoria di tre gare istituzionali competitive nel 2024.',
-          'Coordina il questionario ESG e le risposte RFP di Helfenstein.',
+          'Segue dal 2022 i casi di clientela privata transfrontaliera della società.',
+          'Ha creato il processo di consolidamento per i clienti con patrimoni presso più depositari.',
+          'Coordina il questionario sulle preferenze di sostenibilità previsto dalla LSerFi.',
         ],
       },
       'leon-roth': {
         slug: 'leon-roth',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
           'Leon Roth mantiene in funzione il servizio clienti di Helfenstein. I colleghi contano su di lui per collegare il desk giusto al momento giusto senza che i clienti si sentano passati di mano in mano.',
         results: [
@@ -1167,11 +1051,11 @@ export const it: Translations = {
       },
       'henrik-meier': {
         slug: 'henrik-meier',
-        role: 'Relazioni con gli investitori',
+        role: 'Consulente alla clientela',
         about:
           'Henrik Meier scrive gli aggiornamenti quotidiani per i clienti e supporta il team comunicazione. Chiaro, conciso e leggermente musicale fuori dal lavoro – suona la chitarra in una band d\'ufficio migliore di quanto sembri.',
         results: [
-          'Produce lettere mensili ai partecipanti lette da oltre 8\'000 investitori.',
+          'Produce la lettera mensile ai clienti, letta da oltre 8\'000 abbonati.',
           'Ha contribuito ad aumentare del 19% i tassi di apertura e-mail grazie a oggetti e struttura più chiari.',
           'Redattore di riserva per tutte le pubblicazioni esterne in lingua tedesca.',
         ],

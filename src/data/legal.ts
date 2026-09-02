@@ -13,7 +13,7 @@ export const legalPages: LegalPage[] = [
     sections: [
       {
         paragraphs: [
-          'The information published on this website is provided for general information purposes only. It does not constitute an offer, a recommendation or an invitation to buy or sell any financial instrument, nor does it constitute investment, legal or tax advice.',
+          `The information published on this website is provided for general information purposes only. It does not constitute an offer, a recommendation or an invitation to buy or sell any financial instrument, nor does it constitute investment, legal or tax advice. ${company.legalName} (${company.groupName}) is an independent adviser and portfolio manager; it does not hold client assets, which remain with the client's Swiss custodian bank.`,
         ],
       },
       {
@@ -81,7 +81,8 @@ export const legalPages: LegalPage[] = [
       {
         heading: 'Controller',
         paragraphs: [
-          `${company.legalName}, ${company.address.line}. Phone: ${company.phone}.`,
+          `${company.legalName} (${company.groupName}), ${company.address.line}. Phone: ${company.phone}.` +
+            (company.privacyEmail ? ` Email: ${company.privacyEmail}.` : ''),
         ],
       },
     ],
@@ -110,7 +111,7 @@ export const legalPages: LegalPage[] = [
       {
         heading: 'Company information',
         paragraphs: [
-          `${company.legalName} publishes regulatory and client information on this website. For the latest company filings, consult the Swiss commercial register (UID ${company.uid}).`,
+          `${company.legalName} (trading as ${company.groupName}) publishes regulatory and client information on this website. The company is an independent, fee-only adviser and FINMA-authorised portfolio manager; it does not hold client assets. For the latest company filings, consult the Swiss commercial register (UID ${company.uid}).`,
         ],
       },
     ],
@@ -127,7 +128,6 @@ export const legalPages: LegalPage[] = [
           `Phone: ${company.phone}`,
           `Swiss UID: ${company.uid}`,
           `LEI: ${company.lei}`,
-          company.leiStatus + '.',
         ],
       },
       {
@@ -142,10 +142,9 @@ export const legalPages: LegalPage[] = [
           `LEI record: ${company.leiUrl}`,
         ],
       },
-      {
-        heading: 'Design and realisation',
-        paragraphs: ['Built with React, Vite and Tailwind CSS.'],
-      },
+      // "Design and realisation" is intentionally absent until the agency name
+      // is confirmed; technology credits do not belong on a client-facing
+      // Impressum.
     ],
   },
 ];

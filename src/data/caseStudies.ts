@@ -22,14 +22,14 @@ export const caseStudies: CaseStudy[] = [
     to: ROUTES.retirement,
   },
   {
-    id: 'pension-fund-tender',
-    title: 'Occupational pension fund tender',
-    sector: 'Companies',
+    id: 'staggered-capital-withdrawal',
+    title: 'Drawing pension capital across several years',
+    sector: 'Taxes',
     summary:
-      'An SME with 85 employees had not re-tendered its BVG scheme in eight years. Risk premiums and administration charges sat well above current market levels for identical benefits.',
+      'A client approaching 62 held pillar 3a and vested-benefits capital in a single account and planned to withdraw all of it in the year of retirement, which would have fallen into the steepest band of the capital-withdrawal tariff.',
     outcome:
-      'After benchmarking and a structured tender, the company reduced combined risk and administration costs by around a quarter while improving disability cover.',
-    to: ROUTES.companiesPensionFunds,
+      'Splitting the capital across separate accounts and drawing it over three tax years reduced the combined progression materially; the schedule was set out in writing before the first withdrawal.',
+    to: ROUTES.taxes,
   },
   {
     id: 'mortgage-refi',

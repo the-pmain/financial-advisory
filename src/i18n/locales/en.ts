@@ -2,12 +2,12 @@ import { buildEnglishCatalog } from '../fromData';
 import type { Translations } from '../types';
 
 const meta: Translations['meta'] = {
-  siteName: 'Helfenstein Asset Management AG',
+  siteName: 'Helfenstein Group',
   defaultTitle:
-    'Helfenstein Asset Management AG - Independent wealth management, financial consulting and retirement planning',
+    'Helfenstein Group - Independent, fee-only financial advice for private clients in Switzerland',
   defaultDescription:
-    'Independent advice on retirement planning, financial investments, estate planning, real estate, taxes, insurance and pensions.',
-  teamDescription: 'Experienced investment professionals at Helfenstein Asset Management AG.',
+    'Independent advice on retirement planning, financial investments, estate planning, real estate, taxes, insurance and pensions. Paid only by our clients; we never hold your assets.',
+  teamDescription: 'Independent advisers who answer only to their clients at Helfenstein Group.',
   notFoundTitle: 'Page not found',
 };
 
@@ -28,21 +28,20 @@ const ui: Translations['ui'] = {
     'The page you were looking for does not exist, or has been moved. Please use the navigation above, or start again from one of the topics below.',
   news: 'News',
   ourOffering: 'Our offering',
-  stockExchangeAndMarkets: 'Stock exchange and Markets',
-  moreStockMarketNews: 'More stock market news',
+  stockExchangeAndMarkets: 'Markets & analysis',
+  moreStockMarketNews: 'More market news and analysis',
   marketData: 'Market data',
   marketDataCaption:
     'Indicative index and currency levels with the change since the previous close',
   instrument: 'Instrument',
   level: 'Level',
   change: 'Change',
-  moreMandates: 'More mandates',
   moreOfferings: 'More offerings',
   propertyType: 'Property type',
   whatWeDoForYou: 'What we do for you',
   relatedArticles: 'Related articles',
   team: 'Team',
-  teamSubtitle: 'Experienced investment professionals',
+  teamSubtitle: 'Independent advisers who answer only to their clients',
   featuredMemberLead:
     'Friedrich Hartmann leads Helfenstein’s investment philosophy and long-term capital allocation.',
   about: 'About',
@@ -70,7 +69,7 @@ const ui: Translations['ui'] = {
   externalLinkNewWindow: '(external link, opens in a new window)',
   home: 'Home',
   finmaAlt: 'FINMA — Authorised institutions, individuals and products',
-  logoAria: 'Helfenstein Asset Management AG — home',
+  logoAria: 'Helfenstein Group — home',
   mainNav: 'Main navigation',
   topNav: 'Top navigation',
   quickLinks: 'Quick links',
@@ -78,7 +77,6 @@ const ui: Translations['ui'] = {
   legalNav: 'Legal',
   subscribeNewsletter: 'Subscribe to newsletter',
   forIndividuals: 'For individuals',
-  forCompanies: 'For companies',
   clientStories: 'Client stories',
   verifyAuthorisation: 'Verify our authorisation',
   relatedService: 'Related service',
@@ -87,7 +85,7 @@ const ui: Translations['ui'] = {
   regulatoryChallenges: 'Regulatory challenges',
   howWeHelp: 'How we help',
   adviceDisclaimer:
-    'General information only. Nothing on this page is personalised investment, tax or legal advice.',
+    'General information only. Nothing on this page constitutes personalised investment, tax or legal advice. Helfenstein Group does not hold client assets; all custody is with Swiss banking partners.',
 };
 
 export const en: Translations = buildEnglishCatalog(ui, meta);

@@ -149,25 +149,25 @@ export const teamMembers: TeamMember[] = [
     section: 'business',
     photo: '/team/tobias-brandt.png',
     about:
-      'Tobias Brandt leads commercial development at Helfenstein after stints in private banking and equity sales. He is the person most likely to know which institution is ready for a deeper conversation.',
+      'Tobias Brandt leads client development at Helfenstein after stints in private banking and equity sales. He is usually the first person a prospective client speaks to before a first meeting is arranged.',
     results: [
-      'Grew Helfenstein’s institutional client base by 40% in four years.',
-      'Launched the firm’s adviser-education programme, now attended by 600+ professionals yearly.',
-      'Previously directed sales for Iberia and LatAm at a European multi-asset platform.',
+      'Grew Helfenstein’s private client base by 40% in four years.',
+      'Launched the firm’s client-education programme, now attended by 600+ people yearly.',
+      'Previously directed private-client coverage for Iberia at a European multi-asset platform.',
     ],
     languages: ['German', 'English', 'Spanish'],
-    expertise: ['companies', 'pensions', 'insurance'],
+    expertise: ['pensions', 'insurance', 'retirement'],
   },
   {
     slug: 'markus-engel',
     name: 'Markus Engel',
-    role: 'Director, investor relations',
+    role: 'Director, client communications',
     section: 'business',
     photo: '/team/markus-engel.png',
     about:
-      'Markus Engel runs investor relations, marketing and communications. Warm on calls and precise in follow-up, he keeps Helfenstein’s external voice consistent with how portfolios are actually run.',
+      'Markus Engel runs client communications and marketing. Warm on calls and precise in follow-up, he keeps Helfenstein’s external voice consistent with how portfolios are actually run.',
     results: [
-      'Raised retail and professional assets under advice by €850m over three years.',
+      'Rebuilt the client reporting and correspondence used across the advisory team.',
       'Introduced quarterly letter format now cited by several national business titles.',
       'Leads the team that handles more than 12,000 client touchpoints per year.',
     ],
@@ -179,29 +179,29 @@ export const teamMembers: TeamMember[] = [
     section: 'business',
     photo: '/team/marc-weber.png',
     about:
-      'Marc Weber coordinates client operations and custody arrangements at Helfenstein Asset Management AG. He joined from private banking and focuses on making institutional-grade infrastructure accessible to advisory clients in Lucerne and across Switzerland.',
+      'Marc Weber coordinates client operations and the relationships with our custodian banks. He joined from private banking and makes sure clients get clear reporting from the bank that holds their assets, in Lucerne and across Switzerland.',
     results: [
-      'Reduced average custody and settlement costs for Helfenstein clients by 18% since 2020.',
-      'Oversaw migration of more than €4.2bn in client assets to segregated custody accounts.',
-      'Expanded custody coordination for pension funds, family offices and external advisers across the DACH region.',
+      'Reduced the custody and settlement costs Helfenstein clients pay their banks by 18% since 2020.',
+      'Led the review that moved clients onto segregated custody accounts held in their own names.',
+      'Negotiates custody terms with our Swiss banking partners on behalf of private clients.',
     ],
     credentials: ['Swiss banking diploma'],
     languages: ['German', 'French', 'English'],
     regulatoryNote: 'Senior manager responsible for client operations and custody coordination.',
-    expertise: ['investments', 'companies'],
+    expertise: ['investments'],
   },
   {
     slug: 'andrew-ramsden',
     name: 'Andrew Ramsden',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/andrew-ramsden.png',
     about:
-      'Andrew Ramsden brings three decades of institutional relationship experience to Helfenstein’s investor desk. Measured and approachable, he is the person consultants call when a mandate needs clarity rather than spin.',
+      'Andrew Ramsden brings three decades of client relationship experience to Helfenstein’s advisory desk. Measured and approachable, he is the person clients call when a decision needs clarity rather than spin.',
     results: [
-      'Opened and deepened relationships with more than 40 pension and endowment clients across Europe.',
-      'Led the firm’s first pan-European consultant roadshow, securing three multi-year advisory mandates.',
-      'Former head of client coverage at a London-based asset manager before joining Helfenstein in 2019.',
+      'Advises more than 40 families on retirement and drawdown planning.',
+      'Built the written pre-retirement review now used across the advisory team.',
+      'Former head of private client coverage at a London-based manager before joining Helfenstein in 2019.',
     ],
     credentials: ['IMC', 'CFA Level II'],
     languages: ['English', 'German'],
@@ -210,15 +210,15 @@ export const teamMembers: TeamMember[] = [
   {
     slug: 'andrew-savage',
     name: 'Andrew Savage',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/andrew-savage.png',
     about:
-      'Andrew Savage specialises in onboarding professional investors and keeping reporting sharp. Energetic in meetings and meticulous in follow-up, he bridges investment teams and clients without losing the detail.',
+      'Andrew Savage specialises in onboarding new clients and keeping reporting sharp. Energetic in meetings and meticulous in follow-up, he bridges the investment team and clients without losing the detail.',
     results: [
-      'Onboarded 110 new professional investors over the past two years.',
-      'Rebuilt the quarterly reporting pack used by all IR relationships; NPS rose eight points.',
-      'Key contact for UK and Irish advisory platforms distributing Helfenstein strategies.',
+      'Onboarded 110 new private clients over the past two years.',
+      'Rebuilt the quarterly reporting pack sent to every client; satisfaction rose eight points.',
+      'Primary contact for clients with assets held across more than one custodian bank.',
     ],
     languages: ['English', 'French'],
     expertise: ['investments', 'taxes', 'real-estate'],
@@ -226,15 +226,15 @@ export const teamMembers: TeamMember[] = [
   {
     slug: 'anja-hoffmann',
     name: 'Anja Hoffmann',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/anja-hoffmann.png',
     about:
       'Anja Hoffmann moved into asset management from listed-company IR. Clients appreciate her direct style and the way she explains complex portfolio moves in plain language.',
     results: [
-      'Manages relationships with more than 180 high-net-worth families.',
+      'Manages relationships with more than 180 private clients and families.',
       'Client satisfaction score of 4.8/5 in last annual survey.',
-      'Organises Helfenstein’s twice-yearly investor days in Munich and Zurich.',
+      'Organises Helfenstein’s twice-yearly client seminars in Lucerne.',
     ],
     credentials: ['CFP®'],
     languages: ['German', 'English'],
@@ -243,21 +243,21 @@ export const teamMembers: TeamMember[] = [
   {
     slug: 'florian-bauer',
     name: 'Florian Bauer',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/florian-bauer.png',
     about:
-      'Florian Bauer covers institutional accounts that expect detail, not drama. A former tennis addict turned weekend skier, he is reliable under pressure and rarely misses a callback.',
+      'Florian Bauer looks after clients who expect detail, not drama. A former tennis addict turned weekend skier, he is reliable under pressure and rarely misses a callback.',
     results: [
-      'Supported €320m of net inflows from advisory channels in 2024.',
+      'Advises households on portfolio structure and annual rebalancing.',
       'Reduced average query response time to under four business hours.',
-      'Key contact for southern German and Austrian distributor partners.',
+      'Key contact for German-speaking clients resident outside Switzerland.',
     ],
   },
   {
     slug: 'erik-schneider',
     name: 'Erik Schneider',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/erik-schneider.png',
     about:
@@ -271,7 +271,7 @@ export const teamMembers: TeamMember[] = [
   {
     slug: 'birgit-schulz',
     name: 'Birgit Schulz',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/birgit-schulz.png',
     about:
@@ -285,21 +285,21 @@ export const teamMembers: TeamMember[] = [
   {
     slug: 'alexander-koch',
     name: 'Alexander Koch',
-    role: 'Institutional business',
+    role: 'Senior client adviser',
     section: 'investors',
     photo: '/team/alexander-koch.png',
     about:
-      'Alexander Koch handles institutional pipeline and consultant relations. Young but already trusted in due-diligence meetings, he connects investment teams with the right external partners.',
+      'Alexander Koch advises clients with more complex affairs — several banks, assets in more than one country, or a business being wound down into retirement. Young but already trusted in difficult conversations.',
     results: [
-      'Added twelve new fund-consultant relationships since 2022.',
-      'Supported winning three competitive institutional tenders in 2024.',
-      'Coordinates Helfenstein’s ESG questionnaire and RFP responses.',
+      'Handles the firm’s cross-border private client cases since 2022.',
+      'Built the consolidation process for clients holding assets at several custodians.',
+      'Coordinates Helfenstein’s sustainability preference questionnaire under FinSA.',
     ],
   },
   {
     slug: 'leon-roth',
     name: 'Leon Roth',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/leon-roth.png',
     about:
@@ -313,13 +313,13 @@ export const teamMembers: TeamMember[] = [
   {
     slug: 'henrik-meier',
     name: 'Henrik Meier',
-    role: 'Investor relations',
+    role: 'Client adviser',
     section: 'investors',
     photo: '/team/henrik-meier.png',
     about:
       'Henrik Meier writes the day-to-day client updates and supports the communications team. Clear, concise and slightly musical outside work—he plays guitar in a office band that is better than it sounds.',
     results: [
-      'Produces monthly participant letters read by more than 8,000 investors.',
+      'Produces the monthly client letter read by more than 8,000 subscribers.',
       'Helped lift email open rates by 19% through clearer subject lines and structure.',
       'Backup editor for all German-language external publications.',
     ],
@@ -344,7 +344,7 @@ export const teamSections: TeamSection[] = [
   },
   {
     id: 'investors',
-    title: 'Investor relations',
+    title: 'Client advisers',
     members: teamMembers.filter((m) => m.section === 'investors'),
   },
 ];

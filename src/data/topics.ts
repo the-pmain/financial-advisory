@@ -6,7 +6,6 @@ export type ExpertiseTag =
   | 'taxes'
   | 'real-estate'
   | 'estate'
-  | 'companies'
   | 'pensions'
   | 'insurance';
 
@@ -43,14 +42,14 @@ export const topics: Topic[] = [
     title: 'Individuals',
     subtitle: 'Independent advice for every stage of life.',
     intro: [
-      'Helfenstein advises private clients on retirement, investments, estate planning, real estate, taxes and pensions. We are paid by our clients only — never by product providers — so our recommendations are free of any sales interest.',
+      'Helfenstein Group advises private individuals and families — and only them — on retirement, investments, estate planning, real estate, taxes and pensions. We are paid by our clients alone, never by banks, insurers or product providers, and we never hold your assets. Every recommendation has one purpose: your interests.',
       'Every mandate starts with a written analysis of your situation. You decide afterwards whether and how you would like to work with us.',
     ],
     highlights: [
       { title: 'Retirement', text: 'Work out exactly when you can afford to stop working, and what it will cost.' },
-      { title: 'Investments', text: 'A clear strategy implemented with low-cost index funds and reviewed continuously.' },
+      { title: 'Investments', text: 'A clear strategy, implemented with low-cost index funds at your own bank and reviewed continuously.' },
       { title: 'Estate planning', text: 'Wills, marriage contracts and gifts arranged so your wishes are legally secure.' },
-      { title: 'Taxes', text: 'Long-term tax planning that reliably saves thousands of francs.' },
+      { title: 'Taxes', text: 'Long-term tax planning, so the big decisions are structured before the return is filed.' },
     ],
     relatedSlugs: ['save-on-taxes-with-pillar-3a', 'financial-investments-what-you-need-know'],
   }),
@@ -80,7 +79,7 @@ export const topics: Topic[] = [
     benefits: [
       { title: 'Written year-by-year model', text: 'See income, tax and spending before you commit.' },
       { title: 'Side-by-side options', text: 'Compare pension, lump sum and hybrids over life expectancy.' },
-      { title: 'Independent of products', text: 'Recommendations are not driven by provider commissions.' },
+      { title: 'Independent by design', text: 'We receive no commissions from any provider, so the only question is which option is right for you.' },
     ],
   }),
   t({
@@ -89,14 +88,14 @@ export const topics: Topic[] = [
     title: 'Financial investments & portfolio management',
     subtitle: 'A simple strategy, implemented efficiently.',
     intro: [
-      'We combine a clearly defined investment strategy with low-cost implementation and active support. You always know what you own, what it costs and why it is in your portfolio.',
-      'Because Helfenstein receives no retrocessions, the only fee you pay is the one agreed with us.',
+      'We combine a clearly defined investment strategy with low-cost implementation and active support. Your portfolio is held in your own name at a Swiss bank of your choice; we manage it, we never hold it. You always know what you own, what it costs and why it is in your portfolio.',
+      'Because Helfenstein Group receives no retrocessions, the only fee you pay is the one agreed with us.',
     ],
     highlights: [
       { title: 'Asset management mandates', text: 'Discretionary management from a broadly diversified index core.' },
       { title: 'Index investments', text: 'Ongoing charges a fraction of those of actively managed funds.' },
       { title: 'Portfolio analysis', text: 'A written second opinion on the portfolio you hold today.' },
-      { title: 'Custody with Swiss banking partners', text: 'Lower costs and no incentive to churn your portfolio.' },
+      { title: 'Your assets stay at your bank', text: 'Helfenstein Group never holds client assets. Custody remains with established Swiss banking partners, in your name.' },
     ],
     relatedSlugs: ['financial-investments-what-you-need-know', 'all-you-need-to-know-about-etfs'],
     expertiseTags: ['investments'],
@@ -108,7 +107,7 @@ export const topics: Topic[] = [
     ],
     benefits: [
       { title: 'Index-led core', text: 'Low-cost implementation with a clear strategic asset allocation.' },
-      { title: 'Fee transparency', text: 'You know what you pay; we credit unavoidable third-party payments.' },
+      { title: 'Fee transparency', text: 'One agreed fee, paid by you. Any third-party payment we cannot avoid is credited to you in full.' },
       { title: 'Ongoing review', text: 'Active support without an incentive to churn.' },
     ],
   }),
@@ -137,7 +136,7 @@ export const topics: Topic[] = [
     subtitle: 'Finance your property on the best available terms.',
     intro: [
       'Mortgage rates differ substantially between banks, insurers and pension funds. On a large mortgage the gap between the cheapest and the most expensive provider easily amounts to several thousand francs a year.',
-      'Helfenstein compares the market continuously, negotiates on your behalf and reviews affordability well before your fixed term expires.',
+      'Helfenstein Group compares the market continuously, negotiates on your behalf and reviews affordability well before your fixed term expires. We receive nothing from any lender, so the recommendation is simply the best available offer.',
     ],
     highlights: [
       { title: 'Mortgage comparison', text: 'Current terms from more than a hundred Swiss lenders.' },
@@ -166,7 +165,7 @@ export const topics: Topic[] = [
     subtitle: 'Optimise your tax position over the long term.',
     intro: [
       'Most tax savings are not found in the annual return but in decisions taken years earlier: how you save for retirement, when you draw your pension capital, where you live and how you hold your property.',
-      'Our experts show you how to structure those decisions and save thousands or even tens of thousands of francs.',
+      'Our experts show you how to structure those decisions in the right order — because we sell no products, the advice is about your tax position and nothing else.',
     ],
     highlights: [
       { title: 'Tax returns', text: 'Prepared and filed for individuals and the self-employed.' },
@@ -201,7 +200,7 @@ export const topics: Topic[] = [
       { title: 'Risk analysis', text: 'What OASI and your pension fund would really pay out.' },
       { title: 'Life and disability', text: 'Cover sized to your obligations, not to a sales target.' },
       { title: 'Health insurance', text: 'Deductible and model chosen on the arithmetic, reviewed annually.' },
-      { title: 'Phishing insurance', text: 'Protection against attacks that succeed despite precautions.' },
+      { title: 'Phishing protection', text: 'A free guide to spotting fraudulent messages and acting fast if one gets through.' },
     ],
     relatedSlugs: ['compulsory-insurance-switzerland', 'how-to-spot-financial-scams-switzerland'],
     expertiseTags: ['insurance'],
@@ -217,7 +216,7 @@ export const topics: Topic[] = [
       'We help you choose the vehicle, the strategy and the withdrawal timing.',
     ],
     highlights: [
-      { title: 'Pillar 3a with index investments', text: 'The best index funds, at a fraction of the usual fees.' },
+      { title: 'Pillar 3a with index investments', text: 'Low-cost index solutions, chosen for you and held at the provider of your choice.' },
       { title: 'Voluntary purchases', text: 'When buying into your pension fund genuinely pays off.' },
       { title: 'Several accounts', text: 'Staggered withdrawals that reduce the tax on your capital.' },
       { title: 'Vested benefits', text: 'Where to place your capital between jobs.' },
@@ -228,134 +227,20 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.banking,
-    breadcrumb: ['Individuals', 'Banking'],
-    title: 'Banking',
-    subtitle: 'Secure custody through Swiss banking partners.',
+    breadcrumb: ['Individuals', 'Custody & banking partners'],
+    title: 'Custody & banking partners',
+    subtitle: 'Your assets stay at your own bank.',
     intro: [
-      'Client assets are held with selected Swiss custody partners so that securities stay segregated and transparent. Helfenstein Asset Management AG provides portfolio management and advice; we do not operate a bank of our own.',
-      'Clients benefit from transparent custody fees, clear reporting and Swiss regulatory protections applicable to the chosen custodian.',
+      'Helfenstein Group never holds client assets. Your securities and cash stay in an account in your own name at a Swiss custodian bank, which reports to you directly; we provide portfolio management and advice on top of it.',
+      'We help you choose a custodian, compare what each one charges and make sure the reporting is clear. Custody and transaction fees are set and charged by your bank, never by us.',
     ],
     highlights: [
-      { title: 'Securities custody', text: 'Transparent, flat custody pricing with no hidden margins.' },
-      { title: 'Accounts and cards', text: 'Everyday banking alongside your investment portfolio where available.' },
+      { title: 'Assets in your name', text: 'Segregated custody at an authorised Swiss bank you choose.' },
+      { title: 'Choosing a custodian', text: 'A like-for-like comparison of custody terms and service.' },
       { title: 'Mortgages', text: 'Financing arranged on comparison-tested terms.' },
-      { title: 'Security', text: 'Multi-factor access and continuous fraud monitoring.' },
+      { title: 'Security', text: 'Multi-factor access and the fraud monitoring your bank provides.' },
     ],
-  }),
-
-  /* -- Companies -- */
-  t({
-    path: ROUTES.companies,
-    breadcrumb: ['Companies'],
-    title: 'Companies',
-    subtitle: 'From pension funds to succession planning.',
-    intro: [
-      'Helfenstein advises small and medium-sized Swiss companies on occupational pensions, insurance management, company formation and succession.',
-      'Companies working with Helfenstein frequently reduce risk premiums and administration costs — in some tenders by around a quarter to a third — while reducing internal workload. Outcomes vary by scheme and provider.',
-    ],
-    highlights: [
-      { title: 'Corporate succession planning', text: 'Valuation, buyer search and transaction management.' },
-      { title: 'Pension funds', text: 'Benchmarking and restructuring of your occupational scheme.' },
-      { title: 'Management pension plans', text: 'Tax-efficient additional cover for higher earners.' },
-      { title: 'Insurance management', text: 'One partner for the whole corporate insurance portfolio.' },
-    ],
-    expertiseTags: ['companies'],
     adviceDisclaimer: true,
-  }),
-  t({
-    path: ROUTES.companiesSuccession,
-    breadcrumb: ['Companies', 'Corporate succession planning'],
-    title: 'Corporate succession planning',
-    subtitle: 'Hand over your company on your own terms.',
-    intro: [
-      'Selling a company is something most owners do once. Valuation, tax structuring, buyer search and negotiation all have to fit together, and the process typically takes one to two years.',
-      'Helfenstein manages the whole transaction and represents your interests from the first valuation to the closing.',
-    ],
-    highlights: [
-      { title: 'Company valuation', text: 'A defensible figure based on sustainable earnings.' },
-      { title: 'Buyer search', text: 'Discreet approach to strategic and financial buyers.' },
-      { title: 'Tax structuring', text: 'Arranging the sale so the proceeds are not eroded by tax.' },
-      { title: 'Transaction management', text: 'Due diligence, contracts and closing coordinated for you.' },
-    ],
-    expertiseTags: ['companies'],
-    adviceDisclaimer: true,
-    challenges: [
-      { title: 'One-time process', text: 'Most owners sell once; valuation, tax and buyer search must fit together.' },
-      { title: 'Tax leakage', text: 'Poor structuring can erode a large share of proceeds.' },
-      { title: 'Confidentiality', text: 'A public sale process can unsettle staff and customers.' },
-    ],
-    benefits: [
-      { title: 'End-to-end mandate', text: 'From first valuation to closing under one lead.' },
-      { title: 'Discreet buyer search', text: 'Strategic and financial buyers approached carefully.' },
-      { title: 'Tax coordination', text: 'Structure aligned with your personal and corporate situation.' },
-    ],
-  }),
-  t({
-    path: ROUTES.companiesPensionFunds,
-    breadcrumb: ['Companies', 'Pension funds'],
-    title: 'Pension funds',
-    subtitle: 'Benchmark premiums and administration against the market.',
-    intro: [
-      'Occupational pension costs are one of the largest and least-examined items on a Swiss payroll. Risk premiums and administration charges vary widely between providers for identical benefits.',
-      'We benchmark your current scheme, put it out to tender and manage the transfer. Savings depend on your starting point; some employers see reductions on the order of a quarter when schemes have not been re-tendered for years.',
-    ],
-    highlights: [
-      { title: 'Benchmarking', text: 'Your current premiums measured against the market.' },
-      { title: 'Tender process', text: 'Comparable offers from all relevant providers.' },
-      { title: 'Plan design', text: 'Benefits structured around your workforce.' },
-      { title: 'Administration', text: 'Payroll reporting and member changes handled for you.' },
-    ],
-    relatedSlugs: ['bgv-scheme-benchmarking-smes'],
-    expertiseTags: ['companies', 'pensions'],
-    adviceDisclaimer: true,
-  }),
-  t({
-    path: ROUTES.companiesManagementPensionPlans,
-    breadcrumb: ['Companies', 'Management pension plans'],
-    title: 'Management pension plans',
-    subtitle: 'Additional cover for higher earners.',
-    intro: [
-      'Above a certain salary, the standard occupational scheme replaces only a small share of income. A separate management plan closes that gap and creates substantial scope for tax-deductible contributions.',
-      'We design the plan, document it and integrate it with the base scheme.',
-    ],
-    highlights: [
-      { title: '1e plans', text: 'Individual investment strategies for salaries above the threshold.' },
-      { title: 'Purchase potential', text: 'Creating room for deductible voluntary contributions.' },
-      { title: 'Risk cover', text: 'Death and disability benefits matched to income.' },
-      { title: 'Governance', text: 'Regulations and reporting that satisfy the auditors.' },
-    ],
-  }),
-  t({
-    path: ROUTES.companiesInsuranceManagement,
-    breadcrumb: ['Companies', 'Insurance management'],
-    title: 'Insurance management',
-    subtitle: 'One partner for your whole insurance portfolio.',
-    intro: [
-      'Corporate insurance tends to accumulate rather than be designed. Policies overlap, sums insured drift away from reality and premiums are rarely re-tendered.',
-      'Helfenstein takes an inventory, removes the duplication and manages renewals and claims on your behalf.',
-    ],
-    highlights: [
-      { title: 'Portfolio review', text: 'Every policy assessed for cover, gaps and price.' },
-      { title: 'Tendering', text: 'Renewals put out to market on comparable terms.' },
-      { title: 'Claims handling', text: 'We represent you when a loss occurs.' },
-      { title: 'Reporting', text: 'A single annual overview of cover and cost.' },
-    ],
-  }),
-  t({
-    path: ROUTES.companiesEstablishing,
-    breadcrumb: ['Companies', 'Establishing a company'],
-    title: 'Establishing a company',
-    subtitle: 'Our start-up compass guides you from idea to first salary.',
-    intro: [
-      'Setting up a business in Switzerland involves a sequence of decisions — legal form, capital, social insurance, VAT registration, pensions — each of which is hard to reverse later.',
-      'The Helfenstein start-up compass takes you through them in the right order, with the paperwork prepared for you.',
-    ],
-    highlights: [
-      { title: 'Legal form', text: 'Sole proprietorship, GmbH or AG — what each really means.' },
-      { title: 'Social insurance', text: 'Registration and the cover the self-employed lack.' },
-      { title: 'Pensions', text: 'Building a pillar 3a and, where useful, an occupational scheme.' },
-      { title: 'Taxes and VAT', text: 'Registration thresholds and accounting requirements.' },
-    ],
   }),
 
   /* -- About Helfenstein -- */
@@ -365,8 +250,8 @@ export const topics: Topic[] = [
     title: 'About Helfenstein',
     subtitle: 'Independent advice from Lucerne.',
     intro: [
-      'Helfenstein Asset Management AG is a Swiss portfolio manager based in Lucerne. We advise private and institutional clients on asset management, financial advice, retirement planning and financing advice.',
-      'We are listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. Our income comes from the fees our clients agree with us.',
+      'Helfenstein Group is an independent Swiss adviser and portfolio manager based in Lucerne. We advise private individuals and families — never institutions or companies — on asset management, financial advice, retirement planning and financing.',
+      'We are listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. Our income comes from the fees our clients agree with us, and we hold no client assets: custody stays with Swiss banking partners.',
     ],
     highlights: [
       { title: 'Independent advice', text: 'No retrocessions, no product sales targets.' },
@@ -382,7 +267,7 @@ export const topics: Topic[] = [
     subtitle: 'Paid by our clients. By nobody else.',
     intro: [
       'Most financial advice in Switzerland is funded by the products it recommends. That arrangement is invisible to the client and it systematically favours expensive solutions.',
-      'Helfenstein is paid only by its clients. We publish our fees, we pass on any retrocession we cannot avoid, and our advisers have no product sales targets.',
+      'Helfenstein Group is paid only by its clients — private individuals and families, never institutions or companies. We publish our fees, we credit any retrocession we cannot avoid, our advisers have no product sales targets, and we never hold your assets: custody stays with Swiss banking partners, in your name.',
     ],
     highlights: [
       { title: 'Fee transparency', text: 'You know the cost before you decide anything.' },
@@ -401,7 +286,7 @@ export const topics: Topic[] = [
     intro: [
       'Swiss financial advice is governed primarily by the Financial Services Act (FinSA) and, for portfolio managers, by FINMA authorisation with day-to-day supervision by a recognised supervisory organisation. This page explains the framework in plain language.',
       'Helfenstein Asset Management AG is listed by FINMA as an authorised portfolio manager and is supervised by OSFINcontrol AG. You can verify our authorisation on the official FINMA register (UID CHE-111.708.730, LEI 894500URZFTDV5G7F357).',
-      'Under FinSA, firms must inform you about services, costs, client segmentation and conflicts of interest before providing personalised advice. Independent advice at Helfenstein is paid by clients; we do not earn product commissions.',
+      'Under FinSA, firms must inform you about services, costs, client segmentation and conflicts of interest before providing personalised advice. Advice at Helfenstein Group is paid for by clients alone; we earn no product commissions and hold no client assets — custody is with our Swiss banking partners, and your bank reports to you directly.',
       'If a dispute cannot be resolved with us directly, you may contact the ombudsman office with which we are affiliated. Details appear in our FinSA client brochure and under Documents and information.',
     ],
     highlights: [
@@ -426,7 +311,7 @@ export const topics: Topic[] = [
     ],
     highlights: [
       { title: 'Retirement decisions', text: 'Pension versus lump sum modelled in writing.' },
-      { title: 'Corporate pensions', text: 'BVG tenders that reset premiums and administration.' },
+      { title: 'Taxes', text: 'Pension capital drawn across several years to hold down progression.' },
       { title: 'Mortgages', text: 'Structured refinancing before fixed terms expire.' },
       { title: 'Talk to us', text: 'A free first meeting is the usual starting point.' },
     ],
@@ -434,9 +319,9 @@ export const topics: Topic[] = [
     adviceDisclaimer: true,
   }),
   t({
-    path: ROUTES.aboutBranchOffices,
-    breadcrumb: ['About Helfenstein', 'Branch offices'],
-    title: 'Branch offices',
+    path: ROUTES.aboutOffice,
+    breadcrumb: ['About Helfenstein', 'Our office'],
+    title: 'Our office',
     subtitle: 'Based in Lucerne, advising clients across Switzerland.',
     intro: [
       'Helfenstein Asset Management AG is based at Pilatusstrasse 23 in Lucerne. We advise clients in German, French, Italian and English.',
@@ -455,29 +340,29 @@ export const topics: Topic[] = [
     title: 'Portrait',
     subtitle: 'A Lucerne-based asset manager with a clear advisory model.',
     intro: [
-      'Helfenstein Asset Management AG advises private and institutional clients on asset management, financial advice, retirement planning and financing advice from its office in Lucerne.',
-      'Client assets are held with selected Swiss custody partners. We are authorised by FINMA as a portfolio manager and supervised by OSFINcontrol AG.',
+      'Helfenstein Group advises private individuals and families on asset management, financial advice, retirement planning and financing from its office in Lucerne. We do not act for institutions or companies.',
+      'Client assets are held with selected Swiss custody partners, never by us. We are authorised by FINMA as a portfolio manager and supervised by OSFINcontrol AG.',
     ],
     highlights: [
       { title: 'Asset management', text: 'Portfolio mandates built around a clear investment process.' },
       { title: 'Financial advice', text: 'Retirement, financing and personal planning alongside investments.' },
-      { title: 'Custody partners', text: 'Segregated custody with authorised Swiss banks.' },
+      { title: 'Custody partners', text: 'Segregated custody in your name with authorised Swiss banks.' },
       { title: 'Lucerne', text: 'Pilatusstrasse 23, 6003 Luzern.' },
     ],
   }),
   t({
-    path: ROUTES.aboutInvestorRelations,
-    breadcrumb: ['About Helfenstein', 'Investor relations'],
-    title: 'Investor relations',
-    subtitle: 'Reports, key figures and the financial calendar.',
+    path: ROUTES.aboutCompanyInformation,
+    breadcrumb: ['About Helfenstein', 'Company information'],
+    title: 'Company information',
+    subtitle: 'Who we are on paper, and how to reach us.',
     intro: [
-      'This section brings together company information, media contacts and answers for professional investors and partners of Helfenstein Asset Management AG.',
-      'Contact our investor relations team with any further questions.',
+      'This page brings together the registered details of Helfenstein Asset Management AG, which trades as Helfenstein Group, together with our media contacts.',
+      'For questions about advice or an existing mandate, please use the contact page instead.',
     ],
     highlights: [
       { title: 'Company profile', text: 'Legal name, UID, LEI and Lucerne address.' },
       { title: 'Regulation', text: 'FINMA portfolio manager; supervised by OSFINcontrol AG.' },
-      { title: 'Services', text: 'Asset management, advice, retirement and financing.' },
+      { title: 'Services', text: 'Independent advice and portfolio management for private clients.' },
       { title: 'Contact', text: '+41 41 211 29 29 · Pilatusstrasse 23, Luzern.' },
     ],
   }),
@@ -487,8 +372,8 @@ export const topics: Topic[] = [
     title: 'Jobs & careers',
     subtitle: 'Advisory work without sales targets.',
     intro: [
-      'Because Helfenstein earns nothing from products, our advisers are measured on the quality of their advice rather than on volumes sold. That changes the job fundamentally.',
-      'We are continually looking for advisers, specialists and Graduates across the whole world.',
+      'Because Helfenstein Group earns nothing from products and holds no client assets, our advisers are measured on the quality of their advice rather than on volumes sold. That changes the job fundamentally.',
+      'We are always interested in hearing from advisers, specialists and graduates who want to work this way.',
     ],
     highlights: [
       { title: 'Advisory roles', text: 'Client-facing positions in retirement, tax and investments.' },
@@ -503,7 +388,7 @@ export const topics: Topic[] = [
     title: 'Contact & help',
     subtitle: 'We are happy to hear from you.',
     intro: [
-      'Call us, write to us or arrange a free first meeting at our Lucerne office. Our advisers speak German, French, Italian and English.',
+      'Call us, write to us or arrange a free first meeting at our Lucerne office or by video call. Our advisers speak German, French, Italian and English — and none of them has anything to sell you.',
       'For questions about the Helfenstein Financial Portal, our support team is available on weekdays during office hours.',
     ],
     highlights: [
@@ -521,8 +406,8 @@ export const topics: Topic[] = [
     title: 'Make an appointment',
     subtitle: 'The first meeting is free of charge.',
     intro: [
-      'Talk to an expert at Helfenstein about your retirement, your investments, your taxes or your mortgage. The first consultation costs you nothing and commits you to nothing.',
-      'Choose a branch office and a time that suits you, and tell us briefly what you would like to discuss.',
+      'Talk to an adviser at Helfenstein Group about your retirement, your investments, your taxes or your mortgage. The first consultation costs nothing and commits you to nothing — and because we are paid only by our clients, nobody in the room is selling you a product.',
+      'Choose a time that suits you — at our Lucerne office or by video call — and tell us briefly what you would like to discuss.',
     ],
     highlights: [
       { title: 'Free first meeting', text: 'Around an hour, in person or by video call.' },
@@ -538,14 +423,14 @@ export const topics: Topic[] = [
     title: 'Expertise',
     subtitle: 'Knowledge, studies and tools from our specialists.',
     intro: [
-      'Helfenstein publishes research on retirement, pensions, taxes, mortgages and investing, together with checklists you can order and calculators we are expanding over time.',
-      'Start with the horizon report, browse insights by topic, or open the full article index. Everything here is free; some tools require registration.',
+      'Helfenstein Group publishes research on retirement, pensions, taxes, mortgages and investing, together with checklists you can order free of charge.',
+      'Start with the horizon report, browse insights by topic, or open the full article index. Because we sell no products, what you read here is our own analysis rather than a sales pitch.',
     ],
     highlights: [
       { title: 'Horizon report 2026', text: 'Pensions, mortgages and FinSA developments in plain language.' },
       { title: 'Insights index', text: 'All articles sorted by date, with topic tags.' },
       { title: 'Fact sheets', text: 'Concise printed guides, sent free of charge.' },
-      { title: 'Calculators', text: 'Retirement and affordability tools — more on the way.' },
+      { title: 'Free first meeting', text: 'An hour with an adviser, in Lucerne or by video call.' },
     ],
     relatedSlugs: [
       'horizon-report-2026',
@@ -561,7 +446,7 @@ export const topics: Topic[] = [
     subtitle: 'Supervision, FinSA information and client documents.',
     intro: [
       'This hub brings together how Helfenstein is supervised, what FinSA means for clients, and the documents that accompany our services.',
-      'Helfenstein Asset Management AG is listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. Advisory relationships are subject to FinSA conduct rules, including transparency on fees, conflicts and client segmentation.',
+      'Helfenstein Asset Management AG (Helfenstein Group) is listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. We do not hold client assets — custody is with Swiss banking partners. Advisory relationships are subject to FinSA conduct rules, including transparency on fees, conflicts of interest and client segmentation.',
     ],
     highlights: [
       { title: 'Verify authorisation', text: 'Use the FINMA register to confirm supervised entities.' },
@@ -580,29 +465,29 @@ export const topics: Topic[] = [
     title: 'Helfenstein Financial Portal',
     subtitle: 'Your portfolio, your documents, your markets.',
     intro: [
-      'The Helfenstein Financial Portal gives you a consolidated view of your accounts and portfolios, all your documents, and real-time market data.',
-      'The Pro version adds depth-of-market data, advanced charting and direct order entry on all major exchanges.',
+      'The Helfenstein Financial Portal gives you one consolidated view of the accounts and portfolios you hold at your Swiss banking partners, together with all your documents and current market data.',
+      'Your assets stay at your bank — the portal is your window onto them, not a place where money is held.',
     ],
     highlights: [
       { title: 'Portfolio overview', text: 'Consolidated performance across all your holdings.' },
       { title: 'Documents', text: 'Statements and tax documents in one archive.' },
-      { title: 'Trading', text: 'Order entry on Swiss and international exchanges.' },
+      { title: 'Reporting', text: 'Performance, costs and allocation across all your holdings, explained in plain language.' },
       { title: 'Security', text: 'Two-factor authentication on every login.' },
     ],
-    relatedSlugs: ['helfenstein-financial-portal-pro', 'how-to-spot-financial-scams-switzerland'],
+    relatedSlugs: ['helfenstein-financial-portal', 'how-to-spot-financial-scams-switzerland'],
     ctaLabel: 'Sign up for free',
   }),
   t({
     path: ROUTES.stockExchangesAndMarkets,
-    breadcrumb: ['Prices and markets'],
-    title: 'Helfenstein stock exchanges & markets',
-    subtitle: 'Latest share prices, news and analyses.',
+    breadcrumb: ['Markets & analysis'],
+    title: 'Markets & analysis',
+    subtitle: 'Prices, news and our independent view.',
     intro: [
-      'Reliable information, real-time share prices and useful tools — all in one place, and free to use once you have registered.',
+      'Market data, commentary and useful tools in one place, free to use once registered. We publish our own analysis because we sell no products — what you read here is our opinion, not a sales pitch.',
       'Follow indices, currencies, interest rates and individual securities, and set alerts on the positions that matter to you.',
     ],
     highlights: [
-      { title: 'Real-time prices', text: 'Swiss and international equities, indices and currencies.' },
+      { title: 'Market prices', text: 'Swiss and international equities, indices and currencies.' },
       { title: 'Watchlists', text: 'Track the securities you care about and set alerts.' },
       { title: 'Analyses', text: 'Commentary from our investment specialists.' },
       { title: 'Tools', text: 'Screeners, charts and portfolio simulations.' },
@@ -614,9 +499,9 @@ export const topics: Topic[] = [
     path: ROUTES.newsletter,
     breadcrumb: ['Subscribe to newsletter'],
     title: 'Subscribe to our newsletter',
-    subtitle: 'Regular updates on optimising your pensions.',
+    subtitle: 'Independent updates, with nothing to sell.',
     intro: [
-      'Get regular updates on how to optimise your OASI, occupational and pillar 3 pensions. The newsletter is published in German, French and Italian.',
+      'Practical, independent updates on pensions, tax, investing and property — written for private clients, with no product advertising. Published in English, German, French and Italian.',
       'You can select the topics that interest you and unsubscribe at any time with a single click.',
     ],
     highlights: [
@@ -645,20 +530,21 @@ export const topics: Topic[] = [
     ctaLabel: 'Order for free',
   }),
   t({
-    path: ROUTES.phishingInsurance,
-    breadcrumb: ['Helfenstein phishing insurance'],
-    title: 'Protect your assets with Helfenstein phishing insurance',
-    subtitle: 'Cover for attacks that succeed despite every precaution.',
+    path: ROUTES.phishingProtection,
+    breadcrumb: ['Protect your assets from phishing'],
+    title: 'Protect your assets from phishing',
+    subtitle: 'A practical guide for private clients.',
     intro: [
       'Phishing has become the most common route to unauthorised access to financial accounts. Even careful, well-informed people are occasionally caught by a convincing message.',
-      'Helfenstein phishing insurance covers the financial loss if an attack succeeds despite the security measures and precautions in place.',
+      'Our free guide explains how fraudsters target private investors, what to check before acting on any message that appears to come from your bank or from us, and what to do — and whom to call — in the first hour if something goes wrong. Because your assets are held at your bank and never with Helfenstein Group, we also explain which security measures your bank provides and how to use them.',
     ],
     highlights: [
-      { title: 'What is covered', text: 'Losses from unauthorised transactions following an attack.' },
-      { title: 'Who is covered', text: 'Available to Helfenstein advisory clients with eligible custody arrangements.' },
-      { title: 'Prevention', text: 'Practical guidance on recognising fraudulent messages.' },
-      { title: 'Claims', text: 'A single point of contact if something goes wrong.' },
+      { title: 'How attacks work', text: 'The messages, calls and fake sites used against private investors.' },
+      { title: 'What to check', text: 'The handful of checks that stop almost every attempt.' },
+      { title: "Your bank's safeguards", text: 'Which protections your custodian bank provides, and how to switch them on.' },
+      { title: 'If something goes wrong', text: 'Who to call in the first hour, and in what order.' },
     ],
+    relatedSlugs: ['how-to-spot-financial-scams-switzerland'],
     ctaLabel: 'Order for free',
   }),
 ];

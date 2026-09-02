@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
 import { audienceBands, hero } from '../../data/content';
-import { ButtonOrange, UnderlineLink } from '../ui/primitives';
+import { UnderlineLink } from '../ui/primitives';
 
 /**
- * Home lead: brand + value proposition + dual CTAs, with portrait as a
+ * Home lead: brand + slogan + positioning copy, with portrait as a
  * supporting visual rather than the sole message.
  */
 export function Hero() {
@@ -16,11 +16,10 @@ export function Hero() {
         <h1 className="text-vz-ink mt-3 mb-0 text-[40px] leading-[1.15] font-bold tracking-[-0.01em] max-lap:text-[32px] max-mob:text-[26px]">
           {hero.headline}
         </h1>
-        <p className="text-vz-ink mt-4 mb-0 max-w-[38rem] text-[19px] leading-[1.45] max-mob:mx-auto max-mob:text-[17px]">
+        <p className="text-vz-ink mt-4 mb-0 max-w-[40rem] text-[17px] leading-[1.5] max-mob:mx-auto max-mob:text-[16px]">
           {hero.subline}
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 max-mob:justify-center">
-          <ButtonOrange to={hero.primaryCta.to}>{hero.primaryCta.label}</ButtonOrange>
           <UnderlineLink to={hero.secondaryCta.to}>{hero.secondaryCta.label}</UnderlineLink>
         </div>
       </div>

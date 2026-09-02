@@ -23,27 +23,20 @@ export const ROUTES = {
   pensionPlanning: '/pension-planning',
   banking: '/banking',
 
-  companies: '/companies',
-  companiesSuccession: '/companies/succession',
-  companiesPensionFunds: '/companies/pension-funds',
-  companiesManagementPensionPlans: '/companies/management-pension-plans',
-  companiesInsuranceManagement: '/companies/insurance-management',
-  companiesEstablishing: '/companies/establishing-a-company',
-
   about: '/about',
   aboutIndependentAdvice: '/about/independent-advice',
   aboutHowWeAreRegulated: '/about/how-we-are-regulated',
   aboutClientStories: '/about/client-stories',
-  aboutBranchOffices: '/about/branch-offices',
+  aboutOffice: '/about/office',
   aboutPortrait: '/about/portrait',
-  aboutInvestorRelations: '/about/investor-relations',
+  aboutCompanyInformation: '/about/company-information',
   aboutJobs: '/about/jobs',
   aboutContact: '/about/contact',
   aboutTeam: '/about/team',
 
   financialPortal: '/financial-portal',
   checklistRetirementPlanning: '/checklist-retirement-planning',
-  phishingInsurance: '/protect-your-assets-phishing-insurance',
+  phishingProtection: '/protect-your-assets-from-phishing',
 
   knowledgeHub: '/knowledge-hub',
   legal: '/legal',
@@ -57,6 +50,18 @@ export const ROUTES = {
 
 export type AppRoute = (typeof ROUTES)[keyof typeof ROUTES];
 
+/**
+ * Paths that existed before the private-clients-only repositioning. The phishing
+ * page kept its content under a new URL, so it redirects; the corporate pages
+ * were withdrawn and are left to 404.
+ */
+export const LEGACY_REDIRECTS: Record<string, string> = {
+  '/protect-your-assets-phishing-insurance': ROUTES.phishingProtection,
+  '/about/investor-relations': ROUTES.aboutCompanyInformation,
+  '/about/branch-offices': ROUTES.aboutOffice,
+  [`${ROUTES.knowledgeHub}/helfenstein-financial-portal-pro`]: `${ROUTES.knowledgeHub}/helfenstein-financial-portal`,
+};
+
 /** React Router path patterns (with params). */
 export const ROUTE_PATTERNS = {
   home: ROUTES.home,
@@ -67,7 +72,6 @@ export const ROUTE_PATTERNS = {
   legalPage: `${ROUTES.legal}/:slug`,
   teamMember: `${ROUTES.aboutTeam}/:slug`,
   team: ROUTES.aboutTeam,
-  companiesSub: `${ROUTES.companies}/:sub`,
   aboutSub: `${ROUTES.about}/:sub`,
   topic: '/:topic',
 } as const;

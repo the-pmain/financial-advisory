@@ -15,17 +15,6 @@ const navPaths = {
       ],
     },
     {
-      label: 'Unternehmen',
-      to: ROUTES.companies,
-      children: [
-        { label: 'Unternehmensnachfolge', to: ROUTES.companiesSuccession },
-        { label: 'Pensionskassen', to: ROUTES.companiesPensionFunds },
-        { label: 'Kaderversicherungen', to: ROUTES.companiesManagementPensionPlans },
-        { label: 'Versicherungsmanagement', to: ROUTES.companiesInsuranceManagement },
-        { label: 'Firmengründung', to: ROUTES.companiesEstablishing },
-      ],
-    },
-    {
       label: 'Über Helfenstein',
       to: ROUTES.about,
       children: [
@@ -41,7 +30,7 @@ const navPaths = {
   quickLinks: [
     { label: 'Vorsorge', to: ROUTES.retirement },
     { label: 'Anlagen', to: ROUTES.financialInvestments },
-    { label: 'Unternehmen', to: ROUTES.companies },
+    { label: 'Nachlassplanung', to: ROUTES.estatePlanning },
     { label: 'Immobilien', to: ROUTES.realEstate },
     { label: 'Steuern', to: ROUTES.taxes },
     { label: 'Pensionen', to: ROUTES.pensionPlanning },
@@ -68,12 +57,13 @@ const navPaths = {
 
 export const de: Translations = {
   meta: {
-    siteName: 'Helfenstein Asset Management AG',
+    siteName: 'Helfenstein Group',
     defaultTitle:
-      'Helfenstein Asset Management AG – Unabhängige Vermögensverwaltung, Finanzberatung und Vorsorgeplanung',
+      'Helfenstein Group – Unabhängige Honorarberatung für Privatkundinnen und Privatkunden in der Schweiz',
     defaultDescription:
-      'Unabhängige Beratung zu Vorsorgeplanung, Finanzanlagen, Nachlassplanung, Immobilien, Steuern, Versicherungen und Pensionen.',
-    teamDescription: 'Erfahrene Anlageexperten bei Helfenstein Asset Management AG.',
+      'Unabhängige Beratung zu Vorsorgeplanung, Finanzanlagen, Nachlassplanung, Immobilien, Steuern, Versicherungen und Pensionen. Ausschliesslich von unseren Kundinnen und Kunden bezahlt; wir verwahren keine Kundenvermögen.',
+    teamDescription:
+      'Unabhängige Beraterinnen und Berater, die nur ihren Kundinnen und Kunden verpflichtet sind – Helfenstein Group.',
     notFoundTitle: 'Seite nicht gefunden',
   },
   ui: {
@@ -93,21 +83,20 @@ export const de: Translations = {
       'Die gesuchte Seite existiert nicht oder wurde verschoben. Bitte nutzen Sie die Navigation oben oder wählen Sie eines der Themen unten.',
     news: 'Aktuelles',
     ourOffering: 'Unser Angebot',
-    stockExchangeAndMarkets: 'Börse und Märkte',
-    moreStockMarketNews: 'Mehr Börsennachrichten',
+    stockExchangeAndMarkets: 'Märkte & Analysen',
+    moreStockMarketNews: 'Mehr Marktnachrichten und Analysen',
     marketData: 'Marktdaten',
     marketDataCaption:
       'Indikative Index- und Währungsstände mit der Veränderung seit dem vorherigen Schluss',
     instrument: 'Instrument',
     level: 'Stand',
     change: 'Veränderung',
-    moreMandates: 'Weitere Mandate',
     moreOfferings: 'Weitere Angebote',
     propertyType: 'Objekttyp',
     whatWeDoForYou: 'Was wir für Sie tun',
     relatedArticles: 'Weitere Artikel',
     team: 'Team',
-    teamSubtitle: 'Erfahrene Anlageexperten',
+    teamSubtitle: 'Unabhängige Beraterinnen und Berater, die nur ihren Kundinnen und Kunden verpflichtet sind',
     featuredMemberLead:
       'Friedrich Hartmann leitet die Anlagephilosophie und die langfristige Kapitalallokation von Helfenstein.',
     about: 'Über',
@@ -135,7 +124,7 @@ export const de: Translations = {
     externalLinkNewWindow: '(externer Link, öffnet in neuem Fenster)',
     home: 'Startseite',
     finmaAlt: 'FINMA – Bewilligte Institute, Personen und Produkte',
-    logoAria: 'Helfenstein Asset Management AG – Startseite',
+    logoAria: 'Helfenstein Group – Startseite',
     mainNav: 'Hauptnavigation',
     topNav: 'Obere Navigation',
     quickLinks: 'Schnelllinks',
@@ -143,7 +132,6 @@ export const de: Translations = {
     legalNav: 'Rechtliches',
     subscribeNewsletter: 'Newsletter abonnieren',
     forIndividuals: 'Für Privatpersonen',
-    forCompanies: 'Für Unternehmen',
     clientStories: 'Kundenbeispiele',
     verifyAuthorisation: 'Autorisierung prüfen',
     relatedService: 'Zugehörige Dienstleistung',
@@ -152,7 +140,7 @@ export const de: Translations = {
     regulatoryChallenges: 'Regulatorische Herausforderungen',
     howWeHelp: 'Wie wir helfen',
     adviceDisclaimer:
-      'Nur allgemeine Informationen. Keine persönliche Anlage-, Steuer- oder Rechtsberatung.',
+      'Nur allgemeine Informationen. Keine persönliche Anlage-, Steuer- oder Rechtsberatung. Die Helfenstein Group verwahrt keine Kundenvermögen; die Verwahrung liegt vollständig bei Schweizer Depotbank-Partnern.',
   },
   nav: navPaths,
   home: {
@@ -165,8 +153,8 @@ export const de: Translations = {
       ctaLabel: 'Termin vereinbaren',
     },
     newsletter: {
-      text: 'Erhalten Sie regelmässig Tipps zur Optimierung Ihrer AHV-, Berufsvorsorge- und Säule-3a-Vorsorge.',
-      linkLabel: 'Newsletter abonnieren (auf Deutsch, Französisch und Italienisch).',
+      text: 'Praxisnahe Informationen zu Vorsorge, Steuern, Anlagen und Immobilien – geschrieben für Privatkundinnen und Privatkunden, ohne Produktwerbung.',
+      linkLabel: 'Newsletter abonnieren (auf Englisch, Deutsch, Französisch und Italienisch).',
     },
   },
   content: {
@@ -191,7 +179,7 @@ export const de: Translations = {
         teaser:
           'Wer neben AHV und Pensionskasse die Säule 3a zur Altersvorsorge nutzt, kann die Einzahlungen vom steuerbaren Einkommen abziehen.',
         body: [
-          'Die Säule 3a ist in der Schweiz das beliebteste Instrument zur Steuerersparnis. Einzahlungen können vollständig vom steuerbaren Einkommen abgezogen werden, bis zu einem periodisch angepassten jährlichen Höchstbetrag.',
+          'Die Säule 3a ist in der Schweiz das am weitesten verbreitete Instrument zur Steuerersparnis. Einzahlungen können vollständig vom steuerbaren Einkommen abgezogen werden, bis zu einem periodisch angepassten jährlichen Höchstbetrag. Da wir ausschliesslich von Ihnen bezahlt werden, können wir Ihnen den für Sie passenden 3a-Anbieter empfehlen – Bank, Stiftung oder Versicherung – ganz ohne eigene Präferenz.',
           'Arbeitnehmende mit Pensionskassenanschluss dürfen jährlich bis zu einem festgelegten Frankenbetrag einzahlen. Selbstständige ohne Pensionskasse können bis zu 20 Prozent ihres Nettoerwerbseinkommens einzahlen, innerhalb einer Obergrenze.',
           'Vermögen in der Säule 3a ist von der Vermögenssteuer befreit, und die Erträge sind solange steuerfrei, wie sie auf dem Konto verbleiben. Bei der Auszahlung wird das Kapital getrennt vom übrigen Einkommen zu einem reduzierten Satz besteuert.',
           'Wenn Sie Ihr Sparguthaben auf mehrere Konten verteilen und in verschiedenen Jahren auszahlen, bleibt die Progression tief – das kann mehrere tausend Franken einsparen.',
@@ -233,7 +221,7 @@ export const de: Translations = {
         body: [
           'Eine solide Anlagestrategie beginnt mit Ihrer eigenen Situation: Wie viel Ihres Vermögens Sie binden können, für wie lange und welche Schwankungen Sie verkraften.',
           'Erst wenn die Strategie steht, folgt die Auswahl einzelner Anlagen. Breit diversifizierte, kostengünstige Indexfonds sind für die meisten Anlegerinnen und Anleger der effizienteste Baustein.',
-          'Kosten gehören zu den wenigen Gewissheiten beim Anlegen. Jeder Franken, den Sie an Gebühren sparen, bleibt investiert und wirkt über die gesamte Haltedauer.',
+          'Kosten gehören zu den wenigen Gewissheiten beim Anlegen. Jeder Franken, den Sie an Gebühren sparen, bleibt investiert und wirkt über die gesamte Haltedauer – weshalb eine Beraterin oder ein Berater ohne Anteil an diesen Gebühren als einzige Instanz keinen Grund hat, sie zu übersehen.',
         ],
       },
       'all-you-need-to-know-about-etfs': {
@@ -278,40 +266,31 @@ export const de: Translations = {
         cta: 'Termin anfragen',
       },
       {
-        id: 'phishing-insurance',
-        title: 'Schützen Sie Ihr Vermögen mit der Helfenstein Phishing-Versicherung',
+        id: 'phishing-protection',
+        title: 'Schützen Sie Ihr Vermögen vor Phishing',
         tag: 'Faktenblatt',
         teaser:
-          'Die Helfenstein Phishing-Versicherung schützt Sie vor Phishing-Angriffen, die trotz Sicherheitsmassnahmen und Vorsicht gelingen.',
+          'Unser kostenloser Ratgeber zeigt Ihnen, wie Sie betrügerische Nachrichten erkennen, was Sie prüfen sollten, bevor Sie einer Anweisung folgen, und was in der ersten Stunde zu tun ist, wenn etwas schiefgeht.',
         cta: 'Kostenlos bestellen',
       },
     ],
     solutions: [
       {
         title: 'Vorsorgeplanung',
-        text: 'Planen Sie Ihre Pensionierung mit Helfenstein – und seien Sie versichert, dass Sie nach dem Berufsleben finanziell abgesichert sind.',
+        text: 'Wir modellieren Ihr Renteneinkommen Jahr für Jahr schriftlich, damit Sie genau sehen, was Sie sich leisten können – bevor Sie Entscheidungen treffen, die sich nicht rückgängig machen lassen.',
       },
       {
         title: 'Säule 3a mit Indexanlagen',
-        text: 'Bei Helfenstein können Sie Ihr Säule-3a-Vermögen in die besten Indexfonds anlegen. Dank tieferer Gebühren erzielen Sie über die Jahre zusätzliche Renditen von mehreren tausend oder sogar zehntausend Franken.',
+        text: 'Wir helfen Ihnen, Ihre Säule 3a in kostengünstige Indexlösungen bei einer Schweizer Bank oder Stiftung Ihrer Wahl zu investieren. Über ein Erwerbsleben können tiefere Gebühren einen Unterschied von Zehntausenden von Franken ausmachen.',
       },
       {
         title: 'Steuerberatung',
-        text: 'Unsere Expertinnen und Experten zeigen Ihnen, wie Sie Ihre Steuersituation langfristig optimieren und mehrere tausend oder sogar zehntausend Franken sparen.',
+        text: 'Unsere Expertinnen und Experten zeigen Ihnen, wie Sie Vorsorge-, Immobilien- und Umzugsentscheide Jahre im Voraus strukturieren – dort entstehen die eigentlichen Steuerersparnisse.',
       },
       {
         title: 'Vermögensverwaltungsmandate',
-        text: 'Bei Helfenstein verbinden wir eine einfache Anlagestrategie, effiziente Umsetzung und aktive Betreuung. Finden Sie das passende Mandat für sich.',
+        text: 'Eine klare Strategie, kostengünstige Umsetzung und laufende Betreuung – verwaltet von uns, verwahrt bei Ihrer Bank. Sie wissen jederzeit, was Sie besitzen, was es kostet und warum.',
       },
-    ],
-    mandates: [
-      {
-        title:
-          'Innovatives, schnell wachsendes Unternehmen im Bereich Gebäudetechnik und Energieoptimierung',
-      },
-      { title: 'Spezialisiertes Industrieanlagenbau-Unternehmen mit patentierter Technologie' },
-      { title: 'Einer der führenden Schweizer Anbieter von Logistikverpackungsmaterialien' },
-      { title: 'Erfolgreicher Telekommunikations-Dienstleister' },
     ],
     property: {
       type: 'Einfamilienhaus',
@@ -326,14 +305,14 @@ export const de: Translations = {
       ],
     },
     marketVideo: {
-      slug: 'helfenstein-financial-portal-pro',
-      tagline: 'Helfenstein Financial Portal Pro',
-      title: 'Die Plattform für Ihren Börsenhandel',
-      teaser: 'Video von Helfenstein Asset Management (1:46 Minuten)',
-      videoNote: 'Video von Helfenstein Asset Management (1:46 Minuten)',
+      slug: 'helfenstein-financial-portal',
+      tagline: 'Helfenstein Financial Portal',
+      title: 'Eine klare Sicht auf alles, was Sie besitzen',
+      teaser: 'Video von Helfenstein Group (1:46 Minuten)',
+      videoNote: 'Video von Helfenstein Group (1:46 Minuten)',
       body: [
-        'Das Helfenstein Financial Portal Pro vereint Echtzeitkurse, Markttiefe, Charting und Ordererfassung in einer Ansicht.',
-        'Watchlists, Alerts und Portfolioanalyse sind ohne Aufpreis enthalten, und Orders können direkt an allen wichtigen Schweizer und internationalen Börsen platziert werden.',
+        'Das Helfenstein Financial Portal führt Ihre Positionen bei allen Ihren Schweizer Depotbank-Partnern, Ihre Dokumente und aktuelle Marktdaten in einer Ansicht zusammen.',
+        'Watchlists, Alerts und Portfolioanalyse sind ohne Aufpreis enthalten. Ihre Vermögenswerte bleiben jederzeit bei Ihrer Bank; Transaktionen werden über Ihre Depotbank ausgeführt.',
       ],
     },
   },
@@ -344,14 +323,14 @@ export const de: Translations = {
       title: 'Privatpersonen',
       subtitle: 'Unabhängige Beratung für jede Lebensphase.',
       intro: [
-        'Helfenstein berät Privatkundinnen und Privatkunden zu Vorsorge, Anlagen, Nachlassplanung, Immobilien, Steuern und Pensionen. Wir werden ausschliesslich von unseren Kundinnen und Kunden bezahlt – nie von Produktanbietern –, sodass unsere Empfehlungen frei von Vertriebsinteressen sind.',
+        'Die Helfenstein Group berät Privatpersonen und Familien – und ausschliesslich diese – zu Vorsorge, Anlagen, Nachlassplanung, Immobilien, Steuern und Pensionen. Wir werden allein von unseren Kundinnen und Kunden bezahlt, nie von Banken, Versicherern oder Produktanbietern, und wir verwahren Ihre Vermögenswerte nie. Jede Empfehlung hat nur einen Zweck: Ihr Interesse.',
         'Jedes Mandat beginnt mit einer schriftlichen Analyse Ihrer Situation. Anschliessend entscheiden Sie, ob und wie Sie mit uns zusammenarbeiten möchten.',
       ],
       highlights: [
         { title: 'Vorsorge', text: 'Ermitteln Sie genau, wann Sie sich die Pensionierung leisten können und was sie kostet.' },
-        { title: 'Anlagen', text: 'Eine klare Strategie mit kostengünstigen Indexfonds, laufend überprüft.' },
+        { title: 'Anlagen', text: 'Eine klare Strategie, umgesetzt mit kostengünstigen Indexfonds bei Ihrer eigenen Bank und laufend überprüft.' },
         { title: 'Nachlassplanung', text: 'Testamente, Eheverträge und Schenkungen so gestaltet, dass Ihre Wünsche rechtlich abgesichert sind.' },
-        { title: 'Steuern', text: 'Langfristige Steuerplanung, die zuverlässig tausende Franken spart.' },
+        { title: 'Steuern', text: 'Langfristige Steuerplanung, damit die grossen Entscheide vor dem Ausfüllen der Steuererklärung strukturiert sind.' },
       ],
     },
     [ROUTES.retirement]: {
@@ -376,14 +355,14 @@ export const de: Translations = {
       title: 'Finanzanlagen & Vermögensverwaltung',
       subtitle: 'Eine einfache Strategie, effizient umgesetzt.',
       intro: [
-        'Wir verbinden eine klar definierte Anlagestrategie mit kostengünstiger Umsetzung und aktiver Betreuung. Sie wissen jederzeit, was Sie besitzen, was es kostet und warum es in Ihrem Portfolio ist.',
-        'Da Helfenstein keine Retrozessionen erhält, zahlen Sie nur die mit uns vereinbarte Gebühr.',
+        'Wir verbinden eine klar definierte Anlagestrategie mit kostengünstiger Umsetzung und aktiver Betreuung. Ihr Portfolio wird auf Ihren Namen bei einer Schweizer Bank Ihrer Wahl gehalten; wir verwalten es, wir verwahren es nie. Sie wissen jederzeit, was Sie besitzen, was es kostet und warum es in Ihrem Portfolio ist.',
+        'Da die Helfenstein Group keine Retrozessionen erhält, zahlen Sie nur die mit uns vereinbarte Gebühr.',
       ],
       highlights: [
         { title: 'Vermögensverwaltungsmandate', text: 'Discretionary Management mit breit diversifiziertem Index-Kern.' },
         { title: 'Indexanlagen', text: 'Laufende Kosten nur ein Bruchteil jener aktiv verwalteter Fonds.' },
         { title: 'Portfolioanalyse', text: 'Eine schriftliche Zweitmeinung zu Ihrem heutigen Portfolio.' },
-        { title: 'Verwahrung bei ausgewählten Schweizer Depotbanken', text: 'Tiefere Kosten und kein Anreiz, Ihr Portfolio unnötig umzuschichten.' },
+        { title: 'Ihre Vermögenswerte bleiben bei Ihrer Bank', text: 'Die Helfenstein Group verwahrt nie Kundenvermögen. Die Verwahrung bleibt auf Ihren Namen bei etablierten Schweizer Depotbank-Partnern.' },
       ],
     },
     [ROUTES.estatePlanning]: {
@@ -409,7 +388,7 @@ export const de: Translations = {
       subtitle: 'Finanzieren Sie Ihre Liegenschaft zu den besten verfügbaren Konditionen.',
       intro: [
         'Hypothekarzinsen unterscheiden sich erheblich zwischen Banken, Versicherern und Pensionskassen. Bei einer grossen Hypothek beträgt die Spanne zwischen dem günstigsten und teuersten Anbieter leicht mehrere tausend Franken pro Jahr.',
-        'Helfenstein vergleicht den Markt laufend, verhandelt in Ihrem Namen und prüft die Tragbarkeit rechtzeitig vor Ablauf Ihrer Fixlaufzeit.',
+        'Die Helfenstein Group vergleicht den Markt laufend, verhandelt in Ihrem Namen und prüft die Tragbarkeit rechtzeitig vor Ablauf Ihrer Fixlaufzeit. Wir erhalten von keinem Kreditgeber eine Entschädigung – die Empfehlung ist daher schlicht das beste verfügbare Angebot.',
       ],
       highlights: [
         { title: 'Hypothekenvergleich', text: 'Aktuelle Konditionen von mehr als hundert Schweizer Kreditgebern.' },
@@ -425,7 +404,7 @@ export const de: Translations = {
       subtitle: 'Optimieren Sie Ihre Steuerposition langfristig.',
       intro: [
         'Die meisten Steuerersparnisse entstehen nicht in der jährlichen Steuererklärung, sondern in Entscheidungen, die Jahre zuvor getroffen wurden: wie Sie vorsorgen, wann Sie Pensionskapital beziehen, wo Sie wohnen und wie Sie Ihre Liegenschaft halten.',
-        'Unsere Expertinnen und Experten zeigen Ihnen, wie Sie diese Entscheidungen strukturieren und mehrere tausend oder sogar zehntausend Franken sparen.',
+        'Unsere Expertinnen und Experten zeigen Ihnen, wie Sie diese Entscheidungen in der richtigen Reihenfolge strukturieren – da wir keine Produkte verkaufen, geht es allein um Ihre Steuersituation.',
       ],
       highlights: [
         { title: 'Steuererklärungen', text: 'Erstellt und eingereicht für Privatpersonen und Selbstständige.' },
@@ -447,7 +426,7 @@ export const de: Translations = {
         { title: 'Risikoanalyse', text: 'Was AHV und Ihre Pensionskasse tatsächlich auszahlen würden.' },
         { title: 'Lebens- und Erwerbsausfallversicherung', text: 'Deckung passend zu Ihren Verpflichtungen – nicht zu einem Verkaufsziel.' },
         { title: 'Krankenversicherung', text: 'Franchise und Modell rechnerisch gewählt, jährlich überprüft.' },
-        { title: 'Phishing-Versicherung', text: 'Schutz vor Angriffen, die trotz Vorsicht gelingen.' },
+        { title: 'Phishing-Schutz', text: 'Ein kostenloser Ratgeber zum Erkennen betrügerischer Nachrichten und zum schnellen Handeln im Ernstfall.' },
       ],
     },
     [ROUTES.pensionPlanning]: {
@@ -460,7 +439,7 @@ export const de: Translations = {
         'Wir helfen Ihnen bei der Wahl des Vehikels, der Strategie und des Bezugszeitpunkts.',
       ],
       highlights: [
-        { title: 'Säule 3a mit Indexanlagen', text: 'Die besten Indexfonds – zu einem Bruchteil der üblichen Gebühren.' },
+        { title: 'Säule 3a mit Indexanlagen', text: 'Kostengünstige Indexlösungen, für Sie ausgewählt und beim Anbieter Ihrer Wahl gehalten.' },
         { title: 'Freiwillige Einkäufe', text: 'Wann sich ein Einkauf in die Pensionskasse wirklich lohnt.' },
         { title: 'Mehrere Konten', text: 'Gestaffelte Bezüge, die die Steuer auf Ihr Kapital senken.' },
         { title: 'Freizügigkeitsleistungen', text: 'Wohin Sie Ihr Kapital zwischen zwei Arbeitsstellen platzieren.' },
@@ -468,124 +447,28 @@ export const de: Translations = {
     },
     [ROUTES.banking]: {
       path: ROUTES.banking,
-      breadcrumb: ['Privatpersonen', 'Banking'],
-      title: 'Banking',
-      subtitle: 'Sichere Verwahrung über Schweizer Depotbank-Partner.',
+      breadcrumb: ['Privatpersonen', 'Verwahrung & Depotbank-Partner'],
+      title: 'Verwahrung & Depotbank-Partner',
+      subtitle: 'Ihre Vermögenswerte bleiben bei Ihrer eigenen Bank.',
       intro: [
-        'Kundengelder werden bei ausgewählten Schweizer Depotbanken verwahrt. Helfenstein Asset Management AG erbringt Vermögensverwaltung und Beratung und betreibt keine eigene Bank.',
-        'Kundinnen und Kunden profitieren von transparenten Depotgebühren, ohne Retrozessionen und mit Schweizer Einlagensicherung.',
+        'Die Helfenstein Group verwahrt nie Kundenvermögen. Ihre Wertschriften und Ihr Bargeld bleiben auf einem Konto in Ihrem eigenen Namen bei einer Schweizer Depotbank, die Ihnen direkt Bericht erstattet; wir erbringen darauf aufbauend Vermögensverwaltung und Beratung.',
+        'Wir helfen Ihnen bei der Wahl der Depotbank, vergleichen deren Konditionen und sorgen für ein verständliches Reporting. Depot- und Transaktionsgebühren werden von Ihrer Bank festgelegt und belastet, nie von uns.',
       ],
       highlights: [
-        { title: 'Wertpapierverwahrung', text: 'Transparente, pauschale Depotpreise ohne versteckte Margen.' },
-        { title: 'Konten und Karten', text: 'Alltagsbanking neben Ihrem Anlageportfolio.' },
+        { title: 'Vermögen auf Ihren Namen', text: 'Segregierte Verwahrung bei einer bewilligten Schweizer Bank Ihrer Wahl.' },
+        { title: 'Wahl der Depotbank', text: 'Ein direkter Vergleich von Depotkonditionen und Servicequalität.' },
         { title: 'Hypotheken', text: 'Finanzierung zu verglichenen Konditionen.' },
-        { title: 'Sicherheit', text: 'Mehrfaktor-Zugang und laufende Betrugsüberwachung.' },
-      ],
-    },
-    [ROUTES.companies]: {
-      path: ROUTES.companies,
-      breadcrumb: ['Unternehmen'],
-      title: 'Unternehmen',
-      subtitle: 'Von Pensionskassen bis zur Nachfolgeplanung.',
-      intro: [
-        'Helfenstein berät kleine und mittlere Schweizer Unternehmen zu beruflicher Vorsorge, Versicherungsmanagement, Firmengründung und Nachfolge.',
-        'Unternehmen, die mit Helfenstein zusammenarbeiten, sparen bis zu 30 Prozent bei Risikoprämien und Administrationskosten und reduzieren gleichzeitig ihren internen Aufwand.',
-      ],
-      highlights: [
-        { title: 'Unternehmensnachfolge', text: 'Bewertung, Käufersuche und Transaktionsmanagement.' },
-        { title: 'Pensionskassen', text: 'Benchmarking und Neustrukturierung Ihrer beruflichen Vorsorge.' },
-        { title: 'Vorsorgepläne für das Management', text: 'Steuereffiziente Zusatzdeckung für höhere Einkommen.' },
-        { title: 'Versicherungsmanagement', text: 'Eine Ansprechstelle für das gesamte Unternehmensversicherungsportfolio.' },
-      ],
-    },
-    [ROUTES.companiesSuccession]: {
-      path: ROUTES.companiesSuccession,
-      breadcrumb: ['Unternehmen', 'Unternehmensnachfolge'],
-      title: 'Unternehmensnachfolge',
-      subtitle: 'Übergeben Sie Ihr Unternehmen zu Ihren Bedingungen.',
-      intro: [
-        'Den Verkauf eines Unternehmens vollziehen die meisten Eigentümerinnen und Eigentümer nur einmal. Bewertung, Steuerstrukturierung, Käufersuche und Verhandlung müssen zusammenpassen – der Prozess dauert typischerweise ein bis zwei Jahre.',
-        'Helfenstein führt die gesamte Transaktion und vertritt Ihre Interessen von der ersten Bewertung bis zum Abschluss.',
-      ],
-      highlights: [
-        { title: 'Unternehmensbewertung', text: 'Eine verteidigbare Zahl auf Basis nachhaltiger Erträge.' },
-        { title: 'Käufersuche', text: 'Diskrete Ansprache strategischer und finanzieller Käufer.' },
-        { title: 'Steuerstrukturierung', text: 'Verkauf so gestaltet, dass der Erlös nicht durch Steuern geschmälert wird.' },
-        { title: 'Transaktionsmanagement', text: 'Due Diligence, Verträge und Abschluss für Sie koordiniert.' },
-      ],
-    },
-    [ROUTES.companiesPensionFunds]: {
-      path: ROUTES.companiesPensionFunds,
-      breadcrumb: ['Unternehmen', 'Pensionskassen'],
-      title: 'Pensionskassen',
-      subtitle: 'Sparen Sie bis zu 30 % bei Prämien und Administration.',
-      intro: [
-        'Kosten der beruflichen Vorsorge gehören zu den grössten und am seltensten geprüften Posten auf einer Schweizer Lohnliste. Risikoprämien und Administrationsgebühren variieren bei identischen Leistungen stark zwischen Anbietern.',
-        'Wir benchmarken Ihre aktuelle Lösung, schreiben aus und begleiten den Wechsel.',
-      ],
-      highlights: [
-        { title: 'Benchmarking', text: 'Ihre aktuellen Prämien im Marktvergleich.' },
-        { title: 'Ausschreibung', text: 'Vergleichbare Offerten aller relevanten Anbieter.' },
-        { title: 'Planausgestaltung', text: 'Leistungen passend zu Ihrer Belegschaft.' },
-        { title: 'Administration', text: 'Lohnmeldungen und Mitgliederänderungen für Sie erledigt.' },
-      ],
-    },
-    [ROUTES.companiesManagementPensionPlans]: {
-      path: ROUTES.companiesManagementPensionPlans,
-      breadcrumb: ['Unternehmen', 'Vorsorgepläne für das Management'],
-      title: 'Vorsorgepläne für das Management',
-      subtitle: 'Zusatzdeckung für höhere Einkommen.',
-      intro: [
-        'Oberhalb eines bestimmten Lohns ersetzt die Standard-Berufsvorsorge nur einen kleinen Teil des Einkommens. Ein separater Managementplan schliesst diese Lücke und schafft erheblichen Spielraum für steuerlich abziehbare Beiträge.',
-        'Wir gestalten den Plan, dokumentieren ihn und integrieren ihn in die Basislösung.',
-      ],
-      highlights: [
-        { title: '1e-Pläne', text: 'Individuelle Anlagestrategien für Löhne oberhalb der Schwelle.' },
-        { title: 'Einkaufspotenzial', text: 'Spielraum für abziehbare freiwillige Einzahlungen schaffen.' },
-        { title: 'Risikodeckung', text: 'Todes- und Invaliditätsleistungen passend zum Einkommen.' },
-        { title: 'Governance', text: 'Reglemente und Reporting, die den Revisoren genügen.' },
-      ],
-    },
-    [ROUTES.companiesInsuranceManagement]: {
-      path: ROUTES.companiesInsuranceManagement,
-      breadcrumb: ['Unternehmen', 'Versicherungsmanagement'],
-      title: 'Versicherungsmanagement',
-      subtitle: 'Eine Ansprechstelle für Ihr gesamtes Versicherungsportfolio.',
-      intro: [
-        'Unternehmensversicherungen entstehen eher durch Anhäufung als durch Planung. Policen überlappen, Versicherungssummen weichen von der Realität ab, und Prämien werden selten neu ausgeschrieben.',
-        'Helfenstein erstellt ein Inventar, beseitigt Doppelspurigkeiten und verwaltet Erneuerungen und Schadenfälle in Ihrem Namen.',
-      ],
-      highlights: [
-        { title: 'Portfolio-Review', text: 'Jede Police auf Deckung, Lücken und Preis geprüft.' },
-        { title: 'Ausschreibungen', text: 'Erneuerungen marktgerecht und vergleichbar ausgeschrieben.' },
-        { title: 'Schadenmanagement', text: 'Wir vertreten Sie, wenn ein Schaden eintritt.' },
-        { title: 'Reporting', text: 'Ein jährlicher Überblick über Deckung und Kosten.' },
-      ],
-    },
-    [ROUTES.companiesEstablishing]: {
-      path: ROUTES.companiesEstablishing,
-      breadcrumb: ['Unternehmen', 'Firmengründung'],
-      title: 'Firmengründung',
-      subtitle: 'Unser Gründungskompass führt Sie von der Idee zum ersten Lohn.',
-      intro: [
-        'Eine Firmengründung in der Schweiz erfordert eine Abfolge von Entscheidungen – Rechtsform, Kapital, Sozialversicherungen, MWST-Anmeldung, Vorsorge –, die nachträglich nur schwer korrigiert werden können.',
-        'Der Helfenstein Gründungskompass führt Sie in der richtigen Reihenfolge durch alle Schritte – mit vorbereiteten Unterlagen.',
-      ],
-      highlights: [
-        { title: 'Rechtsform', text: 'Einzelunternehmen, GmbH oder AG – was jede Option wirklich bedeutet.' },
-        { title: 'Sozialversicherungen', text: 'Anmeldung und die Deckung, die Selbstständige nicht haben.' },
-        { title: 'Vorsorge', text: 'Aufbau einer Säule 3a und, wo sinnvoll, einer beruflichen Vorsorge.' },
-        { title: 'Steuern und MWST', text: 'Anmeldeschwellen und Buchhaltungspflichten.' },
+        { title: 'Sicherheit', text: 'Mehrfaktor-Zugang und die Betrugsüberwachung Ihrer Bank.' },
       ],
     },
     [ROUTES.about]: {
       path: ROUTES.about,
       breadcrumb: ['Über Helfenstein'],
       title: 'Über Helfenstein',
-      subtitle: 'Unabhängig seit 1993.',
+      subtitle: 'Unabhängige Beratung aus Luzern.',
       intro: [
-        'Helfenstein Asset Management ist eine Schweizer Finanzberatungsgesellschaft. Wir beraten Privatkundinnen und Privatkunden zu Vorsorge, Anlagen, Steuern und Immobilien.',
-        'Wir nehmen keine Provisionen von Produktanbietern an. Unser Einkommen stammt ausschliesslich aus den Honoraren, die unsere Kundinnen und Kunden mit uns vereinbaren.',
+        'Die Helfenstein Group ist eine unabhängige Schweizer Beratungs- und Vermögensverwaltungsgesellschaft mit Sitz in Luzern. Wir beraten Privatpersonen und Familien – nie Institutionen oder Unternehmen – zu Vorsorge, Anlagen, Steuern und Immobilien.',
+        'Wir nehmen keine Provisionen von Produktanbietern an. Unser Einkommen stammt ausschliesslich aus den Honoraren, die unsere Kundinnen und Kunden mit uns vereinbaren, und wir verwahren keine Kundenvermögen: Die Verwahrung bleibt bei Schweizer Depotbank-Partnern.',
       ],
       highlights: [
         { title: 'Unabhängige Beratung', text: 'Keine Retrozessionen, keine Produktverkaufsziele.' },
@@ -601,7 +484,7 @@ export const de: Translations = {
       subtitle: 'Bezahlt von unseren Kundinnen und Kunden. Von niemandem sonst.',
       intro: [
         'Der Grossteil der Finanzberatung in der Schweiz wird über die empfohlenen Produkte finanziert. Diese Regelung ist für Kundinnen und Kunden unsichtbar und begünstigt systematisch teure Lösungen.',
-        'Helfenstein wird ausschliesslich von seinen Kundinnen und Kunden bezahlt. Wir veröffentlichen unsere Honorare, leiten nicht vermeidbare Retrozessionen weiter, und unsere Beraterinnen und Berater haben keine Produktverkaufsziele.',
+        'Die Helfenstein Group wird ausschliesslich von ihren Kundinnen und Kunden bezahlt – Privatpersonen und Familien, nie Institutionen oder Unternehmen. Wir veröffentlichen unsere Honorare, schreiben nicht vermeidbare Retrozessionen vollständig gut, unsere Beraterinnen und Berater haben keine Produktverkaufsziele, und wir verwahren Ihre Vermögenswerte nie: Die Verwahrung bleibt auf Ihren Namen bei Schweizer Depotbank-Partnern.',
       ],
       highlights: [
         { title: 'Honorartransparenz', text: 'Sie kennen die Kosten, bevor Sie eine Entscheidung treffen.' },
@@ -610,52 +493,52 @@ export const de: Translations = {
         { title: 'Kostenloses Erstgespräch', text: 'Die Erstberatung kostet Sie nichts.' },
       ],
     },
-    [ROUTES.aboutBranchOffices]: {
-      path: ROUTES.aboutBranchOffices,
-      breadcrumb: ['Über Helfenstein', 'Filialen'],
-      title: 'Filialen',
-      subtitle: 'Mehr als dreißig Standorte in der ganzen Schweiz.',
+    [ROUTES.aboutOffice]: {
+      path: ROUTES.aboutOffice,
+      breadcrumb: ['Über Helfenstein', 'Standort'],
+      title: 'Standort',
+      subtitle: 'Mit Sitz in Luzern, für Kundinnen und Kunden in der ganzen Schweiz.',
       intro: [
-        'Helfenstein berät Kundinnen und Kunden von Büros aus in allen wichtigen Schweizer Wirtschaftsregionen – auf Deutsch, Französisch, Italienisch und Englisch.',
-        'Finden Sie die Filiale in Ihrer Nähe und vereinbaren Sie ein kostenloses Erstgespräch.',
+        'Die Helfenstein Asset Management AG hat ihren Sitz an der Pilatusstrasse 23 in Luzern. Wir beraten auf Deutsch, Französisch, Italienisch und Englisch.',
+        'Rufen Sie uns unter +41 41 211 29 29 an oder vereinbaren Sie ein kostenloses Erstgespräch.',
       ],
       highlights: [
-        { title: 'Deutschschweiz', text: 'Zürich, Bern, Basel, Luzern, St. Gallen, Aarau, Zug und mehr.' },
-        { title: 'Westschweiz', text: 'Genf, Lausanne, Nyon, Freiburg, Neuenburg, Sion.' },
-        { title: 'Tessin', text: 'Lugano und Bellinzona.' },
-        { title: 'Öffnungszeiten', text: 'Wochentags 08:00–18:00 Uhr, Termine ausserhalb dieser Zeiten auf Anfrage.' },
+        { title: 'Büro Luzern', text: 'Pilatusstrasse 23, 6003 Luzern.' },
+        { title: 'Telefon', text: '+41 41 211 29 29, wochentags während der Bürozeiten.' },
+        { title: 'Sprachen', text: 'Deutsch, Französisch, Italienisch und Englisch.' },
+        { title: 'Termine', text: 'Persönlich in Luzern oder per Videokonferenz.' },
       ],
     },
     [ROUTES.aboutPortrait]: {
       path: ROUTES.aboutPortrait,
       breadcrumb: ['Über Helfenstein', 'Portrait'],
       title: 'Portrait',
-      subtitle: 'Eine Schweizer Finanzdienstleistungsgruppe mit einem Geschäftsmodell.',
+      subtitle: 'Ein Luzerner Vermögensverwalter mit klarem Beratungsmodell.',
       intro: [
-        'Helfenstein Asset Management AG berät Privat- und Institutionelle Kundinnen und Kunden zu Vermögensverwaltung, Finanzberatung, Vorsorge und Finanzierung aus Luzern.',
-        'Wir sind von der FINMA als Vermögensverwalter bewilligt und werden von der OSFINcontrol AG beaufsichtigt.',
+        'Die Helfenstein Group berät von Luzern aus Privatpersonen und Familien zu Vermögensverwaltung, Finanzberatung, Vorsorge und Finanzierung. Für Institutionen oder Unternehmen sind wir nicht tätig.',
+        'Kundenvermögen werden bei ausgewählten Schweizer Depotbanken verwahrt, nie bei uns. Wir sind von der FINMA als Vermögensverwalter bewilligt und werden von der OSFINcontrol AG beaufsichtigt.',
       ],
       highlights: [
-        { title: 'Depotbank-Partner', text: 'Segregierte Verwahrung bei bewilligten Schweizer Banken.' },
-        { title: 'Helfenstein Insurance Services', text: 'Brokerage für Privat- und Firmenkundinnen und -kunden.' },
-        { title: 'Management', text: 'Geschäftsleitung und Verwaltungsrat.' },
-        { title: 'Geschichte', text: 'Drei Jahrzehnte unabhängiger Beratung.' },
+        { title: 'Vermögensverwaltung', text: 'Mandate auf Basis eines klaren Anlageprozesses.' },
+        { title: 'Finanzberatung', text: 'Vorsorge, Finanzierung und persönliche Planung neben den Anlagen.' },
+        { title: 'Depotbank-Partner', text: 'Segregierte Verwahrung auf Ihren Namen bei bewilligten Schweizer Banken.' },
+        { title: 'Luzern', text: 'Pilatusstrasse 23, 6003 Luzern.' },
       ],
     },
-    [ROUTES.aboutInvestorRelations]: {
-      path: ROUTES.aboutInvestorRelations,
-      breadcrumb: ['Über Helfenstein', 'Investor Relations'],
-      title: 'Investor Relations',
-      subtitle: 'Berichte, Kennzahlen und Finanzkalender.',
+    [ROUTES.aboutCompanyInformation]: {
+      path: ROUTES.aboutCompanyInformation,
+      breadcrumb: ['Über Helfenstein', 'Unternehmensinformationen'],
+      title: 'Unternehmensinformationen',
+      subtitle: 'Wer wir auf dem Papier sind – und wie Sie uns erreichen.',
       intro: [
-        'Hier finden Sie Unternehmensinformationen, Medienkontakte und Antworten für professionelle Investorinnen und Investoren sowie Partner von Helfenstein Asset Management AG.',
-        'Wenden Sie sich bei weiteren Fragen an unser Investor-Relations-Team.',
+        'Auf dieser Seite finden Sie die registrierten Angaben der Helfenstein Asset Management AG, die unter dem Namen Helfenstein Group auftritt, sowie unsere Medienkontakte.',
+        'Für Fragen zur Beratung oder zu einem bestehenden Mandat nutzen Sie bitte die Kontaktseite.',
       ],
       highlights: [
-        { title: 'Geschäftsbericht', text: 'Vollständige Finanzberichte und Kommentar der Geschäftsleitung.' },
-        { title: 'Halbjahresbericht', text: 'Zwischenergebnisse und Segmentzahlen.' },
-        { title: 'Aktieninformationen', text: 'Kapitalstruktur, Dividendengeschichte und Analystenabdeckung.' },
-        { title: 'Finanzkalender', text: 'Publikationstermine und Generalversammlung.' },
+        { title: 'Firmenprofil', text: 'Firmenname, UID, LEI und Adresse in Luzern.' },
+        { title: 'Regulierung', text: 'Von der FINMA bewilligter Vermögensverwalter; beaufsichtigt durch die OSFINcontrol AG.' },
+        { title: 'Dienstleistungen', text: 'Unabhängige Beratung und Vermögensverwaltung für Privatkundinnen und Privatkunden.' },
+        { title: 'Kontakt', text: '+41 41 211 29 29 · Pilatusstrasse 23, Luzern.' },
       ],
     },
     [ROUTES.aboutJobs]: {
@@ -664,8 +547,8 @@ export const de: Translations = {
       title: 'Jobs & Karriere',
       subtitle: 'Beratungsarbeit ohne Verkaufsziele.',
       intro: [
-        'Da Helfenstein nichts an Produkten verdient, werden unsere Beraterinnen und Berater nach der Qualität ihrer Beratung beurteilt – nicht nach verkauften Volumina. Das verändert den Beruf grundlegend.',
-        'Wir suchen laufend Beraterinnen und Berater, Spezialistinnen und Spezialisten sowie Absolventinnen und Absolventen weltweit.',
+        'Da die Helfenstein Group nichts an Produkten verdient und keine Kundenvermögen verwahrt, werden unsere Beraterinnen und Berater nach der Qualität ihrer Beratung beurteilt – nicht nach verkauften Volumina. Das verändert den Beruf grundlegend.',
+        'Wir freuen uns jederzeit über Zuschriften von Beraterinnen und Beratern, Spezialistinnen und Spezialisten sowie Absolventinnen und Absolventen, die so arbeiten möchten.',
       ],
       highlights: [
         { title: 'Beratungsrollen', text: 'Kundenorientierte Positionen in Vorsorge, Steuern und Anlagen.' },
@@ -680,14 +563,14 @@ export const de: Translations = {
       title: 'Kontakt & Hilfe',
       subtitle: 'Wir freuen uns auf Ihre Nachricht.',
       intro: [
-        'Rufen Sie uns an, schreiben Sie uns oder vereinbaren Sie ein kostenloses Erstgespräch in der Filiale in Ihrer Nähe. Unsere Beraterinnen und Berater sprechen Deutsch, Französisch, Italienisch und Englisch.',
+        'Rufen Sie uns an, schreiben Sie uns oder vereinbaren Sie ein kostenloses Erstgespräch in unserem Büro in Luzern oder per Videokonferenz. Unsere Beraterinnen und Berater sprechen Deutsch, Französisch, Italienisch und Englisch – und keine und keiner von ihnen hat Ihnen etwas zu verkaufen.',
         'Bei Fragen zum Helfenstein Financial Portal steht unser Support-Team werktags während der Bürozeiten zur Verfügung.',
       ],
       highlights: [
-        { title: 'Telefon', text: 'Wochentags 08:00–18:00 Uhr unter der Nummer Ihrer Filiale.' },
+        { title: 'Telefon', text: '+41 41 211 29 29, wochentags 08:00–18:00 Uhr.' },
+        { title: 'Adresse', text: 'Pilatusstrasse 23, 6003 Luzern, Schweiz.' },
         { title: 'Termine', text: 'Buchen Sie online in wenigen Minuten ein kostenloses Erstgespräch.' },
-        { title: 'Portal-Support', text: 'Hilfe bei Login, Zwei-Faktor-Zugang und Handel.' },
-        { title: 'Medienanfragen', text: 'Unser Kommunikationsteam meldet sich umgehend.' },
+        { title: 'Portal-Support', text: 'Hilfe bei Login, Zwei-Faktor-Zugang und Reporting.' },
       ],
     },
     [ROUTES.appointments]: {
@@ -696,8 +579,8 @@ export const de: Translations = {
       title: 'Termin vereinbaren',
       subtitle: 'Das Erstgespräch ist kostenlos.',
       intro: [
-        'Sprechen Sie mit einer Expertin oder einem Experten von Helfenstein über Ihre Vorsorge, Ihre Anlagen, Ihre Steuern oder Ihre Hypothek. Die Erstberatung kostet Sie nichts und verpflichtet Sie zu nichts.',
-        'Wählen Sie eine Filiale und einen Termin, und teilen Sie uns kurz mit, worüber Sie sprechen möchten.',
+        'Sprechen Sie mit einer Beraterin oder einem Berater der Helfenstein Group über Ihre Vorsorge, Ihre Anlagen, Ihre Steuern oder Ihre Hypothek. Die Erstberatung kostet nichts und verpflichtet Sie zu nichts – und da wir ausschliesslich von unseren Kundinnen und Kunden bezahlt werden, verkauft Ihnen niemand im Raum ein Produkt.',
+        'Wählen Sie einen Termin, der Ihnen passt – in unserem Büro in Luzern oder per Videokonferenz – und teilen Sie uns kurz mit, worüber Sie sprechen möchten.',
       ],
       highlights: [
         { title: 'Kostenloses Erstgespräch', text: 'Etwa eine Stunde, persönlich oder per Videokonferenz.' },
@@ -713,14 +596,14 @@ export const de: Translations = {
       title: 'Fachwissen',
       subtitle: 'Wissen, Studien und Tools unserer Spezialistinnen und Spezialisten.',
       intro: [
-        'Helfenstein publiziert Forschung zu Vorsorge, Pensionen, Steuern, Hypotheken und Anlagen – zusammen mit Rechnern und Checklisten, die Sie selbst nutzen können.',
-        'Alles ist kostenlos und erfordert keine Registrierung.',
+        'Die Helfenstein Group publiziert Analysen zu Vorsorge, Pensionen, Steuern, Hypotheken und Anlagen – zusammen mit Checklisten, die Sie kostenlos bestellen können.',
+        'Beginnen Sie mit dem Horizon-Report, stöbern Sie nach Themen oder öffnen Sie das vollständige Artikelverzeichnis. Da wir keine Produkte verkaufen, ist das Gelesene unsere eigene Analyse und kein Verkaufsargument.',
       ],
       highlights: [
-        { title: 'Wissensdatenbank', text: 'Mehrere hundert Artikel zur persönlichen Finanzplanung in der Schweiz.' },
-        { title: 'Rechner', text: 'Tools für Vorsorge, Hypothekartragbarkeit und Säule 3a.' },
+        { title: 'Horizon-Report 2026', text: 'Entwicklungen bei Vorsorge, Hypotheken und FIDLEG in verständlicher Sprache.' },
+        { title: 'Insights-Verzeichnis', text: 'Alle Artikel nach Datum sortiert, mit Themen-Tags.' },
         { title: 'Faktenblätter', text: 'Kompakte gedruckte Ratgeber, kostenlos zugestellt.' },
-        { title: 'Studien', text: 'Regelmässige Forschung zu Pensionskassen und Hypothekarpreisen.' },
+        { title: 'Kostenloses Erstgespräch', text: 'Eine Stunde mit einer Beraterin oder einem Berater, in Luzern oder per Video.' },
       ],
     },
     [ROUTES.financialPortal]: {
@@ -729,27 +612,27 @@ export const de: Translations = {
       title: 'Helfenstein Financial Portal',
       subtitle: 'Ihr Portfolio, Ihre Dokumente, Ihre Märkte.',
       intro: [
-        'Das Helfenstein Financial Portal bietet Ihnen eine konsolidierte Sicht auf Ihre Konten und Portfolios, alle Ihre Dokumente und Echtzeit-Marktdaten.',
-        'Die Pro-Version ergänzt Markttiefe, erweitertes Charting und direkte Ordererfassung an allen wichtigen Börsen.',
+        'Das Helfenstein Financial Portal bietet Ihnen eine konsolidierte Sicht auf die Konten und Portfolios, die Sie bei Ihren Schweizer Depotbank-Partnern halten, zusammen mit allen Ihren Dokumenten und aktuellen Marktdaten.',
+        'Ihre Vermögenswerte bleiben bei Ihrer Bank – das Portal ist Ihr Fenster darauf und kein Ort, an dem Geld verwahrt wird.',
       ],
       highlights: [
         { title: 'Portfolioübersicht', text: 'Konsolidierte Performance über alle Ihre Positionen.' },
         { title: 'Dokumente', text: 'Auszüge und Steuerdokumente in einem Archiv.' },
-        { title: 'Handel', text: 'Ordererfassung an Schweizer und internationalen Börsen.' },
+        { title: 'Reporting', text: 'Performance, Kosten und Allokation über alle Positionen, verständlich erklärt.' },
         { title: 'Sicherheit', text: 'Zwei-Faktor-Authentifizierung bei jedem Login.' },
       ],
     },
     [ROUTES.stockExchangesAndMarkets]: {
       path: ROUTES.stockExchangesAndMarkets,
-      breadcrumb: ['Kurse und Märkte'],
-      title: 'Helfenstein Börsen & Märkte',
-      subtitle: 'Aktuelle Aktienkurse, News und Analysen.',
+      breadcrumb: ['Märkte & Analysen'],
+      title: 'Märkte & Analysen',
+      subtitle: 'Kurse, News und unsere unabhängige Einschätzung.',
       intro: [
-        'Verlässliche Informationen, Echtzeitkurse und nützliche Tools – alles an einem Ort und nach Registrierung kostenlos nutzbar.',
+        'Marktdaten, Kommentare und nützliche Tools an einem Ort, nach Registrierung kostenlos nutzbar. Wir publizieren eigene Analysen, weil wir keine Produkte verkaufen – was Sie hier lesen, ist unsere Meinung und kein Verkaufsargument.',
         'Verfolgen Sie Indizes, Währungen, Zinsen und einzelne Titel, und setzen Sie Alerts für die Positionen, die Ihnen wichtig sind.',
       ],
       highlights: [
-        { title: 'Echtzeitkurse', text: 'Schweizer und internationale Aktien, Indizes und Währungen.' },
+        { title: 'Marktkurse', text: 'Schweizer und internationale Aktien, Indizes und Währungen.' },
         { title: 'Watchlists', text: 'Verfolgen Sie die Titel, die Sie interessieren, und setzen Sie Alerts.' },
         { title: 'Analysen', text: 'Kommentare unserer Anlage-Spezialistinnen und -Spezialisten.' },
         { title: 'Tools', text: 'Screener, Charts und Portfoliosimulationen.' },
@@ -760,9 +643,9 @@ export const de: Translations = {
       path: ROUTES.newsletter,
       breadcrumb: ['Newsletter abonnieren'],
       title: 'Newsletter abonnieren',
-      subtitle: 'Regelmässige Tipps zur Optimierung Ihrer Vorsorge.',
+      subtitle: 'Unabhängige Informationen, ohne Verkaufsabsicht.',
       intro: [
-        'Erhalten Sie regelmässig Informationen zur Optimierung Ihrer AHV-, Berufsvorsorge- und Säule-3a-Vorsorge. Der Newsletter erscheint auf Deutsch, Französisch und Italienisch.',
+        'Praxisnahe, unabhängige Informationen zu Vorsorge, Steuern, Anlagen und Immobilien – geschrieben für Privatkundinnen und Privatkunden, ohne Produktwerbung. Erscheint auf Englisch, Deutsch, Französisch und Italienisch.',
         'Sie können die Themen wählen, die Sie interessieren, und sich jederzeit mit einem Klick abmelden.',
       ],
       highlights: [
@@ -790,20 +673,20 @@ export const de: Translations = {
       ],
       ctaLabel: 'Kostenlos bestellen',
     },
-    [ROUTES.phishingInsurance]: {
-      path: ROUTES.phishingInsurance,
-      breadcrumb: ['Helfenstein Phishing-Versicherung'],
-      title: 'Schützen Sie Ihr Vermögen mit der Helfenstein Phishing-Versicherung',
-      subtitle: 'Deckung für Angriffe, die trotz aller Vorsicht gelingen.',
+    [ROUTES.phishingProtection]: {
+      path: ROUTES.phishingProtection,
+      breadcrumb: ['Schützen Sie Ihr Vermögen vor Phishing'],
+      title: 'Schützen Sie Ihr Vermögen vor Phishing',
+      subtitle: 'Ein kostenloser Ratgeber zum Erkennen und Melden von Angriffen.',
       intro: [
         'Phishing ist zum häufigsten Weg für unbefugten Zugang zu Finanzkonten geworden. Selbst vorsichtige, gut informierte Menschen geraten gelegentlich auf eine überzeugende Nachricht herein.',
-        'Die Helfenstein Phishing-Versicherung deckt den finanziellen Verlust, wenn ein Angriff trotz Sicherheitsmassnahmen und Vorsicht gelingt.',
+        'Unser kostenloser Ratgeber zeigt, woran Sie betrügerische Nachrichten erkennen, wie Sie Ihre Zugänge absichern und wen Sie sofort informieren, wenn Sie doch geklickt haben. Da Ihre Vermögenswerte bei Ihrer Schweizer Depotbank liegen, erklären wir auch, welche Rolle die Bank in einem solchen Fall spielt.',
       ],
       highlights: [
-        { title: 'Was ist gedeckt', text: 'Verluste aus unbefugten Transaktionen nach einem Angriff.' },
-        { title: 'Wer ist gedeckt', text: 'Verfügbar für Helfenstein-Beratungskundinnen und -kunden mit geeigneter Depotlösung.' },
-        { title: 'Prävention', text: 'Praktische Hinweise zum Erkennen betrügerischer Nachrichten.' },
-        { title: 'Schadenfälle', text: 'Eine Ansprechstelle, wenn etwas schiefgeht.' },
+        { title: 'Warnzeichen', text: 'Woran Sie eine betrügerische E-Mail, SMS oder einen Anruf erkennen.' },
+        { title: 'Sichere Zugänge', text: 'Zwei-Faktor-Authentifizierung und Passwortpraxis, die tatsächlich hilft.' },
+        { title: 'Sofortmassnahmen', text: 'Was in den ersten Minuten nach einem Klick zu tun ist.' },
+        { title: 'Wen informieren', text: 'Ihre Depotbank, die Polizei und Ihre Beraterin oder Ihren Berater.' },
       ],
       ctaLabel: 'Kostenlos bestellen',
     },
@@ -815,7 +698,7 @@ export const de: Translations = {
       sections: [
         {
           paragraphs: [
-            'Die auf dieser Website veröffentlichten Informationen dienen ausschliesslich allgemeinen Informationszwecken. Sie stellen weder ein Angebot noch eine Empfehlung oder Aufforderung zum Kauf oder Verkauf von Finanzinstrumenten dar und sind keine Anlage-, Rechts- oder Steuerberatung.',
+            'Die auf dieser Website veröffentlichten Informationen dienen ausschliesslich allgemeinen Informationszwecken. Sie stellen weder ein Angebot noch eine Empfehlung oder Aufforderung zum Kauf oder Verkauf von Finanzinstrumenten dar und sind keine Anlage-, Rechts- oder Steuerberatung. Die Helfenstein Asset Management AG (Helfenstein Group) ist eine unabhängige Beraterin und Vermögensverwalterin; sie verwahrt keine Kundenvermögen – diese bleiben bei der Schweizer Depotbank der Kundin oder des Kunden.',
           ],
         },
         {
@@ -840,7 +723,7 @@ export const de: Translations = {
         {
           heading: 'Anwendbares Recht',
           paragraphs: [
-            'Die Nutzung dieser Website untersteht schweizerischem Recht. Gerichtsstand ist ausschliesslich Zürich, Schweiz.',
+            'Die Nutzung dieser Website untersteht schweizerischem Recht. Gerichtsstand ist ausschliesslich Luzern, Schweiz.',
           ],
         },
       ],
@@ -880,6 +763,12 @@ export const de: Translations = {
             'Sie haben das Recht, Auskunft über die von uns über Sie bearbeiteten Personendaten zu verlangen sowie unrichtige Daten berichtigen oder unrechtmässig bearbeitete Daten löschen zu lassen.',
           ],
         },
+        {
+          heading: 'Verantwortliche Stelle',
+          paragraphs: [
+            'Helfenstein Asset Management AG (Helfenstein Group), Pilatusstrasse 23, 6003 Luzern, Schweiz. Telefon: +41 41 211 29 29.',
+          ],
+        },
       ],
     },
     'documents-and-information': {
@@ -904,9 +793,9 @@ export const de: Translations = {
           ],
         },
         {
-          heading: 'Berichte',
+          heading: 'Unternehmensinformationen',
           paragraphs: [
-            'Jahres- und Halbjahresberichte der Helfenstein Asset Management AG sowie Medienmitteilungen und Präsentationen.',
+            'Die Helfenstein Asset Management AG (auftretend als Helfenstein Group) veröffentlicht regulatorische Informationen und Kundeninformationen auf dieser Website. Das Unternehmen ist eine unabhängige, ausschliesslich honorarbasierte Beraterin und eine von der FINMA bewilligte Vermögensverwalterin; es verwahrt keine Kundenvermögen. Aktuelle Handelsregisterangaben finden Sie im Schweizer Handelsregister (UID CHE-111.708.730).',
           ],
         },
       ],
@@ -923,24 +812,21 @@ export const de: Translations = {
             'Telefon: +41 41 211 29 29',
             'UID: CHE-111.708.730',
             'LEI: 894500URZFTDV5G7F357',
-            'LEI aktiv; Erneuerung fällig am 4. November 2026.',
           ],
         },
         {
           heading: 'Geschäftstätigkeit',
           paragraphs: [
-            'Vermögensverwaltung, Finanzberatung, Vorsorgeplanung und Finanzierungsberatung.',
+            'Unabhängige, ausschliesslich honorarbasierte Finanzberatung und Vermögensverwaltung für Privatkundinnen und Privatkunden: Vorsorge, Anlagen, Steuern, Immobilien und Nachlassplanung. Kundenvermögen werden bei Schweizer Bankpartnern gehalten, nicht durch das Unternehmen.',
           ],
         },
         {
           heading: 'Aufsicht',
           paragraphs: [
             'Helfenstein Asset Management AG ist bei der FINMA als Vermögensverwalterin bewilligt und wird von der OSFINcontrol AG beaufsichtigt.',
+            'Bewilligungen können im offiziellen FINMA-Register überprüft werden (https://www.finma.ch/de/finma-public/bewilligte-institute-personen-und-produkte/).',
+            'LEI-Eintrag: https://search.gleif.org/#/record/894500URZFTDV5G7F357',
           ],
-        },
-        {
-          heading: 'Design und Umsetzung',
-          paragraphs: ['Erstellt mit React, Vite und Tailwind CSS.'],
         },
       ],
     },
@@ -949,7 +835,7 @@ export const de: Translations = {
     sections: {
       investment: 'Anlageteam',
       business: 'Geschäftsentwicklung',
-      investors: 'Investor Relations',
+      investors: 'Kundenberatung',
     },
     featuredLead:
       'Friedrich Hartmann leitet die Anlagephilosophie und die langfristige Kapitalallokation von Helfenstein.',
@@ -1046,20 +932,20 @@ export const de: Translations = {
         slug: 'tobias-brandt',
         role: 'Geschäftsführer',
         about:
-          'Tobias Brandt leitet die Geschäftsentwicklung bei Helfenstein nach Stationen im Private Banking und im Aktienvertrieb. Er weiss am ehesten, welche Institution bereit für ein vertieftes Gespräch ist.',
+          'Tobias Brandt leitet die Kundenentwicklung bei Helfenstein nach Stationen im Private Banking und im Aktienvertrieb. Meist ist er die erste Person, mit der Interessentinnen und Interessenten vor einem Erstgespräch sprechen.',
         results: [
-          'Vergrösserte die institutionelle Kundenbasis von Helfenstein in vier Jahren um 40 %.',
-          'Startete das Berater-Ausbildungsprogramm des Hauses, das jährlich von über 600 Fachleuten besucht wird.',
-          'Leitete zuvor den Vertrieb für Iberien und Lateinamerika auf einer europäischen Multi-Asset-Plattform.',
+          'Vergrösserte die Privatkundenbasis von Helfenstein in vier Jahren um 40 %.',
+          'Startete das Kunden-Bildungsprogramm des Hauses, das jährlich von über 600 Personen besucht wird.',
+          'Leitete zuvor die Privatkundenbetreuung für Iberien auf einer europäischen Multi-Asset-Plattform.',
         ],
       },
       'markus-engel': {
         slug: 'markus-engel',
-        role: 'Direktor Investor Relations',
+        role: 'Direktor Kundenkommunikation',
         about:
-          'Markus Engel leitet Investor Relations, Marketing und Kommunikation. Warm am Telefon und präzise im Follow-up hält er die externe Stimme von Helfenstein im Einklang mit der tatsächlichen Portfoliosteuerung.',
+          'Markus Engel leitet Kundenkommunikation und Marketing. Warm am Telefon und präzise im Follow-up hält er die externe Stimme von Helfenstein im Einklang mit der tatsächlichen Portfoliosteuerung.',
         results: [
-          'Steigerte Retail- und professionelle Assets under Advice in drei Jahren um 850 Mio. EUR.',
+          'Baute das Kundenreporting und die Korrespondenz für das gesamte Beratungsteam neu auf.',
           'Führte das Quartalsbrief-Format ein, das heute von mehreren nationalen Wirtschaftsmedien zitiert wird.',
           'Leitet das Team mit über 12 000 Kundenkontakten pro Jahr.',
         ],
@@ -1068,49 +954,49 @@ export const de: Translations = {
         slug: 'marc-weber',
         role: 'Managing Director, Client Operations',
         about:
-          'Marc Weber koordiniert Client Operations und Depotbank-Arrangements bei Helfenstein Asset Management AG. Er kam aus dem Private Banking und macht institutionelle Infrastruktur für Beratungskundinnen und -kunden in Luzern und der Schweiz zugänglich.',
+          'Marc Weber koordiniert Client Operations und die Beziehungen zu unseren Depotbanken. Er kam aus dem Private Banking und sorgt dafür, dass Kundinnen und Kunden von der Bank, die ihre Vermögenswerte verwahrt, ein klares Reporting erhalten – in Luzern und in der ganzen Schweiz.',
         results: [
-          'Senkte die durchschnittlichen Verwahrungs- und Abwicklungskosten für Helfenstein-Kundinnen und -Kunden seit 2020 um 18 %.',
-          'Überwachte die Migration von über 4,2 Mrd. EUR Kundenvermögen auf segregierte Konten der Bank.',
-          'Erweiterte Depotservices auf Pensionskassen, Family Offices und externe Berater in der DACH-Region.',
+          'Senkte die Verwahrungs- und Abwicklungskosten, die Helfenstein-Kundinnen und -Kunden ihren Banken zahlen, seit 2020 um 18 %.',
+          'Leitete die Überprüfung, die Kundinnen und Kunden auf segregierte Depots in ihrem eigenen Namen überführte.',
+          'Verhandelt Depotkonditionen mit unseren Schweizer Bankpartnern im Namen der Privatkundschaft.',
         ],
       },
       'anja-hoffmann': {
         slug: 'anja-hoffmann',
-        role: 'Investor Relations',
+        role: 'Kundenberaterin',
         about:
           'Anja Hoffmann wechselte von der IR börsennotierter Unternehmen ins Asset Management. Kundinnen und Kunden schätzen ihren direkten Stil und die Art, komplexe Portfolio-Bewegungen in verständlicher Sprache zu erklären.',
         results: [
-          'Betreut Beziehungen zu mehr als 180 vermögenden Familien.',
+          'Betreut Beziehungen zu mehr als 180 Privatkundinnen, Privatkunden und Familien.',
           'Kundenzufriedenheitswert von 4,8/5 in der letzten Jahresumfrage.',
-          'Organisiert die halbjährlichen Investorentage von Helfenstein in München und Zürich.',
+          'Organisiert die halbjährlichen Kundenseminare von Helfenstein in Luzern.',
         ],
       },
       'florian-bauer': {
         slug: 'florian-bauer',
-        role: 'Investor Relations',
+        role: 'Kundenberater',
         about:
-          'Florian Bauer betreut institutionelle Konten, die Detail statt Drama erwarten. Ehemaliger Tennis-Enthusiast und Wochenend-Skifahrer ist er unter Druck zuverlässig und verpasst selten einen Rückruf.',
+          'Florian Bauer betreut Kundinnen und Kunden, die Detail statt Drama erwarten. Ehemaliger Tennis-Enthusiast und Wochenend-Skifahrer ist er unter Druck zuverlässig und verpasst selten einen Rückruf.',
         results: [
-          'Unterstützte 2024 Nettozuflüsse von 320 Mio. EUR über Beratungskanäle.',
+          'Berät Haushalte zu Portfoliostruktur und jährlichem Rebalancing.',
           'Reduzierte die durchschnittliche Antwortzeit auf Anfragen auf unter vier Geschäftsstunden.',
-          'Hauptkontakt für Vertriebspartner in Süddeutschland und Österreich.',
+          'Hauptkontakt für deutschsprachige Kundinnen und Kunden mit Wohnsitz ausserhalb der Schweiz.',
         ],
       },
       'andrew-ramsden': {
         slug: 'andrew-ramsden',
-        role: 'Investor Relations',
+        role: 'Kundenberater',
         about:
-          'Andrew Ramsden bringt drei Jahrzehnte institutionelle Beziehungserfahrung an den Investor-Desk von Helfenstein. Abgewogen und zugänglich ist er die Person, die Consultants anrufen, wenn ein Mandat Klarheit statt Spin braucht.',
+          'Andrew Ramsden bringt drei Jahrzehnte Erfahrung in der Kundenbeziehung an den Beratungsdesk von Helfenstein. Abgewogen und zugänglich ist er die Person, die Kundinnen und Kunden anrufen, wenn eine Entscheidung Klarheit statt Spin braucht.',
         results: [
-          'Hat Beziehungen zu mehr als 40 Pensions- und Stiftungskunden in Europa aufgebaut und vertieft.',
-          'Leitete die erste pan-europäische Consultant-Roadshow der Firma und sicherte drei mehrjährige Beratungsmandate.',
-          'Ehemaliger Head of Client Coverage bei einem Londoner Asset Manager; seit 2019 bei Helfenstein.',
+          'Berät mehr als 40 Familien zu Pensionierung und Kapitalbezugsplanung.',
+          'Entwickelte die schriftliche Vorpensionierungs-Analyse, die heute im gesamten Beratungsteam verwendet wird.',
+          'Ehemaliger Leiter Privatkundenbetreuung bei einem Londoner Vermögensverwalter; seit 2019 bei Helfenstein.',
         ],
       },
       'erik-schneider': {
         slug: 'erik-schneider',
-        role: 'Investor Relations',
+        role: 'Kundenberater',
         about:
           'Erik Schneider ist seit zwei Jahrzehnten in Fonds- und Beratungsplattformen tätig. Ruhig und unhurried ist er oft die erste Person, nach der langjährige Kundinnen und Kunden fragen, wenn die Märkte unruhig werden.',
         results: [
@@ -1121,18 +1007,18 @@ export const de: Translations = {
       },
       'andrew-savage': {
         slug: 'andrew-savage',
-        role: 'Investor Relations',
+        role: 'Kundenberater',
         about:
-          'Andrew Savage spezialisiert sich auf das Onboarding professioneller Anleger und präzises Reporting. Energetisch in Meetings und akribisch im Follow-up verbindet er Investmentteams und Kunden, ohne den Detailverlust.',
+          'Andrew Savage spezialisiert sich auf das Onboarding neuer Kundinnen und Kunden und ein präzises Reporting. Energetisch in Meetings und akribisch im Follow-up verbindet er Anlageteam und Kundschaft, ohne dass Details verloren gehen.',
         results: [
-          'Onboardete in den letzten zwei Jahren 110 neue professionelle Anlegerinnen und Anleger.',
-          'Baute das Quartalsreporting für alle IR-Beziehungen neu auf; NPS stieg um acht Punkte.',
-          'Hauptkontakt für britische und irische Beratungsplattformen, die Helfenstein-Strategien vertreiben.',
+          'Onboardete in den letzten zwei Jahren 110 neue Privatkundinnen und -kunden.',
+          'Baute das Quartalsreporting für alle Kundinnen und Kunden neu auf; die Zufriedenheit stieg um acht Punkte.',
+          'Hauptkontakt für Kundinnen und Kunden mit Vermögenswerten bei mehr als einer Depotbank.',
         ],
       },
       'birgit-schulz': {
         slug: 'birgit-schulz',
-        role: 'Investor Relations',
+        role: 'Kundenberaterin',
         about:
           'Birgit Schulz kam nach einer Karriere in der Qualitätskontrolle in den Finanzdienstleistungssektor – ein Hintergrund, der sich in der akribischen Dokumentation jedes Kundenkontakts zeigt. Ruhig, gründlich und schwer aus der Ruhe zu bringen.',
         results: [
@@ -1143,18 +1029,18 @@ export const de: Translations = {
       },
       'alexander-koch': {
         slug: 'alexander-koch',
-        role: 'Institutionelles Geschäft',
+        role: 'Senior Kundenberater',
         about:
-          'Alexander Koch betreut institutionelle Pipeline und Consultant Relations. Jung, aber bereits vertrauenswürdig in Due-Diligence-Meetings, verbindet er Investmentteams mit den richtigen externen Partnern.',
+          'Alexander Koch berät Kundinnen und Kunden mit komplexeren Verhältnissen – mehrere Banken, Vermögenswerte in verschiedenen Ländern oder ein Unternehmen, das in die Pensionierung überführt wird. Jung, aber in schwierigen Gesprächen bereits ein vertrauter Ansprechpartner.',
         results: [
-          'Fügte seit 2022 zwölf neue Fondsberater-Beziehungen hinzu.',
-          'Unterstützte den Gewinn von drei wettbewerbsorientierten institutionellen Ausschreibungen 2024.',
-          'Koordiniert ESG-Fragebögen und RFP-Antworten von Helfenstein.',
+          'Betreut seit 2022 die grenzüberschreitenden Privatkundenfälle des Hauses.',
+          'Entwickelte den Konsolidierungsprozess für Kundinnen und Kunden mit Vermögenswerten bei mehreren Depotbanken.',
+          'Koordiniert den Fragebogen zu Nachhaltigkeitspräferenzen nach FIDLEG.',
         ],
       },
       'leon-roth': {
         slug: 'leon-roth',
-        role: 'Investor Relations',
+        role: 'Kundenberater',
         about:
           'Leon Roth hält die Kundenservice-Maschine von Helfenstein am Laufen. Kolleginnen und Kollegen verlassen sich darauf, dass er zum richtigen Zeitpunkt den richtigen Desk verbindet, ohne dass Kundinnen und Kunden sich durchgereicht fühlen.',
         results: [
@@ -1165,11 +1051,11 @@ export const de: Translations = {
       },
       'henrik-meier': {
         slug: 'henrik-meier',
-        role: 'Investor Relations',
+        role: 'Kundenberater',
         about:
           'Henrik Meier verfasst die täglichen Kunden-Updates und unterstützt das Kommunikationsteam. Klar, prägnant und leicht musikalisch ausserhalb der Arbeit – er spielt Gitarre in einer Büroband, die besser klingt, als sie aussieht.',
         results: [
-          'Erstellt monatliche Teilnehmerbriefe, die von über 8 000 Anlegerinnen und Anlegern gelesen werden.',
+          'Erstellt den monatlichen Kundenbrief, der von über 8 000 Abonnentinnen und Abonnenten gelesen wird.',
           'Half, E-Mail-Öffnungsraten um 19 % durch klarere Betreffzeilen und Struktur zu steigern.',
           'Stellvertretender Redaktor für alle deutschsprachigen externen Publikationen.',
         ],

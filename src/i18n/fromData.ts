@@ -1,4 +1,4 @@
-import { allArticles, mandates, marketVideo, offers, property, solutions, testimonial, newsletterCta } from '../data/content';
+import { allArticles, marketVideo, offers, property, solutions, testimonial, newsletterCta } from '../data/content';
 import { legalPages } from '../data/legal';
 import { actionLinks, legalLinks, mainNavigation, quickLinks, topMenu } from '../data/navigation';
 import { featuredMember, teamMembers, teamSections } from '../data/team';
@@ -67,7 +67,6 @@ const articleSlugs = [
   'finsa-what-clients-should-know',
   'early-retirement-cost-check',
   'cantonal-tax-relocation-checklist',
-  'bgv-scheme-benchmarking-smes',
 ] as const;
 
 /** Build the English catalog from existing data modules (single source of truth). */
@@ -112,7 +111,6 @@ export function buildEnglishCatalog(ui: Translations['ui'], meta: Translations['
         imageAlt: o.imageAlt,
       })),
       solutions,
-      mandates: mandates.map((m) => ({ title: m.title })),
       property: {
         type: property.type,
         imageAlt: property.imageAlt,

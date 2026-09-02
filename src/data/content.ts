@@ -43,11 +43,6 @@ export type Solution = {
   to: string;
 };
 
-export type Mandate = {
-  title: string;
-  to: string;
-};
-
 export type PropertySpec = {
   label: string;
   value: string;
@@ -60,14 +55,13 @@ export type PropertySpec = {
 /* -------------------------------------------------------------------------- */
 
 export const hero = {
-  brand: 'Helfenstein Asset Management AG',
-  headline: 'Independent wealth advice for every stage of life.',
+  brand: 'Helfenstein Group',
+  headline: 'Independent advice. No hidden agendas.',
   subline:
-    'Retirement, investments, taxes and real estate — paid only by our clients. Custody held with Swiss banking partners; Helfenstein is a FINMA-authorised portfolio manager supervised by OSFINcontrol AG.',
-  primaryCta: { label: 'Make an appointment', to: ROUTES.appointments },
+    'Retirement, investments, taxes and real estate — advised by people who answer only to you. We are paid solely by our clients and never hold your assets: your money stays in your own name with established Swiss banking partners. Helfenstein Group is a FINMA-authorised portfolio manager supervised by OSFINcontrol AG, and we advise private individuals and families only — never institutions or companies.',
   secondaryCta: { label: 'Explore our expertise', to: ROUTES.expertise },
   image: '/team/friedrich-hartmann.png',
-  imageAlt: 'Portrait of Friedrich Hartmann, Chairman and CIO of Helfenstein Asset Management AG',
+  imageAlt: 'Portrait of Friedrich Hartmann, Chairman and CIO of Helfenstein Group',
 };
 
 /** Kept for i18n catalog compatibility; hero is the primary home lead. */
@@ -78,24 +72,24 @@ export const testimonial = {
   position: 'Managing Director, Client Operations',
   image: hero.image,
   imageAlt: hero.imageAlt,
-  ctaLabel: hero.primaryCta.label,
-  ctaTo: hero.primaryCta.to,
+  ctaLabel: hero.secondaryCta.label,
+  ctaTo: hero.secondaryCta.to,
 };
 
 export const audienceBands = [
   {
     id: 'individuals',
     title: 'For individuals',
-    text: 'Retirement, investments, estate planning, real estate and taxes — with a free first meeting.',
+    text: 'Retirement, investments, estate planning, real estate and taxes — independent advice for private individuals and families, starting with a free first meeting.',
     to: ROUTES.individuals,
     cta: 'Private clients',
   },
   {
-    id: 'companies',
-    title: 'For companies',
-    text: 'Occupational pensions, succession, insurance management and company formation for Swiss SMEs.',
-    to: ROUTES.companies,
-    cta: 'Corporate clients',
+    id: 'independent-advice',
+    title: 'Paid only by you',
+    text: 'No commissions, no product sales targets and no client assets on our books — custody stays with your Swiss bank, in your name.',
+    to: ROUTES.aboutIndependentAdvice,
+    cta: 'How we are paid',
   },
 ] as const;
 
@@ -135,7 +129,7 @@ export const newsSlim: Article[] = [
     readingTimeMinutes: 6,
     lastReviewed: '2026-07-15',
     body: [
-      'Pillar 3a is the most popular way of saving tax in Switzerland. Contributions can be deducted from taxable income in full, up to an annual maximum that is adjusted periodically.',
+      'Pillar 3a is the most widely used way of saving tax in Switzerland. Contributions can be deducted from taxable income in full, up to an annual maximum that is adjusted periodically. Because we are paid only by you, we can recommend whichever 3a provider suits you best — bank, foundation or insurer — with no preference of our own.',
       'Employees who belong to a pension fund may pay in up to a fixed franc amount each year. The self-employed without a pension fund may contribute up to 20 per cent of their net earned income, subject to a cap.',
       'Assets in pillar 3a are exempt from wealth tax and the returns are exempt from income tax for as long as they remain in the account. On withdrawal, the capital is taxed separately from other income at a reduced rate.',
       'Spreading your savings over several accounts and withdrawing them in different years keeps the progression low and can save several thousand francs.',
@@ -208,13 +202,13 @@ export const offers: Offer[] = [
     icon: 'calendar',
   },
   {
-    id: 'phishing-insurance',
-    title: 'Protect your assets with Helfenstein phishing insurance',
+    id: 'phishing-protection',
+    title: 'Protect your assets from phishing',
     tag: 'Fact sheet',
     teaser:
-      'Helfenstein phishing insurance protects you against any phishing attacks that occur despite security measures and precautions.',
+      'Our free guide shows you how to recognise fraudulent messages, what to check before you act on any instruction, and what to do in the first hour if something goes wrong.',
     cta: 'Order for free',
-    to: ROUTES.phishingInsurance,
+    to: ROUTES.phishingProtection,
     icon: 'shield',
   },
 ];
@@ -237,7 +231,7 @@ export const marketArticles: Article[] = [
     body: [
       'A sound investment strategy starts with your own circumstances: how much of your assets you can tie up, for how long, and how much fluctuation you can live with.',
       'Only once the strategy is fixed does the choice of individual investments follow. Broadly diversified, low-cost index funds are the most efficient building block for most investors.',
-      'Costs are one of the few certainties in investing. Every franc saved on fees stays invested and compounds over the whole holding period.',
+      'Costs are one of the few certainties in investing. Every franc saved on fees stays invested and compounds over the whole holding period — which is why an adviser who receives no share of those fees is the only one with no reason to overlook them.',
     ],
   },
   {
@@ -284,20 +278,20 @@ export const quotes: Quote[] = [
 ];
 
 export const marketVideo: Article = {
-  slug: 'helfenstein-financial-portal-pro',
-  tagline: 'Helfenstein Financial Portal Pro',
-  title: 'The platform for your stock market trading',
-  teaser: 'Video by Helfenstein Asset Management (1:46 minutes)',
+  slug: 'helfenstein-financial-portal',
+  tagline: 'Helfenstein Financial Portal',
+  title: 'One clear view of everything you hold',
+  teaser: 'Video by Helfenstein Group (1:46 minutes)',
   kind: 'video',
-  videoNote: 'Video by Helfenstein Asset Management (1:46 minutes)',
+  videoNote: 'Video by Helfenstein Group (1:46 minutes)',
   image: '/images/video-portal-pro.svg',
-  imageAlt: 'Preview of the Helfenstein Financial Portal Pro trading platform',
+  imageAlt: 'Preview of the Helfenstein Financial Portal consolidated portfolio view',
   publishedDate: '2025-09-01',
   author: editorial,
   readingTimeMinutes: 2,
   body: [
-    'The Helfenstein Financial Portal Pro brings real-time prices, depth-of-market data, charting and order entry together in a single view.',
-    'Watchlists, alerts and portfolio analysis are included at no extra cost, and orders can be placed directly on all major Swiss and international exchanges.',
+    'The Helfenstein Financial Portal brings your holdings at all your Swiss banking partners, your documents and current market data together in a single view.',
+    'Watchlists, alerts and portfolio analysis are included at no extra cost. Your assets remain at your bank at all times; any transactions are executed through your custodian bank.',
   ],
 };
 
@@ -311,7 +305,7 @@ export const insightArticles: Article[] = [
     tagline: 'Insights',
     title: 'Horizon report 2026: Swiss pensions, mortgages and FinSA',
     teaser:
-      'The main legislative and market developments private clients and SMEs should plan for in 2026 — in plain language.',
+      'The main legislative and market developments private clients should plan for in 2026 — in plain language.',
     publishedDate: '2026-01-15',
     author: editorial,
     readingTimeMinutes: 12,
@@ -393,22 +387,6 @@ export const insightArticles: Article[] = [
       'Timing matters: the date you establish a new tax domicile can affect which year benefits from the move.',
     ],
   },
-  {
-    slug: 'bgv-scheme-benchmarking-smes',
-    tagline: 'Companies',
-    title: 'Why SMEs should benchmark their BVG scheme',
-    teaser:
-      'Occupational pension costs are often the least-examined payroll line. A periodic tender can improve price and benefits.',
-    publishedDate: '2026-04-17',
-    author: editorial,
-    readingTimeMinutes: 5,
-    lastReviewed: '2026-08-05',
-    body: [
-      'Risk premiums and administration charges for identical BVG benefits still vary widely between providers.',
-      'A structured benchmark compares cover, conversion rates, investment returns and service quality — not price alone.',
-      'Employers that re-tender every few years typically reduce friction for HR and give employees clearer plan communication.',
-    ],
-  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -418,22 +396,22 @@ export const insightArticles: Article[] = [
 export const solutions: Solution[] = [
   {
     title: 'Retirement planning',
-    text: 'Plan your retirement with Helfenstein and you can rest assured that you will be financially secure once you have stopped working.',
+    text: 'We model your retirement income year by year, in writing, so you can see exactly what you can afford — before you make decisions that cannot be undone.',
     to: ROUTES.retirement,
   },
   {
     title: 'Pillar 3a with index investments',
-    text: 'At Helfenstein, you can invest your pillar 3a assets in the best index funds. Thanks to the lower fees, you can generate additional returns of thousands or even tens of thousands of francs over the years.',
+    text: 'We help you place your pillar 3a in low-cost index solutions held at a Swiss bank or foundation of your choice. Over a working life, lower fees can make a difference of tens of thousands of francs.',
     to: ROUTES.pensionPlanning,
   },
   {
     title: 'Tax advice',
-    text: 'Our experts show you how to optimise your tax situation over the long term and save thousands or even tens of thousands of francs.',
+    text: 'Our experts show you how to structure pension, property and relocation decisions years in advance — where the real tax savings are made.',
     to: ROUTES.taxes,
   },
   {
     title: 'Asset management mandates',
-    text: 'At Helfenstein, we combine a simple investment strategy, efficient implementation and active support. Find the right mandate for you.',
+    text: 'A clear strategy, low-cost implementation and ongoing support — managed by us, held at your bank. You always know what you own, what it costs and why.',
     to: ROUTES.financialInvestments,
   },
 ];
@@ -443,28 +421,14 @@ export const solutions: Solution[] = [
 /* -------------------------------------------------------------------------- */
 
 export const newsletterCta = {
-  text: 'Get regular updates on how to optimise your OASI, occupational and pillar 3 pensions.',
-  linkLabel: 'Subscribe to our newsletter (in German, French and Italian).',
+  text: 'Practical updates on pensions, tax, investing and property — written for private clients, with no product advertising.',
+  linkLabel: 'Subscribe to our newsletter (available in English, German, French and Italian).',
   to: ROUTES.newsletter,
 };
 
 /* -------------------------------------------------------------------------- */
-/* Sales mandates + property                                                   */
+/* Property                                                                    */
 /* -------------------------------------------------------------------------- */
-
-export const mandates: Mandate[] = [
-  {
-    title:
-      'Innovative, rapidly growing company in the building technology and energy optimisation sector',
-    to: ROUTES.companiesSuccession,
-  },
-  {
-    title: 'Specialised industrial plant engineering company with patented technology',
-    to: ROUTES.companiesSuccession,
-  },
-  { title: 'One of the leading Swiss providers of logistics packaging materials', to: ROUTES.companiesSuccession },
-  { title: 'Successful telecommunications service provider', to: ROUTES.companiesSuccession },
-];
 
 export const property = {
   type: 'Single family house',

@@ -25,7 +25,6 @@ export type OfferT = {
 };
 
 export type SolutionT = { title: string; text: string };
-export type MandateT = { title: string };
 export type PropertySpecT = { label: string };
 export type TopicHighlightT = { title: string; text: string };
 
@@ -80,7 +79,6 @@ export type Translations = {
     instrument: string;
     level: string;
     change: string;
-    moreMandates: string;
     moreOfferings: string;
     propertyType: string;
     whatWeDoForYou: string;
@@ -120,7 +118,6 @@ export type Translations = {
     legalNav: string;
     subscribeNewsletter: string;
     forIndividuals: string;
-    forCompanies: string;
     clientStories: string;
     verifyAuthorisation: string;
     relatedService: string;
@@ -151,7 +148,6 @@ export type Translations = {
     articles: Record<string, ArticleT>;
     offers: OfferT[];
     solutions: SolutionT[];
-    mandates: MandateT[];
     property: { type: string; imageAlt: string; specs: PropertySpecT[] };
     marketVideo: ArticleT;
   };
