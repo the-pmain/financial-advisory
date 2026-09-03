@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { ROUTES } from '../../constants/routes';
 import { topMenu } from '../../data/navigation';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useEscape, useScrollLock } from '../../hooks/useScrollLock';
@@ -57,7 +56,7 @@ export function Header() {
               aria-controls={SEARCH_ID}
               aria-label="Search"
               onClick={toggleSearch}
-              className="text-vz-blue hover:text-vz-orange block size-[30px] shrink-0 cursor-pointer bg-transparent p-[3px] transition-colors duration-250 active:opacity-75 max-mob:order-2"
+              className="text-vz-blue hover:text-vz-orange block size-[30px] shrink-0 cursor-pointer bg-transparent p-[3px] transition-colors duration-250 active:opacity-75"
             >
               <SearchIcon className="h-6 w-6" stroke="currentColor" />
             </button>
@@ -77,18 +76,7 @@ export function Header() {
               </ul>
             </nav>
 
-            {/* On phones the utility links move into the menu drawer and this
-                compact chip takes their place. */}
-            <Link
-              to={ROUTES.financialPortal}
-              className="text-vz-blue bg-vz-surface hover:text-vz-orange vz-underline-hover hidden rounded-[3px] px-2 pt-[7px] pb-[6px] text-[15px] leading-[17px] max-mob:order-1 max-mob:inline-block"
-            >
-              Login
-            </Link>
-
-            <div className="max-mob:order-3">
-              <NavToggle open={menuOpen} onToggle={toggleMenu} controls={MENU_ID} />
-            </div>
+            <NavToggle open={menuOpen} onToggle={toggleMenu} controls={MENU_ID} />
           </div>
         </div>
 
