@@ -1,8 +1,9 @@
 import { Link, useParams } from 'react-router';
 import { ROUTES, teamMemberPath } from '../constants/routes';
 import { teamBySlug, teamSections } from '../data/team';
-import { ButtonOrange, SectionTitle } from '../components/ui/primitives';
+import { SectionTitle } from '../components/ui/primitives';
 import { TeamAvatar } from '../components/ui/TeamAvatar';
+import { ConsultationForm } from '../components/widgets/ConsultationForm';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -94,9 +95,10 @@ export function TeamMemberPage() {
           </section>
         )}
 
-        <ButtonOrange to={ROUTES.appointments} className="mt-8">
-          Make an appointment
-        </ButtonOrange>
+      </div>
+
+      <div className="mt-12 max-lap:mt-10">
+        <ConsultationForm member={member} />
       </div>
 
       {peers.length > 0 && (

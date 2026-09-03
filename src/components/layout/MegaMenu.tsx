@@ -7,8 +7,9 @@ import { useT } from '../../i18n';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ArrowRightIcon, ChevronDownIcon } from '../ui/Icons';
 
+import { BloombergLeiLink } from '../ui/BloombergLeiLink';
 import { ButtonOrange } from '../ui/primitives';
-import { FinmaLink } from '../ui/FinmaLink';
+import { RegistryLinks } from '../ui/RegistryLinks';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 /**
@@ -63,7 +64,13 @@ export function MegaMenu({
                 ) : (
                   <>
                     <h3 className="text-vz-gray-mid vz-hairline-b mt-1 mb-[10px] pb-[17px] text-[20px] leading-[23px] font-normal">
-                      {group.label}
+                      <Link
+                        to={group.to}
+                        onClick={onClose}
+                        className="hover:text-vz-orange transition-colors duration-250"
+                      >
+                        {group.label}
+                      </Link>
                     </h3>
                     <ul>
                       {group.children.map((child) => (
@@ -124,7 +131,10 @@ export function MegaMenu({
           />
 
           <div className="mt-8 max-mob:mt-6 max-mob:border-t max-mob:border-vz-rule max-mob:pt-6">
-            <FinmaLink />
+            <RegistryLinks />
+            <div className="mt-5">
+              <BloombergLeiLink />
+            </div>
           </div>
         </div>
       </div>

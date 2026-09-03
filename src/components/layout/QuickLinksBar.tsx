@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router';
+import { ROUTES } from '../../constants/routes';
 import { quickLinks } from '../../data/navigation';
 
 /**
@@ -35,6 +36,7 @@ export function QuickLinksBar() {
             >
               <NavLink
                 to={link.to}
+                end={link.to === ROUTES.about}
                 className={({ isActive }) =>
                   `text-vz-blue hover:text-vz-orange tracking-vz-01 block py-[9px] text-[19px] leading-[22px] transition-[color,box-shadow] duration-250 max-desk:py-[7px] max-desk:text-[17px] max-desk:leading-[20px] ${
                     isActive ? 'vz-underline' : 'vz-underline-hover'

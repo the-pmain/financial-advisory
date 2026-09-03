@@ -15,14 +15,15 @@ const navPaths = {
       ],
     },
     {
-      label: 'À propos d\'Helfenstein',
+      label: 'À propos',
       to: ROUTES.about,
       children: [
+        { label: 'Notre équipe', to: `${ROUTES.about}#our-team` },
+        { label: 'Conformité réglementaire', to: `${ROUTES.about}#regulatory-compliance` },
         { label: 'Conseil indépendant', to: ROUTES.aboutIndependentAdvice },
         { label: 'Notre régulation', to: ROUTES.aboutHowWeAreRegulated },
         { label: 'Emplois et carrières', to: ROUTES.aboutJobs },
         { label: 'Contact et assistance', to: ROUTES.aboutContact },
-        { label: 'Équipe', to: ROUTES.aboutTeam },
         { label: 'Exemples de clients', to: ROUTES.aboutClientStories },
       ],
     },
@@ -34,6 +35,9 @@ const navPaths = {
     { label: 'Immobilier', to: ROUTES.realEstate },
     { label: 'Impôts', to: ROUTES.taxes },
     { label: 'Prévoyance', to: ROUTES.pensionPlanning },
+    { label: 'À propos', to: ROUTES.about },
+    { label: 'Conformité réglementaire', to: ROUTES.regulatoryAndCompliance },
+    { label: 'Notre équipe', to: ROUTES.aboutTeam },
   ],
   topMenu: [
     { label: 'Rendez-vous', to: ROUTES.appointments },
@@ -463,23 +467,23 @@ export const fr: Translations = {
     },
     [ROUTES.about]: {
       path: ROUTES.about,
-      breadcrumb: ['À propos d\'Helfenstein'],
-      title: 'À propos d\'Helfenstein',
+      breadcrumb: ['À propos'],
+      title: 'À propos',
       subtitle: 'Un conseil indépendant depuis Lucerne.',
       intro: [
         'Helfenstein Group est une société suisse indépendante de conseil et de gestion de fortune établie à Lucerne. Nous conseillons les particuliers et les familles — jamais des institutions ni des entreprises — en matière de gestion de fortune, de conseil financier, de planification de la retraite et de financement.',
         'Nous figurons au registre de la FINMA en qualité de gestionnaire de fortune autorisé et sommes surveillés par OSFINcontrol AG. Nos revenus proviennent exclusivement des honoraires convenus avec nos clients, et nous ne détenons aucun avoir de la clientèle : la conservation est assurée par des partenaires bancaires suisses.',
       ],
       highlights: [
+        { title: 'Notre équipe', text: 'Des spécialistes qui vous accompagnent sur le long terme.' },
+        { title: 'Conformité réglementaire', text: 'Autorisation FINMA, surveillance OSFINcontrol et notre enregistrement Bloomberg LEI.' },
         { title: 'Conseil indépendant', text: 'Aucune rétrocession, aucun objectif de vente de produits.' },
-        { title: 'Notre régulation', text: 'Autorisation FINMA de gestionnaire de fortune, surveillance OSFINcontrol, LSFin et documents clients.' },
-        { title: 'Équipe', text: 'Des spécialistes qui vous accompagnent sur le long terme.' },
         { title: 'Exemples de clients', text: 'Des exemples anonymisés de conseil délivré en pratique.' },
       ],
     },
     [ROUTES.aboutIndependentAdvice]: {
       path: ROUTES.aboutIndependentAdvice,
-      breadcrumb: ['À propos d\'Helfenstein', 'Conseil indépendant'],
+      breadcrumb: ['À propos', 'Conseil indépendant'],
       title: 'Conseil indépendant',
       subtitle: 'Rémunérés par nos clients. Par personne d\'autre.',
       intro: [
@@ -495,7 +499,7 @@ export const fr: Translations = {
     },
     [ROUTES.aboutOffice]: {
       path: ROUTES.aboutOffice,
-      breadcrumb: ['À propos d\'Helfenstein', 'Notre site'],
+      breadcrumb: ['À propos', 'Notre site'],
       title: 'Notre site',
       subtitle: 'Établis à Lucerne, au service de clients dans toute la Suisse.',
       intro: [
@@ -511,7 +515,7 @@ export const fr: Translations = {
     },
     [ROUTES.aboutPortrait]: {
       path: ROUTES.aboutPortrait,
-      breadcrumb: ['À propos d\'Helfenstein', 'Portrait'],
+      breadcrumb: ['À propos', 'Portrait'],
       title: 'Portrait',
       subtitle: 'Un gestionnaire de fortune lucernois au modèle de conseil clair.',
       intro: [
@@ -527,7 +531,7 @@ export const fr: Translations = {
     },
     [ROUTES.aboutCompanyInformation]: {
       path: ROUTES.aboutCompanyInformation,
-      breadcrumb: ['À propos d\'Helfenstein', 'Informations sur la société'],
+      breadcrumb: ['À propos', 'Informations sur la société'],
       title: 'Informations sur la société',
       subtitle: 'Qui nous sommes sur le papier, et comment nous joindre.',
       intro: [
@@ -543,7 +547,7 @@ export const fr: Translations = {
     },
     [ROUTES.aboutJobs]: {
       path: ROUTES.aboutJobs,
-      breadcrumb: ['À propos d\'Helfenstein', 'Emplois et carrières'],
+      breadcrumb: ['À propos', 'Emplois et carrières'],
       title: 'Emplois et carrières',
       subtitle: 'Un conseil sans objectifs de vente.',
       intro: [
@@ -559,7 +563,7 @@ export const fr: Translations = {
     },
     [ROUTES.aboutContact]: {
       path: ROUTES.aboutContact,
-      breadcrumb: ['À propos d\'Helfenstein', 'Contact et assistance'],
+      breadcrumb: ['À propos', 'Contact et assistance'],
       title: 'Contact et assistance',
       subtitle: 'Nous sommes heureux de vous entendre.',
       intro: [

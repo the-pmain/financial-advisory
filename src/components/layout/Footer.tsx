@@ -5,7 +5,8 @@ import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ArrowRightIcon, ChevronDownIcon } from '../ui/Icons';
 import { LogoMark } from '../ui/Logo';
 import { ButtonOrange } from '../ui/primitives';
-import { FinmaLink } from '../ui/FinmaLink';
+import { BloombergLeiLink } from '../ui/BloombergLeiLink';
+import { RegistryLinks } from '../ui/RegistryLinks';
 import { Breadcrumb } from './Breadcrumb';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import {
@@ -59,7 +60,12 @@ export function Footer() {
             ) : (
               <div key={group.label} className="pt-[5px]">
                 <h2 className="text-vz-gray-mid m-0 text-[20px] leading-[24px] font-normal">
-                  {group.label}
+                  <Link
+                    to={group.to}
+                    className="hover:text-vz-orange transition-colors duration-250"
+                  >
+                    {group.label}
+                  </Link>
                 </h2>
                 <FooterGroupLinks group={group} />
               </div>
@@ -91,7 +97,10 @@ export function Footer() {
             ))}
           </ul>
 
-          <FinmaLink className="mt-8 max-tab:mt-6" />
+          <RegistryLinks className="mt-8 max-tab:mt-6" />
+          <div className="mt-5">
+            <BloombergLeiLink />
+          </div>
         </div>
       </div>
 

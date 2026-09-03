@@ -25,8 +25,17 @@ export const company = {
    */
   privacyEmail: '',
   uid: 'CHE-111.708.730',
+  /**
+   * help.ch profile mirroring the Handelsregister entry: UID, purpose clause
+   * and SHAB history. A directory, not the register itself — do not describe it
+   * as an official source.
+   */
+  uidProfileUrl:
+    'https://www.help.ch/firma/CHE-111.708.730/helfenstein-asset-management-ag-luzern',
   lei: '894500URZFTDV5G7F357',
   leiUrl: 'https://search.gleif.org/#/record/894500URZFTDV5G7F357',
+  /** Issuing LOU's own record for the same LEI. */
+  leiIssuerUrl: 'https://lei.bloomberg.com/leis/view/894500URZFTDV5G7F357',
   regulation: {
     summary:
       'listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG.',

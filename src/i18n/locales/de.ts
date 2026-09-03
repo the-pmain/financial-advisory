@@ -15,14 +15,15 @@ const navPaths = {
       ],
     },
     {
-      label: 'Über Helfenstein',
+      label: 'Über uns',
       to: ROUTES.about,
       children: [
+        { label: 'Unser Team', to: `${ROUTES.about}#our-team` },
+        { label: 'Regulatorische Compliance', to: `${ROUTES.about}#regulatory-compliance` },
         { label: 'Unabhängige Beratung', to: ROUTES.aboutIndependentAdvice },
         { label: 'Wie wir reguliert sind', to: ROUTES.aboutHowWeAreRegulated },
         { label: 'Jobs & Karriere', to: ROUTES.aboutJobs },
         { label: 'Kontakt & Hilfe', to: ROUTES.aboutContact },
-        { label: 'Team', to: ROUTES.aboutTeam },
         { label: 'Kundenbeispiele', to: ROUTES.aboutClientStories },
       ],
     },
@@ -34,6 +35,9 @@ const navPaths = {
     { label: 'Immobilien', to: ROUTES.realEstate },
     { label: 'Steuern', to: ROUTES.taxes },
     { label: 'Pensionen', to: ROUTES.pensionPlanning },
+    { label: 'Über uns', to: ROUTES.about },
+    { label: 'Regulatorische Compliance', to: ROUTES.regulatoryAndCompliance },
+    { label: 'Unser Team', to: ROUTES.aboutTeam },
   ],
   topMenu: [
     { label: 'Termine', to: ROUTES.appointments },
@@ -463,23 +467,23 @@ export const de: Translations = {
     },
     [ROUTES.about]: {
       path: ROUTES.about,
-      breadcrumb: ['Über Helfenstein'],
-      title: 'Über Helfenstein',
+      breadcrumb: ['Über uns'],
+      title: 'Über uns',
       subtitle: 'Unabhängige Beratung aus Luzern.',
       intro: [
         'Die Helfenstein Group ist eine unabhängige Schweizer Beratungs- und Vermögensverwaltungsgesellschaft mit Sitz in Luzern. Wir beraten Privatpersonen und Familien – nie Institutionen oder Unternehmen – zu Vorsorge, Anlagen, Steuern und Immobilien.',
         'Wir nehmen keine Provisionen von Produktanbietern an. Unser Einkommen stammt ausschliesslich aus den Honoraren, die unsere Kundinnen und Kunden mit uns vereinbaren, und wir verwahren keine Kundenvermögen: Die Verwahrung bleibt bei Schweizer Depotbank-Partnern.',
       ],
       highlights: [
+        { title: 'Unser Team', text: 'Spezialistinnen und Spezialisten, die Sie langfristig begleiten.' },
+        { title: 'Regulatorische Compliance', text: 'FINMA-Bewilligung, Aufsicht durch OSFINcontrol und unser Bloomberg-LEI-Eintrag.' },
         { title: 'Unabhängige Beratung', text: 'Keine Retrozessionen, keine Produktverkaufsziele.' },
-        { title: 'Team', text: 'Spezialistinnen und Spezialisten, die Sie langfristig begleiten.' },
-        { title: 'Jobs & Karriere', text: 'Beratungsarbeit, beurteilt nach Qualität – nicht nach verkauften Volumina.' },
-        { title: 'Kontakt & Hilfe', text: 'Schreiben Sie uns, rufen Sie an oder vereinbaren Sie ein Erstgespräch.' },
+        { title: 'Kundenbeispiele', text: 'Anonymisierte Beispiele, wie Beratung in der Praxis aussieht.' },
       ],
     },
     [ROUTES.aboutIndependentAdvice]: {
       path: ROUTES.aboutIndependentAdvice,
-      breadcrumb: ['Über Helfenstein', 'Unabhängige Beratung'],
+      breadcrumb: ['Über uns', 'Unabhängige Beratung'],
       title: 'Unabhängige Beratung',
       subtitle: 'Bezahlt von unseren Kundinnen und Kunden. Von niemandem sonst.',
       intro: [
@@ -495,7 +499,7 @@ export const de: Translations = {
     },
     [ROUTES.aboutOffice]: {
       path: ROUTES.aboutOffice,
-      breadcrumb: ['Über Helfenstein', 'Standort'],
+      breadcrumb: ['Über uns', 'Standort'],
       title: 'Standort',
       subtitle: 'Mit Sitz in Luzern, für Kundinnen und Kunden in der ganzen Schweiz.',
       intro: [
@@ -511,7 +515,7 @@ export const de: Translations = {
     },
     [ROUTES.aboutPortrait]: {
       path: ROUTES.aboutPortrait,
-      breadcrumb: ['Über Helfenstein', 'Portrait'],
+      breadcrumb: ['Über uns', 'Portrait'],
       title: 'Portrait',
       subtitle: 'Ein Luzerner Vermögensverwalter mit klarem Beratungsmodell.',
       intro: [
@@ -527,7 +531,7 @@ export const de: Translations = {
     },
     [ROUTES.aboutCompanyInformation]: {
       path: ROUTES.aboutCompanyInformation,
-      breadcrumb: ['Über Helfenstein', 'Unternehmensinformationen'],
+      breadcrumb: ['Über uns', 'Unternehmensinformationen'],
       title: 'Unternehmensinformationen',
       subtitle: 'Wer wir auf dem Papier sind – und wie Sie uns erreichen.',
       intro: [
@@ -543,7 +547,7 @@ export const de: Translations = {
     },
     [ROUTES.aboutJobs]: {
       path: ROUTES.aboutJobs,
-      breadcrumb: ['Über Helfenstein', 'Jobs & Karriere'],
+      breadcrumb: ['Über uns', 'Jobs & Karriere'],
       title: 'Jobs & Karriere',
       subtitle: 'Beratungsarbeit ohne Verkaufsziele.',
       intro: [
@@ -559,7 +563,7 @@ export const de: Translations = {
     },
     [ROUTES.aboutContact]: {
       path: ROUTES.aboutContact,
-      breadcrumb: ['Über Helfenstein', 'Kontakt & Hilfe'],
+      breadcrumb: ['Über uns', 'Kontakt & Hilfe'],
       title: 'Kontakt & Hilfe',
       subtitle: 'Wir freuen uns auf Ihre Nachricht.',
       intro: [

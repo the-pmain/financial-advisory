@@ -26,14 +26,15 @@ export const mainNavigation: NavGroup[] = [
     ],
   },
   {
-    label: 'About Helfenstein',
+    label: 'About us',
     to: ROUTES.about,
     children: [
+      { label: 'Our team', to: `${ROUTES.about}#our-team` },
+      { label: 'Regulatory compliance', to: `${ROUTES.about}#regulatory-compliance` },
       { label: 'Independent advice', to: ROUTES.aboutIndependentAdvice },
       { label: 'How we are regulated', to: ROUTES.aboutHowWeAreRegulated },
       { label: 'Jobs & careers', to: ROUTES.aboutJobs },
       { label: 'Contact & help', to: ROUTES.aboutContact },
-      { label: 'Team', to: ROUTES.aboutTeam },
       { label: 'Client stories', to: ROUTES.aboutClientStories },
     ],
   },
@@ -47,6 +48,9 @@ export const quickLinks: NavLink[] = [
   { label: 'Real estate', to: ROUTES.realEstate },
   { label: 'Taxes', to: ROUTES.taxes },
   { label: 'Pensions', to: ROUTES.pensionPlanning },
+  { label: 'About us', to: ROUTES.about },
+  { label: 'Regulatory compliance', to: ROUTES.regulatoryAndCompliance },
+  { label: 'Our team', to: ROUTES.aboutTeam },
 ];
 
 /** Top-right utility links in the header's first row. */

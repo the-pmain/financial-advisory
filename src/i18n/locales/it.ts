@@ -15,14 +15,15 @@ const navPaths = {
       ],
     },
     {
-      label: 'Su Helfenstein',
+      label: 'Chi siamo',
       to: ROUTES.about,
       children: [
+        { label: 'Il nostro team', to: `${ROUTES.about}#our-team` },
+        { label: 'Conformità normativa', to: `${ROUTES.about}#regulatory-compliance` },
         { label: 'Consulenza indipendente', to: ROUTES.aboutIndependentAdvice },
         { label: 'Come siamo regolamentati', to: ROUTES.aboutHowWeAreRegulated },
         { label: 'Lavoro e carriera', to: ROUTES.aboutJobs },
         { label: 'Contatto e assistenza', to: ROUTES.aboutContact },
-        { label: 'Team', to: ROUTES.aboutTeam },
         { label: 'Storie di clienti', to: ROUTES.aboutClientStories },
       ],
     },
@@ -34,6 +35,9 @@ const navPaths = {
     { label: 'Immobili', to: ROUTES.realEstate },
     { label: 'Imposte', to: ROUTES.taxes },
     { label: 'Previdenza complementare', to: ROUTES.pensionPlanning },
+    { label: 'Chi siamo', to: ROUTES.about },
+    { label: 'Conformità normativa', to: ROUTES.regulatoryAndCompliance },
+    { label: 'Il nostro team', to: ROUTES.aboutTeam },
   ],
   topMenu: [
     { label: 'Appuntamenti', to: ROUTES.appointments },
@@ -463,23 +467,23 @@ export const it: Translations = {
     },
     [ROUTES.about]: {
       path: ROUTES.about,
-      breadcrumb: ['Su Helfenstein'],
-      title: 'Su Helfenstein',
+      breadcrumb: ['Chi siamo'],
+      title: 'Chi siamo',
       subtitle: 'Consulenza indipendente da Lucerna.',
       intro: [
         'Helfenstein Group è una società svizzera indipendente di consulenza e gestione patrimoniale con sede a Lucerna. Consigliamo persone e famiglie private – mai istituzioni o aziende – in materia di gestione patrimoniale, consulenza finanziaria, previdenza e finanziamenti.',
         'Siamo iscritti presso la FINMA come gestori patrimoniali autorizzati e sottoposti alla vigilanza di OSFINcontrol AG. Il nostro reddito proviene esclusivamente dagli onorari concordati con i nostri clienti e non deteniamo patrimoni della clientela: la custodia resta presso banche partner svizzere.',
       ],
       highlights: [
+        { title: 'Il nostro team', text: 'Specialisti che La accompagnano a lungo termine.' },
+        { title: 'Conformità normativa', text: 'Autorizzazione FINMA, vigilanza OSFINcontrol e il nostro record Bloomberg LEI.' },
         { title: 'Consulenza indipendente', text: 'Nessuna retrocessione, nessun obiettivo di vendita di prodotti.' },
-        { title: 'Come siamo regolamentati', text: 'Autorizzazione FINMA come gestore patrimoniale, vigilanza OSFINcontrol, LSerFi e documenti per la clientela.' },
-        { title: 'Team', text: 'Specialisti che La accompagnano a lungo termine.' },
         { title: 'Storie di clienti', text: 'Esempi anonimizzati di consulenza nella pratica.' },
       ],
     },
     [ROUTES.aboutIndependentAdvice]: {
       path: ROUTES.aboutIndependentAdvice,
-      breadcrumb: ['Su Helfenstein', 'Consulenza indipendente'],
+      breadcrumb: ['Chi siamo', 'Consulenza indipendente'],
       title: 'Consulenza indipendente',
       subtitle: 'Remunerati dai nostri clienti. Da nessun altro.',
       intro: [
@@ -495,7 +499,7 @@ export const it: Translations = {
     },
     [ROUTES.aboutOffice]: {
       path: ROUTES.aboutOffice,
-      breadcrumb: ['Su Helfenstein', 'La nostra sede'],
+      breadcrumb: ['Chi siamo', 'La nostra sede'],
       title: 'La nostra sede',
       subtitle: 'Con sede a Lucerna, al servizio di clienti in tutta la Svizzera.',
       intro: [
@@ -511,7 +515,7 @@ export const it: Translations = {
     },
     [ROUTES.aboutPortrait]: {
       path: ROUTES.aboutPortrait,
-      breadcrumb: ['Su Helfenstein', 'Ritratto'],
+      breadcrumb: ['Chi siamo', 'Ritratto'],
       title: 'Ritratto',
       subtitle: 'Un gestore patrimoniale lucernese con un modello di consulenza chiaro.',
       intro: [
@@ -527,7 +531,7 @@ export const it: Translations = {
     },
     [ROUTES.aboutCompanyInformation]: {
       path: ROUTES.aboutCompanyInformation,
-      breadcrumb: ['Su Helfenstein', 'Informazioni societarie'],
+      breadcrumb: ['Chi siamo', 'Informazioni societarie'],
       title: 'Informazioni societarie',
       subtitle: 'Chi siamo sulla carta e come raggiungerci.',
       intro: [
@@ -543,7 +547,7 @@ export const it: Translations = {
     },
     [ROUTES.aboutJobs]: {
       path: ROUTES.aboutJobs,
-      breadcrumb: ['Su Helfenstein', 'Lavoro e carriera'],
+      breadcrumb: ['Chi siamo', 'Lavoro e carriera'],
       title: 'Lavoro e carriera',
       subtitle: 'Consulenza senza obiettivi di vendita.',
       intro: [
@@ -559,7 +563,7 @@ export const it: Translations = {
     },
     [ROUTES.aboutContact]: {
       path: ROUTES.aboutContact,
-      breadcrumb: ['Su Helfenstein', 'Contatto e assistenza'],
+      breadcrumb: ['Chi siamo', 'Contatto e assistenza'],
       title: 'Contatto e assistenza',
       subtitle: 'Siamo lieti di sentirLa.',
       intro: [

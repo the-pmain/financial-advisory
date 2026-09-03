@@ -243,26 +243,26 @@ export const topics: Topic[] = [
     adviceDisclaimer: true,
   }),
 
-  /* -- About Helfenstein -- */
+  /* -- About us -- */
   t({
     path: ROUTES.about,
-    breadcrumb: ['About Helfenstein'],
-    title: 'About Helfenstein',
+    breadcrumb: ['About us'],
+    title: 'About us',
     subtitle: 'Independent advice from Lucerne.',
     intro: [
       'Helfenstein Group is an independent Swiss adviser and portfolio manager based in Lucerne. We advise private individuals and families — never institutions or companies — on asset management, financial advice, retirement planning and financing.',
       'We are listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. Our income comes from the fees our clients agree with us, and we hold no client assets: custody stays with Swiss banking partners.',
     ],
     highlights: [
+      { title: 'Our team', text: 'Specialists who stay with you over the long term.' },
+      { title: 'Regulatory compliance', text: 'FINMA authorisation, OSFINcontrol supervision, and our Bloomberg LEI record.' },
       { title: 'Independent advice', text: 'No retrocessions, no product sales targets.' },
-      { title: 'How we are regulated', text: 'FINMA portfolio-manager authorisation, OSFINcontrol supervision, FinSA and client documents.' },
-      { title: 'Team', text: 'Specialists who stay with you over the long term.' },
       { title: 'Client stories', text: 'Anonymised examples of how advice is delivered in practice.' },
     ],
   }),
   t({
     path: ROUTES.aboutIndependentAdvice,
-    breadcrumb: ['About Helfenstein', 'Independent advice'],
+    breadcrumb: ['About us', 'Independent advice'],
     title: 'Independent advice',
     subtitle: 'Paid by our clients. By nobody else.',
     intro: [
@@ -280,7 +280,7 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.aboutHowWeAreRegulated,
-    breadcrumb: ['About Helfenstein', 'How we are regulated'],
+    breadcrumb: ['About us', 'How we are regulated'],
     title: 'How we are regulated',
     subtitle: 'Who supervises Helfenstein, what FinSA means for you, and how fees work.',
     intro: [
@@ -302,7 +302,7 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.aboutClientStories,
-    breadcrumb: ['About Helfenstein', 'Client stories'],
+    breadcrumb: ['About us', 'Client stories'],
     title: 'Client stories',
     subtitle: 'Anonymised examples of advice delivered in practice.',
     intro: [
@@ -320,7 +320,7 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.aboutOffice,
-    breadcrumb: ['About Helfenstein', 'Our office'],
+    breadcrumb: ['About us', 'Our office'],
     title: 'Our office',
     subtitle: 'Based in Lucerne, advising clients across Switzerland.',
     intro: [
@@ -336,7 +336,7 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.aboutPortrait,
-    breadcrumb: ['About Helfenstein', 'Portrait'],
+    breadcrumb: ['About us', 'Portrait'],
     title: 'Portrait',
     subtitle: 'A Lucerne-based asset manager with a clear advisory model.',
     intro: [
@@ -352,7 +352,7 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.aboutCompanyInformation,
-    breadcrumb: ['About Helfenstein', 'Company information'],
+    breadcrumb: ['About us', 'Company information'],
     title: 'Company information',
     subtitle: 'Who we are on paper, and how to reach us.',
     intro: [
@@ -368,7 +368,7 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.aboutJobs,
-    breadcrumb: ['About Helfenstein', 'Jobs & careers'],
+    breadcrumb: ['About us', 'Jobs & careers'],
     title: 'Jobs & careers',
     subtitle: 'Advisory work without sales targets.',
     intro: [
@@ -384,7 +384,7 @@ export const topics: Topic[] = [
   }),
   t({
     path: ROUTES.aboutContact,
-    breadcrumb: ['About Helfenstein', 'Contact & help'],
+    breadcrumb: ['About us', 'Contact & help'],
     title: 'Contact & help',
     subtitle: 'We are happy to hear from you.',
     intro: [

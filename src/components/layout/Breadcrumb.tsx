@@ -2,10 +2,12 @@ import { Link, useLocation } from 'react-router';
 import {
   matchKnowledgeHubSlug,
   matchLegalSlug,
+  matchTeamMemberSlug,
   ROUTES,
 } from '../../constants/routes';
 import { legalBySlug } from '../../data/legal';
 import { findArticle } from '../../data/content';
+import { teamBySlug } from '../../data/team';
 import { topicByPath } from '../../data/topics';
 
 /** Derives the trail from the current route so every page carries a breadcrumb. */
@@ -15,11 +17,26 @@ function useTrail(): { label: string; to?: string }[] {
 
   if (pathname === ROUTES.home) return trail;
 
+  if (pathname === ROUTES.aboutTeam) {
+    trail.push({ label: 'About us', to: ROUTES.about });
+    trail.push({ label: 'Our team' });
+    return trail;
+  }
+
+  const memberSlug = matchTeamMemberSlug(pathname);
+  if (memberSlug) {
+    const member = teamBySlug.get(memberSlug);
+    trail.push({ label: 'About us', to: ROUTES.about });
+    trail.push({ label: 'Our team', to: ROUTES.aboutTeam });
+    trail.push({ label: member?.name ?? 'Team' });
+    return trail;
+  }
+
   const topic = topicByPath.get(pathname);
   if (topic) {
     topic.breadcrumb.forEach((label, i) => {
       const last = i === topic.breadcrumb.length - 1;
-      trail.push(last ? { label } : { label });
+      trail.push(last ? { label } : { label, to: i === 0 ? ROUTES.about : undefined });
     });
     return trail;
   }

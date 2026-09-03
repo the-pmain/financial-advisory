@@ -63,7 +63,7 @@ export function Header() {
             </button>
 
             <nav aria-label="Top navigation" className="max-mob:hidden">
-              <ul className="flex gap-[24px] leading-[17px]">
+              <ul className="flex items-center gap-[24px] leading-[17px]">
                 {topMenu.map((link) => (
                   <li key={link.to}>
                     <Link

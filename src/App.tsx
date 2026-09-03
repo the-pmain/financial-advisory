@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 import { PageShell } from './components/layout/PageShell';
 import { DocumentMeta } from './components/seo/DocumentMeta';
-import { LEGACY_REDIRECTS, ROUTE_PATTERNS } from './constants/routes';
+import { LEGACY_REDIRECTS, ROUTES, ROUTE_PATTERNS } from './constants/routes';
 import { AdminPage } from './pages/AdminPage';
+import { AboutPage } from './pages/AboutPage';
 import { HomePage } from './pages/HomePage';
 import { TopicPage } from './pages/TopicPage';
 import { ArticlePage } from './pages/ArticlePage';
@@ -16,10 +17,17 @@ import { NotFoundPage } from './pages/NotFoundPage';
 
 /** Restores the scroll position on navigation, as a multi-page site would. */
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (el) {
+        el.scrollIntoView({ behavior: 'instant', block: 'start' });
+        return;
+      }
+    }
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -46,6 +54,7 @@ export function App() {
           <Route path={ROUTE_PATTERNS.legalPage} element={<LegalPage />} />
           <Route path={ROUTE_PATTERNS.teamMember} element={<TeamMemberPage />} />
           <Route path={ROUTE_PATTERNS.team} element={<TeamPage />} />
+          <Route path={ROUTES.about} element={<AboutPage />} />
           {Object.entries(LEGACY_REDIRECTS).map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
           ))}
