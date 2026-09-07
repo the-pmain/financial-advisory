@@ -267,7 +267,7 @@ export const marketArticles: Article[] = [
   },
 ];
 
-/** Snapshot of the reference market table. Static by design. */
+/** Snapshot shown until live market quotes load (and if the request fails). */
 export const quotes: Quote[] = [
   { id: 'smi', symbol: 'SMI', value: "16'264.830", change: '-0.60 %', direction: 'down' },
   { id: 'dax', symbol: 'DAX', value: "28'306.320", change: '-0.96 %', direction: 'down' },

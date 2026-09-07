@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { knowledgeHubArticlePath, ROUTES } from '../../constants/routes';
-import { marketArticles, marketVideo, quotes } from '../../data/content';
+import { marketArticles, marketVideo } from '../../data/content';
+import { useMarketQuotes } from '../../hooks/useMarketQuotes';
 import { VideoIcon } from '../ui/Icons';
 import { SectionTitle, Tagline, UnderlineLink } from '../ui/primitives';
 import { ArticleCompact } from './ArticleTeaser';
@@ -44,10 +45,12 @@ export function MarketsSection() {
 }
 
 /**
- * The reference loads live quotes from a third-party widget; this is a static
- * snapshot of those values with the same layout and up/down colouring.
+ * Live index and FX levels via `/api/markets` (Yahoo Finance, with ECB
+ * reference rates as the FX fallback), fetched once when this section mounts.
  */
 function MarketData() {
+  const quotes = useMarketQuotes();
+
   return (
     <>
       <h2 className="m-0 mb-[8px] text-[17px] leading-[17px] font-bold">

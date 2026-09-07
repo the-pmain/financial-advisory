@@ -11,6 +11,8 @@ import { DocumentsList } from '../components/widgets/DocumentsList';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { TextTeasers } from '../components/widgets/TextTeasers';
 import { VerifyFinma } from '../components/widgets/VerifyFinma';
+import { usePublicCompany } from '../hooks/usePublicCompany';
+import { formatStatusLabel } from '../lib/publicCompany';
 
 const highlightTo: Record<string, string> = {
   'Our team': `${ROUTES.about}#our-team`,
@@ -31,8 +33,9 @@ const initials = featuredMember.name
  * public regulatory record — including the Bloomberg LEI mark.
  */
 export function AboutPage() {
-  const topic = topicByPath.get(ROUTES.about);
   const [photoFailed, setPhotoFailed] = useState(false);
+  const record = usePublicCompany();
+  const topic = topicByPath.get(ROUTES.about);
   if (!topic) return null;
 
   return (
@@ -123,29 +126,58 @@ export function AboutPage() {
         <SectionTitle>Regulatory compliance</SectionTitle>
         <div className="max-w-[802px]">
           <p className="text-vz-ink m-0 text-[19px] leading-[1.45] max-mob:text-[18px]">
-            {company.legalName} (trading as {company.groupName}) is{' '}
+            {record.legalName} (trading as {company.groupName}) is{' '}
             {company.regulation.summary} Advisory conduct is subject to the Swiss Financial Services
             Act (FinSA). We do not hold client assets — custody stays with Swiss banking partners.
           </p>
         </div>
 
         <dl className="mt-8 max-w-[802px]">
-          <RegRow term="Legal name" detail={company.legalName} />
-          <RegRow term="Swiss UID" detail={company.uid} href={company.uidProfileUrl} />
-          <RegRow term="LEI" detail={company.lei} href={company.leiIssuerUrl} />
+          <RegRow term="Legal name" detail={record.legalName} />
+          <RegRow term="Swiss UID" detail={record.uid} href={record.uidRegisterUrl} />
+          <RegRow term="LEI" detail={record.lei} href={record.gleifUrl} />
           <RegRow
             term="Supervision"
             detail={`${company.regulation.authority} authorisation · ${company.regulation.supervisor}`}
             href={company.regulation.registerUrl}
           />
-          <RegRow term="Office" detail={company.address.line} />
+          <RegRow term="Office" detail={record.addressLine} />
+          {record.leiStatus ? (
+            <RegRow
+              term="LEI status"
+              detail={
+                record.entityStatus
+                  ? `${formatStatusLabel(record.leiStatus)} · ${formatStatusLabel(record.entityStatus)}`
+                  : formatStatusLabel(record.leiStatus)
+              }
+            />
+          ) : null}
+          {record.leiRenewalDate ? (
+            <RegRow term="LEI renewal" detail={record.leiRenewalDate} />
+          ) : null}
         </dl>
+
+        {record.source === 'gleif' ? (
+          <p className="text-vz-gray-mid mt-4 mb-0 max-w-[802px] text-[14px] leading-[1.4]">
+            Legal name, UID, address and LEI status are read from the{' '}
+            <a
+              href={record.gleifUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-vz-blue hover:text-vz-orange vz-underline-hover"
+            >
+              GLEIF LEI register
+              <span className="visually-hidden"> (external link, opens in a new window)</span>
+            </a>
+            {record.updatedAt ? ` (golden copy ${record.updatedAt})` : ''}.
+          </p>
+        ) : null}
 
         <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
           <BloombergLeiLink size="large" />
           <p className="text-vz-gray-mid m-0 max-w-[420px] text-[14px] leading-[1.4]">
             Confirm our Legal Entity Identifier on the Bloomberg LEI register — the issuing LOU’s
-            record for {company.legalName}.
+            record for {record.legalName}.
           </p>
         </div>
 

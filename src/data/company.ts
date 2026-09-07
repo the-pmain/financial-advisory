@@ -26,6 +26,11 @@ export const company = {
   privacyEmail: '',
   uid: 'CHE-111.708.730',
   /**
+   * Official Federal Statistical Office UID-register entry. Use this when
+   * linking the UID itself; help.ch is a directory, not the register.
+   */
+  uidRegisterUrl: 'https://www.uid.admin.ch/Detail.aspx?uid_id=CHE-111.708.730',
+  /**
    * help.ch profile mirroring the Handelsregister entry: UID, purpose clause
    * and SHAB history. A directory, not the register itself — do not describe it
    * as an official source.

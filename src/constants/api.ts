@@ -1,6 +1,8 @@
 /** Client-facing API paths (proxied to the Express server). */
 export const API = {
   health: '/api/health',
+  markets: '/api/markets',
+  company: '/api/company',
   session: '/api/auth/session',
   login: '/api/auth/login',
   logout: '/api/auth/logout',

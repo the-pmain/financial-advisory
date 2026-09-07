@@ -14,6 +14,8 @@ import {
   setSessionCookie,
 } from './auth.ts';
 import { serverConfig } from './config.ts';
+import { getPublicCompany } from './gleif.ts';
+import { getMarketQuotes } from './markets.ts';
 import { rateLimitLogin } from './rateLimit.ts';
 
 export function createApiRouter(): Router {
@@ -21,6 +23,24 @@ export function createApiRouter(): Router {
 
   router.get('/health', (_req, res) => {
     res.json({ ok: true, service: 'helfenstein-api', time: new Date().toISOString() });
+  });
+
+  router.get('/markets', async (_req, res) => {
+    try {
+      const quotes = await getMarketQuotes();
+      res.json({ ok: true, quotes });
+    } catch {
+      res.status(502).json({ ok: false, error: 'Market data is unavailable.' });
+    }
+  });
+
+  router.get('/company', async (_req, res) => {
+    try {
+      const record = await getPublicCompany();
+      res.json({ ok: true, company: record });
+    } catch {
+      res.status(502).json({ ok: false, error: 'Company register data is unavailable.' });
+    }
   });
 
   router.get('/auth/session', (req, res) => {
