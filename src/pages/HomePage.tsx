@@ -23,7 +23,7 @@ export function HomePage() {
 
       <div className={gap}>
         <TwoColumns
-          title="News"
+          title="Guidance for confident decisions"
           left={
             <>
               <ArticleFeatured article={newsFeatured} />
@@ -34,7 +34,7 @@ export function HomePage() {
               </div>
               <p className="mt-4 mb-0">
                 <UnderlineLink to={ROUTES.insights} bold>
-                  All insights
+                  Explore all insights
                 </UnderlineLink>
               </p>
             </>
@@ -48,7 +48,7 @@ export function HomePage() {
       </div>
 
       <div className={gap}>
-        <CaseStudiesBand limit={3} />
+        <CaseStudiesBand title="Advice made personal" limit={3} />
       </div>
 
       <div className={gap}>
@@ -56,7 +56,7 @@ export function HomePage() {
       </div>
 
       <div className={gap}>
-        <TextTeasers title="Our offering" items={solutions} />
+        <TextTeasers title="A higher standard of care" items={solutions} />
       </div>
 
       <div className={gap}>

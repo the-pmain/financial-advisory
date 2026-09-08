@@ -55,11 +55,11 @@ export type PropertySpec = {
 /* -------------------------------------------------------------------------- */
 
 export const hero = {
-  brand: 'Helfenstein Group',
-  headline: 'Independent advice. No hidden agendas.',
+  brand: 'Trust. Clarity. Your future.',
+  headline: 'Your interests first. Always.',
   subline:
-    'Retirement, investments, taxes and real estate — advised by people who answer only to you. We are paid solely by our clients and never hold your assets: your money stays in your own name with established Swiss banking partners. Helfenstein Group is a FINMA-authorised portfolio manager supervised by OSFINcontrol AG, and we advise private individuals and families only — never institutions or companies.',
-  secondaryCta: { label: 'Explore our expertise', to: ROUTES.expertise },
+    'Independent, fee-only advice for the decisions that shape your life. We bring retirement, investing, tax and estate planning into one clear strategy — built around your goals, explained without jargon and free from product sales incentives.',
+  secondaryCta: { label: 'Discover our client-first approach', to: ROUTES.expertise },
   image: '/team/friedrich-hartmann.png',
   imageAlt: 'Portrait of Friedrich Hartmann, Chairman and CIO of Helfenstein Group',
 };
@@ -79,17 +79,17 @@ export const testimonial = {
 export const audienceBands = [
   {
     id: 'individuals',
-    title: 'For individuals',
-    text: 'Retirement, investments, estate planning, real estate and taxes — independent advice for private individuals and families, starting with a free first meeting.',
+    title: 'Advice built around your life',
+    text: 'Your ambitions, responsibilities and concerns set the direction. We turn the full picture of your finances into practical guidance for today and a clear plan for the years ahead.',
     to: ROUTES.individuals,
-    cta: 'Private clients',
+    cta: 'How we advise private clients',
   },
   {
     id: 'independent-advice',
-    title: 'Paid only by you',
-    text: 'No commissions, no product sales targets and no client assets on our books — custody stays with your Swiss bank, in your name.',
+    title: 'Independence you can see',
+    text: 'We are paid only by our clients, not by product providers. Your assets remain in your name at your Swiss bank, while every recommendation is made with your interests in view.',
     to: ROUTES.aboutIndependentAdvice,
-    cta: 'How we are paid',
+    cta: 'Why our model matters',
   },
 ] as const;
 
@@ -181,10 +181,10 @@ export const newsSecondary: Article = {
 export const offers: Offer[] = [
   {
     id: 'checklist-retirement',
-    title: 'Checklist for planning your retirement',
+    title: 'Plan retirement with confidence',
     tag: 'Fact sheet',
     teaser:
-      "Retirement marks the transition into a new chapter of life - also from a financial point of view. To be able to look forward to your golden years, you'll have to take a number of very significant decisions.",
+      'Retirement brings important choices about income, pensions, tax and the life you want to lead. Our checklist helps you prepare each decision with greater clarity.',
     cta: 'Order for free',
     to: ROUTES.checklistRetirementPlanning,
     icon: 'checklist',
@@ -194,19 +194,19 @@ export const offers: Offer[] = [
   },
   {
     id: 'free-first-meeting',
-    title: 'Free first meeting',
+    title: 'Start with a conversation',
     tag: 'Appointment',
-    teaser: 'Talk to an expert at Helfenstein. The first meeting is free of charge.',
-    cta: 'Arrange an appointment',
+    teaser: 'Tell us what matters to you and learn how independent advice could help. Your first meeting is free and without obligation.',
+    cta: 'Schedule a conversation',
     to: ROUTES.appointments,
     icon: 'calendar',
   },
   {
     id: 'phishing-protection',
-    title: 'Protect your assets from phishing',
+    title: 'Protect what you have built',
     tag: 'Fact sheet',
     teaser:
-      'Our free guide shows you how to recognise fraudulent messages, what to check before you act on any instruction, and what to do in the first hour if something goes wrong.',
+      'A practical guide to recognising suspicious messages, checking requests before you act and responding quickly when something feels wrong.',
     cta: 'Order for free',
     to: ROUTES.phishingProtection,
     icon: 'shield',
@@ -396,22 +396,22 @@ export const insightArticles: Article[] = [
 export const solutions: Solution[] = [
   {
     title: 'Retirement planning',
-    text: 'We model your retirement income year by year, in writing, so you can see exactly what you can afford — before you make decisions that cannot be undone.',
+    text: 'See how your income, pensions, assets and plans fit together. We model the years ahead so you can make lasting decisions with confidence.',
     to: ROUTES.retirement,
   },
   {
     title: 'Pillar 3a with index investments',
-    text: 'We help you place your pillar 3a in low-cost index solutions held at a Swiss bank or foundation of your choice. Over a working life, lower fees can make a difference of tens of thousands of francs.',
+    text: 'Build long-term savings through transparent, low-cost solutions selected for their fit with your goals — never because a provider pays us.',
     to: ROUTES.pensionPlanning,
   },
   {
     title: 'Tax advice',
-    text: 'Our experts show you how to structure pension, property and relocation decisions years in advance — where the real tax savings are made.',
+    text: 'Plan pension, property and relocation decisions early. We make the implications clear and help you act at the moment it matters most.',
     to: ROUTES.taxes,
   },
   {
     title: 'Asset management mandates',
-    text: 'A clear strategy, low-cost implementation and ongoing support — managed by us, held at your bank. You always know what you own, what it costs and why.',
+    text: 'A disciplined strategy, transparent costs and ongoing oversight — managed by us and held at your bank, with every decision tied to your objectives.',
     to: ROUTES.financialInvestments,
   },
 ];
@@ -421,8 +421,8 @@ export const solutions: Solution[] = [
 /* -------------------------------------------------------------------------- */
 
 export const newsletterCta = {
-  text: 'Practical updates on pensions, tax, investing and property — written for private clients, with no product advertising.',
-  linkLabel: 'Subscribe to our newsletter (available in English, German, French and Italian).',
+  text: 'Clear thinking for the financial decisions that matter — practical perspectives on retirement, tax, investing and property, with no product advertising.',
+  linkLabel: 'Receive our client newsletter.',
   to: ROUTES.newsletter,
 };
 
