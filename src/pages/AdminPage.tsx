@@ -2,17 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { ROUTES } from '../constants/routes';
 import { fetchSession, loginWithPin, logoutAdmin } from '../lib/adminApi';
+import { ClientsPanel } from '../components/admin/ClientsPanel';
 
 const PIN_LENGTH = 4;
-
-type Client = {
-  id: string;
-  name: string;
-  email: string;
-};
-
-/** Placeholder list — wire to an API later. */
-const clients: Client[] = [];
 
 function BackspaceIcon({ className = '' }: { className?: string }) {
   return (
@@ -210,6 +202,10 @@ export function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
+  const onUnauthorized = useCallback(() => {
+    setAuthenticated(false);
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -270,7 +266,7 @@ export function AdminPage() {
 
   return (
     <div className="bg-vz-page-mobile min-h-screen px-4 py-10">
-      <div className="mx-auto w-full max-w-[960px]">
+      <div className="mx-auto w-full max-w-[1180px]">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-vz-blue m-0 text-[13px] font-bold tracking-[0.04em] uppercase">
@@ -278,45 +274,24 @@ export function AdminPage() {
             </p>
             <h1 className="text-vz-ink m-0 mt-1 text-[28px] font-bold">Clients</h1>
           </div>
-          <div className="flex items-center gap-5">
-            <Link to={ROUTES.home} className="text-vz-blue hover:text-vz-orange text-[14px]">
-              ← Back to site
+          <div className="flex items-center gap-3">
+            <Link
+              to={ROUTES.home}
+              className="border-vz-rule text-vz-blue hover:border-vz-blue hover:bg-white inline-flex h-10 items-center rounded-[3px] border bg-white px-4 text-[14px] font-bold"
+            >
+              Back to site
             </Link>
             <button
               type="button"
               onClick={onLogout}
-              className="text-vz-blue hover:text-vz-orange cursor-pointer text-[14px]"
+              className="bg-vz-blue hover:bg-vz-blue-mid inline-flex h-10 cursor-pointer items-center rounded-[3px] px-4 text-[14px] font-bold text-white shadow-[1px_1px_2px_rgba(11,31,51,0.35)]"
             >
               Log out
             </button>
           </div>
         </div>
 
-        <div className="rounded-[4px] bg-white p-6 shadow-[0_0_2px_rgba(0,0,0,0.2)]">
-          <div className="border-vz-rule flex items-center justify-between gap-3 border-b pb-4">
-            <p className="text-vz-ink m-0 text-[15px] font-bold">
-              {clients.length} {clients.length === 1 ? 'client' : 'clients'}
-            </p>
-          </div>
-
-          {clients.length === 0 ? (
-            <p className="text-vz-gray-mid m-0 mt-8 text-center text-[16px] leading-[1.45]">
-              No clients yet.
-            </p>
-          ) : (
-            <ul className="m-0 mt-2 list-none p-0">
-              {clients.map((client) => (
-                <li
-                  key={client.id}
-                  className="border-vz-rule flex flex-wrap items-baseline justify-between gap-2 border-b py-4"
-                >
-                  <span className="text-vz-ink text-[16px] font-bold">{client.name}</span>
-                  <span className="text-vz-gray text-[14px]">{client.email}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <ClientsPanel onUnauthorized={onUnauthorized} />
       </div>
     </div>
   );

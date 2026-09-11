@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, type Response } from 'express';
 import { allArticles } from '../src/data/content.ts';
 import { caseStudies } from '../src/data/caseStudies.ts';
 import { clientDocuments } from '../src/data/documents.ts';
@@ -15,8 +15,13 @@ import {
 } from './auth.ts';
 import { serverConfig } from './config.ts';
 import { getPublicCompany } from './gleif.ts';
+import { HttpError } from './http.js';
+import { loadClientsPage, patchClientIsTest } from './admin-clients.js';
+import { saveClientDocument } from './clients-documents.js';
 import { getMarketQuotes } from './markets.ts';
-import { rateLimitLogin } from './rateLimit.ts';
+import { rateLimitClients, rateLimitLogin } from './rateLimit.ts';
+import { parseClientInput } from '../src/js/clients-model.js';
+import { asRows, requireInsertedRow, rest } from './supabase.js';
 
 export function createApiRouter(): Router {
   const router = Router();
@@ -79,6 +84,57 @@ export function createApiRouter(): Router {
   router.post('/auth/logout', (_req, res) => {
     clearSessionCookie(res);
     res.json({ ok: true, authenticated: false });
+  });
+
+  router.post('/clients', rateLimitClients(), async (req, res) => {
+    try {
+      const parsed = parseClientInput(req.body);
+      if (!parsed.ok) {
+        res.status(400).json({ error: parsed.error });
+        return;
+      }
+
+      const result = await rest('clients', {
+        method: 'POST',
+        headers: { Prefer: 'return=representation' },
+        body: parsed.value,
+      });
+      requireInsertedRow(asRows(result.payload));
+      res.status(201).json({ ok: true });
+    } catch (err) {
+      sendRouteError(res, err);
+    }
+  });
+
+  router.get('/admin/clients', requireAdmin, async (req, res) => {
+    try {
+      const params = new URLSearchParams();
+      for (const [key, value] of Object.entries(req.query)) {
+        if (typeof value === 'string') params.set(key, value);
+      }
+      const payload = await loadClientsPage(params);
+      res.json({ ok: true, ...payload });
+    } catch (err) {
+      sendRouteError(res, err);
+    }
+  });
+
+  router.patch('/admin/clients', requireAdmin, async (req, res) => {
+    try {
+      const payload = await patchClientIsTest(req.body);
+      res.json({ ok: true, ...payload });
+    } catch (err) {
+      sendRouteError(res, err);
+    }
+  });
+
+  router.put('/admin/clients-documents', requireAdmin, async (req, res) => {
+    try {
+      const row = await saveClientDocument(req.body);
+      res.json({ ok: true, ...row });
+    } catch (err) {
+      sendRouteError(res, err);
+    }
   });
 
   router.get('/admin/overview', requireAdmin, (_req, res) => {
@@ -149,4 +205,13 @@ export function createApiRouter(): Router {
   });
 
   return router;
+}
+
+function sendRouteError(res: Response, err: unknown) {
+  if (err instanceof HttpError) {
+    res.status(err.status).json(err.body);
+    return;
+  }
+  console.error(err instanceof Error ? err.message : err);
+  res.status(500).json({ error: 'Internal server error.' });
 }

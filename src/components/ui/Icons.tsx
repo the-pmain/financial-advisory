@@ -41,27 +41,29 @@ export function ChevronDownIcon(props: IconProps) {
   );
 }
 
+export function PlusIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path d="M8 2.5v11M2.5 8h11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square" />
+    </svg>
+  );
+}
+
+export function MoreIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <circle cx="3.5" cy="8" r="1.35" fill="currentColor" />
+      <circle cx="8" cy="8" r="1.35" fill="currentColor" />
+      <circle cx="12.5" cy="8" r="1.35" fill="currentColor" />
+    </svg>
+  );
+}
+
 export function EnvelopeIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 32 24" fill="none" aria-hidden="true" focusable="false" {...props}>
       <rect x="1" y="1" width="30" height="22" stroke="currentColor" strokeWidth="1.5" />
       <path d="M1 2l15 12L31 2" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
-}
-
-/** 24×24 monitor+play glyph that leads video titles on the reference. */
-export function VideoIcon(props: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" {...props}>
-      <path fillRule="evenodd" clipRule="evenodd" d="M10 14V7L15 10.7338L10 14Z" fill="currentColor" />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M3.5017 3C2.67017 3 2 3.69175 2 4.55004V17.45C2 18.3082 2.67017 19 3.5017 19H20.4983C21.3298 19 22 18.3082 22 17.45V4.55004C22 3.69175 21.3298 3 20.4983 3H3.5017ZM3.5017 4.55004H20.4983V17.45H3.5017V4.55004Z"
-        fill="currentColor"
-      />
-      <path d="M18 20H6V21H18V20Z" fill="currentColor" />
     </svg>
   );
 }

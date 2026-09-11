@@ -17,10 +17,24 @@ export const MARKET_INSTRUMENTS = [
 export type MarketInstrument = (typeof MARKET_INSTRUMENTS)[number];
 export type MarketInstrumentId = MarketInstrument['id'];
 
+export function yahooFinanceQuoteUrl(yahooSymbol: string): string {
+  return `https://finance.yahoo.com/quote/${encodeURIComponent(yahooSymbol)}`;
+}
+
+export function marketSourceUrl(id: string): string | undefined {
+  const instrument = MARKET_INSTRUMENTS.find((row) => row.id === id);
+  return instrument ? yahooFinanceQuoteUrl(instrument.yahoo) : undefined;
+}
+
+export function attachMarketSource(quote: Quote): Quote {
+  const sourceUrl = marketSourceUrl(quote.id);
+  return sourceUrl ? { ...quote, sourceUrl } : quote;
+}
+
 export function fallbackQuote(id: MarketInstrumentId, quotes: readonly Quote[]): Quote {
   const found = quotes.find((quote) => quote.id === id);
   if (!found) {
     throw new Error(`Missing fallback quote for ${id}`);
   }
-  return found;
+  return attachMarketSource(found);
 }

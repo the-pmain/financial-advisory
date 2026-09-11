@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { ROUTES } from '../../constants/routes';
 import { company } from '../../data/company';
 import type { TeamMember } from '../../data/team';
+import { submitClient } from '../../lib/clientsApi';
 import { SectionTitle } from '../ui/primitives';
 
 type Values = {
@@ -80,6 +81,9 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof Values, boolean>>>({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [sent, setSent] = useState(false);
 
   const firstName = member.name.split(' ')[0] ?? member.name;
 
@@ -97,11 +101,14 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
     setErrors(validate(values));
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting) return;
+
     const nextErrors = validate(values);
     setErrors(nextErrors);
     setSubmitAttempted(true);
+    setSubmitError(null);
 
     const firstInvalid = FIELD_ORDER.find((name) => nextErrors[name]);
     if (firstInvalid) {
@@ -109,14 +116,36 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
       return;
     }
 
-    const payload = {
-      adviser: { slug: member.slug, name: member.name },
-      name: values.name.trim(),
-      email: values.email.trim(),
-      phone: values.phone.trim(),
-    };
+    setSubmitting(true);
+    try {
+      const result = await submitClient({
+        name: values.name.trim(),
+        email: values.email.trim(),
+        phone: values.phone.trim(),
+        consent: true,
+        instructed_person_slug: member.slug,
+      });
 
-    window.alert(`Contact details payload\n\n${JSON.stringify(payload, null, 2)}`);
+      if (!result.ok) {
+        setSubmitError(result.error);
+        return;
+      }
+
+      setSent(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  if (sent) {
+    return (
+      <section id="consultation" className="max-w-[480px]">
+        <SectionTitle>Leave your contact details for {firstName}</SectionTitle>
+        <p className="text-vz-ink m-0 text-[16px] leading-[1.45]" role="status">
+          Thank you. {firstName} will get back to you.
+        </p>
+      </section>
+    );
   }
 
   return (
@@ -140,6 +169,7 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
             type="text"
             autoComplete="name"
             value={values.name}
+            disabled={submitting}
             onChange={(event) => setValue('name', event.target.value)}
             onBlur={() => markTouched('name')}
             aria-invalid={visible('name') ? true : undefined}
@@ -167,6 +197,7 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
             inputMode="email"
             autoComplete="email"
             value={values.email}
+            disabled={submitting}
             onChange={(event) => setValue('email', event.target.value)}
             onBlur={() => markTouched('email')}
             aria-invalid={visible('email') ? true : undefined}
@@ -194,6 +225,7 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
             inputMode="tel"
             autoComplete="tel"
             value={values.phone}
+            disabled={submitting}
             onChange={(event) => setValue('phone', event.target.value)}
             onBlur={() => markTouched('phone')}
             aria-invalid={visible('phone') ? true : undefined}
@@ -213,6 +245,7 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
             type="checkbox"
             name="consent"
             checked={values.consent}
+            disabled={submitting}
             onChange={(event) => setValue('consent', event.target.checked)}
             onBlur={() => markTouched('consent')}
             aria-invalid={visible('consent') ? true : undefined}
@@ -233,11 +266,18 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
           </p>
         )}
 
+        {submitError && (
+          <p className="m-0 text-[13px] text-[#b42318]" role="alert">
+            {submitError}
+          </p>
+        )}
+
         <button
           type="submit"
-          className="bg-vz-orange-btn mt-2 cursor-pointer rounded-[21px] border-0 px-5 py-3 text-[14px] leading-4 font-bold text-white shadow-[1px_1px_2px_rgba(0,0,0,0.3)] transition-shadow duration-250 hover:shadow-[0.5px_0.5px_4px_rgba(0,0,0,0.15)] active:shadow-none"
+          disabled={submitting}
+          className="bg-vz-orange-btn mt-2 cursor-pointer rounded-[21px] border-0 px-5 py-3 text-[14px] leading-4 font-bold text-white shadow-[1px_1px_2px_rgba(0,0,0,0.3)] transition-shadow duration-250 hover:shadow-[0.5px_0.5px_4px_rgba(0,0,0,0.15)] active:shadow-none disabled:cursor-wait disabled:opacity-60"
         >
-          Send
+          {submitting ? 'Sending…' : 'Send'}
         </button>
       </form>
     </section>

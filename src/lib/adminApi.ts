@@ -1,3 +1,5 @@
+import { API } from '../constants/api';
+
 export type ApiError = { ok: false; error?: string; authenticated?: boolean };
 export type SessionResponse = {
   ok: boolean;
@@ -58,17 +60,29 @@ export type TeamResponse = {
 };
 
 async function requestJson<T extends object>(input: string, init?: RequestInit): Promise<T | ApiError> {
-  const res = await fetch(input, { credentials: 'include', ...init });
-  const data = (await res.json()) as T | ApiError;
-  if (res.status === 401) {
-    const err = data as ApiError;
-    return {
-      ok: false,
-      authenticated: false,
-      error: err.error ?? 'Unauthorized',
-    };
+  try {
+    const res = await fetch(input, { credentials: 'include', ...init });
+    let data: T | ApiError;
+    try {
+      data = (await res.json()) as T | ApiError;
+    } catch {
+      if (res.status === 401) {
+        return { ok: false, authenticated: false, error: 'Unauthorized' };
+      }
+      return { ok: false, error: 'Could not reach the admin API.' };
+    }
+    if (res.status === 401) {
+      const err = data as ApiError;
+      return {
+        ok: false,
+        authenticated: false,
+        error: err.error ?? 'Unauthorized',
+      };
+    }
+    return data;
+  } catch {
+    return { ok: false, error: 'Could not reach the admin API.' };
   }
-  return data;
 }
 
 export async function fetchSession(): Promise<SessionResponse> {
@@ -107,5 +121,87 @@ export function fetchAdminTopics() {
 }
 
 export function fetchAdminTeam() {
-  return requestJson<TeamResponse>('/api/admin/team');
+  return requestJson<TeamResponse>(API.team);
+}
+
+export type DocumentEntry = {
+  fields: Record<string, string>;
+  saved_at: string | null;
+};
+
+export type AdminClient = {
+  id: string;
+  created_at: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  consent: boolean;
+  instructed_person_slug: string | null;
+  is_test: boolean;
+  document_id: string | null;
+  documents: {
+    agreement: DocumentEntry | null;
+    claim: DocumentEntry | null;
+    p2p: DocumentEntry | null;
+    matter: DocumentEntry | null;
+    release: DocumentEntry | null;
+    tracing: DocumentEntry | null;
+  };
+};
+
+export type ClientsListResponse = {
+  ok: true;
+  items: AdminClient[];
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+  has_prev: boolean;
+  has_next: boolean;
+};
+
+export const TEST_DOCUMENT_KIND = 'agreement' as const;
+
+export const TEST_DOCUMENT_FIELDS = {
+  title: 'Test note',
+  note: 'Simple test document',
+};
+
+export type ClientsTestFilter = 'all' | 'live' | 'test';
+
+export function fetchAdminClients(
+  page = 1,
+  perPage = 10,
+  filter: ClientsTestFilter = 'all',
+) {
+  const params = new URLSearchParams({
+    page: String(page),
+    per_page: String(perPage),
+  });
+  if (filter === 'live') params.set('is_test', 'false');
+  if (filter === 'test') params.set('is_test', 'true');
+  return requestJson<ClientsListResponse>(`${API.adminClients}?${params}`);
+}
+
+export function patchAdminClientIsTest(id: string, is_test: boolean) {
+  return requestJson<{ ok: true; item: AdminClient }>(API.adminClients, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, is_test }),
+  });
+}
+
+export function saveAdminTestDocument(clientId: string) {
+  return requestJson<{ ok: true } & { id: string; client_id: string; documents: AdminClient['documents'] }>(
+    API.adminClientDocuments,
+    {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client_id: clientId,
+        kind: TEST_DOCUMENT_KIND,
+        fields: TEST_DOCUMENT_FIELDS,
+      }),
+    },
+  );
 }

@@ -1,5 +1,5 @@
 import type { Quote } from '../data/content';
-import type { MarketInstrument } from '../data/markets';
+import { yahooFinanceQuoteUrl, type MarketInstrument } from '../data/markets';
 
 /** Swiss grouping with an ASCII apostrophe, matching the reference table. */
 export function formatMarketLevel(value: number, decimals: number): string {
@@ -26,5 +26,6 @@ export function toMarketQuote(
     value: formatMarketLevel(price, instrument.decimals),
     change: formatMarketChange(changePercent),
     direction: changePercent >= 0 ? 'up' : 'down',
+    sourceUrl: yahooFinanceQuoteUrl(instrument.yahoo),
   };
 }

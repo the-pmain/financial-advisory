@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { API } from '../constants/api';
 import { quotes as fallbackQuotes, type Quote } from '../data/content';
+import { attachMarketSource } from '../data/markets';
 
 type MarketsResponse = {
   ok?: boolean;
@@ -12,7 +13,7 @@ type MarketsResponse = {
  * The static snapshot is shown first (and kept if the request fails).
  */
 export function useMarketQuotes(): Quote[] {
-  const [quotes, setQuotes] = useState<Quote[]>(fallbackQuotes);
+  const [quotes, setQuotes] = useState<Quote[]>(() => fallbackQuotes.map(attachMarketSource));
 
   useEffect(() => {
     const controller = new AbortController();
@@ -21,7 +22,7 @@ export function useMarketQuotes(): Quote[] {
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error('markets request failed'))))
       .then((data: MarketsResponse) => {
         if (data.ok && Array.isArray(data.quotes) && data.quotes.length > 0) {
-          setQuotes(data.quotes);
+          setQuotes(data.quotes.map(attachMarketSource));
         }
       })
       .catch((error: unknown) => {

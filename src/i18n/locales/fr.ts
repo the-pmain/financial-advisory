@@ -18,7 +18,7 @@ const navPaths = {
       label: 'À propos',
       to: ROUTES.about,
       children: [
-        { label: 'Notre équipe', to: `${ROUTES.about}#our-team` },
+        { label: 'Notre équipe', to: ROUTES.aboutTeam },
         { label: 'Conformité réglementaire', to: `${ROUTES.about}#regulatory-compliance` },
         { label: 'Conseil indépendant', to: ROUTES.aboutIndependentAdvice },
         { label: 'Notre régulation', to: ROUTES.aboutHowWeAreRegulated },
@@ -306,17 +306,6 @@ export const fr: Translations = {
         { label: 'Surface du terrain' },
         { label: 'Année de construction' },
         { label: 'Prix de vente' },
-      ],
-    },
-    marketVideo: {
-      slug: 'helfenstein-financial-portal',
-      tagline: 'Portail financier Helfenstein',
-      title: 'Une vue claire de tout ce que vous détenez',
-      teaser: 'Vidéo de Helfenstein Group (1:46 minute)',
-      videoNote: 'Vidéo de Helfenstein Group (1:46 minute)',
-      body: [
-        'Le Portail financier Helfenstein réunit en une seule vue vos positions auprès de tous vos partenaires bancaires suisses, vos documents et les données de marché actuelles.',
-        'Listes de surveillance, alertes et analyse de portefeuille sont inclus sans frais supplémentaires. Vos avoirs restent en tout temps auprès de votre banque ; toute transaction est exécutée par votre banque dépositaire.',
       ],
     },
   },

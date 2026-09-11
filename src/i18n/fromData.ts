@@ -1,4 +1,4 @@
-import { allArticles, marketVideo, offers, property, solutions, testimonial, newsletterCta } from '../data/content';
+import { allArticles, offers, property, solutions, testimonial, newsletterCta } from '../data/content';
 import { legalPages } from '../data/legal';
 import { actionLinks, legalLinks, mainNavigation, quickLinks, topMenu } from '../data/navigation';
 import { featuredMember, teamMembers, teamSections } from '../data/team';
@@ -115,14 +115,6 @@ export function buildEnglishCatalog(ui: Translations['ui'], meta: Translations['
         type: property.type,
         imageAlt: property.imageAlt,
         specs: property.specs.map((s) => ({ label: s.label })),
-      },
-      marketVideo: {
-        slug: marketVideo.slug,
-        tagline: marketVideo.tagline,
-        title: marketVideo.title,
-        teaser: marketVideo.teaser,
-        videoNote: marketVideo.videoNote,
-        body: marketVideo.body,
       },
     },
     topics: topicsRecord(),

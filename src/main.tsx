@@ -19,7 +19,11 @@ const app = (
   </StrictMode>
 );
 
-if (container.hasChildNodes()) {
+const hasServerMarkup = Array.from(container.childNodes).some(
+  (node) => node.nodeType === Node.ELEMENT_NODE,
+);
+
+if (hasServerMarkup) {
   hydrateRoot(container, app);
 } else {
   createRoot(container).render(app);

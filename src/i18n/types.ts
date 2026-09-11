@@ -149,7 +149,6 @@ export type Translations = {
     offers: OfferT[];
     solutions: SolutionT[];
     property: { type: string; imageAlt: string; specs: PropertySpecT[] };
-    marketVideo: ArticleT;
   };
   topics: Record<string, TopicT>;
   legal: Record<string, LegalPageT>;

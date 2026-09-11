@@ -18,7 +18,7 @@ const navPaths = {
       label: 'Chi siamo',
       to: ROUTES.about,
       children: [
-        { label: 'Il nostro team', to: `${ROUTES.about}#our-team` },
+        { label: 'Il nostro team', to: ROUTES.aboutTeam },
         { label: 'Conformità normativa', to: `${ROUTES.about}#regulatory-compliance` },
         { label: 'Consulenza indipendente', to: ROUTES.aboutIndependentAdvice },
         { label: 'Come siamo regolamentati', to: ROUTES.aboutHowWeAreRegulated },
@@ -306,17 +306,6 @@ export const it: Translations = {
         { label: 'Superficie del terreno' },
         { label: 'Anno di costruzione' },
         { label: 'Prezzo di vendita' },
-      ],
-    },
-    marketVideo: {
-      slug: 'helfenstein-financial-portal',
-      tagline: 'Helfenstein Financial Portal',
-      title: 'Una visione chiara di tutto ciò che possiede',
-      teaser: 'Video di Helfenstein Group (1:46 minuti)',
-      videoNote: 'Video di Helfenstein Group (1:46 minuti)',
-      body: [
-        'Helfenstein Financial Portal riunisce in un\'unica vista le posizioni che detiene presso tutte le Sue banche partner svizzere, i Suoi documenti e i dati di mercato aggiornati.',
-        'Watchlist, alert e analisi del portafoglio sono inclusi senza costi aggiuntivi. I Suoi patrimoni restano sempre presso la Sua banca; le eventuali transazioni sono eseguite dalla banca depositaria.',
       ],
     },
   },

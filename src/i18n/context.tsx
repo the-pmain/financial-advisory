@@ -55,15 +55,17 @@ export function LocaleProvider({
   initialLocale?: Locale;
   children: ReactNode;
 }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window === 'undefined') return initialLocale;
-    return readStoredLocale();
-  });
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
 
   const setLocale = useCallback((next: Locale) => {
     setLocaleState(next);
     storeLocale(next);
     document.documentElement.lang = next;
+  }, []);
+
+  useEffect(() => {
+    const stored = readStoredLocale();
+    setLocaleState((current) => (stored === current ? current : stored));
   }, []);
 
   useEffect(() => {

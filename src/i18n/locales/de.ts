@@ -18,7 +18,7 @@ const navPaths = {
       label: 'Über uns',
       to: ROUTES.about,
       children: [
-        { label: 'Unser Team', to: `${ROUTES.about}#our-team` },
+        { label: 'Unser Team', to: ROUTES.aboutTeam },
         { label: 'Regulatorische Compliance', to: `${ROUTES.about}#regulatory-compliance` },
         { label: 'Unabhängige Beratung', to: ROUTES.aboutIndependentAdvice },
         { label: 'Wie wir reguliert sind', to: ROUTES.aboutHowWeAreRegulated },
@@ -306,17 +306,6 @@ export const de: Translations = {
         { label: 'Grundstücksfläche' },
         { label: 'Baujahr' },
         { label: 'Verkaufspreis' },
-      ],
-    },
-    marketVideo: {
-      slug: 'helfenstein-financial-portal',
-      tagline: 'Helfenstein Financial Portal',
-      title: 'Eine klare Sicht auf alles, was Sie besitzen',
-      teaser: 'Video von Helfenstein Group (1:46 Minuten)',
-      videoNote: 'Video von Helfenstein Group (1:46 Minuten)',
-      body: [
-        'Das Helfenstein Financial Portal führt Ihre Positionen bei allen Ihren Schweizer Depotbank-Partnern, Ihre Dokumente und aktuelle Marktdaten in einer Ansicht zusammen.',
-        'Watchlists, Alerts und Portfolioanalyse sind ohne Aufpreis enthalten. Ihre Vermögenswerte bleiben jederzeit bei Ihrer Bank; Transaktionen werden über Ihre Depotbank ausgeführt.',
       ],
     },
   },

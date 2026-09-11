@@ -15,7 +15,7 @@ import { usePublicCompany } from '../hooks/usePublicCompany';
 import { formatStatusLabel } from '../lib/publicCompany';
 
 const highlightTo: Record<string, string> = {
-  'Our team': `${ROUTES.about}#our-team`,
+  'Our team': ROUTES.aboutTeam,
   'Regulatory compliance': `${ROUTES.about}#regulatory-compliance`,
   'Independent advice': ROUTES.aboutIndependentAdvice,
   'Client stories': ROUTES.aboutClientStories,
@@ -112,10 +112,10 @@ export function AboutPage() {
             </p>
             <p className="mt-5 mb-0">
               <Link
-                to={teamMemberPath(featuredMember.slug)}
+                to={ROUTES.aboutTeam}
                 className="text-vz-blue hover:text-vz-orange vz-underline-hover text-[15px]"
               >
-                Read more
+                Meet the team
               </Link>
             </p>
           </div>

@@ -474,7 +474,7 @@ export const topics: Topic[] = [
       { title: 'Reporting', text: 'Performance, costs and allocation across all your holdings, explained in plain language.' },
       { title: 'Security', text: 'Two-factor authentication on every login.' },
     ],
-    relatedSlugs: ['helfenstein-financial-portal', 'how-to-spot-financial-scams-switzerland'],
+    relatedSlugs: ['how-to-spot-financial-scams-switzerland'],
     ctaLabel: 'Sign up for free',
   }),
   t({

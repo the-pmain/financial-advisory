@@ -59,7 +59,6 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/protect-your-assets-phishing-insurance': ROUTES.phishingProtection,
   '/about/investor-relations': ROUTES.aboutCompanyInformation,
   '/about/branch-offices': ROUTES.aboutOffice,
-  [`${ROUTES.knowledgeHub}/helfenstein-financial-portal-pro`]: `${ROUTES.knowledgeHub}/helfenstein-financial-portal`,
 };
 
 /** React Router path patterns (with params). */

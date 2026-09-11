@@ -311,21 +311,12 @@
   }
 }
 
-/* Markets panel: three columns whose inner content boxes are all the same
-   width. The middle track carries 36px of padding on both sides plus two 4px
-   white rules (80px of chrome) against 36px on each outer track, so the tracks
-   are sized to absorb that difference rather than splitting the row evenly. */
+/* Markets panel: two equal columns with a 4px white rule between them. */
 .bm-grid {
   display: grid;
-  --bm-chrome: 152px;
-  --bm-content: calc((100% - var(--bm-chrome)) / 3);
-  grid-template-columns:
-    calc(var(--bm-content) + 36px)
-    calc(var(--bm-content) + 80px)
-    calc(var(--bm-content) + 36px);
+  grid-template-columns: 1fr 1fr;
 }
 
-/* The three tracks survive all the way down to the mobile breakpoint. */
 @media (width < 741px) {
   .bm-grid {
     grid-template-columns: 1fr;

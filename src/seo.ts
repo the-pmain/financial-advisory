@@ -35,7 +35,13 @@ export function normalizePath(pathname: string): string {
 }
 
 export function getStaticPaths(): string[] {
-  const paths = new Set<string>([ROUTES.home, ROUTES.aboutTeam, ROUTES.insights, ROUTES.expertise]);
+  const paths = new Set<string>([
+    ROUTES.home,
+    ROUTES.aboutTeam,
+    ROUTES.insights,
+    ROUTES.expertise,
+    ROUTES.admin,
+  ]);
   for (const topic of topics) {
     if (topic.path === ROUTES.aboutTeam) continue;
     paths.add(topic.path);

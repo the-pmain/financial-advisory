@@ -11,6 +11,9 @@ export const API = {
   topics: '/api/admin/topics',
   team: '/api/admin/team',
   documents: '/api/admin/documents',
+  clients: '/api/clients',
+  adminClients: '/api/admin/clients',
+  adminClientDocuments: '/api/admin/clients-documents',
 } as const;
 
 export type ApiPath = (typeof API)[keyof typeof API];

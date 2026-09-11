@@ -29,7 +29,7 @@ export const mainNavigation: NavGroup[] = [
     label: 'About us',
     to: ROUTES.about,
     children: [
-      { label: 'Our team', to: `${ROUTES.about}#our-team` },
+      { label: 'Our team', to: ROUTES.aboutTeam },
       { label: 'Regulatory compliance', to: `${ROUTES.about}#regulatory-compliance` },
       { label: 'Independent advice', to: ROUTES.aboutIndependentAdvice },
       { label: 'How we are regulated', to: ROUTES.aboutHowWeAreRegulated },

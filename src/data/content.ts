@@ -35,6 +35,8 @@ export type Quote = {
   value: string;
   change: string;
   direction: 'up' | 'down';
+  /** Yahoo Finance quote page for this instrument. */
+  sourceUrl?: string;
 };
 
 export type Solution = {
@@ -277,24 +279,6 @@ export const quotes: Quote[] = [
   { id: 'usdchf', symbol: 'USD/CHF', value: '0.90119', change: '-0.21 %', direction: 'down' },
 ];
 
-export const marketVideo: Article = {
-  slug: 'helfenstein-financial-portal',
-  tagline: 'Helfenstein Financial Portal',
-  title: 'One clear view of everything you hold',
-  teaser: 'Video by Helfenstein Group (1:46 minutes)',
-  kind: 'video',
-  videoNote: 'Video by Helfenstein Group (1:46 minutes)',
-  image: '/images/video-portal-pro.svg',
-  imageAlt: 'Preview of the Helfenstein Financial Portal consolidated portfolio view',
-  publishedDate: '2025-09-01',
-  author: editorial,
-  readingTimeMinutes: 2,
-  body: [
-    'The Helfenstein Financial Portal brings your holdings at all your Swiss banking partners, your documents and current market data together in a single view.',
-    'Watchlists, alerts and portfolio analysis are included at no extra cost. Your assets remain at your bank at all times; any transactions are executed through your custodian bank.',
-  ],
-};
-
 /* -------------------------------------------------------------------------- */
 /* Additional insights                                                         */
 /* -------------------------------------------------------------------------- */
@@ -454,7 +438,6 @@ export const allArticles: Article[] = [
   ...newsSlim,
   newsSecondary,
   ...marketArticles,
-  marketVideo,
   ...insightArticles,
 ];
 
