@@ -86,6 +86,17 @@ const ui: Translations['ui'] = {
   howWeHelp: 'How we help',
   adviceDisclaimer:
     'General information only. Nothing on this page constitutes personalised investment, tax or legal advice. Helfenstein Group does not hold client assets; all custody is with Swiss banking partners.',
+  verified: 'Verified',
+  viewOnMap: 'View on Map',
+  trustSignals: 'Verification and contact',
+  officeAddress: 'Office',
+  ombudsmanHeading: 'Ombudsman',
+  ombudsmanReference: 'Reference',
+  verifiedFinma: 'Verified — opens the official FINMA register',
+  verifiedLei: 'Verified — opens the Bloomberg LEI record',
+  verifiedHelp: 'Verified — opens the HELP.ch company directory',
+  verifiedOsfin: 'Verified — opens the OSFINcontrol supervision page',
+  verifiedAudit: 'Verified — opens the Zefix record (auditor of record)',
 };
 
 export const en: Translations = buildEnglishCatalog(ui, meta);

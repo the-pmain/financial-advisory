@@ -336,7 +336,7 @@ export const insightArticles: Article[] = [
       'The Financial Services Act (FinSA) sets conduct rules for firms that provide financial services in Switzerland. It is designed to make advice more transparent and comparable.',
       'Before you receive personalised advice, you should receive information about the services offered, how you are classified as a client, and the costs involved.',
       'Conflicts of interest must be disclosed and managed. At Helfenstein, advice is paid by clients; any unavoidable third-party payments are credited to you.',
-      'If a dispute cannot be resolved directly, clients can turn to an affiliated ombudsman office. Details appear in our FinSA client brochure and legal documents.',
+      'If a dispute cannot be resolved directly, clients can turn to Finanzombudsstelle Schweiz (FINOS), Freigutstrasse 8, 8002 Zürich, +41 44 552 08 00, info@finos.ch (reference FINOS-111.708.730). Details also appear in our FinSA client brochure.',
     ],
   },
   {

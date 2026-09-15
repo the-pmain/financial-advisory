@@ -1,24 +1,38 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type Ref } from 'react';
 import { createPortal } from 'react-dom';
-import { MoreIcon, PlusIcon } from '../ui/Icons';
-import { teamBySlug } from '../../data/team';
+import { FolderIcon, MoreIcon, PreviewIcon } from '../ui/Icons';
+import { company } from '../../data/company';
+import { teamBySlug, teamMembers } from '../../data/team';
 import { useEscape } from '../../hooks/useScrollLock';
+import {
+  COMPOSE_KINDS,
+  DOCUMENT_KIND_LABELS,
+  composeKindsSaved,
+  kindSaved,
+} from '../../js/clients-documents-model.js';
+import { agreementFromRecord, valuesForCompose } from '../../js/document-fields.js';
+import { generateDocument } from '../../js/document-generate.js';
+import { buildDocumentRegister } from '../../js/document-register.js';
 import {
   fetchAdminClients,
   patchAdminClientIsTest,
-  saveAdminTestDocument,
+  saveAdminDocument,
   type AdminClient,
+  type AdminDocumentKind,
   type ClientsTestFilter,
 } from '../../lib/adminApi';
+import { ComposeDocumentDialog } from './ComposeDocumentDialog';
+import { DocumentPreviewDialog, adminPreviewCopy } from './DocumentPreviewDialog';
 
 const PER_PAGE = 10;
 const ROW_H = 76;
 const LIST_MIN_H = PER_PAGE * ROW_H;
-
 const ROW_GRID =
-  'grid grid-cols-[minmax(0,1.5fr)_minmax(0,1.15fr)_minmax(0,1fr)_5.75rem_5.5rem_minmax(0,0.95fr)_2.75rem] items-center gap-x-5';
+  'grid grid-cols-[minmax(0,1.4fr)_minmax(0,1.05fr)_minmax(0,0.9fr)_5.25rem_5rem_minmax(0,1.25fr)_7.75rem] items-center gap-x-4';
 
 type TestFilter = ClientsTestFilter;
+type MenuKind = 'folder' | 'kebab';
+type OpenMenu = { id: string; kind: MenuKind } | null;
 
 function formatWhen(iso: string): string {
   const date = new Date(iso);
@@ -46,8 +60,10 @@ function initials(name: string): string {
     .join('');
 }
 
-function hasDocument(client: AdminClient): boolean {
-  return Boolean(client.documents.agreement);
+function savedKindList(client: AdminClient): AdminDocumentKind[] {
+  return (Object.keys(DOCUMENT_KIND_LABELS) as AdminDocumentKind[]).filter((kind) =>
+    kindSaved(client.documents, kind),
+  );
 }
 
 export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void }) {
@@ -61,8 +77,25 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [savingId, setSavingId] = useState<string | null>(null);
+  const [pdfBusyId, setPdfBusyId] = useState<string | null>(null);
   const [togglingId, setTogglingId] = useState<string | null>(null);
-  const [menuId, setMenuId] = useState<string | null>(null);
+  const [menu, setMenu] = useState<OpenMenu>(null);
+  const [compose, setCompose] = useState<{ client: AdminClient; kind: AdminDocumentKind } | null>(null);
+  const [preview, setPreview] = useState<{
+    title: string;
+    runKey: string;
+    prepare: () => Promise<{ bytes: Uint8Array; filename: string }>;
+  } | null>(null);
+
+  const registerFor = useCallback(
+    (client?: AdminClient | null) =>
+      buildDocumentRegister({
+        company,
+        teamMembers,
+        instructedSlug: client?.instructed_person_slug,
+      }),
+    [],
+  );
 
   const load = useCallback(
     async (nextPage: number, nextFilter: TestFilter, silent = false) => {
@@ -100,40 +133,66 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
   }, [load, page, filter]);
 
   function onFilterChange(next: TestFilter) {
-    setMenuId(null);
+    setMenu(null);
     setFilter(next);
     setPage(1);
   }
 
-  async function onSaveTestDocument(clientId: string) {
-    setSavingId(clientId);
-    setMenuId(null);
+  function openPreview(client: AdminClient, kind: AdminDocumentKind) {
+    const register = registerFor(client);
+    const title = DOCUMENT_KIND_LABELS[kind] ?? kind;
+    setMenu(null);
+    setPdfBusyId(client.id);
+    setPreview({
+      title,
+      runKey: `${client.id}:${kind}`,
+      prepare: async () => {
+        const values =
+          kind === 'agreement'
+            ? {
+                ...agreementFromRecord(client, register),
+                ...(kindSaved(client.documents, 'agreement') ? client.documents.agreement?.fields : {}),
+              }
+            : valuesForCompose(kind, client, client.documents, register);
+        const result = await generateDocument(kind, values, { register, people: register.people });
+        return { bytes: result.bytes, filename: result.filename };
+      },
+    });
+  }
+
+  async function onSaveCompose(fields: Record<string, string>) {
+    if (!compose) return;
+    const { client, kind } = compose;
+    setSavingId(client.id);
     setError(null);
-    const result = await saveAdminTestDocument(clientId);
+    const result = await saveAdminDocument(client.id, kind, fields);
     setSavingId(null);
     if ('authenticated' in result && result.authenticated === false) {
       onUnauthorized();
       return;
     }
     if (!('ok' in result) || result.ok !== true) {
-      setError('error' in result && result.error ? result.error : 'Could not save the test document.');
+      setError('error' in result && result.error ? result.error : 'Could not save the document.');
       return;
     }
-    await load(page, filter, true);
+    setItems((current) =>
+      current.map((item) =>
+        item.id === client.id ? { ...item, document_id: result.id, documents: result.documents } : item,
+      ),
+    );
+    setCompose(null);
   }
 
   async function onToggleTest(client: AdminClient) {
     const next = !client.is_test;
-    setMenuId(null);
+    setMenu(null);
     setTogglingId(client.id);
     setError(null);
     setItems((current) =>
       current.map((item) => (item.id === client.id ? { ...item, is_test: next } : item)),
     );
-
     const result = await patchAdminClientIsTest(client.id, next);
     setTogglingId(null);
-
     if ('authenticated' in result && result.authenticated === false) {
       onUnauthorized();
       return;
@@ -145,7 +204,6 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
       setError('error' in result && result.error ? result.error : 'Could not update the test flag.');
       return;
     }
-
     if ((filter === 'live' && next) || (filter === 'test' && !next)) {
       await load(page, filter, true);
     }
@@ -179,17 +237,15 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
         )}
 
         <div className="overflow-x-auto px-6 max-mob:px-4">
-          <div className="min-w-[920px]">
+          <div className="min-w-[980px]">
             <div className={`${ROW_GRID} text-vz-gray-mid bg-vz-blue-panel-faint border-vz-rule border-b py-3 pr-1 pl-1 text-[11px] font-bold tracking-[0.08em] uppercase`}>
               <span>Client</span>
               <span>Contact</span>
               <span>Adviser</span>
               <span>Consent</span>
               <span>Test</span>
-              <span>Document</span>
-              <span className="overflow-hidden whitespace-nowrap text-[0px] text-transparent">
-                Actions
-              </span>
+              <span>Documents</span>
+              <span className="overflow-hidden whitespace-nowrap text-[0px] text-transparent">Actions</span>
             </div>
 
             {empty ? (
@@ -207,16 +263,22 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
                     <ClientRow
                       key={(entry as AdminClient).id}
                       client={entry as AdminClient}
-                      menuOpen={menuId === (entry as AdminClient).id}
-                      saving={savingId === (entry as AdminClient).id}
+                      menu={menu}
+                      pdfBusy={pdfBusyId === (entry as AdminClient).id}
                       toggling={togglingId === (entry as AdminClient).id}
-                      onToggleMenu={() =>
-                        setMenuId((current) =>
-                          current === (entry as AdminClient).id ? null : (entry as AdminClient).id,
+                      onToggleMenu={(kind) =>
+                        setMenu((current) =>
+                          current?.id === (entry as AdminClient).id && current.kind === kind
+                            ? null
+                            : { id: (entry as AdminClient).id, kind },
                         )
                       }
-                      onCloseMenu={() => setMenuId(null)}
-                      onSaveDocument={() => void onSaveTestDocument((entry as AdminClient).id)}
+                      onCloseMenu={() => setMenu(null)}
+                      onPreviewKind={(kind) => openPreview(entry as AdminClient, kind)}
+                      onComposeKind={(kind) => {
+                        setMenu(null);
+                        setCompose({ client: entry as AdminClient, kind });
+                      }}
                       onToggleTest={() => void onToggleTest(entry as AdminClient)}
                     />
                   ),
@@ -241,21 +303,336 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
         className="border-vz-rule flex min-h-[72px] items-center justify-between gap-3 border-t px-6 max-mob:px-4"
         aria-label="Client list pages"
       >
-        <PagerButton
-          label="Previous"
-          disabled={!hasPrev || loading}
-          onClick={() => setPage((current) => Math.max(1, current - 1))}
-        />
-        <p className="text-vz-gray m-0 text-[13px] tabular-nums">
-          {totalPages > 0 ? `${page} / ${totalPages}` : '—'}
-        </p>
-        <PagerButton
-          label="Next"
-          disabled={!hasNext || loading}
-          onClick={() => setPage((current) => current + 1)}
-        />
+        <PagerButton label="Previous" disabled={!hasPrev || loading} onClick={() => setPage((current) => Math.max(1, current - 1))} />
+        <p className="text-vz-gray m-0 text-[13px] tabular-nums">{totalPages > 0 ? `${page} / ${totalPages}` : '—'}</p>
+        <PagerButton label="Next" disabled={!hasNext || loading} onClick={() => setPage((current) => current + 1)} />
       </nav>
+
+      <ComposeDocumentDialog
+        open={Boolean(compose)}
+        client={compose?.client ?? null}
+        kind={compose?.kind ?? null}
+        register={compose ? registerFor(compose.client) : null}
+        saving={Boolean(compose && savingId === compose.client.id)}
+        onClose={() => {
+          if (!savingId) setCompose(null);
+        }}
+        onSave={onSaveCompose}
+      />
+
+      <DocumentPreviewDialog
+        open={Boolean(preview)}
+        copy={adminPreviewCopy(preview?.title ?? 'Document')}
+        confirm={false}
+        wait="close"
+        runKey={preview?.runKey}
+        prepare={preview?.prepare ?? null}
+        onClose={() => {
+          setPreview(null);
+          setPdfBusyId(null);
+        }}
+        onReady={() => setPdfBusyId(null)}
+      />
     </div>
+  );
+}
+
+function ClientRow({
+  client,
+  menu,
+  pdfBusy,
+  toggling,
+  onToggleMenu,
+  onCloseMenu,
+  onPreviewKind,
+  onComposeKind,
+  onToggleTest,
+}: {
+  client: AdminClient;
+  menu: OpenMenu;
+  pdfBusy: boolean;
+  toggling: boolean;
+  onToggleMenu: (kind: MenuKind) => void;
+  onCloseMenu: () => void;
+  onPreviewKind: (kind: AdminDocumentKind) => void;
+  onComposeKind: (kind: AdminDocumentKind) => void;
+  onToggleTest: () => void;
+}) {
+  const badges = savedKindList(client);
+  return (
+    <li
+      className="border-vz-rule hover:bg-vz-blue-panel-faint relative min-h-[76px] border-b transition-colors duration-150 last:border-b-0"
+      aria-busy={toggling}
+    >
+      <div className={`${ROW_GRID} min-h-[76px] px-1 py-2`}>
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="bg-vz-blue-tint text-vz-blue relative flex size-11 shrink-0 items-center justify-center rounded-[3px] text-[13px] font-bold tracking-[0.04em]">
+            <span className={toggling ? 'opacity-0' : undefined}>{initials(client.name)}</span>
+            {toggling && (
+              <span className="absolute inset-0 flex items-center justify-center">
+                <RowSpinner label={`Updating test flag for ${client.name}`} />
+              </span>
+            )}
+          </div>
+          <div className="min-w-0">
+            <p className="text-vz-ink m-0 truncate text-[15px] font-bold">{client.name}</p>
+            <p className="text-vz-gray m-0 mt-0.5 truncate text-[12px]">{formatWhen(client.created_at)}</p>
+          </div>
+        </div>
+        <div className="min-w-0">
+          <p className="text-vz-ink m-0 truncate text-[14px]">{client.email}</p>
+          <p className="text-vz-gray m-0 mt-0.5 truncate text-[13px]">{client.phone || '—'}</p>
+        </div>
+        <p className="text-vz-ink m-0 truncate text-[14px]">{adviserName(client.instructed_person_slug)}</p>
+        <p className="m-0">
+          <span
+            className={`inline-block rounded-[3px] px-1.5 py-0.5 text-[11px] font-bold tracking-[0.04em] uppercase ${
+              client.consent ? 'bg-vz-blue-panel text-vz-blue' : 'bg-vz-cream text-vz-orange'
+            }`}
+          >
+            {client.consent ? 'Given' : 'No'}
+          </span>
+        </p>
+        <TestSwitch
+          checked={client.is_test}
+          disabled={toggling}
+          label={`Test record for ${client.name}`}
+          onToggle={onToggleTest}
+        />
+        <div className="flex flex-wrap gap-1">
+          {badges.length ? (
+            badges.map((kind) => (
+              <span
+                key={kind}
+                className="bg-vz-blue-panel text-vz-blue inline-block rounded-[3px] px-1.5 py-0.5 text-[10px] font-bold tracking-[0.03em] uppercase"
+              >
+                {DOCUMENT_KIND_LABELS[kind]}
+              </span>
+            ))
+          ) : (
+            <span className="text-vz-gray-mid text-[13px]">None</span>
+          )}
+        </div>
+        <RowActions
+          client={client}
+          menu={menu}
+          pdfBusy={pdfBusy}
+          onToggleMenu={onToggleMenu}
+          onCloseMenu={onCloseMenu}
+          onPreviewKind={onPreviewKind}
+          onComposeKind={onComposeKind}
+        />
+      </div>
+    </li>
+  );
+}
+
+function RowActions({
+  client,
+  menu,
+  pdfBusy,
+  onToggleMenu,
+  onCloseMenu,
+  onPreviewKind,
+  onComposeKind,
+}: {
+  client: AdminClient;
+  menu: OpenMenu;
+  pdfBusy: boolean;
+  onToggleMenu: (kind: MenuKind) => void;
+  onCloseMenu: () => void;
+  onPreviewKind: (kind: AdminDocumentKind) => void;
+  onComposeKind: (kind: AdminDocumentKind) => void;
+}) {
+  const folderSaved = composeKindsSaved(client.documents) as AdminDocumentKind[];
+  const folderOpen = menu?.id === client.id && menu.kind === 'folder';
+  const kebabOpen = menu?.id === client.id && menu.kind === 'kebab';
+
+  return (
+    <div className="flex items-center justify-end gap-1">
+      <ActionMenu
+        label={`Saved documents for ${client.name}`}
+        disabled={!folderSaved.length}
+        title={folderSaved.length ? undefined : 'No documents yet'}
+        open={folderOpen}
+        busy={pdfBusy}
+        icon={<FolderIcon className="size-4" />}
+        onToggle={() => onToggleMenu('folder')}
+        onClose={onCloseMenu}
+      >
+        {folderSaved.map((kind) => (
+          <MenuAction
+            key={kind}
+            label={DOCUMENT_KIND_LABELS[kind]}
+            disabled={pdfBusy}
+            onClick={() => onPreviewKind(kind)}
+          />
+        ))}
+      </ActionMenu>
+      <IconButton
+        label={`Preview authority for ${client.name}`}
+        disabled={pdfBusy}
+        onClick={() => onPreviewKind('agreement')}
+      >
+        <PreviewIcon className="size-4" />
+      </IconButton>
+      <ActionMenu
+        label={`Add or edit documents for ${client.name}`}
+        open={kebabOpen}
+        icon={<MoreIcon className="size-4" />}
+        onToggle={() => onToggleMenu('kebab')}
+        onClose={onCloseMenu}
+      >
+        {COMPOSE_KINDS.map((kind) => {
+          const saved = kindSaved(client.documents, kind);
+          return (
+            <MenuAction
+              key={kind}
+              label={saved ? `${DOCUMENT_KIND_LABELS[kind]} · Saved` : `Add ${DOCUMENT_KIND_LABELS[kind]}`}
+              onClick={() => onComposeKind(kind as AdminDocumentKind)}
+            />
+          );
+        })}
+      </ActionMenu>
+    </div>
+  );
+}
+
+function ActionMenu({
+  label,
+  open,
+  disabled,
+  busy,
+  title,
+  icon,
+  onToggle,
+  onClose,
+  children,
+}: {
+  label: string;
+  open: boolean;
+  disabled?: boolean;
+  busy?: boolean;
+  title?: string;
+  icon: ReactNode;
+  onToggle: () => void;
+  onClose: () => void;
+  children: ReactNode;
+}) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState({ top: 0, right: 0 });
+
+  useLayoutEffect(() => {
+    if (!open || !buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    const panelHeight = 220;
+    const below = rect.bottom + 6;
+    const top = below + panelHeight > window.innerHeight ? rect.top - panelHeight - 6 : below;
+    setCoords({ top, right: window.innerWidth - rect.right });
+    panelRef.current?.querySelector('button')?.focus();
+  }, [open]);
+
+  useEscape(open, onClose);
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointer = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (buttonRef.current?.contains(target) || panelRef.current?.contains(target)) return;
+      onClose();
+    };
+    const onViewport = () => onClose();
+    document.addEventListener('mousedown', onPointer);
+    window.addEventListener('scroll', onViewport, true);
+    window.addEventListener('resize', onViewport);
+    return () => {
+      document.removeEventListener('mousedown', onPointer);
+      window.removeEventListener('scroll', onViewport, true);
+      window.removeEventListener('resize', onViewport);
+    };
+  }, [open, onClose]);
+
+  return (
+    <div>
+      <IconButton
+        ref={buttonRef}
+        label={label}
+        disabled={disabled || busy}
+        title={title}
+        expanded={open}
+        onClick={onToggle}
+      >
+        {icon}
+      </IconButton>
+      {open &&
+        createPortal(
+          <div
+            ref={panelRef}
+            role="menu"
+            className="border-vz-rule fixed z-50 min-w-[240px] rounded-[4px] border bg-white p-1.5 shadow-[0_8px_24px_rgba(11,31,51,0.18)]"
+            style={{ top: coords.top, right: coords.right }}
+          >
+            {children}
+          </div>,
+          document.body,
+        )}
+    </div>
+  );
+}
+
+function IconButton({
+  label,
+  disabled,
+  title,
+  expanded,
+  onClick,
+  children,
+  ref,
+}: {
+  label: string;
+  disabled?: boolean;
+  title?: string;
+  expanded?: boolean;
+  onClick: () => void;
+  children: ReactNode;
+  ref?: Ref<HTMLButtonElement>;
+}) {
+  return (
+    <button
+      ref={ref}
+      type="button"
+      aria-label={label}
+      title={title}
+      aria-expanded={expanded}
+      disabled={disabled}
+      onClick={onClick}
+      className="border-vz-rule text-vz-blue hover:border-vz-blue hover:bg-vz-blue-panel focus-visible:outline-vz-orange flex size-9 cursor-pointer items-center justify-center rounded-[3px] border bg-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
+    >
+      {children}
+    </button>
+  );
+}
+
+function MenuAction({
+  label,
+  disabled,
+  onClick,
+}: {
+  label: string;
+  disabled?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="menuitem"
+      disabled={disabled}
+      onClick={onClick}
+      className="text-vz-ink hover:bg-vz-blue-panel flex w-full cursor-pointer items-center rounded-[3px] px-2.5 py-2.5 text-left text-[14px] font-bold disabled:cursor-wait disabled:opacity-60"
+    >
+      {label}
+    </button>
   );
 }
 
@@ -271,13 +648,8 @@ function TestFilterSwitch({
     { id: 'live', label: 'Live' },
     { id: 'test', label: 'Test' },
   ];
-
   return (
-    <div
-      className="border-vz-rule inline-flex rounded-[3px] border p-0.5"
-      role="radiogroup"
-      aria-label="Filter by test status"
-    >
+    <div className="border-vz-rule inline-flex rounded-[3px] border p-0.5" role="radiogroup" aria-label="Filter by test status">
       {options.map((option) => {
         const selected = value === option.id;
         return (
@@ -288,9 +660,7 @@ function TestFilterSwitch({
             aria-checked={selected}
             onClick={() => onChange(option.id)}
             className={`h-9 min-w-[72px] cursor-pointer rounded-[2px] px-3 text-[13px] font-bold transition-colors duration-150 ${
-              selected
-                ? 'bg-vz-blue text-white'
-                : 'text-vz-blue hover:bg-vz-blue-panel bg-transparent'
+              selected ? 'bg-vz-blue text-white' : 'text-vz-blue hover:bg-vz-blue-panel bg-transparent'
             }`}
           >
             {option.label}
@@ -301,15 +671,7 @@ function TestFilterSwitch({
   );
 }
 
-function PagerButton({
-  label,
-  disabled,
-  onClick,
-}: {
-  label: string;
-  disabled: boolean;
-  onClick: () => void;
-}) {
+function PagerButton({ label, disabled, onClick }: { label: string; disabled: boolean; onClick: () => void }) {
   return (
     <button
       type="button"
@@ -327,12 +689,7 @@ function LoaderMark({ label }: { label: string }) {
     <div className="flex flex-col items-center gap-4" role="status">
       <svg className="text-vz-blue size-24 animate-spin" viewBox="0 0 48 48" fill="none">
         <circle cx="24" cy="24" r="18" stroke="currentColor" strokeOpacity="0.18" strokeWidth="4" />
-        <path
-          d="M42 24a18 18 0 00-18-18"
-          stroke="currentColor"
-          strokeWidth="4"
-          strokeLinecap="round"
-        />
+        <path d="M42 24a18 18 0 00-18-18" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
       </svg>
       <span className="text-vz-ink text-[16px] font-bold">{label}</span>
     </div>
@@ -352,95 +709,6 @@ function SkeletonRow() {
       <span className="bg-vz-blue-panel h-7 w-12 rounded-full" />
       <span className="bg-vz-blue-panel h-3 w-16 rounded-[2px]" />
       <span className="bg-vz-blue-panel size-9 justify-self-end rounded-[3px]" />
-    </li>
-  );
-}
-
-function ClientRow({
-  client,
-  menuOpen,
-  saving,
-  toggling,
-  onToggleMenu,
-  onCloseMenu,
-  onSaveDocument,
-  onToggleTest,
-}: {
-  client: AdminClient;
-  menuOpen: boolean;
-  saving: boolean;
-  toggling: boolean;
-  onToggleMenu: () => void;
-  onCloseMenu: () => void;
-  onSaveDocument: () => void;
-  onToggleTest: () => void;
-}) {
-  const testDoc = client.documents.agreement;
-
-  return (
-    <li
-      className="border-vz-rule hover:bg-vz-blue-panel-faint relative h-[76px] border-b transition-colors duration-150 last:border-b-0"
-      aria-busy={toggling}
-    >
-      <div className={`${ROW_GRID} h-full px-1`}>
-        <div className="flex min-w-0 items-center gap-3">
-          <div className="bg-vz-blue-tint text-vz-blue relative flex size-11 shrink-0 items-center justify-center rounded-[3px] text-[13px] font-bold tracking-[0.04em]">
-            <span className={toggling ? 'opacity-0' : undefined}>{initials(client.name)}</span>
-            {toggling && (
-              <span className="absolute inset-0 flex items-center justify-center">
-                <RowSpinner label={`Updating test flag for ${client.name}`} />
-              </span>
-            )}
-          </div>
-          <div className="min-w-0">
-            <p className="text-vz-ink m-0 truncate text-[15px] font-bold">{client.name}</p>
-            <p className="text-vz-gray m-0 mt-0.5 truncate text-[12px]">{formatWhen(client.created_at)}</p>
-          </div>
-        </div>
-
-        <div className="min-w-0">
-          <p className="text-vz-ink m-0 truncate text-[14px]">{client.email}</p>
-          <p className="text-vz-gray m-0 mt-0.5 truncate text-[13px]">{client.phone || '—'}</p>
-        </div>
-
-        <p className="text-vz-ink m-0 truncate text-[14px]">{adviserName(client.instructed_person_slug)}</p>
-
-        <p className="m-0">
-          <span
-            className={`inline-block rounded-[3px] px-1.5 py-0.5 text-[11px] font-bold tracking-[0.04em] uppercase ${
-              client.consent ? 'bg-vz-blue-panel text-vz-blue' : 'bg-vz-cream text-vz-orange'
-            }`}
-          >
-            {client.consent ? 'Given' : 'No'}
-          </span>
-        </p>
-
-        <TestSwitch
-          checked={client.is_test}
-          disabled={toggling}
-          label={`Test record for ${client.name}`}
-          onToggle={onToggleTest}
-        />
-
-        <p className="m-0">
-          {testDoc ? (
-            <span className="bg-vz-blue-panel text-vz-blue inline-block rounded-[3px] px-1.5 py-0.5 text-[11px] font-bold tracking-[0.04em] uppercase">
-              On file
-            </span>
-          ) : (
-            <span className="text-vz-gray-mid text-[13px]">None</span>
-          )}
-        </p>
-
-        <RowActions
-          client={client}
-          open={menuOpen}
-          saving={saving}
-          onToggle={onToggleMenu}
-          onClose={onCloseMenu}
-          onCreateDocument={onSaveDocument}
-        />
-      </div>
     </li>
   );
 }
@@ -479,108 +747,9 @@ function TestSwitch({
 
 function RowSpinner({ label }: { label: string }) {
   return (
-    <svg
-      className="text-vz-blue size-6 animate-spin"
-      viewBox="0 0 48 48"
-      fill="none"
-      role="status"
-      aria-label={label}
-    >
+    <svg className="text-vz-blue size-6 animate-spin" viewBox="0 0 48 48" fill="none" role="status" aria-label={label}>
       <circle cx="24" cy="24" r="18" stroke="currentColor" strokeOpacity="0.18" strokeWidth="4" />
-      <path
-        d="M42 24a18 18 0 00-18-18"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
+      <path d="M42 24a18 18 0 00-18-18" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
     </svg>
-  );
-}
-
-function RowActions({
-  client,
-  open,
-  saving,
-  onToggle,
-  onClose,
-  onCreateDocument,
-}: {
-  client: AdminClient;
-  open: boolean;
-  saving: boolean;
-  onToggle: () => void;
-  onClose: () => void;
-  onCreateDocument: () => void;
-}) {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState({ top: 0, right: 0 });
-
-  useLayoutEffect(() => {
-    if (!open || !buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    const panelHeight = 56;
-    const below = rect.bottom + 6;
-    const top = below + panelHeight > window.innerHeight ? rect.top - panelHeight - 6 : below;
-    setCoords({
-      top,
-      right: window.innerWidth - rect.right,
-    });
-    panelRef.current?.querySelector('button')?.focus();
-  }, [open]);
-
-  useEscape(open, onClose);
-
-  useEffect(() => {
-    if (!open) return;
-    const onPointer = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (buttonRef.current?.contains(target) || panelRef.current?.contains(target)) return;
-      onClose();
-    };
-    document.addEventListener('mousedown', onPointer);
-    return () => document.removeEventListener('mousedown', onPointer);
-  }, [open, onClose]);
-
-  const hasDoc = hasDocument(client);
-
-  return (
-    <div className="justify-self-end">
-      <button
-        ref={buttonRef}
-        type="button"
-        aria-label={`Actions for ${client.name}`}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        onClick={onToggle}
-        className="border-vz-rule text-vz-blue hover:border-vz-blue hover:bg-vz-blue-panel focus-visible:outline-vz-orange flex size-9 cursor-pointer items-center justify-center rounded-[3px] border bg-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
-      >
-        <MoreIcon className="size-4" />
-      </button>
-
-      {open &&
-        createPortal(
-          <div
-            ref={panelRef}
-            role="menu"
-            className="border-vz-rule fixed z-50 min-w-[220px] rounded-[4px] border bg-white p-1.5 shadow-[0_8px_24px_rgba(11,31,51,0.18)]"
-            style={{ top: coords.top, right: coords.right }}
-          >
-            <button
-              type="button"
-              role="menuitem"
-              disabled={saving}
-              onClick={onCreateDocument}
-              className="text-vz-ink hover:bg-vz-blue-panel flex w-full cursor-pointer items-center gap-2.5 rounded-[3px] px-2.5 py-2.5 text-left text-[14px] font-bold disabled:cursor-wait disabled:opacity-60"
-            >
-              <span className="bg-vz-blue flex size-7 items-center justify-center rounded-[3px] text-white">
-                <PlusIcon className="size-3.5" />
-              </span>
-              {saving ? 'Saving…' : hasDoc ? 'Update document' : 'Create document'}
-            </button>
-          </div>,
-          document.body,
-        )}
-    </div>
   );
 }

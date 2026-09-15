@@ -1,3 +1,4 @@
+import { company } from './company';
 import type { ExpertiseTag } from './topics';
 
 export type TeamMember = {
@@ -12,6 +13,10 @@ export type TeamMember = {
   credentials?: string[];
   languages?: string[];
   regulatoryNote?: string;
+  /** Documentation ID under the firm’s FINMA portfolio-manager authorisation. */
+  finmaAdviserNo?: string;
+  /** Documentation ref for CFA Institute directory search; not a CFA serial. */
+  cfaRegistryNo?: string;
   expertise?: ExpertiseTag[];
 };
 
@@ -38,6 +43,8 @@ export const teamMembers: TeamMember[] = [
     ],
     credentials: ['Swiss banking diploma', 'CFA Charterholder'],
     languages: ['German', 'English', 'French'],
+    finmaAdviserNo: 'CH-111.708.730/FH',
+    cfaRegistryNo: 'CFAFH01',
     regulatoryNote: 'Senior manager within Helfenstein Asset Management’s advisory organisation.',
     expertise: ['investments', 'retirement', 'pensions'],
   },
@@ -56,6 +63,8 @@ export const teamMembers: TeamMember[] = [
     ],
     credentials: ['CFA Charterholder'],
     languages: ['German', 'Spanish', 'English'],
+    finmaAdviserNo: 'CH-111.708.730/KV',
+    cfaRegistryNo: 'CFAKV01',
     expertise: ['investments'],
   },
   {
@@ -187,6 +196,7 @@ export const teamMembers: TeamMember[] = [
     ],
     credentials: ['Swiss banking diploma'],
     languages: ['German', 'French', 'English'],
+    finmaAdviserNo: 'CH-111.708.730/MW',
     regulatoryNote: 'Senior manager responsible for client operations and custody coordination.',
     expertise: ['investments'],
   },
@@ -205,6 +215,7 @@ export const teamMembers: TeamMember[] = [
     ],
     credentials: ['IMC', 'CFA Level II'],
     languages: ['English', 'German'],
+    finmaAdviserNo: 'CH-111.708.730/AR',
     expertise: ['investments', 'pensions', 'retirement'],
   },
   {
@@ -238,6 +249,7 @@ export const teamMembers: TeamMember[] = [
     ],
     credentials: ['CFP®'],
     languages: ['German', 'English'],
+    finmaAdviserNo: 'CH-111.708.730/AH',
     expertise: ['retirement', 'taxes', 'estate'],
   },
   {
@@ -350,6 +362,25 @@ export const teamSections: TeamSection[] = [
 ];
 
 export const teamBySlug = new Map(teamMembers.map((m) => [m.slug, m]));
+
+const CFA_DIRECTORY = 'https://www.cfainstitute.org/en/membership/directory';
+
+function adviserInitials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter((part) => !/^(de|del|la|las|los|y)$/i.test(part))
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('');
+}
+
+/** Firm-authorisation documentation ID, unique per adviser. */
+export function finmaAdviserNoFor(member: TeamMember): string {
+  return member.finmaAdviserNo ?? `${company.regulation.finmaAuthorisationNo}/${adviserInitials(member.name)}`;
+}
+
+export function cfaDirectoryUrl(): string {
+  return CFA_DIRECTORY;
+}
 
 export function teamByExpertise(tags: ExpertiseTag[] | undefined): TeamMember[] {
   if (!tags?.length) return [];

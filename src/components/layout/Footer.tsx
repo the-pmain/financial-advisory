@@ -5,8 +5,9 @@ import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ArrowRightIcon, ChevronDownIcon } from '../ui/Icons';
 import { LogoMark } from '../ui/Logo';
 import { ButtonOrange } from '../ui/primitives';
-import { BloombergLeiLink } from '../ui/BloombergLeiLink';
-import { RegistryLinks } from '../ui/RegistryLinks';
+import { ComplianceMarks } from '../ui/ComplianceMarks';
+import { TrustSignals } from './TrustSignals';
+import { VersionStamp } from '../ui/VersionStamp';
 import { Breadcrumb } from './Breadcrumb';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import {
@@ -14,7 +15,6 @@ import {
   legalLinks,
   mainNavigation,
   portalLinks,
-  socialLinks,
 } from '../../data/navigation';
 import type { NavGroup } from '../../data/navigation';
 
@@ -40,6 +40,8 @@ export function Footer() {
         <Breadcrumb />
         <ButtonOrange to={ROUTES.appointments}>Make an appointment</ButtonOrange>
       </div>
+
+      <TrustSignals className="mb-[50px] max-tab:mb-[40px]" />
 
       <div className="relative grid grid-cols-[minmax(0,836fr)_257px] items-start gap-x-[36px] gap-y-[44px] pl-[91px] max-tab:grid-cols-1 max-tab:gap-y-[43px] max-tab:pl-0">
         <Link
@@ -97,15 +99,12 @@ export function Footer() {
             ))}
           </ul>
 
-          <RegistryLinks className="mt-8 max-tab:mt-6" />
-          <div className="mt-5">
-            <BloombergLeiLink />
-          </div>
+          <ComplianceMarks className="mt-8 max-tab:mt-6" />
         </div>
       </div>
 
-      {/* Legal row. Stacked, the reference reverses it: languages first, then
-          the social line, then the legal links in a 12/15 column. */}
+      {/* Legal row. Social icons live in the trust band; languages sit first
+          on small screens, then the legal links. */}
       <div className="mt-[28px] grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-4 max-tab:mt-[17px] max-tab:grid-cols-1">
         <nav aria-label="Legal" className="max-tab:order-3">
           <ul className="m-0 flex list-none flex-wrap gap-4 p-0 max-tab:flex-col max-tab:gap-1">
@@ -123,25 +122,9 @@ export function Footer() {
         </nav>
 
         <LanguageSwitcher className="max-tab:order-1 max-tab:gap-10" />
-
-        <p className="text-vz-gray-mid m-0 flex flex-wrap items-center gap-x-4 text-[14px] leading-[17px] max-tab:order-2 max-tab:text-[12px] max-tab:leading-[15px]">
-          You can also find us on:
-          <span className="flex items-center gap-4">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-vz-slate hover:text-vz-orange transition-colors duration-250"
-              >
-                {social.label}
-                <span className="visually-hidden"> (external link, opens in a new window)</span>
-              </a>
-            ))}
-          </span>
-        </p>
       </div>
+
+      <VersionStamp className="text-vz-gray-mid m-0 mt-4 text-[12px] leading-[15px]" />
     </footer>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { ROUTES } from '../constants/routes';
 import { fetchSession, loginWithPin, logoutAdmin } from '../lib/adminApi';
 import { ClientsPanel } from '../components/admin/ClientsPanel';
+import { VersionStamp } from '../components/ui/VersionStamp';
 
 const PIN_LENGTH = 4;
 
@@ -260,6 +261,7 @@ export function AdminPage() {
     return (
       <div className="min-h-screen bg-white">
         <AdminPasscodeGate busy={busy} error={error} onUnlock={unlockWithPin} />
+        <VersionStamp className="text-vz-gray-mid m-0 px-4 pb-4 text-center text-[12px] leading-[15px]" />
       </div>
     );
   }
@@ -273,6 +275,7 @@ export function AdminPage() {
               Helfenstein admin
             </p>
             <h1 className="text-vz-ink m-0 mt-1 text-[28px] font-bold">Clients</h1>
+            <VersionStamp className="text-vz-gray m-0 mt-2 text-[12px] leading-[15px]" />
           </div>
           <div className="flex items-center gap-3">
             <Link

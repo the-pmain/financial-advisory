@@ -18,7 +18,7 @@ export function FinmaLink({ className = '' }: { className?: string }) {
         <span className="text-vz-blue text-[15px] leading-[1.3]">FINMA register</span>
       ) : (
         <img
-          src="/images/finma-logo.png"
+          src="/images/finma-badge.svg"
           alt="FINMA — Authorised institutions, individuals and products"
           width={120}
           height={40}

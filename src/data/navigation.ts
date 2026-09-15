@@ -75,6 +75,7 @@ export const legalLinks: NavLink[] = [
   { label: 'Legal Notices', to: ROUTES.legalNotices },
   { label: 'Privacy Policy', to: ROUTES.privacyPolicy },
   { label: 'Documents and information', to: ROUTES.documentsAndInformation },
+  { label: 'Audit reports', to: ROUTES.auditReports },
   { label: 'Regulatory & compliance', to: ROUTES.regulatoryAndCompliance },
   { label: 'Impressum', to: ROUTES.impressum },
 ];

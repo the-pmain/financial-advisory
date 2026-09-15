@@ -162,11 +162,7 @@ export type ClientsListResponse = {
 
 export const TEST_DOCUMENT_KIND = 'agreement' as const;
 
-export const TEST_DOCUMENT_FIELDS = {
-  title: 'Test note',
-  note: 'Simple test document',
-};
-
+export type AdminDocumentKind = keyof AdminClient['documents'];
 export type ClientsTestFilter = 'all' | 'live' | 'test';
 
 export function fetchAdminClients(
@@ -191,7 +187,7 @@ export function patchAdminClientIsTest(id: string, is_test: boolean) {
   });
 }
 
-export function saveAdminTestDocument(clientId: string) {
+export function saveAdminDocument(clientId: string, kind: AdminDocumentKind, fields: Record<string, string>) {
   return requestJson<{ ok: true } & { id: string; client_id: string; documents: AdminClient['documents'] }>(
     API.adminClientDocuments,
     {
@@ -199,9 +195,62 @@ export function saveAdminTestDocument(clientId: string) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         client_id: clientId,
-        kind: TEST_DOCUMENT_KIND,
-        fields: TEST_DOCUMENT_FIELDS,
+        kind,
+        fields,
       }),
     },
   );
+}
+
+export function firstSavedDocumentKind(client: AdminClient): AdminDocumentKind | null {
+  const kinds: AdminDocumentKind[] = ['agreement', 'claim', 'p2p', 'matter', 'release', 'tracing'];
+  return kinds.find((kind) => client.documents[kind]) ?? null;
+}
+
+export type DocumentPdfResult =
+  | { ok: true; blob: Blob; filename: string }
+  | { ok: false; error: string; authenticated?: boolean };
+
+function filenameFromDisposition(header: string | null): string | null {
+  if (!header) return null;
+  const match = /filename="([^"]+)"/i.exec(header);
+  return match?.[1] ?? null;
+}
+
+/** Session cookie only — never put the admin PIN on the query string. */
+export async function fetchAdminDocumentPdf(
+  clientId: string,
+  kind: AdminDocumentKind,
+  disposition: 'inline' | 'attachment',
+): Promise<DocumentPdfResult> {
+  const params = new URLSearchParams({ client_id: clientId, kind });
+  const path =
+    disposition === 'inline'
+      ? `${API.adminClientDocumentPreview}?${params}`
+      : `${API.adminClientDocumentDownload}?${params}`;
+
+  try {
+    const res = await fetch(path, { credentials: 'include' });
+    if (res.status === 401) {
+      return { ok: false, authenticated: false, error: 'Unauthorized' };
+    }
+    if (!res.ok) {
+      let error = 'Could not generate the PDF.';
+      try {
+        const data = (await res.json()) as { error?: string };
+        if (typeof data.error === 'string' && data.error) error = data.error;
+      } catch {
+        /* keep default */
+      }
+      return { ok: false, error };
+    }
+    const blob = await res.blob();
+    return {
+      ok: true,
+      blob,
+      filename: filenameFromDisposition(res.headers.get('content-disposition')) ?? `helfenstein-${kind}.pdf`,
+    };
+  } catch {
+    return { ok: false, error: 'Could not generate the PDF.' };
+  }
 }

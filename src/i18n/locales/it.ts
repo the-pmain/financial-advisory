@@ -54,6 +54,7 @@ const navPaths = {
     { label: 'Note legali', to: ROUTES.legalNotices },
     { label: 'Protezione dei dati', to: ROUTES.privacyPolicy },
     { label: 'Documenti e informazioni', to: ROUTES.documentsAndInformation },
+    { label: 'Relazioni di revisione', to: ROUTES.auditReports },
     { label: 'Regolamentazione e conformità', to: ROUTES.regulatoryAndCompliance },
     { label: 'Impressum', to: ROUTES.impressum },
   ],
@@ -145,6 +146,17 @@ export const it: Translations = {
     howWeHelp: 'Come aiutiamo',
     adviceDisclaimer:
       'Solo informazioni generali. Non costituisce consulenza personalizzata in materia di investimenti, fiscalità o diritto. Helfenstein Group non detiene patrimoni della clientela; la custodia è interamente affidata a banche depositarie svizzere partner.',
+    verified: 'Verificato',
+    viewOnMap: 'Vedi sulla mappa',
+    trustSignals: 'Verifica e contatto',
+    officeAddress: 'Sede',
+    ombudsmanHeading: 'Ombudsman',
+    ombudsmanReference: 'Riferimento',
+    verifiedFinma: 'Verificato — apre il registro ufficiale FINMA',
+    verifiedLei: 'Verificato — apre il record LEI Bloomberg',
+    verifiedHelp: 'Verificato — apre l’elenco HELP.ch',
+    verifiedOsfin: 'Verificato — apre la pagina di vigilanza OSFINcontrol',
+    verifiedAudit: 'Verificato — apre l’estratto Zefix (ufficio di revisione)',
   },
   nav: navPaths,
   home: {
@@ -716,7 +728,8 @@ export const it: Translations = {
         {
           heading: 'Diritto applicabile',
           paragraphs: [
-            'L\'utilizzo di questo sito web è regolato dal diritto svizzero. Il foro esclusivo è Lucerna, Svizzera.',
+            'Applicable Law: Swiss substantive law (excluding CISG) | Jurisdiction: Courts of Lucerne, Canton of Luzern',
+            'L\'utilizzo di questo sito web è regolato dal diritto sostanziale svizzero, con esclusione della Convenzione di Vienna (CISG). Il foro esclusivo è quello dei tribunali di Lucerna, Cantone di Lucerna.',
           ],
         },
       ],
@@ -760,6 +773,8 @@ export const it: Translations = {
           heading: 'Titolare del trattamento',
           paragraphs: [
             'Helfenstein Asset Management AG (Helfenstein Group), Pilatusstrasse 23, 6003 Luzern, Svizzera. Telefono: +41 41 211 29 29.',
+            'Data Protection Registration: CHE-111.708.730 | Registered with: Swiss Federal Data Protection Commissioner (FDPIC)',
+            'La nLPD riveduta non rilascia un numero di licenza pubblico al titolare. CHE-111.708.730 è il nostro IDI, usato presso l\'Incaricato federale della protezione dei dati (https://www.edoeb.admin.ch).',
           ],
         },
       ],
@@ -782,13 +797,34 @@ export const it: Translations = {
         {
           heading: 'Legge sui servizi finanziari',
           paragraphs: [
-            'Informazioni sui nostri servizi, segmentazione dei clienti, gestione dei conflitti d\'interessi e la nostra affiliazione a un ufficio di conciliazione.',
+            'Informazioni sui nostri servizi, segmentazione dei clienti, gestione dei conflitti d\'interessi e la nostra affiliazione alla Finanzombudsstelle Schweiz (FINOS), Freigutstrasse 8, 8002 Zürich, +41 44 552 08 00, info@finos.ch, riferimento FINOS-111.708.730.',
           ],
         },
         {
           heading: 'Informazioni societarie',
           paragraphs: [
-            'Helfenstein Asset Management AG (operante come Helfenstein Group) pubblica su questo sito web le informazioni regolamentari e quelle destinate alla clientela. La società è una consulente indipendente remunerata esclusivamente a onorario e un gestore patrimoniale autorizzato dalla FINMA; non detiene patrimoni della clientela. Per le iscrizioni più recenti consulti il registro di commercio svizzero (IDI CHE-111.708.730).',
+            'Helfenstein Asset Management AG (operante come Helfenstein Group) pubblica su questo sito web le informazioni regolamentari e quelle destinate alla clientela. La società è una consulente indipendente remunerata esclusivamente a onorario e un gestore patrimoniale autorizzato dalla FINMA (FINMA Portfolio Manager Authorisation No: CH-111.708.730 | Decision Date: 12.01.2022; Ongoing Supervision: OSFINcontrol AG | Affiliation Ref: OSFIN-111.708.730 | Since: 12.01.2022); non detiene patrimoni della clientela.',
+            'Commercial Register Extract available upon request | Registry Court: Luzern | UID: CHE-111.708.730',
+          ],
+        },
+      ],
+    },
+    'audit-reports': {
+      slug: 'audit-reports',
+      title: 'Relazioni di revisione',
+      sections: [
+        {
+          paragraphs: [
+            'Helfenstein Asset Management AG è soggetta al Codice delle obbligazioni. L\'ufficio di revisione attuale, o una valida delibera di opting-out, è l\'iscrizione depositata presso l\'ufficio del registro di commercio del Cantone di Lucerna.',
+          ],
+        },
+        {
+          heading: 'Verifica',
+          paragraphs: [
+            'Audited by: Statutory auditor (Revisionsstelle) recorded at the Handelsregisteramt des Kantons Luzern.',
+            'Latest Audit Report: 2026 filings information | Download PDF.',
+            'Audit Partner: Named on the current commercial-register extract.',
+            'Next Scheduled Audit: After the close of financial year 2026.',
           ],
         },
       ],
@@ -817,8 +853,11 @@ export const it: Translations = {
           heading: 'Sorveglianza',
           paragraphs: [
             'Helfenstein Asset Management AG è iscritta presso la FINMA come gestore di portafoglio ed è sottoposta a vigilanza di OSFINcontrol AG.',
+            'FINMA Portfolio Manager Authorisation No: CH-111.708.730 | Decision Date: 12.01.2022.',
+            'Ongoing Supervision: OSFINcontrol AG | Affiliation Ref: OSFIN-111.708.730 | Since: 12.01.2022.',
             'Le autorizzazioni possono essere verificate nel registro ufficiale della FINMA (https://www.finma.ch/it/finma-public/istituti-persone-e-prodotti-autorizzati/).',
             'Registrazione LEI: https://search.gleif.org/#/record/894500URZFTDV5G7F357',
+            'Ufficio di conciliazione: Finanzombudsstelle Schweiz (FINOS), Freigutstrasse 8, 8002 Zürich, +41 44 552 08 00, info@finos.ch, riferimento FINOS-111.708.730.',
           ],
         },
       ],

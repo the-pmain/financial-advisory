@@ -5,6 +5,7 @@ import { AudienceBands, Hero } from '../components/widgets/Hero';
 import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
 import { MarketsSection } from '../components/widgets/MarketsSection';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
+import { PortalPreview } from '../components/widgets/PortalPreview';
 import { OffersGallery } from '../components/widgets/OffersGallery';
 import { TextTeasers } from '../components/widgets/TextTeasers';
 import { TwoColumns } from '../components/widgets/TwoColumns';
@@ -57,6 +58,10 @@ export function HomePage() {
 
       <div className={gap}>
         <TextTeasers title="A higher standard of care" items={solutions} />
+      </div>
+
+      <div className={gap}>
+        <PortalPreview />
       </div>
 
       <div className={gap}>

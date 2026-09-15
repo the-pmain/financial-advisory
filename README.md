@@ -118,3 +118,10 @@ Serves the built site and Express API together (default port `4173`).
 | GET | `/api/admin/topics` | yes | Topic inventory |
 | GET | `/api/admin/team` | yes | Team inventory |
 | GET | `/api/admin/documents` | yes | Client documents |
+| GET | `/api/admin/clients` | cookie | Paginated clients + document bags |
+| PATCH | `/api/admin/clients` | cookie | Set `is_test` |
+| PUT | `/api/admin/clients-documents` | cookie | Merge one document kind into the 1:1 bag |
+| GET | `/api/admin/clients-documents/preview` | cookie | Regenerate a PDF (`inline`) from saved fields + current firm/people |
+| GET | `/api/admin/clients-documents/download` | cookie | Same PDF as an attachment |
+
+Preview and download take `client_id` (UUID) and `kind` (`agreement` \| `claim` \| `p2p` \| `matter` \| `release` \| `tracing`). There is no stored PDF: the file is built on each request. Auth is the admin session cookie, not a PIN on the query string.

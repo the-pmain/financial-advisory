@@ -1,4 +1,11 @@
-import { company } from './company';
+import {
+  applicableLawLine,
+  commercialRegisterLine,
+  company,
+  dataProtectionLine,
+  finmaAuthorisationLine,
+  osfinSupervisionLine,
+} from './company';
 
 export type LegalPage = {
   slug: string;
@@ -38,7 +45,8 @@ export const legalPages: LegalPage[] = [
       {
         heading: 'Applicable law',
         paragraphs: [
-          `Use of this website is governed by Swiss law. The exclusive place of jurisdiction is ${company.jurisdiction}.`,
+          applicableLawLine(),
+          `Use of this website is governed by ${company.applicableLaw.governing}. Exclusive jurisdiction lies with the ${company.applicableLaw.venue}. The United Nations Convention on Contracts for the International Sale of Goods (CISG) does not apply.`,
         ],
       },
     ],
@@ -83,6 +91,8 @@ export const legalPages: LegalPage[] = [
         paragraphs: [
           `${company.legalName} (${company.groupName}), ${company.address.line}. Phone: ${company.phone}.` +
             (company.privacyEmail ? ` Email: ${company.privacyEmail}.` : ''),
+          dataProtectionLine(),
+          `The revised Swiss Federal Act on Data Protection does not issue a separate public controller licence. ${company.dataProtection.registration} is our UID, used to identify the controller with the ${company.dataProtection.authority} (${company.dataProtection.authorityUrl}).`,
         ],
       },
     ],
@@ -105,13 +115,15 @@ export const legalPages: LegalPage[] = [
       {
         heading: 'Financial services act',
         paragraphs: [
-          'Information on our services, client segmentation, the handling of conflicts of interest and our affiliation with an ombudsman office is set out in the FinSA client brochure.',
+          `Information on our services, client segmentation, the handling of conflicts of interest and our affiliation with ${company.ombudsman.name} is set out in the FinSA client brochure. Ombudsman reference ${company.ombudsman.reference}; ${company.ombudsman.addressLine}; ${company.ombudsman.phone}; ${company.ombudsman.email}; ${company.ombudsman.website}.`,
         ],
       },
       {
         heading: 'Company information',
         paragraphs: [
-          `${company.legalName} (trading as ${company.groupName}) publishes regulatory and client information on this website. The company is an independent, fee-only adviser and FINMA-authorised portfolio manager; it does not hold client assets. For the latest company filings, consult the Swiss commercial register (UID ${company.uid}).`,
+          `${company.legalName} (trading as ${company.groupName}) publishes regulatory and client information on this website. The company is an independent, fee-only adviser and FINMA-authorised portfolio manager (${finmaAuthorisationLine()}; ${osfinSupervisionLine()}); it does not hold client assets.`,
+          commercialRegisterLine(),
+          `Company identity ${company.commercialRegister.hrNumber}. View the current record on Zefix (${company.commercialRegister.zefixUrl}) or request a certified extract from us or the ${company.commercialRegister.office}.`,
         ],
       },
     ],
@@ -138,13 +150,37 @@ export const legalPages: LegalPage[] = [
         heading: 'Supervision',
         paragraphs: [
           `${company.legalName} is ${company.regulation.summary}`,
+          finmaAuthorisationLine(),
+          osfinSupervisionLine(),
           `Clients can verify authorisations on the official FINMA register (${company.regulation.registerUrl}).`,
           `LEI record: ${company.leiUrl}`,
+          `Ombudsman: ${company.ombudsman.name}, ${company.ombudsman.addressLine}, ${company.ombudsman.phone}, ${company.ombudsman.email}, ${company.ombudsman.website}. Reference Number: ${company.ombudsman.reference}.`,
         ],
       },
       // "Design and realisation" is intentionally absent until the agency name
       // is confirmed; technology credits do not belong on a client-facing
       // Impressum.
+    ],
+  },
+  {
+    slug: 'audit-reports',
+    title: 'Audit reports',
+    sections: [
+      {
+        paragraphs: [
+          `${company.legalName} is subject to the Swiss Code of Obligations. The current statutory auditor (Revisionsstelle), or a valid opting-out resolution, is the appointment filed at the ${company.commercialRegister.office}.`,
+        ],
+      },
+      {
+        heading: 'How to verify',
+        paragraphs: [
+          `Audited by: ${company.audit.firm}.`,
+          `Latest audit report: ${company.audit.latestLabel} | Download PDF (${company.audit.pdfHref}).`,
+          `Audit partner: ${company.audit.partner}.`,
+          `Next scheduled audit: ${company.audit.nextAudit}.`,
+          `Confirm the live filing on Zefix (${company.audit.zefixUrl}) together with UID ${company.uid} and LEI ${company.lei}.`,
+        ],
+      },
     ],
   },
 ];

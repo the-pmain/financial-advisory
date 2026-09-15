@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { matchKnowledgeHubSlug } from '../../constants/routes';
 import { allArticles } from '../../data/content';
-import { getPageMeta, SITE_NAME } from '../../seo';
+import { financialServiceJsonLd, getPageMeta, SITE_NAME, JSON_LD_ORG_ID } from '../../seo';
 
 function upsertMeta(name: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
@@ -29,7 +29,7 @@ function upsertJsonLd(id: string, data: Record<string, unknown> | null) {
   el.textContent = JSON.stringify(data);
 }
 
-/** Keeps <title>, description and article JSON-LD in sync after navigations. */
+/** Keeps <title>, description, organisation JSON-LD and article JSON-LD in sync. */
 export function DocumentMeta() {
   const { pathname } = useLocation();
 
@@ -38,6 +38,7 @@ export function DocumentMeta() {
     document.title = meta.title;
     upsertMeta('description', meta.description);
     upsertMeta('robots', meta.robots);
+    upsertJsonLd(JSON_LD_ORG_ID, financialServiceJsonLd());
 
     const articleSlug = matchKnowledgeHubSlug(pathname);
     if (articleSlug) {

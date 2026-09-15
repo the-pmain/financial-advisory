@@ -71,7 +71,11 @@ function ssgPrerender(siteUrl: string): Plugin {
       const { render, getStaticPaths } = (await import(
         pathToFileURL(path.join(ssrDir, 'entry-server.js')).href
       )) as {
-        render: (url: string) => { html: string; meta: { title: string; description: string; robots: string } };
+        render: (url: string) => {
+          html: string;
+          meta: { title: string; description: string; robots: string };
+          jsonLd?: Record<string, unknown>;
+        };
         getStaticPaths: () => string[];
       };
 
@@ -79,7 +83,7 @@ function ssgPrerender(siteUrl: string): Plugin {
       const origin = siteUrl.replace(/\/$/, '');
 
       for (const url of routes) {
-        const { html, meta } = render(url);
+        const { html, meta, jsonLd: jsonLdData } = render(url);
         if (!template.includes('<!--app-html-->')) {
           throw new Error('index.html is missing the <!--app-html--> placeholder');
         }
@@ -96,12 +100,16 @@ function ssgPrerender(siteUrl: string): Plugin {
         );
 
         const canonical = origin ? `${origin}${url}` : url;
+        const jsonLd = JSON.stringify(jsonLdData ?? {}).replace(/</g, '\\u003c');
         const extraHead = [
           origin ? `<link rel="canonical" href="${escapeAttr(canonical)}" />` : '',
           `<meta property="og:title" content="${escapeAttr(meta.title)}" />`,
           `<meta property="og:description" content="${escapeAttr(meta.description)}" />`,
           `<meta property="og:type" content="${url === '/' ? 'website' : 'article'}" />`,
           origin ? `<meta property="og:url" content="${escapeAttr(canonical)}" />` : '',
+          page.includes('helfenstein-jsonld-org')
+            ? ''
+            : `<script type="application/ld+json" id="helfenstein-jsonld-org">${jsonLd}</script>`,
         ]
           .filter(Boolean)
           .join('\n    ');
@@ -159,6 +167,9 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
+    },
+    optimizeDeps: {
+      include: ['pdfjs-dist', 'pdf-lib'],
     },
     server: {
       port: 5173,

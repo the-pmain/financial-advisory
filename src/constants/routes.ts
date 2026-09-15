@@ -43,6 +43,7 @@ export const ROUTES = {
   legalNotices: '/legal/legal-notices',
   privacyPolicy: '/legal/privacy-policy',
   documentsAndInformation: '/legal/documents-and-information',
+  auditReports: '/legal/audit-reports',
   impressum: '/legal/impressum',
 
   admin: '/admin',

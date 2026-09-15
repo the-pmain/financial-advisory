@@ -7,10 +7,9 @@ import { useT } from '../../i18n';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ArrowRightIcon, ChevronDownIcon } from '../ui/Icons';
 
-import { BloombergLeiLink } from '../ui/BloombergLeiLink';
 import { ButtonOrange } from '../ui/primitives';
-import { RegistryLinks } from '../ui/RegistryLinks';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { VerificationRegisterCards } from './TrustSignals';
 
 /**
  * The panel the Menu button reveals. It is absolutely positioned from the
@@ -129,14 +128,16 @@ export function MegaMenu({
             className="mt-[30px] gap-[15px]"
             buttonClassName="text-vz-blue hover:text-vz-orange"
           />
-
-          <div className="mt-8 max-mob:mt-6 max-mob:border-t max-mob:border-vz-rule max-mob:pt-6">
-            <RegistryLinks />
-            <div className="mt-5">
-              <BloombergLeiLink />
-            </div>
-          </div>
         </div>
+      </div>
+
+      <div className="vz-hairline-t pb-5 pt-4 max-mob:pb-10">
+        <p className="text-vz-gray-mid m-0 text-[20px] leading-[23px] font-normal">
+          {t.ui.verifyAuthorisation}
+        </p>
+        <ul className="m-0 mt-4 grid list-none grid-cols-4 gap-4 p-0 max-mast:grid-cols-2 max-mob:grid-cols-1">
+          <VerificationRegisterCards />
+        </ul>
       </div>
     </div>
   );

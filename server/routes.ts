@@ -1,4 +1,4 @@
-import { Router, type Response } from 'express';
+import { Router, type Request, type Response } from 'express';
 import { allArticles } from '../src/data/content.ts';
 import { caseStudies } from '../src/data/caseStudies.ts';
 import { clientDocuments } from '../src/data/documents.ts';
@@ -18,16 +18,27 @@ import { getPublicCompany } from './gleif.ts';
 import { HttpError } from './http.js';
 import { loadClientsPage, patchClientIsTest } from './admin-clients.js';
 import { saveClientDocument } from './clients-documents.js';
+import {
+  createAdminDocumentPdf,
+  parseAdminDocumentPdfQuery,
+  sendGeneratedPdf,
+} from './document-pdf.ts';
 import { getMarketQuotes } from './markets.ts';
 import { rateLimitClients, rateLimitLogin } from './rateLimit.ts';
 import { parseClientInput } from '../src/js/clients-model.js';
 import { asRows, requireInsertedRow, rest } from './supabase.js';
+import { SERVER_VERSION } from '../src/version.ts';
 
 export function createApiRouter(): Router {
   const router = Router();
 
   router.get('/health', (_req, res) => {
-    res.json({ ok: true, service: 'helfenstein-api', time: new Date().toISOString() });
+    res.json({
+      ok: true,
+      service: 'helfenstein-api',
+      time: new Date().toISOString(),
+      serverVersion: SERVER_VERSION,
+    });
   });
 
   router.get('/markets', async (_req, res) => {
@@ -137,6 +148,14 @@ export function createApiRouter(): Router {
     }
   });
 
+  router.get('/admin/clients-documents/preview', requireAdmin, async (req, res) => {
+    await sendAdminDocumentPdf(req, res, 'inline');
+  });
+
+  router.get('/admin/clients-documents/download', requireAdmin, async (req, res) => {
+    await sendAdminDocumentPdf(req, res, 'attachment');
+  });
+
   router.get('/admin/overview', requireAdmin, (_req, res) => {
     const articles = allArticles.filter((a) => a.kind !== 'video');
     res.json({
@@ -205,6 +224,24 @@ export function createApiRouter(): Router {
   });
 
   return router;
+}
+
+async function sendAdminDocumentPdf(
+  req: Request,
+  res: Response,
+  disposition: 'inline' | 'attachment',
+) {
+  try {
+    const parsed = parseAdminDocumentPdfQuery(req.query);
+    if (!parsed.ok) {
+      res.status(400).json({ ok: false, error: parsed.error });
+      return;
+    }
+    const file = await createAdminDocumentPdf(parsed.value);
+    sendGeneratedPdf(res, file, disposition);
+  } catch (err) {
+    sendRouteError(res, err);
+  }
 }
 
 function sendRouteError(res: Response, err: unknown) {

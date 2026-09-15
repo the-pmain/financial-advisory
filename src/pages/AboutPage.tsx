@@ -4,10 +4,12 @@ import { ROUTES, teamMemberPath } from '../constants/routes';
 import { company } from '../data/company';
 import { featuredMember } from '../data/team';
 import { topicByPath } from '../data/topics';
+import { AuthorisationMarks } from '../components/ui/AuthorisationMarks';
 import { BloombergLeiLink } from '../components/ui/BloombergLeiLink';
 import { ButtonOrange, SectionTitle } from '../components/ui/primitives';
 import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { DocumentsList } from '../components/widgets/DocumentsList';
+import { OmbudsmanDisclosure } from '../components/widgets/OmbudsmanDisclosure';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { TextTeasers } from '../components/widgets/TextTeasers';
 import { VerifyFinma } from '../components/widgets/VerifyFinma';
@@ -137,10 +139,16 @@ export function AboutPage() {
           <RegRow term="Swiss UID" detail={record.uid} href={record.uidRegisterUrl} />
           <RegRow term="LEI" detail={record.lei} href={record.gleifUrl} />
           <RegRow
-            term="Supervision"
-            detail={`${company.regulation.authority} authorisation · ${company.regulation.supervisor}`}
+            term="FINMA authorisation"
+            detail={`No. ${company.regulation.finmaAuthorisationNo} · Decision ${company.regulation.finmaDecisionDate}`}
             href={company.regulation.registerUrl}
           />
+          <RegRow
+            term="OSFINcontrol"
+            detail={`Affiliation ${company.regulation.osfinAffiliationRef} · Since ${company.regulation.osfinSince}`}
+            href={company.regulation.supervisorUrl}
+          />
+          <RegRow term="Ombudsman" detail={`${company.ombudsman.name} · ${company.ombudsman.reference}`} />
           <RegRow term="Office" detail={record.addressLine} />
           {record.leiStatus ? (
             <RegRow
@@ -173,6 +181,8 @@ export function AboutPage() {
           </p>
         ) : null}
 
+        <AuthorisationMarks className="mt-8 max-w-[802px]" />
+
         <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
           <BloombergLeiLink size="large" />
           <p className="text-vz-gray-mid m-0 max-w-[420px] text-[14px] leading-[1.4]">
@@ -193,6 +203,10 @@ export function AboutPage() {
 
       <div className="mt-12 max-lap:mt-10">
         <VerifyFinma />
+      </div>
+
+      <div className="mt-12 max-lap:mt-10">
+        <OmbudsmanDisclosure />
       </div>
 
       <div className="mt-12 max-lap:mt-10">

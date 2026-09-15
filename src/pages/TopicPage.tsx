@@ -6,7 +6,11 @@ import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
 import { ChallengesBenefits } from '../components/widgets/ChallengesBenefits';
+import { CustodyBanks } from '../components/widgets/CustodyBanks';
 import { DocumentsList } from '../components/widgets/DocumentsList';
+import { OmbudsmanDisclosure } from '../components/widgets/OmbudsmanDisclosure';
+import { PortalPreview } from '../components/widgets/PortalPreview';
+import { RegulatoryHistory } from '../components/widgets/RegulatoryHistory';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { SpecialistsBand } from '../components/widgets/SpecialistsBand';
 import { TextTeasers } from '../components/widgets/TextTeasers';
@@ -79,6 +83,30 @@ export function TopicPage() {
       {topic.showVerifyFinma && (
         <div className="mt-12 max-lap:mt-10">
           <VerifyFinma />
+        </div>
+      )}
+
+      {topic.showRegulatoryHistory && (
+        <div className="mt-12 max-lap:mt-10">
+          <RegulatoryHistory />
+        </div>
+      )}
+
+      {topic.showCustodyBanks && (
+        <div className="mt-12 max-lap:mt-10">
+          <CustodyBanks />
+        </div>
+      )}
+
+      {topic.showPortalPreview && (
+        <div className="mt-12 max-lap:mt-10">
+          <PortalPreview />
+        </div>
+      )}
+
+      {topic.showOmbudsman && (
+        <div className="mt-12 max-lap:mt-10">
+          <OmbudsmanDisclosure />
         </div>
       )}
 

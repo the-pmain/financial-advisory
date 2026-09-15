@@ -1,6 +1,9 @@
 import { useParams } from 'react-router';
 import { legalBySlug } from '../data/legal';
+import { AuditReports } from '../components/widgets/AuditReports';
 import { DocumentsList } from '../components/widgets/DocumentsList';
+import { CommercialRegisterExtract } from '../components/widgets/CommercialRegisterExtract';
+import { OmbudsmanDisclosure } from '../components/widgets/OmbudsmanDisclosure';
 import { NotFoundPage } from './NotFoundPage';
 
 export function LegalPage() {
@@ -26,10 +29,24 @@ export function LegalPage() {
         </section>
       ))}
 
-      {slug === 'documents-and-information' && (
+      {slug === 'audit-reports' && (
         <div className="mt-10">
-          <DocumentsList title="Downloadable documents" />
+          <AuditReports />
         </div>
+      )}
+
+      {slug === 'documents-and-information' && (
+        <>
+          <div className="mt-10">
+            <CommercialRegisterExtract />
+          </div>
+          <div className="mt-10">
+            <OmbudsmanDisclosure />
+          </div>
+          <div className="mt-10">
+            <DocumentsList title="Documents" />
+          </div>
+        </>
       )}
     </article>
   );

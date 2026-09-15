@@ -126,6 +126,17 @@ export type Translations = {
     regulatoryChallenges: string;
     howWeHelp: string;
     adviceDisclaimer: string;
+    verified: string;
+    viewOnMap: string;
+    trustSignals: string;
+    officeAddress: string;
+    ombudsmanHeading: string;
+    ombudsmanReference: string;
+    verifiedFinma: string;
+    verifiedLei: string;
+    verifiedHelp: string;
+    verifiedOsfin: string;
+    verifiedAudit: string;
   };
   nav: {
     mainNavigation: NavGroupT[];

@@ -1,4 +1,5 @@
 import { company } from '../../data/company';
+import { AuthorisationMarks } from '../ui/AuthorisationMarks';
 import { FinmaLink } from '../ui/FinmaLink';
 import { SectionTitle } from '../ui/primitives';
 
@@ -32,9 +33,11 @@ export function VerifyFinma() {
             </li>
             <li>Confirm the authorisation type and any public warnings before you engage.</li>
           </ol>
+          <AuthorisationMarks className="mt-5" />
           <p className="text-vz-gray-mid mt-4 mb-0 text-[14px] leading-[1.4]">
-            {company.legalName} is {company.regulation.summary} Advisory conduct is also subject to
-            the Swiss Financial Services Act (FinSA).
+            {company.legalName} is {company.regulation.summary} Search the register by name or Swiss
+            UID {company.uid}. Advisory conduct is also subject to the Swiss Financial Services Act
+            (FinSA).
           </p>
         </div>
         <FinmaLink className="justify-self-end max-mob:justify-self-start" />

@@ -49,6 +49,44 @@ export function PlusIcon(props: IconProps) {
   );
 }
 
+export function DownloadIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M8 2.5v8M5 8.5 8 11.5 11 8.5M3 13.5h10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+}
+
+export function FolderIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M2 4.2h4.2l1.2 1.4H14V13H2V4.2Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+      />
+    </svg>
+  );
+}
+
+export function PreviewIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M2 8s2.4-4 6-4 6 4 6 4-2.4 4-6 4-6-4-6-4Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <circle cx="8" cy="8" r="1.6" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export function MoreIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
@@ -145,6 +183,32 @@ export const offerIcons = {
 /* -------------------------------------------------------------------------- */
 /* Social glyphs                                                               */
 /* -------------------------------------------------------------------------- */
+
+export function CheckIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M3 8.2 6.4 11.5 13 4.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+}
+
+export function MapPinIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <path
+        d="M8 14.5s5-4.2 5-7.4A5 5 0 0 0 3 7.1c0 3.2 5 7.4 5 7.4Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+      />
+      <circle cx="8" cy="7.1" r="1.6" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
 
 export function SocialIcon({ name, ...props }: IconProps & { name: string }) {
   const paths: Record<string, ReactNode> = {

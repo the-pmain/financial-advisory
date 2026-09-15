@@ -2,9 +2,12 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
   attachDocumentsToClients,
+  composeKindsSaved,
   emptyDocuments,
+  fieldsForKind,
   isDocumentKind,
   isUuid,
+  kindSaved,
   mergeKind,
   normalizeDocuments,
   persistDocuments,
@@ -76,6 +79,9 @@ describe('normalizeDocuments / persistDocuments', () => {
     assert.equal(flat.matter, null);
     assert.equal(flat.tracing.fields.bank, 'UBS');
     assert.equal(flat.release, null);
+    assert.equal(kindSaved(flat, 'claim'), true);
+    assert.equal(kindSaved(flat, 'p2p'), true);
+    assert.equal(kindSaved(flat, 'release'), false);
 
     const persisted = persistDocuments(flat);
     assert.deepEqual(Object.keys(persisted).sort(), ['agreement', 'claim', 'release']);
@@ -93,8 +99,22 @@ describe('normalizeDocuments / persistDocuments', () => {
     });
     assert.equal(persisted.agreement, null);
     assert.equal(persisted.claim.p2p.fields.note, 'nested');
-    assert.deepEqual(persisted.claim.fields, {});
-    assert.equal(persisted.claim.saved_at, saved);
+    assert.equal('fields' in persisted.claim, false);
+    const flat = normalizeDocuments(persisted);
+    assert.equal(kindSaved(flat, 'claim'), false);
+    assert.equal(kindSaved(flat, 'p2p'), true);
+  });
+
+  it('reads nested kinds stored at the top level', () => {
+    const saved = '2026-09-11T12:00:00.000Z';
+    const flat = normalizeDocuments({
+      agreement: null,
+      claim: null,
+      release: null,
+      tracing: { fields: { hops: '4' }, saved_at: saved },
+    });
+    assert.equal(flat.tracing.fields.hops, '4');
+    assert.equal(kindSaved(flat, 'tracing'), true);
   });
 });
 
@@ -112,6 +132,20 @@ describe('mergeKind', () => {
   it('rejects an unknown kind', () => {
     const merged = mergeKind(emptyDocuments(), 'gtc', { a: 'b' });
     assert.equal(merged.ok, false);
+  });
+
+  it('saving p2p does not wipe claim fields', () => {
+    const start = mergeKind(emptyDocuments(), 'claim', { clientName: 'Anna', crimeRef: 'AF-1' });
+    const next = mergeKind(start.value, 'p2p', { sellerName: 'Sam' });
+    assert.equal(next.ok, true);
+    assert.equal(next.value.claim.fields.clientName, 'Anna');
+    assert.equal(next.value.claim.fields.crimeRef, 'AF-1');
+    assert.equal(next.value.p2p.fields.sellerName, 'Sam');
+    const persisted = persistDocuments(next.value);
+    const flat = normalizeDocuments(persisted);
+    assert.equal(fieldsForKind(flat, 'claim').clientName, 'Anna');
+    assert.equal(kindSaved(flat, 'p2p'), true);
+    assert.deepEqual(composeKindsSaved(flat), ['claim', 'p2p']);
   });
 });
 

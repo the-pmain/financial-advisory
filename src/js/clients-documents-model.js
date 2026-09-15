@@ -9,6 +9,16 @@ export const DOCUMENT_KINDS = Object.freeze([
 
 export const TOP_LEVEL_KINDS = Object.freeze(['agreement', 'claim', 'release']);
 export const NESTED_CLAIM_KINDS = Object.freeze(['p2p', 'matter', 'tracing']);
+export const COMPOSE_KINDS = Object.freeze(['claim', 'p2p', 'matter', 'release', 'tracing']);
+
+export const DOCUMENT_KIND_LABELS = Object.freeze({
+  agreement: 'Client authority',
+  claim: 'Victim claim',
+  p2p: 'P2P agreement',
+  matter: 'Application of release order',
+  release: 'Release order',
+  tracing: 'Tracing report',
+});
 
 const FIELD_KEY_RE = /^[A-Za-z][A-Za-z0-9_]*$/;
 const MAX_FIELD_KEYS = 80;
@@ -102,15 +112,26 @@ export function normalizeDocuments(raw) {
   out.agreement = readEntry(raw.agreement);
   out.release = readEntry(raw.release);
 
-  const claim = raw.claim;
-  if (claim && typeof claim === 'object' && !Array.isArray(claim)) {
-    out.claim = readEntry(claim);
-    out.p2p = readEntry(claim.p2p);
-    out.matter = readEntry(claim.matter);
-    out.tracing = readEntry(claim.tracing);
-  }
+  const claim = raw.claim && typeof raw.claim === 'object' && !Array.isArray(raw.claim) ? raw.claim : null;
+  out.claim = readOwnClaimEntry(claim);
+  out.p2p = readEntry(claim?.p2p) ?? readEntry(raw.p2p);
+  out.matter = readEntry(claim?.matter) ?? readEntry(raw.matter);
+  out.tracing = readEntry(claim?.tracing) ?? readEntry(raw.tracing);
 
   return out;
+}
+
+/** Claim is its own document — empty residue left by nested kinds is not a save. */
+function readOwnClaimEntry(claim) {
+  if (!claim) return null;
+  const fields = pickStringFields(
+    claim.fields && typeof claim.fields === 'object' && !Array.isArray(claim.fields)
+      ? claim.fields
+      : {},
+  );
+  if (Object.keys(fields).length === 0) return null;
+  const saved_at = typeof claim.saved_at === 'string' && claim.saved_at ? claim.saved_at : null;
+  return { fields, saved_at };
 }
 
 /** Persist flattened 6-kind view as the 3-key JSON shape. Nested kinds omit if null. */
@@ -128,16 +149,34 @@ export function persistDocuments(flat) {
 
   const claimBase = cloneEntry(view.claim);
   let claim = null;
-  if (claimBase || Object.keys(nested).length) {
-    const nestedSaved = Object.values(nested)[0]?.saved_at ?? null;
+  if (claimBase) {
     claim = {
-      fields: claimBase?.fields ?? {},
-      saved_at: claimBase?.saved_at ?? nestedSaved,
+      fields: claimBase.fields,
+      saved_at: claimBase.saved_at,
       ...nested,
     };
+  } else if (Object.keys(nested).length) {
+    claim = { ...nested };
   }
 
   return { agreement, claim, release };
+}
+
+export function kindSaved(documents, kind) {
+  if (!isDocumentKind(kind)) return false;
+  const entry = documents?.[kind];
+  if (!entry || typeof entry !== 'object') return false;
+  if (typeof entry.saved_at === 'string' && entry.saved_at) return true;
+  return Object.keys(entry.fields || {}).length > 0;
+}
+
+export function fieldsForKind(documents, kind) {
+  if (!kindSaved(documents, kind)) return {};
+  return { ...(documents[kind].fields || {}) };
+}
+
+export function composeKindsSaved(documents) {
+  return COMPOSE_KINDS.filter((kind) => kindSaved(documents, kind));
 }
 
 export function mergeKind(existingFlat, kind, fields, savedAt = new Date().toISOString()) {

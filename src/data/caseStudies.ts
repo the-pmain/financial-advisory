@@ -9,6 +9,7 @@ export type CaseStudy = {
   to: string;
 };
 
+
 /** Anonymised client stories — illustrative, not performance guarantees. */
 export const caseStudies: CaseStudy[] = [
   {

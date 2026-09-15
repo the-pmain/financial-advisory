@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { serverConfig } from './config.ts';
 import { createApiRouter } from './routes.ts';
 import { LEGACY_REDIRECTS } from '../src/constants/routes.ts';
+import { SERVER_VERSION } from '../src/version.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, '..');
@@ -146,7 +147,9 @@ export function startServer() {
 
   app.listen(port, serverConfig.host, () => {
     const mode = serveStatic ? 'full' : 'api';
-    console.log(`Helfenstein ${mode} server listening on http://${serverConfig.host}:${port}`);
+    console.log(
+      `Helfenstein ${mode} server ${SERVER_VERSION} listening on http://${serverConfig.host}:${port}`,
+    );
   });
 }
 

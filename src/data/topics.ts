@@ -24,6 +24,10 @@ export type Topic = {
   expertiseTags?: ExpertiseTag[];
   showDocuments?: boolean;
   showVerifyFinma?: boolean;
+  showOmbudsman?: boolean;
+  showRegulatoryHistory?: boolean;
+  showCustodyBanks?: boolean;
+  showPortalPreview?: boolean;
   showCaseStudies?: boolean;
   adviceDisclaimer?: boolean;
 };
@@ -99,6 +103,7 @@ export const topics: Topic[] = [
     ],
     relatedSlugs: ['financial-investments-what-you-need-know', 'all-you-need-to-know-about-etfs'],
     expertiseTags: ['investments'],
+    showCustodyBanks: true,
     adviceDisclaimer: true,
     challenges: [
       { title: 'Cost drag', text: 'Fees and retrocessions quietly compound against long-term returns.' },
@@ -240,6 +245,7 @@ export const topics: Topic[] = [
       { title: 'Mortgages', text: 'Financing arranged on comparison-tested terms.' },
       { title: 'Security', text: 'Multi-factor access and the fraud monitoring your bank provides.' },
     ],
+    showCustodyBanks: true,
     adviceDisclaimer: true,
   }),
 
@@ -251,11 +257,11 @@ export const topics: Topic[] = [
     subtitle: 'Independent advice from Lucerne.',
     intro: [
       'Helfenstein Group is an independent Swiss adviser and portfolio manager based in Lucerne. We advise private individuals and families — never institutions or companies — on asset management, financial advice, retirement planning and financing.',
-      'We are listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. Our income comes from the fees our clients agree with us, and we hold no client assets: custody stays with Swiss banking partners.',
+      'We are listed by FINMA as an authorised portfolio manager (No. CH-111.708.730, decision 12.01.2022) and supervised by OSFINcontrol AG (affiliation OSFIN-111.708.730, since 12.01.2022). Our income comes from the fees our clients agree with us, and we hold no client assets: custody stays with Swiss banking partners.',
     ],
     highlights: [
       { title: 'Our team', text: 'Specialists who stay with you over the long term.' },
-      { title: 'Regulatory compliance', text: 'FINMA authorisation, OSFINcontrol supervision, and our Bloomberg LEI record.' },
+      { title: 'Regulatory compliance', text: 'FINMA No. CH-111.708.730 (12.01.2022), OSFIN-111.708.730, and our Bloomberg LEI record.' },
       { title: 'Independent advice', text: 'No retrocessions, no product sales targets.' },
       { title: 'Client stories', text: 'Anonymised examples of how advice is delivered in practice.' },
     ],
@@ -285,18 +291,20 @@ export const topics: Topic[] = [
     subtitle: 'Who supervises Helfenstein, what FinSA means for you, and how fees work.',
     intro: [
       'Swiss financial advice is governed primarily by the Financial Services Act (FinSA) and, for portfolio managers, by FINMA authorisation with day-to-day supervision by a recognised supervisory organisation. This page explains the framework in plain language.',
-      'Helfenstein Asset Management AG is listed by FINMA as an authorised portfolio manager and is supervised by OSFINcontrol AG. You can verify our authorisation on the official FINMA register (UID CHE-111.708.730, LEI 894500URZFTDV5G7F357).',
+      'Helfenstein Asset Management AG is listed by FINMA as an authorised portfolio manager and is supervised by OSFINcontrol AG. FINMA Portfolio Manager Authorisation No: CH-111.708.730 | Decision Date: 12.01.2022. Ongoing Supervision: OSFINcontrol AG | Affiliation Ref: OSFIN-111.708.730 | Since: 12.01.2022. Verify these entries on the official FINMA register (UID CHE-111.708.730, LEI 894500URZFTDV5G7F357).',
       'Under FinSA, firms must inform you about services, costs, client segmentation and conflicts of interest before providing personalised advice. Advice at Helfenstein Group is paid for by clients alone; we earn no product commissions and hold no client assets — custody is with our Swiss banking partners, and your bank reports to you directly.',
-      'If a dispute cannot be resolved with us directly, you may contact the ombudsman office with which we are affiliated. Details appear in our FinSA client brochure and under Documents and information.',
+      'If a dispute cannot be resolved with us directly, you may contact Finanzombudsstelle Schweiz (FINOS), Freigutstrasse 8, 8002 Zürich, +41 44 552 08 00, info@finos.ch, reference FINOS-111.708.730. The same details appear in our FinSA client brochure.',
     ],
     highlights: [
       { title: 'FINMA register', text: 'Check authorised institutions and individuals on finma.ch.' },
       { title: 'FinSA conduct rules', text: 'Transparency on services, fees, suitability and conflicts.' },
       { title: 'Client documents', text: 'Fee schedule, GTC, risk disclosure and FinSA brochure.' },
-      { title: 'Ombudsman', text: 'An independent route if a complaint cannot be settled.' },
+      { title: 'Ombudsman', text: 'FINOS, Freigutstrasse 8, 8002 Zürich — reference FINOS-111.708.730.' },
     ],
     relatedSlugs: ['finsa-what-clients-should-know', 'how-to-spot-financial-scams-switzerland'],
     showVerifyFinma: true,
+    showOmbudsman: true,
+    showRegulatoryHistory: true,
     showDocuments: true,
     adviceDisclaimer: true,
   }),
@@ -361,7 +369,7 @@ export const topics: Topic[] = [
     ],
     highlights: [
       { title: 'Company profile', text: 'Legal name, UID, LEI and Lucerne address.' },
-      { title: 'Regulation', text: 'FINMA portfolio manager; supervised by OSFINcontrol AG.' },
+      { title: 'Regulation', text: 'FINMA No. CH-111.708.730 (12.01.2022); OSFIN-111.708.730.' },
       { title: 'Services', text: 'Independent advice and portfolio management for private clients.' },
       { title: 'Contact', text: '+41 41 211 29 29 · Pilatusstrasse 23, Luzern.' },
     ],
@@ -446,16 +454,17 @@ export const topics: Topic[] = [
     subtitle: 'Supervision, FinSA information and client documents.',
     intro: [
       'This hub brings together how Helfenstein is supervised, what FinSA means for clients, and the documents that accompany our services.',
-      'Helfenstein Asset Management AG (Helfenstein Group) is listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. We do not hold client assets — custody is with Swiss banking partners. Advisory relationships are subject to FinSA conduct rules, including transparency on fees, conflicts of interest and client segmentation.',
+      'Helfenstein Asset Management AG (Helfenstein Group) is listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. FINMA Portfolio Manager Authorisation No: CH-111.708.730 | Decision Date: 12.01.2022. Ongoing Supervision: OSFINcontrol AG | Affiliation Ref: OSFIN-111.708.730 | Since: 12.01.2022. We do not hold client assets — custody is with Swiss banking partners. Advisory relationships are subject to FinSA conduct rules, including transparency on fees, conflicts of interest and client segmentation.',
     ],
     highlights: [
       { title: 'Verify authorisation', text: 'Use the FINMA register to confirm supervised entities.' },
       { title: 'Client documents', text: 'Fee schedule, GTC, risk disclosure and FinSA brochure.' },
       { title: 'Conflicts of interest', text: 'How we disclose and manage them.' },
-      { title: 'Complaints', text: 'Contact us first; then the affiliated ombudsman if needed.' },
+      { title: 'Complaints', text: 'Contact us first; then FINOS (ref. FINOS-111.708.730) if needed.' },
     ],
     relatedSlugs: ['finsa-what-clients-should-know', 'how-to-spot-financial-scams-switzerland'],
     showVerifyFinma: true,
+    showOmbudsman: true,
     showDocuments: true,
     adviceDisclaimer: true,
   }),
@@ -475,6 +484,7 @@ export const topics: Topic[] = [
       { title: 'Security', text: 'Two-factor authentication on every login.' },
     ],
     relatedSlugs: ['how-to-spot-financial-scams-switzerland'],
+    showPortalPreview: true,
     ctaLabel: 'Sign up for free',
   }),
   t({

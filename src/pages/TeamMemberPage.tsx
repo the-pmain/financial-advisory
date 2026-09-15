@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router';
 import { ROUTES, teamMemberPath } from '../constants/routes';
-import { teamBySlug, teamSections } from '../data/team';
+import { company } from '../data/company';
+import { cfaDirectoryUrl, finmaAdviserNoFor, teamBySlug, teamSections } from '../data/team';
 import { SectionTitle } from '../components/ui/primitives';
 import { TeamAvatar } from '../components/ui/TeamAvatar';
 import { ConsultationForm } from '../components/widgets/ConsultationForm';
@@ -57,6 +58,39 @@ export function TeamMemberPage() {
                 Languages: {member.languages.join(', ')}
               </p>
             ) : null}
+            <div className="text-vz-ink mt-4 space-y-1 text-[13px] leading-[1.45]">
+              <p className="m-0 font-bold">
+                FINMA Registered Adviser No:{' '}
+                <a
+                  href={company.regulation.registerUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="text-vz-blue hover:text-vz-orange"
+                >
+                  {finmaAdviserNoFor(member)}
+                  <span className="visually-hidden"> (external link, opens in a new window)</span>
+                </a>
+              </p>
+              {member.cfaRegistryNo ? (
+                <p className="m-0 font-bold">
+                  CFA Registry No:{' '}
+                  <a
+                    href={cfaDirectoryUrl()}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-vz-blue hover:text-vz-orange"
+                  >
+                    {member.cfaRegistryNo}
+                    <span className="visually-hidden"> (external link, opens in a new window)</span>
+                  </a>
+                </p>
+              ) : null}
+              <p className="text-vz-gray m-0 text-[12px] leading-[1.4]">
+                Advises under {company.legalName} FINMA authorisation {company.regulation.finmaAuthorisationNo}.
+                Verify the firm on the FINMA register (UID {company.uid})
+                {member.cfaRegistryNo ? '; confirm the CFA charter in the CFA Institute directory' : ''}.
+              </p>
+            </div>
             {member.regulatoryNote ? (
               <p className="text-vz-gray m-0 mt-2 text-[13px] leading-[1.4]">{member.regulatoryNote}</p>
             ) : null}
