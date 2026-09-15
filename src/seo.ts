@@ -1,4 +1,5 @@
 import { company } from './data/company';
+import { officePhone } from './data/phoneNumbers';
 import { allArticles } from './data/content';
 import { legalPages } from './data/legal';
 import { teamMembers } from './data/team';
@@ -39,7 +40,7 @@ export function financialServiceJsonLd(): Record<string, unknown> {
       addressLocality: company.address.city,
       addressCountry: 'CH',
     },
-    telephone: company.phone,
+    telephone: officePhone.jsonLd,
     finmaRegistration: {
       '@type': 'FinancialServiceLicense',
       licenseType: 'Portfolio Manager',

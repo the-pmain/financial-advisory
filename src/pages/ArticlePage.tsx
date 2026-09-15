@@ -4,6 +4,7 @@ import { allArticles, findArticle } from '../data/content';
 import { ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
+import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { SectionTitle, Tagline } from '../components/ui/primitives';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -43,7 +44,7 @@ export function ArticlePage() {
           <Tagline className="mt-3">{article.tagline}</Tagline>
           <h1 className="mt-2">{article.title}</h1>
           <p className="text-vz-ink m-0 text-[21px] leading-[1.45] max-mob:text-[19px]">
-            {article.teaser}
+            <PhoneRichText text={article.teaser} />
           </p>
           {meta.length > 0 && (
             <p className="text-vz-gray m-0 mt-4 text-[14px] leading-[1.4]">{meta.join(' · ')}</p>
@@ -66,7 +67,7 @@ export function ArticlePage() {
         <div className="mt-8">
           {(article.body ?? []).map((paragraph, i) => (
             <p key={i} className="text-vz-ink text-[19px] leading-[1.55] max-mob:text-[18px]">
-              {paragraph}
+              <PhoneRichText text={paragraph} />
             </p>
           ))}
         </div>

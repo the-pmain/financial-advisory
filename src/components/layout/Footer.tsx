@@ -4,7 +4,7 @@ import { ROUTES } from '../../constants/routes';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ArrowRightIcon, ChevronDownIcon } from '../ui/Icons';
 import { LogoMark } from '../ui/Logo';
-import { ButtonOrange } from '../ui/primitives';
+import { AppointmentButton } from '../appointments/AppointmentModal';
 import { ComplianceMarks } from '../ui/ComplianceMarks';
 import { TrustSignals } from './TrustSignals';
 import { VersionStamp } from '../ui/VersionStamp';
@@ -38,7 +38,7 @@ export function Footer() {
     >
       <div className="mb-[38px] flex flex-wrap items-center justify-between gap-6 max-tab:mb-[31px] max-tab:flex-col max-tab:items-start max-tab:gap-[30px]">
         <Breadcrumb />
-        <ButtonOrange to={ROUTES.appointments}>Make an appointment</ButtonOrange>
+        <AppointmentButton>Make an appointment</AppointmentButton>
       </div>
 
       <TrustSignals className="mb-[50px] max-tab:mb-[40px]" />

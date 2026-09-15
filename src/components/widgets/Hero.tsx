@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import { audienceBands, hero } from '../../data/content';
+import { PhoneRichText } from '../ui/PhoneNumberDisplay';
 import { UnderlineLink } from '../ui/primitives';
 
 /**
@@ -17,7 +18,7 @@ export function Hero() {
           {hero.headline}
         </h1>
         <p className="text-vz-ink mt-4 mb-0 max-w-[40rem] text-[17px] leading-[1.5] max-mob:mx-auto max-mob:text-[16px]">
-          {hero.subline}
+          <PhoneRichText text={hero.subline} />
         </p>
         <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 max-mob:justify-center">
           <UnderlineLink to={hero.secondaryCta.to}>{hero.secondaryCta.label}</UnderlineLink>
@@ -45,7 +46,9 @@ export function AudienceBands() {
           <h2 className="text-vz-ink m-0 text-[26px] leading-[1.25] font-bold max-mob:text-[22px]">
             {band.title}
           </h2>
-          <p className="text-vz-ink mt-3 mb-0 text-[17px] leading-[1.45]">{band.text}</p>
+          <p className="text-vz-ink mt-3 mb-0 text-[17px] leading-[1.45]">
+            <PhoneRichText text={band.text} />
+          </p>
           <p className="mt-4 mb-0">
             <Link
               to={band.to}

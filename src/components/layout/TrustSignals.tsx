@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { company } from '../../data/company';
 import { useT } from '../../i18n';
+import { PhoneNumberDisplay } from '../ui/PhoneNumberDisplay';
 import { VerificationBadge } from '../ui/VerificationBadge';
 
 function TrustCard({
@@ -100,9 +101,7 @@ export function TrustSignals({ className = '' }: { className?: string }) {
               {company.address.country}
             </p>
             <p className="m-0 mt-1.5">
-              <a href={company.phoneHref} className="text-vz-blue hover:text-vz-orange text-[13px]">
-                {company.phone}
-              </a>
+              <PhoneNumberDisplay />
             </p>
           </TrustCard>
         </li>
@@ -112,9 +111,13 @@ export function TrustSignals({ className = '' }: { className?: string }) {
             <p className="text-vz-ink m-0 mt-1.5 text-[13px] leading-[1.4] font-bold">{office.name}</p>
             <p className="text-vz-ink m-0 mt-1 text-[12px] leading-[1.45]">{office.addressLine}</p>
             <p className="text-vz-ink m-0 mt-1 text-[12px] leading-[1.45]">
-              <a href={office.phoneHref} className="text-vz-blue hover:text-vz-orange">
-                {office.phone}
-              </a>
+              <PhoneNumberDisplay
+                visibleNumber={office.phone}
+                indexedNumber={office.phone}
+                jsonLd={false}
+                inline
+                className="text-[12px]"
+              />
               {' · '}
               <a href={`mailto:${office.email}`} className="text-vz-blue hover:text-vz-orange">
                 {office.email}

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { knowledgeHubArticlePath } from '../constants/routes';
 import { sortedArticles } from '../data/content';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
+import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { SectionTitle, Tagline } from '../components/ui/primitives';
 
 function formatDate(iso?: string): string {
@@ -58,7 +59,9 @@ export function InsightsPage() {
                 <h2 className="text-vz-ink group-hover:text-vz-orange m-0 mt-1 text-[24px] leading-[1.25] font-bold transition-colors duration-250 max-mob:text-[20px]">
                   {article.title}
                 </h2>
-                <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">{article.teaser}</p>
+                <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">
+                  <PhoneRichText text={article.teaser} />
+                </p>
                 <p className="text-vz-gray m-0 mt-2 text-[13px]">
                   {[formatDate(article.publishedDate), article.author, article.readingTimeMinutes
                     ? `${article.readingTimeMinutes} min read`

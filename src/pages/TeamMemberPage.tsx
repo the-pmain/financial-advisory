@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router';
 import { ROUTES, teamMemberPath } from '../constants/routes';
 import { company } from '../data/company';
 import { cfaDirectoryUrl, finmaAdviserNoFor, teamBySlug, teamSections } from '../data/team';
+import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { SectionTitle } from '../components/ui/primitives';
 import { TeamAvatar } from '../components/ui/TeamAvatar';
 import { ConsultationForm } from '../components/widgets/ConsultationForm';
@@ -114,7 +115,7 @@ export function TeamMemberPage() {
         <section>
           <h2 className="text-vz-ink mb-3 text-[22px] leading-[1.3] font-bold">About</h2>
           <p className="text-vz-ink m-0 text-[19px] leading-[1.55] max-mob:text-[18px]">
-            {member.about}
+            <PhoneRichText text={member.about} />
           </p>
         </section>
 
@@ -123,7 +124,9 @@ export function TeamMemberPage() {
             <h2 className="text-vz-ink mb-3 text-[22px] leading-[1.3] font-bold">Results</h2>
             <ul className="text-vz-ink m-0 list-disc space-y-2 pl-5 text-[17px] leading-[1.5] max-mob:text-[16px]">
               {member.results.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item}>
+                  <PhoneRichText text={item} />
+                </li>
               ))}
             </ul>
           </section>

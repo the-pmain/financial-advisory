@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import type { Solution } from '../../data/content';
+import { PhoneRichText } from '../ui/PhoneNumberDisplay';
 import { SectionTitle } from '../ui/primitives';
 
 /**
@@ -35,7 +36,7 @@ export function TextTeasers({ title, items }: { title: string; items: Solution[]
               </Link>
             </h3>
             <p className="tracking-vz-02 m-0 text-[18px] leading-[25.4px] text-black max-mob:text-[16px] max-mob:leading-[22.4px]">
-              {item.text}
+              <PhoneRichText text={item.text} />
             </p>
           </li>
         ))}

@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
-import { ROUTES, teamMemberPath } from '../constants/routes';
+import { teamMemberPath } from '../constants/routes';
 import { featuredMember, teamSections, type TeamMember } from '../data/team';
-import { ButtonOrange, SectionTitle } from '../components/ui/primitives';
+import { AppointmentButton } from '../components/appointments/AppointmentModal';
+import { SectionTitle } from '../components/ui/primitives';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 
 function MemberCard({ member }: { member: TeamMember }) {
@@ -114,7 +115,7 @@ export function TeamPage() {
       ))}
 
       <div className="mt-12 max-w-[802px]">
-        <ButtonOrange to={ROUTES.appointments}>Make an appointment</ButtonOrange>
+        <AppointmentButton>Make an appointment</AppointmentButton>
       </div>
 
       <div className="mt-12 max-lap:mt-10">

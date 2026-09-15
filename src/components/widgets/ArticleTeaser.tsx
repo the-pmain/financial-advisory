@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { knowledgeHubArticlePath } from '../../constants/routes';
 import type { Article } from '../../data/content';
+import { PhoneRichText } from '../ui/PhoneNumberDisplay';
 import { Tagline } from '../ui/primitives';
 
 /**
@@ -51,7 +52,7 @@ export function ArticleFeatured({ article }: { article: Article }) {
           </h3>
         </Link>
         <p id={describedBy} className={teaser}>
-          {article.teaser}
+          <PhoneRichText text={article.teaser} />
         </p>
         <ArticleMeta article={article} />
       </div>
@@ -85,7 +86,7 @@ export function ArticleSlim({ article, divided = true }: { article: Article; div
         </h3>
       </Link>
       <p id={describedBy} className={teaser}>
-        {article.teaser}
+        <PhoneRichText text={article.teaser} />
       </p>
       <ArticleMeta article={article} />
     </article>

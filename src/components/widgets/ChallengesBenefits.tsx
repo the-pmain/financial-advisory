@@ -1,3 +1,4 @@
+import { PhoneRichText } from '../ui/PhoneNumberDisplay';
 import { SectionTitle } from '../ui/primitives';
 
 export function ChallengesBenefits({
@@ -18,7 +19,9 @@ export function ChallengesBenefits({
             {challenges.map((item) => (
               <li key={item.title}>
                 <h3 className="text-vz-ink m-0 text-[18px] leading-[1.3] font-bold">{item.title}</h3>
-                <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">{item.text}</p>
+                <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">
+                  <PhoneRichText text={item.text} />
+                </p>
               </li>
             ))}
           </ul>
@@ -31,7 +34,9 @@ export function ChallengesBenefits({
             {benefits.map((item) => (
               <li key={item.title}>
                 <h3 className="text-vz-ink m-0 text-[18px] leading-[1.3] font-bold">{item.title}</h3>
-                <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">{item.text}</p>
+                <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">
+                  <PhoneRichText text={item.text} />
+                </p>
               </li>
             ))}
           </ul>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { newsletterCta } from '../../data/content';
 import { EnvelopeIcon } from '../ui/Icons';
+import { PhoneRichText } from '../ui/PhoneNumberDisplay';
 
 /**
  * Newsletter prompt: 19px Georgia italic on a 27px rhythm inside the
@@ -16,7 +17,7 @@ export function NewsletterCta() {
       <div className="relative font-serif text-[19px] leading-[27px] tracking-normal italic max-mob:text-[17px] max-mob:leading-[24px]">
         <EnvelopeIcon className="text-vz-ink absolute top-1/2 left-0 h-[26px] w-[34px] -translate-y-1/2 max-mob:h-5 max-mob:w-6" />
         <p className="text-vz-ink m-0 pl-[52px] text-center">
-          {newsletterCta.text}{' '}
+          <PhoneRichText text={newsletterCta.text} />{' '}
           <Link to={newsletterCta.to} className="text-vz-ink hover:text-vz-orange vz-underline">
             {newsletterCta.linkLabel}
           </Link>

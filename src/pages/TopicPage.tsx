@@ -2,6 +2,7 @@ import { useLocation } from 'react-router';
 import { ROUTES } from '../constants/routes';
 import { findArticle } from '../data/content';
 import { topicByPath } from '../data/topics';
+import { useT } from '../i18n';
 import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
@@ -15,6 +16,8 @@ import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { SpecialistsBand } from '../components/widgets/SpecialistsBand';
 import { TextTeasers } from '../components/widgets/TextTeasers';
 import { VerifyFinma } from '../components/widgets/VerifyFinma';
+import { AppointmentButton } from '../components/appointments/AppointmentModal';
+import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { ButtonOrange, SectionTitle } from '../components/ui/primitives';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -24,9 +27,16 @@ import { NotFoundPage } from './NotFoundPage';
  */
 export function TopicPage() {
   const { pathname } = useLocation();
+  const t = useT();
   const topic = topicByPath.get(pathname);
 
   if (!topic) return <NotFoundPage />;
+  const copy = t.topics[pathname];
+  const title = copy?.title ?? topic.title;
+  const subtitle = copy?.subtitle ?? topic.subtitle;
+  const intro = copy?.intro ?? topic.intro;
+  const highlights = copy?.highlights ?? topic.highlights;
+  const ctaLabel = copy?.ctaLabel ?? topic.ctaLabel;
 
   const related = (topic.relatedSlugs ?? [])
     .map((slug) => findArticle(slug))
@@ -35,38 +45,42 @@ export function TopicPage() {
   return (
     <>
       <header className="max-w-[802px]">
-        <h1 className="mb-3">{topic.title}</h1>
+        <h1 className="mb-3">{title}</h1>
         <p className="text-vz-ink m-0 text-[42px] leading-[1.1875] font-light max-lap:text-[32px] max-mob:text-[24px]">
-          {topic.subtitle}
+          {subtitle}
         </p>
       </header>
 
       <div className="mt-10 max-w-[802px]">
-        {topic.intro.map((paragraph, i) => (
+        {intro.map((paragraph, i) => (
           <p key={i} className="text-vz-ink text-[19px] leading-[1.45] max-mob:text-[18px]">
-            {paragraph}
+            <PhoneRichText text={paragraph} />
           </p>
         ))}
-        <ButtonOrange
-          to={
-            topic.ctaLabel === 'Subscribe now'
-              ? ROUTES.newsletter
-              : topic.ctaLabel === 'Sign up for free'
-                ? ROUTES.financialPortal
-                : topic.ctaLabel === 'Order for free'
-                  ? pathname
-                  : ROUTES.appointments
-          }
-          className="mt-2"
-        >
-          {topic.ctaLabel ?? 'Make an appointment'}
-        </ButtonOrange>
+        {topic.ctaLabel === 'Subscribe now' ||
+        topic.ctaLabel === 'Sign up for free' ||
+        topic.ctaLabel === 'Order for free' ? (
+          <ButtonOrange
+            to={
+              topic.ctaLabel === 'Subscribe now'
+                ? ROUTES.newsletter
+                : topic.ctaLabel === 'Sign up for free'
+                  ? ROUTES.financialPortal
+                  : pathname
+            }
+            className="mt-2"
+          >
+            {ctaLabel}
+          </ButtonOrange>
+        ) : (
+          <AppointmentButton className="mt-2">{ctaLabel ?? 'Make an appointment'}</AppointmentButton>
+        )}
       </div>
 
       <div className="mt-12 max-lap:mt-10">
         <TextTeasers
           title="What we do for you"
-          items={topic.highlights.map((item) => ({
+          items={highlights.map((item) => ({
             title: item.title,
             text: item.text,
             to: pathname,

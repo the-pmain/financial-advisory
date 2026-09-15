@@ -2,20 +2,25 @@ import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
 import { ROUTES } from '../../constants/routes';
 import { company } from '../../data/company';
-import type { TeamMember } from '../../data/team';
+import { teamBySlug, teamMembers, type TeamMember } from '../../data/team';
 import { submitClient } from '../../lib/clientsApi';
-import { SectionTitle } from '../ui/primitives';
+import { useOptionalAppointmentModal } from '../appointments/appointmentModalContext';
+import { ChevronDownIcon } from '../ui/Icons';
+import { buttonOrangeClass, SectionTitle } from '../ui/primitives';
 
 type Values = {
+  adviser: string;
   name: string;
   email: string;
   phone: string;
   consent: boolean;
 };
 
-type Errors = Partial<Record<keyof Values, string>>;
+type FieldName = keyof Values;
+type Errors = Partial<Record<FieldName, string>>;
 
 const EMPTY: Values = {
+  adviser: '',
   name: '',
   email: '',
   phone: '',
@@ -25,29 +30,32 @@ const EMPTY: Values = {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 const PHONE_ALLOWED = /^[+\d][\d\s()./-]*$/;
 
-const FIELD_ORDER: (keyof Values)[] = ['name', 'email', 'phone', 'consent'];
+const ADVISERS = [...teamMembers].sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
-const FIELD_LABELS: Record<keyof Values, string> = {
+const FIELD_LABELS: Record<FieldName, string> = {
+  adviser: 'Adviser',
   name: 'Name',
   email: 'Email',
   phone: 'Phone',
   consent: 'Privacy consent',
 };
 
-function fieldId(name: keyof Values): string {
-  return `consultation-${name}`;
+function fieldOrder(pickAdviser: boolean): FieldName[] {
+  return pickAdviser ? ['adviser', 'name', 'email', 'phone', 'consent'] : ['name', 'email', 'phone', 'consent'];
 }
 
-function errorId(name: keyof Values): string {
-  return `consultation-${name}-error`;
-}
-
-function validate(values: Values): Errors {
+function validate(values: Values, pickAdviser: boolean): Errors {
   const errors: Errors = {};
   const name = values.name.trim();
   const email = values.email.trim();
   const phone = values.phone.trim();
   const phoneDigits = phone.replace(/\D/g, '');
+
+  if (pickAdviser) {
+    if (!values.adviser || !teamBySlug.has(values.adviser)) {
+      errors.adviser = 'Please choose who should receive your details.';
+    }
+  }
 
   if (!name) errors.name = 'Please enter your name.';
   else if (name.length < 2) errors.name = 'Please enter at least two characters.';
@@ -69,50 +77,72 @@ function validate(values: Values): Errors {
   return errors;
 }
 
-const inputBase =
-  'text-vz-ink w-full rounded-[3px] border bg-white px-3 py-[10px] text-[16px] leading-[1.4] transition-colors duration-250 placeholder:text-vz-gray-light/70';
-
-function controlClass(invalid: boolean): string {
-  return `${inputBase} ${invalid ? 'border-[#b42318]' : 'border-vz-rule hover:border-vz-blue-soft'}`;
+function firstNameOf(member: TeamMember | undefined, fallback: string): string {
+  if (!member) return fallback;
+  return member.name.split(' ')[0] ?? member.name;
 }
 
-export function ConsultationForm({ member }: { member: TeamMember }) {
-  const [values, setValues] = useState<Values>(EMPTY);
+export function ConsultationForm({
+  member,
+  pickAdviser = false,
+  embedded = false,
+  idPrefix = 'consultation',
+}: {
+  member?: TeamMember;
+  pickAdviser?: boolean;
+  embedded?: boolean;
+  idPrefix?: string;
+}) {
+  const [values, setValues] = useState<Values>({
+    ...EMPTY,
+    adviser: member && !pickAdviser ? member.slug : '',
+  });
   const [errors, setErrors] = useState<Errors>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof Values, boolean>>>({});
+  const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [submitAttempted, setSubmitAttempted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
 
-  const firstName = member.name.split(' ')[0] ?? member.name;
+  const appointment = useOptionalAppointmentModal();
+  const selected = pickAdviser ? teamBySlug.get(values.adviser) : member;
+  const firstName = firstNameOf(selected, 'an adviser');
 
-  const visible = (name: keyof Values): string | undefined =>
+  const fieldId = (name: FieldName) => `${idPrefix}-${name}`;
+  const errorId = (name: FieldName) => `${idPrefix}-${name}-error`;
+
+  const visible = (name: FieldName): string | undefined =>
     submitAttempted || touched[name] ? errors[name] : undefined;
 
-  function setValue<K extends keyof Values>(name: K, value: Values[K]) {
+  function setValue<K extends FieldName>(name: K, value: Values[K]) {
     const next = { ...values, [name]: value };
     setValues(next);
-    if (submitAttempted || touched[name]) setErrors(validate(next));
+    if (submitAttempted || touched[name]) setErrors(validate(next, pickAdviser));
   }
 
-  function markTouched(name: keyof Values) {
+  function markTouched(name: FieldName) {
     setTouched((prev) => ({ ...prev, [name]: true }));
-    setErrors(validate(values));
+    setErrors(validate(values, pickAdviser));
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting) return;
 
-    const nextErrors = validate(values);
+    const nextErrors = validate(values, pickAdviser);
     setErrors(nextErrors);
     setSubmitAttempted(true);
     setSubmitError(null);
 
-    const firstInvalid = FIELD_ORDER.find((name) => nextErrors[name]);
+    const firstInvalid = fieldOrder(pickAdviser).find((name) => nextErrors[name]);
     if (firstInvalid) {
       document.getElementById(fieldId(firstInvalid))?.focus();
+      return;
+    }
+
+    const slug = pickAdviser ? values.adviser : member?.slug;
+    if (!slug) {
+      setSubmitError('Please choose who should receive your details.');
       return;
     }
 
@@ -123,7 +153,7 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
         email: values.email.trim(),
         phone: values.phone.trim(),
         consent: true,
-        instructed_person_slug: member.slug,
+        instructed_person_slug: slug,
       });
 
       if (!result.ok) {
@@ -137,109 +167,143 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
     }
   }
 
+  const heading = pickAdviser
+    ? 'Leave your contact details'
+    : `Leave your contact details for ${firstName}`;
+
+  const inputBase = embedded
+    ? 'appointment-form__control'
+    : 'text-vz-ink w-full rounded-[3px] border bg-white px-3 py-[10px] text-[16px] leading-[1.4] transition-colors duration-250 placeholder:text-vz-gray-light/70';
+
+  function controlClass(invalid: boolean): string {
+    if (embedded) return `${inputBase}${invalid ? ' is-invalid' : ''}`;
+    return `${inputBase} ${invalid ? 'border-[#b42318]' : 'border-vz-rule hover:border-vz-blue-soft'}`;
+  }
+
+  const labelClass = embedded
+    ? 'appointment-form__label'
+    : 'text-vz-ink mb-[6px] block text-[14px] leading-[1.3] font-bold';
+
+  const errorClass = embedded
+    ? 'appointment-form__error'
+    : 'm-0 mt-[6px] text-[13px] text-[#b42318]';
+
+  function textField(name: Exclude<FieldName, 'adviser' | 'consent'>, type: string, extra?: object) {
+    const message = visible(name);
+    return (
+      <div className={embedded ? 'appointment-form__field' : undefined}>
+        <label htmlFor={fieldId(name)} className={labelClass}>
+          {FIELD_LABELS[name]}
+        </label>
+        <input
+          id={fieldId(name)}
+          name={name}
+          type={type}
+          value={values[name]}
+          disabled={submitting}
+          onChange={(event) => setValue(name, event.target.value)}
+          onBlur={() => markTouched(name)}
+          aria-invalid={message ? true : undefined}
+          aria-describedby={message ? errorId(name) : undefined}
+          className={controlClass(Boolean(message))}
+          {...extra}
+        />
+        {message ? (
+          <p id={errorId(name)} className={errorClass}>
+            {message}
+          </p>
+        ) : null}
+      </div>
+    );
+  }
+
   if (sent) {
     return (
-      <section id="consultation" className="max-w-[480px]">
-        <SectionTitle>Leave your contact details for {firstName}</SectionTitle>
-        <p className="text-vz-ink m-0 text-[16px] leading-[1.45]" role="status">
-          Thank you. {firstName} will get back to you.
+      <section id={embedded ? undefined : 'consultation'} className={embedded ? 'appointment-form__success' : 'max-w-[480px]'}>
+        {!embedded && <SectionTitle>{heading}</SectionTitle>}
+        {embedded ? <h3>Thank you</h3> : null}
+        <p className={embedded ? undefined : 'text-vz-ink m-0 text-[16px] leading-[1.45]'} role="status">
+          {firstName} will get back to you. You can close this window.
         </p>
       </section>
     );
   }
 
   return (
-    <section id="consultation" className="max-w-[480px]">
-      <SectionTitle>Leave your contact details for {firstName}</SectionTitle>
-      <p className="text-vz-ink m-0 text-[16px] leading-[1.45]">
-        Send your details and {firstName} will get back to you.
+    <section id={embedded ? undefined : 'consultation'} className={embedded ? 'appointment-form' : 'max-w-[480px]'}>
+      {!embedded && <SectionTitle>{heading}</SectionTitle>}
+      <p className={embedded ? 'appointment-form__intro' : 'text-vz-ink m-0 text-[16px] leading-[1.45]'}>
+        {pickAdviser
+          ? 'Choose who should receive your details. They will get back to you.'
+          : `Send your details and ${firstName} will get back to you.`}
       </p>
 
-      <form noValidate onSubmit={onSubmit} className="mt-6 space-y-4">
-        <div>
-          <label
-            htmlFor={fieldId('name')}
-            className="text-vz-ink mb-[6px] block text-[14px] leading-[1.3] font-bold"
-          >
-            {FIELD_LABELS.name}
-          </label>
-          <input
-            id={fieldId('name')}
-            name="name"
-            type="text"
-            autoComplete="name"
-            value={values.name}
-            disabled={submitting}
-            onChange={(event) => setValue('name', event.target.value)}
-            onBlur={() => markTouched('name')}
-            aria-invalid={visible('name') ? true : undefined}
-            aria-describedby={visible('name') ? errorId('name') : undefined}
-            className={controlClass(Boolean(visible('name')))}
-          />
-          {visible('name') && (
-            <p id={errorId('name')} className="m-0 mt-[6px] text-[13px] text-[#b42318]">
-              {visible('name')}
-            </p>
-          )}
-        </div>
+      <form noValidate onSubmit={onSubmit} className={embedded ? '' : 'mt-6 space-y-4'}>
+        {pickAdviser && (
+          <div className={embedded ? 'appointment-form__field' : undefined}>
+            <label htmlFor={fieldId('adviser')} className={labelClass}>
+              {FIELD_LABELS.adviser}
+              <span className="text-[#b42318]" aria-hidden="true">
+                {' '}
+                *
+              </span>
+            </label>
+            <div className={embedded ? 'appointment-form__select-wrap' : undefined}>
+              <select
+                id={fieldId('adviser')}
+                name="adviser"
+                required
+                value={values.adviser}
+                disabled={submitting}
+                onChange={(event) => setValue('adviser', event.target.value)}
+                onBlur={() => markTouched('adviser')}
+                aria-invalid={visible('adviser') ? true : undefined}
+                aria-describedby={visible('adviser') ? errorId('adviser') : undefined}
+                className={`${controlClass(Boolean(visible('adviser')))} ${embedded ? '' : 'cursor-pointer appearance-auto'}`}
+              >
+                <option value="">Select name and role</option>
+                {ADVISERS.map((person) => (
+                  <option key={person.slug} value={person.slug}>
+                    {person.name} — {person.role}
+                  </option>
+                ))}
+              </select>
+              {embedded ? <ChevronDownIcon className="appointment-form__chevron" /> : null}
+            </div>
+            {selected ? (
+              <div className={embedded ? 'appointment-form__pick' : 'mt-2'}>
+                {selected.photo ? (
+                  <img src={selected.photo} alt="" width={44} height={44} />
+                ) : null}
+                <div>
+                  <p className={embedded ? 'appointment-form__pick-name' : 'text-vz-ink m-0 text-[14px] font-bold'}>
+                    {selected.name}
+                  </p>
+                  <p className={embedded ? 'appointment-form__pick-role' : 'text-vz-gray m-0 text-[13px]'}>
+                    {selected.role}
+                  </p>
+                </div>
+              </div>
+            ) : null}
+            {visible('adviser') ? (
+              <p id={errorId('adviser')} className={errorClass}>
+                {visible('adviser')}
+              </p>
+            ) : null}
+          </div>
+        )}
 
-        <div>
-          <label
-            htmlFor={fieldId('email')}
-            className="text-vz-ink mb-[6px] block text-[14px] leading-[1.3] font-bold"
-          >
-            {FIELD_LABELS.email}
-          </label>
-          <input
-            id={fieldId('email')}
-            name="email"
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            value={values.email}
-            disabled={submitting}
-            onChange={(event) => setValue('email', event.target.value)}
-            onBlur={() => markTouched('email')}
-            aria-invalid={visible('email') ? true : undefined}
-            aria-describedby={visible('email') ? errorId('email') : undefined}
-            className={controlClass(Boolean(visible('email')))}
-          />
-          {visible('email') && (
-            <p id={errorId('email')} className="m-0 mt-[6px] text-[13px] text-[#b42318]">
-              {visible('email')}
-            </p>
-          )}
-        </div>
+        {textField('name', 'text', { autoComplete: 'name' })}
+        {textField('email', 'email', { inputMode: 'email', autoComplete: 'email' })}
+        {textField('phone', 'tel', { inputMode: 'tel', autoComplete: 'tel' })}
 
-        <div>
-          <label
-            htmlFor={fieldId('phone')}
-            className="text-vz-ink mb-[6px] block text-[14px] leading-[1.3] font-bold"
-          >
-            {FIELD_LABELS.phone}
-          </label>
-          <input
-            id={fieldId('phone')}
-            name="phone"
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
-            value={values.phone}
-            disabled={submitting}
-            onChange={(event) => setValue('phone', event.target.value)}
-            onBlur={() => markTouched('phone')}
-            aria-invalid={visible('phone') ? true : undefined}
-            aria-describedby={visible('phone') ? errorId('phone') : undefined}
-            className={controlClass(Boolean(visible('phone')))}
-          />
-          {visible('phone') && (
-            <p id={errorId('phone')} className="m-0 mt-[6px] text-[13px] text-[#b42318]">
-              {visible('phone')}
-            </p>
-          )}
-        </div>
-
-        <label className="text-vz-ink flex cursor-pointer items-start gap-3 text-[14px] leading-[1.45]">
+        <label
+          className={
+            embedded
+              ? 'appointment-form__consent'
+              : 'text-vz-ink flex cursor-pointer items-start gap-3 text-[14px] leading-[1.45]'
+          }
+        >
           <input
             id={fieldId('consent')}
             type="checkbox"
@@ -250,32 +314,36 @@ export function ConsultationForm({ member }: { member: TeamMember }) {
             onBlur={() => markTouched('consent')}
             aria-invalid={visible('consent') ? true : undefined}
             aria-describedby={visible('consent') ? errorId('consent') : undefined}
-            className="accent-vz-orange-btn mt-[3px] size-[17px] shrink-0 cursor-pointer"
+            className={embedded ? undefined : 'accent-vz-orange-btn mt-[3px] size-[17px] shrink-0 cursor-pointer'}
           />
           <span>
             I agree that {company.groupName} may use my details to answer this request. See the{' '}
-            <Link to={ROUTES.privacyPolicy} className="vz-underline-hover text-vz-blue">
+            <Link
+              to={ROUTES.privacyPolicy}
+              className="vz-underline-hover text-vz-blue"
+              onClick={() => appointment?.close()}
+            >
               Privacy Policy
             </Link>
             .
           </span>
         </label>
-        {visible('consent') && (
-          <p id={errorId('consent')} className="m-0 text-[13px] text-[#b42318]">
+        {visible('consent') ? (
+          <p id={errorId('consent')} className={errorClass}>
             {visible('consent')}
           </p>
-        )}
+        ) : null}
 
-        {submitError && (
-          <p className="m-0 text-[13px] text-[#b42318]" role="alert">
+        {submitError ? (
+          <p className={errorClass} role="alert">
             {submitError}
           </p>
-        )}
+        ) : null}
 
         <button
           type="submit"
           disabled={submitting}
-          className="bg-vz-orange-btn mt-2 cursor-pointer rounded-[21px] border-0 px-5 py-3 text-[14px] leading-4 font-bold text-white shadow-[1px_1px_2px_rgba(0,0,0,0.3)] transition-shadow duration-250 hover:shadow-[0.5px_0.5px_4px_rgba(0,0,0,0.15)] active:shadow-none disabled:cursor-wait disabled:opacity-60"
+          className={`${buttonOrangeClass} ${embedded ? 'appointment-form__submit' : 'mt-2'} cursor-pointer border-0 disabled:cursor-wait disabled:opacity-60`}
         >
           {submitting ? 'Sending…' : 'Send'}
         </button>

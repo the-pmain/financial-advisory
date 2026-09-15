@@ -5,14 +5,17 @@ import { company } from '../data/company';
 import { featuredMember } from '../data/team';
 import { topicByPath } from '../data/topics';
 import { AuthorisationMarks } from '../components/ui/AuthorisationMarks';
+import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { BloombergLeiLink } from '../components/ui/BloombergLeiLink';
-import { ButtonOrange, SectionTitle } from '../components/ui/primitives';
+import { AppointmentButton } from '../components/appointments/AppointmentModal';
+import { SectionTitle } from '../components/ui/primitives';
 import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { DocumentsList } from '../components/widgets/DocumentsList';
 import { OmbudsmanDisclosure } from '../components/widgets/OmbudsmanDisclosure';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { TextTeasers } from '../components/widgets/TextTeasers';
 import { VerifyFinma } from '../components/widgets/VerifyFinma';
+import { useT } from '../i18n';
 import { usePublicCompany } from '../hooks/usePublicCompany';
 import { formatStatusLabel } from '../lib/publicCompany';
 
@@ -37,36 +40,40 @@ const initials = featuredMember.name
 export function AboutPage() {
   const [photoFailed, setPhotoFailed] = useState(false);
   const record = usePublicCompany();
+  const t = useT();
   const topic = topicByPath.get(ROUTES.about);
   if (!topic) return null;
+  const copy = t.topics[ROUTES.about];
+  const title = copy?.title ?? topic.title;
+  const subtitle = copy?.subtitle ?? topic.subtitle;
+  const intro = copy?.intro ?? topic.intro;
+  const highlights = copy?.highlights ?? topic.highlights;
 
   return (
     <>
       <header className="max-w-[802px]">
-        <h1 className="mb-3">{topic.title}</h1>
+        <h1 className="mb-3">{title}</h1>
         <p className="text-vz-ink m-0 text-[42px] leading-[1.1875] font-light max-lap:text-[32px] max-mob:text-[24px]">
-          {topic.subtitle}
+          {subtitle}
         </p>
       </header>
 
       <div className="mt-10 max-w-[802px]">
-        {topic.intro.map((paragraph) => (
+        {intro.map((paragraph) => (
           <p key={paragraph} className="text-vz-ink text-[19px] leading-[1.45] max-mob:text-[18px]">
-            {paragraph}
+            <PhoneRichText text={paragraph} />
           </p>
         ))}
-        <ButtonOrange to={ROUTES.appointments} className="mt-2">
-          Make an appointment
-        </ButtonOrange>
+        <AppointmentButton className="mt-2">Make an appointment</AppointmentButton>
       </div>
 
       <div className="mt-12 max-lap:mt-10">
         <TextTeasers
           title="What we do for you"
-          items={topic.highlights.map((item) => ({
+          items={highlights.map((item, i) => ({
             title: item.title,
             text: item.text,
-            to: highlightTo[item.title] ?? ROUTES.about,
+            to: highlightTo[topic.highlights[i]?.title] ?? highlightTo[item.title] ?? ROUTES.about,
           }))}
         />
       </div>

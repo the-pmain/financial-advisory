@@ -1,6 +1,10 @@
+import type { MouseEvent } from 'react';
 import { Link } from 'react-router';
+import { ROUTES } from '../../constants/routes';
 import type { Offer } from '../../data/content';
+import { useOptionalAppointmentModal } from '../appointments/appointmentModalContext';
 import { offerIcons } from '../ui/Icons';
+import { PhoneRichText } from '../ui/PhoneNumberDisplay';
 import { ButtonPill } from '../ui/primitives';
 
 /**
@@ -41,10 +45,21 @@ const cardBase =
 const tagClass =
   'text-vz-ink tracking-vz-01 m-0 mb-[6px] text-[15px] leading-[17px] max-mob:mb-[2px]';
 
+function useOfferClick(offer: Offer) {
+  const appointment = useOptionalAppointmentModal();
+  if (offer.to !== ROUTES.appointments) return undefined;
+  return (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    appointment?.open();
+  };
+}
+
 function LargeCard({ offer }: { offer: Offer }) {
+  const onClick = useOfferClick(offer);
   return (
     <Link
       to={offer.to}
+      onClick={onClick}
       className={`${cardBase} pt-[22px] pb-[18px] max-mob:pb-[14px]`}
       aria-describedby={`offer-teaser-${offer.id}`}
     >
@@ -57,7 +72,7 @@ function LargeCard({ offer }: { offer: Offer }) {
           id={`offer-teaser-${offer.id}`}
           className="text-vz-ink tracking-vz-01 mt-[6px] mb-[19px] text-[14px] leading-[18.7px] max-mob:mb-[12px]"
         >
-          {offer.teaser}
+          <PhoneRichText text={offer.teaser} />
         </p>
         <ButtonPill static className="mt-auto">
           {offer.cta}
@@ -81,10 +96,12 @@ function LargeCard({ offer }: { offer: Offer }) {
 
 function SmallCard({ offer }: { offer: Offer }) {
   const Icon = offerIcons[offer.icon];
+  const onClick = useOfferClick(offer);
 
   return (
     <Link
       to={offer.to}
+      onClick={onClick}
       className={`${cardBase} flex-col pt-[12px] pb-[18px] max-mob:py-[14px]`}
     >
       <Icon className="mx-auto mb-[14px] h-[72px] w-[72px] shrink-0 text-[#cdbfae]" />
@@ -94,7 +111,9 @@ function SmallCard({ offer }: { offer: Offer }) {
         <h3 className="text-vz-ink m-0 mb-[19px] text-[16px] leading-[21px] font-bold transition-colors duration-250 group-hover:text-vz-orange max-mob:mb-[12px] max-mob:text-[15px] max-mob:leading-[20px]">
           {offer.title}
         </h3>
-        <p className="visually-hidden">{offer.teaser}</p>
+        <p className="visually-hidden">
+          <PhoneRichText text={offer.teaser} />
+        </p>
         <ButtonPill static block className="mt-auto">
           {offer.cta}
         </ButtonPill>

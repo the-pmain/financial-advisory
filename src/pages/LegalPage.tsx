@@ -1,5 +1,7 @@
 import { useParams } from 'react-router';
 import { legalBySlug } from '../data/legal';
+import { useT } from '../i18n';
+import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { AuditReports } from '../components/widgets/AuditReports';
 import { DocumentsList } from '../components/widgets/DocumentsList';
 import { CommercialRegisterExtract } from '../components/widgets/CommercialRegisterExtract';
@@ -8,7 +10,8 @@ import { NotFoundPage } from './NotFoundPage';
 
 export function LegalPage() {
   const { slug } = useParams();
-  const page = slug ? legalBySlug.get(slug) : undefined;
+  const t = useT();
+  const page = slug ? (t.legal[slug] ?? legalBySlug.get(slug)) : undefined;
 
   if (!page) return <NotFoundPage />;
 
@@ -23,7 +26,7 @@ export function LegalPage() {
           )}
           {section.paragraphs.map((paragraph, j) => (
             <p key={j} className="text-vz-ink text-[17px] leading-[1.55]">
-              {paragraph}
+              <PhoneRichText text={paragraph} />
             </p>
           ))}
         </section>

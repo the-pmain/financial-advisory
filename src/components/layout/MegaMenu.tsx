@@ -7,7 +7,7 @@ import { useT } from '../../i18n';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ArrowRightIcon, ChevronDownIcon } from '../ui/Icons';
 
-import { ButtonOrange } from '../ui/primitives';
+import { AppointmentButton } from '../appointments/AppointmentModal';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { VerificationRegisterCards } from './TrustSignals';
 
@@ -93,9 +93,7 @@ export function MegaMenu({
 
         {/* Utility column: appointment CTA, portal links, newsletter, languages */}
         <div className="w-1/5 shrink-0 pl-[18px] max-tab:w-full max-tab:pt-6 max-mob:pl-0 max-mob:pb-10">
-          <ButtonOrange to={ROUTES.appointments} onClick={onClose}>
-            {t.ui.makeAppointment}
-          </ButtonOrange>
+          <AppointmentButton onClick={onClose}>{t.ui.makeAppointment}</AppointmentButton>
 
           {portalLinks.length > 0 && (
             <ul className="mt-4">

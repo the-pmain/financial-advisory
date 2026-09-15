@@ -3,6 +3,7 @@ import { knowledgeHubArticlePath, ROUTES } from '../constants/routes';
 import { insightArticles, sortedArticles } from '../data/content';
 import { ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
+import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { SectionTitle, Tagline, UnderlineLink } from '../components/ui/primitives';
 
 const groups = [
@@ -36,7 +37,7 @@ export function ExpertisePage() {
             </Link>
           </h2>
           <p className="text-vz-ink mt-3 mb-0 max-w-[40rem] text-[17px] leading-[1.45]">
-            {horizon.teaser}
+            <PhoneRichText text={horizon.teaser} />
           </p>
           <p className="mt-4 mb-0">
             <UnderlineLink to={knowledgeHubArticlePath(horizon.slug)}>Read the report</UnderlineLink>

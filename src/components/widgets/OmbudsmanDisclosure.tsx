@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { ROUTES } from '../../constants/routes';
 import { company } from '../../data/company';
 import { clientDocuments } from '../../data/documents';
+import { PhoneNumberDisplay } from '../ui/PhoneNumberDisplay';
 import { SectionTitle } from '../ui/primitives';
 
 const brochure = clientDocuments.find((doc) => doc.id === 'finsa-brochure');
@@ -26,9 +28,13 @@ export function OmbudsmanDisclosure({
         <p className="text-vz-ink m-0 mt-1 text-[12px] leading-[1.45]">
           {office.addressLine}
           <br />
-          <a href={office.phoneHref} className="text-vz-blue hover:text-vz-orange">
-            {office.phone}
-          </a>
+          <PhoneNumberDisplay
+            visibleNumber={office.phone}
+            indexedNumber={office.phone}
+            jsonLd={false}
+            inline
+            className="text-[12px]"
+          />
           {' · '}
           <a href={`mailto:${office.email}`} className="text-vz-blue hover:text-vz-orange">
             {office.email}
@@ -62,7 +68,14 @@ export function OmbudsmanDisclosure({
       <dl className="mt-6 max-w-[802px]">
         <OmbudsRow term="Ombudsman" detail={office.name} note={office.description} />
         <OmbudsRow term="Address" detail={office.addressLine} />
-        <OmbudsRow term="Phone" detail={office.phone} href={office.phoneHref} />
+        <OmbudsRow term="Phone">
+          <PhoneNumberDisplay
+            visibleNumber={office.phone}
+            indexedNumber={office.phone}
+            jsonLd={false}
+            className="text-[16px] leading-[1.4]"
+          />
+        </OmbudsRow>
         <OmbudsRow term="Email" detail={office.email} href={`mailto:${office.email}`} />
         <OmbudsRow term="Website" detail={office.websiteLabel} href={office.website} external />
         <OmbudsRow term="Reference Number" detail={office.reference} />
@@ -76,7 +89,8 @@ export function OmbudsmanDisclosure({
         ) : (
           'FinSA client brochure'
         )}
-        . You can also write to us first at {company.address.line}, {company.phone}.
+        . You can also write to us first at {company.address.line},{' '}
+        <PhoneNumberDisplay inline jsonLd={false} className="text-[16px]" />.
       </p>
       <p className="mt-3 mb-0">
         <Link
@@ -96,18 +110,22 @@ function OmbudsRow({
   note,
   href,
   external,
+  children,
 }: {
   term: string;
-  detail: string;
+  detail?: string;
   note?: string;
   href?: string;
   external?: boolean;
+  children?: ReactNode;
 }) {
   return (
     <div className="border-vz-rule grid grid-cols-[minmax(120px,200px)_minmax(0,1fr)] items-baseline gap-4 border-b py-3 max-mob:grid-cols-1 max-mob:gap-1">
       <dt className="text-vz-gray-mid m-0 text-[14px] leading-[1.3]">{term}</dt>
       <dd className="m-0">
-        {href ? (
+        {children ? (
+          children
+        ) : href && detail ? (
           <a
             href={href}
             {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
