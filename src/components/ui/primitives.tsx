@@ -52,7 +52,7 @@ export function SectionTitle({
   return (
     <h2
       id={id}
-      className={`text-vz-gray-mid border-vz-gray-light border-b pb-[7px] text-[28px] leading-[32px] font-bold ${small} ${
+      className={`text-vz-gray-mid border-vz-gray-light vz-break-long border-b pb-[7px] text-[28px] leading-[32px] font-bold ${small} ${
         spaced ? gap : 'mb-0'
       } ${className}`}
     >

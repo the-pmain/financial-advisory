@@ -48,7 +48,7 @@ export function ClientTestimonials() {
 
       <ul className="m-0 grid list-none grid-cols-3 gap-x-8 gap-y-10 p-0 max-tab:grid-cols-1">
         {clientTestimonials.map((item) => (
-          <li key={item.id} className="border-vz-rule border-t pt-5">
+          <li key={item.id} className="border-vz-rule min-w-0 border-t pt-5">
             {/* TODO: Replace with actual client photo */}
             <img
               src={item.photo}
@@ -58,7 +58,7 @@ export function ClientTestimonials() {
               className="size-[88px] rounded-full object-cover max-mob:size-[72px]"
               decoding="async"
             />
-            <p className="text-vz-ink m-0 mt-4 text-[16px] leading-[1.3] font-bold">
+            <p className="vz-break-long text-vz-ink m-0 mt-4 text-[16px] leading-[1.3] font-bold">
               {item.name}, {item.location}
             </p>
             <p className="text-vz-gray-mid m-0 mt-1 text-[13px] leading-[1.3]">

@@ -20,7 +20,7 @@ export function CaseStudiesBand({
             <p className="text-vz-blue m-0 text-[13px] leading-[1.3] font-bold tracking-[0.02em]">
               {study.sector}
             </p>
-            <h3 className="text-vz-ink mt-2 mb-0 text-[20px] leading-[1.3] font-bold">
+            <h3 className="vz-break-long text-vz-ink mt-2 mb-0 text-[20px] leading-[1.3] font-bold">
               {study.title}
             </h3>
             <p className="text-vz-ink mt-3 mb-0 text-[15px] leading-[1.45]">{study.summary}</p>

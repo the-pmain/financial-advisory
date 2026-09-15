@@ -304,7 +304,7 @@ export const de: Translations = {
         text: 'Unsere Expertinnen und Experten zeigen Ihnen, wie Sie Vorsorge-, Immobilien- und Umzugsentscheide Jahre im Voraus strukturieren – dort entstehen die eigentlichen Steuerersparnisse.',
       },
       {
-        title: 'Vermögensverwaltungsmandate',
+        title: 'Vermögens\u00ADverwaltungs\u00ADmandate',
         text: 'Eine klare Strategie, kostengünstige Umsetzung und laufende Betreuung – verwaltet von uns, verwahrt bei Ihrer Bank. Sie wissen jederzeit, was Sie besitzen, was es kostet und warum.',
       },
     ],
@@ -364,7 +364,7 @@ export const de: Translations = {
         'Da die Helfenstein Group keine Retrozessionen erhält, zahlen Sie nur die mit uns vereinbarte Gebühr.',
       ],
       highlights: [
-        { title: 'Vermögensverwaltungsmandate', text: 'Discretionary Management mit breit diversifiziertem Index-Kern.' },
+        { title: 'Vermögens\u00ADverwaltungs\u00ADmandate', text: 'Discretionary Management mit breit diversifiziertem Index-Kern.' },
         { title: 'Indexanlagen', text: 'Laufende Kosten nur ein Bruchteil jener aktiv verwalteter Fonds.' },
         { title: 'Portfolioanalyse', text: 'Eine schriftliche Zweitmeinung zu Ihrem heutigen Portfolio.' },
         { title: 'Ihre Vermögenswerte bleiben bei Ihrer Bank', text: 'Die Helfenstein Group verwahrt nie Kundenvermögen. Die Verwahrung bleibt auf Ihren Namen bei etablierten Schweizer Depotbank-Partnern.' },

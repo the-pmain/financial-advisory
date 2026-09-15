@@ -393,6 +393,13 @@
   }
 }
 
+/* Long compounds (DE Vermögensverwaltung…) stay inside their column. */
+@utility vz-break-long {
+  min-width: 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
 /* Horizontal scroller with the scrollbar suppressed (quick-links bar). */
 @utility vz-scroll-x {
   overflow-x: auto;

@@ -18,7 +18,7 @@ export function ChallengesBenefits({
           <ul className="m-0 list-none space-y-5 p-0">
             {challenges.map((item) => (
               <li key={item.title}>
-                <h3 className="text-vz-ink m-0 text-[18px] leading-[1.3] font-bold">{item.title}</h3>
+                <h3 className="vz-break-long text-vz-ink m-0 text-[18px] leading-[1.3] font-bold">{item.title}</h3>
                 <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">
                   <PhoneRichText text={item.text} />
                 </p>
@@ -33,7 +33,7 @@ export function ChallengesBenefits({
           <ul className="m-0 list-none space-y-5 p-0">
             {benefits.map((item) => (
               <li key={item.title}>
-                <h3 className="text-vz-ink m-0 text-[18px] leading-[1.3] font-bold">{item.title}</h3>
+                <h3 className="vz-break-long text-vz-ink m-0 text-[18px] leading-[1.3] font-bold">{item.title}</h3>
                 <p className="text-vz-ink mt-2 mb-0 text-[16px] leading-[1.45]">
                   <PhoneRichText text={item.text} />
                 </p>
