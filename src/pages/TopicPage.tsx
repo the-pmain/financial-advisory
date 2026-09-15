@@ -6,6 +6,7 @@ import { useT } from '../i18n';
 import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
+import { ClientTestimonials } from '../components/widgets/ClientTestimonials';
 import { ChallengesBenefits } from '../components/widgets/ChallengesBenefits';
 import { CustodyBanks } from '../components/widgets/CustodyBanks';
 import { DocumentsList } from '../components/widgets/DocumentsList';
@@ -77,13 +78,18 @@ export function TopicPage() {
         )}
       </div>
 
+      {topic.showClientTestimonials && (
+        <div className="mt-12 max-lap:mt-10">
+          <ClientTestimonials />
+        </div>
+      )}
+
       <div className="mt-12 max-lap:mt-10">
         <TextTeasers
           title="What we do for you"
           items={highlights.map((item) => ({
             title: item.title,
             text: item.text,
-            to: pathname,
           }))}
         />
       </div>

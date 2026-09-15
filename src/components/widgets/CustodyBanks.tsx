@@ -1,5 +1,40 @@
+import { useState } from 'react';
 import { company } from '../../data/company';
 import { SectionTitle } from '../ui/primitives';
+
+function BankMark({
+  name,
+  logo,
+}: {
+  name: string;
+  logo: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  const word = name.replace(/\s+AG$/, '');
+
+  if (failed) {
+    return (
+      <div
+        className="bg-vz-blue flex h-12 w-full max-w-[220px] items-center px-4"
+        aria-hidden="true"
+      >
+        <span className="font-serif text-[16px] leading-none font-bold text-white">{word}</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={logo}
+      alt=""
+      width={220}
+      height={48}
+      className="h-12 w-auto max-w-full"
+      decoding="async"
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 export function CustodyBanks({ className = '' }: { className?: string }) {
   const banks = company.custodyBanks;
@@ -14,14 +49,7 @@ export function CustodyBanks({ className = '' }: { className?: string }) {
       <ul className="mt-6 mb-0 grid list-none grid-cols-3 gap-4 p-0 max-tab:grid-cols-1">
         {banks.map((bank) => (
           <li key={bank.id} className="border-vz-rule bg-white p-4">
-            <img
-              src={bank.logo}
-              alt=""
-              width={220}
-              height={48}
-              className="h-12 w-auto"
-              decoding="async"
-            />
+            <BankMark name={bank.name} logo={bank.logo} />
             <p className="text-vz-ink m-0 mt-3 text-[16px] leading-[1.3] font-bold">{bank.name}</p>
             <p className="text-vz-gray-mid m-0 mt-1 text-[14px] leading-[1.3]">{bank.city}</p>
           </li>

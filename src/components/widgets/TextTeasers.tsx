@@ -27,13 +27,17 @@ export function TextTeasers({ title, items }: { title: string; items: Solution[]
                 : 'border-vz-surface border-l-4 pr-[18px] pl-[14px] max-desk:pl-[10px] max-mob:border-l-0 max-mob:pr-0 max-mob:pl-[18px]'
             } ${i === items.length - 1 ? '!pr-0' : ''}`}
           >
-            <h3 className="tracking-vz-01 m-0 mb-[8px] text-[20px] leading-[25px] font-bold">
-              <Link
-                to={item.to}
-                className="text-vz-blue-mid hover:text-vz-orange vz-underline-hover transition-colors duration-250"
-              >
-                {item.title}
-              </Link>
+            <h3 className="tracking-vz-01 text-vz-ink m-0 mb-[8px] text-[20px] leading-[25px] font-bold">
+              {item.to ? (
+                <Link
+                  to={item.to}
+                  className="text-vz-blue-mid hover:text-vz-orange vz-underline-hover transition-colors duration-250"
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                item.title
+              )}
             </h3>
             <p className="tracking-vz-02 m-0 text-[18px] leading-[25.4px] text-black max-mob:text-[16px] max-mob:leading-[22.4px]">
               <PhoneRichText text={item.text} />

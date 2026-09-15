@@ -29,6 +29,7 @@ export type Topic = {
   showCustodyBanks?: boolean;
   showPortalPreview?: boolean;
   showCaseStudies?: boolean;
+  showClientTestimonials?: boolean;
   adviceDisclaimer?: boolean;
 };
 
@@ -324,6 +325,7 @@ export const topics: Topic[] = [
       { title: 'Talk to us', text: 'A free first meeting is the usual starting point.' },
     ],
     showCaseStudies: true,
+    showClientTestimonials: true,
     adviceDisclaimer: true,
   }),
   t({

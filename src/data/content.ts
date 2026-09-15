@@ -42,7 +42,7 @@ export type Quote = {
 export type Solution = {
   title: string;
   text: string;
-  to: string;
+  to?: string;
 };
 
 export type PropertySpec = {
