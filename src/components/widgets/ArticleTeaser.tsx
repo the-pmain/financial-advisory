@@ -30,13 +30,23 @@ function ArticleMeta({ article }: { article: Article }) {
 }
 
 /** 34/39.1 headline, dropping to 26/30.7 below 1281px. */
-export function ArticleFeatured({ article }: { article: Article }) {
+export function ArticleFeatured({
+  article,
+  compact = false,
+}: {
+  article: Article;
+  compact?: boolean;
+}) {
   const describedBy = `teaser-${article.slug}`;
 
   return (
     <article className="group flex flex-col pb-6 max-mob:pb-8">
       <div>
-        <Link to={knowledgeHubArticlePath(article.slug)} aria-describedby={describedBy} className="block">
+        <Link
+          to={knowledgeHubArticlePath(article.slug)}
+          aria-describedby={compact ? undefined : describedBy}
+          className="block"
+        >
           {article.image && (
             <div className="mb-[18px] overflow-hidden">
               <img
@@ -51,9 +61,11 @@ export function ArticleFeatured({ article }: { article: Article }) {
             <span className={titleLink}>{article.title}</span>
           </h3>
         </Link>
-        <p id={describedBy} className={teaser}>
-          <PhoneRichText text={article.teaser} />
-        </p>
+        {!compact && (
+          <p id={describedBy} className={teaser}>
+            <PhoneRichText text={article.teaser} />
+          </p>
+        )}
         <ArticleMeta article={article} />
       </div>
     </article>
@@ -66,7 +78,15 @@ export function ArticleFeatured({ article }: { article: Article }) {
  * group can omit it; on phones it becomes a 3px black-10% rule instead of the
  * 4px page-grey one.
  */
-export function ArticleSlim({ article, divided = true }: { article: Article; divided?: boolean }) {
+export function ArticleSlim({
+  article,
+  divided = true,
+  compact = false,
+}: {
+  article: Article;
+  divided?: boolean;
+  compact?: boolean;
+}) {
   const describedBy = `teaser-${article.slug}`;
 
   return (
@@ -77,7 +97,10 @@ export function ArticleSlim({ article, divided = true }: { article: Article; div
           : ''
       }`}
     >
-      <Link to={knowledgeHubArticlePath(article.slug)} aria-describedby={describedBy}>
+      <Link
+        to={knowledgeHubArticlePath(article.slug)}
+        aria-describedby={compact ? undefined : describedBy}
+      >
         <h3 className="m-0 text-[26px] leading-[32px] font-bold max-desk:text-[20px] max-desk:leading-[24px]">
           <Tagline gap={8} className="group-hover:text-vz-orange">
             {article.tagline}
@@ -85,9 +108,11 @@ export function ArticleSlim({ article, divided = true }: { article: Article; div
           <span className={titleLink}>{article.title}</span>
         </h3>
       </Link>
-      <p id={describedBy} className={teaser}>
-        <PhoneRichText text={article.teaser} />
-      </p>
+      {!compact && (
+        <p id={describedBy} className={teaser}>
+          <PhoneRichText text={article.teaser} />
+        </p>
+      )}
       <ArticleMeta article={article} />
     </article>
   );

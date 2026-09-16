@@ -60,7 +60,7 @@ export const hero = {
   brand: 'Trust. Clarity. Your future.',
   headline: 'Your interests first. Always.',
   subline:
-    'Independent, fee-only advice for the decisions that shape your life. We bring retirement, investing, tax and estate planning into one clear strategy — built around your goals, explained without jargon and free from product sales incentives.',
+    'Independent, fee-only advice for retirement, investing, tax and estate planning. Your assets stay at your bank.',
   secondaryCta: { label: 'Discover our client-first approach', to: ROUTES.expertise },
   image: '/team/friedrich-hartmann.png',
   imageAlt: 'Portrait of Friedrich Hartmann, Chairman and CIO of Helfenstein Group',

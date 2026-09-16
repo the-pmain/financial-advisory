@@ -1,18 +1,22 @@
-import { newsFeatured, newsSecondary, newsSlim, offers, solutions } from '../data/content';
+import { newsFeatured, newsSecondary, newsSlim, offers } from '../data/content';
 import { ROUTES } from '../constants/routes';
 import { ArticleFeatured, ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { AudienceBands, Hero } from '../components/widgets/Hero';
 import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
+import { HomeServices } from '../components/widgets/HomeServices';
 import { MarketsSection } from '../components/widgets/MarketsSection';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
-import { PortalPreview } from '../components/widgets/PortalPreview';
 import { OffersGallery } from '../components/widgets/OffersGallery';
-import { TextTeasers } from '../components/widgets/TextTeasers';
+import { PortalPreview } from '../components/widgets/PortalPreview';
 import { TwoColumns } from '../components/widgets/TwoColumns';
 import { UnderlineLink } from '../components/ui/primitives';
 
-const gap = 'mt-12';
+const gap = 'mt-20 max-lap:mt-16 max-mob:mt-14';
 
+/**
+ * Same home sections as before, with more air between them and a shorter
+ * lead. Insights, offers, stories, markets and the portal stay on the page.
+ */
 export function HomePage() {
   return (
     <>
@@ -27,10 +31,10 @@ export function HomePage() {
           title="Guidance for confident decisions"
           left={
             <>
-              <ArticleFeatured article={newsFeatured} />
+              <ArticleFeatured article={newsFeatured} compact />
               <div className="border-vz-surface border-t-4 pt-[13px] max-mob:border-t-[3px] max-mob:border-t-black/10 max-mob:pt-[12px]">
                 {newsSlim.map((article, i) => (
-                  <ArticleSlim key={article.slug} article={article} divided={i > 0} />
+                  <ArticleSlim key={article.slug} article={article} divided={i > 0} compact />
                 ))}
               </div>
               <p className="mt-4 mb-0">
@@ -40,7 +44,7 @@ export function HomePage() {
               </p>
             </>
           }
-          right={<ArticleFeatured article={newsSecondary} />}
+          right={<ArticleFeatured article={newsSecondary} compact />}
         />
       </div>
 
@@ -49,7 +53,7 @@ export function HomePage() {
       </div>
 
       <div className={gap}>
-        <CaseStudiesBand title="Advice made personal" limit={3} />
+        <CaseStudiesBand title="Advice made personal" limit={3} compact />
       </div>
 
       <div className={gap}>
@@ -57,7 +61,7 @@ export function HomePage() {
       </div>
 
       <div className={gap}>
-        <TextTeasers title="A higher standard of care" items={solutions} />
+        <HomeServices />
       </div>
 
       <div className={gap}>
