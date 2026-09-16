@@ -6,13 +6,16 @@ export function NavToggle({
   open,
   onToggle,
   controls,
+  tone = 'default',
 }: {
   open: boolean;
   onToggle: () => void;
   controls: string;
+  tone?: 'default' | 'hero';
 }) {
   const bar =
     'absolute left-0 right-0 mx-auto block h-[2px] bg-current transition-all duration-250 ease-in-out';
+  const hero = tone === 'hero';
 
   return (
     <button
@@ -21,9 +24,13 @@ export function NavToggle({
       aria-expanded={open}
       aria-controls={controls}
       onClick={onToggle}
-      className="border-vz-blue text-vz-blue tracking-vz-02 hover:border-vz-orange hover:text-vz-orange relative block cursor-pointer overflow-hidden rounded-[5px] border-[0.5px] bg-white py-2 pr-[7px] pl-[34px] text-[15px] leading-[17px] transition-colors duration-250 active:opacity-75 max-mob:h-[39px] max-mob:w-10 max-mob:border-0 max-mob:p-0 max-mob:indent-[-99em]"
+      className={`tracking-vz-02 relative block min-h-11 cursor-pointer overflow-hidden rounded-[5px] border-[0.5px] py-2 pr-[7px] pl-[34px] text-[15px] leading-[17px] transition-colors duration-250 active:opacity-75 max-mob:size-11 max-mob:border-0 max-mob:p-0 max-mob:indent-[-99em] ${
+        hero
+          ? 'border-white/70 bg-transparent text-white hover:border-vz-orange-light hover:text-vz-orange-light'
+          : 'border-vz-blue-mid bg-vz-blue-mid text-white hover:border-vz-slate hover:bg-vz-slate'
+      }`}
     >
-      <span className="pointer-events-none absolute top-[9px] left-[9px] block h-4 w-4 indent-0 max-mob:top-[11px] max-mob:left-[11px]">
+      <span className="pointer-events-none absolute top-[14px] left-[9px] block h-4 w-4 indent-0 max-mob:top-[14px] max-mob:left-[14px]">
         <span
           className={bar}
           style={open ? { top: 9, width: 0, left: '50%' } : { top: 0, width: '100%' }}

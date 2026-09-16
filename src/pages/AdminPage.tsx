@@ -287,7 +287,7 @@ export function AdminPage() {
             <button
               type="button"
               onClick={onLogout}
-              className="bg-vz-blue hover:bg-vz-blue-mid inline-flex h-10 cursor-pointer items-center rounded-[3px] px-4 text-[14px] font-bold text-white shadow-[1px_1px_2px_rgba(11,31,51,0.35)]"
+              className="bg-vz-blue hover:bg-vz-blue-mid inline-flex h-10 cursor-pointer items-center rounded-[3px] px-4 text-[14px] font-bold text-white shadow-[1px_1px_2px_rgba(7,14,24,0.35)]"
             >
               Log out
             </button>

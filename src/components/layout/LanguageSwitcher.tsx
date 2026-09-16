@@ -19,7 +19,7 @@ export function LanguageSwitcher({
             type="button"
             aria-current={locale === lang.code ? 'true' : undefined}
             onClick={() => setLocale(lang.code as Locale)}
-            className={`${buttonClassName} cursor-pointer text-[16px] leading-[19px] uppercase transition-colors duration-250 ${
+            className={`${buttonClassName} min-h-11 min-w-8 cursor-pointer px-1 text-[16px] leading-[19px] uppercase transition-colors duration-250 ${
               locale === lang.code ? 'font-bold' : ''
             }`}
           >

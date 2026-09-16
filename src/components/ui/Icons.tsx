@@ -163,6 +163,17 @@ export function ChartIcon(props: IconProps) {
   );
 }
 
+export function PeopleIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false" {...props}>
+      <circle cx="16" cy="15" r="5" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="31" cy="16" r="4" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M6 38c1-8 5.2-12 10-12s9 4 10 12" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M26 38c.8-6 3.6-9 6.8-9 3 0 5.6 2.6 6.4 9" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
 export function CompassIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false" {...props}>

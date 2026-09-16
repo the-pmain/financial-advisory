@@ -19,7 +19,7 @@ export function PortalPreview({ className = '' }: { className?: string }) {
       <SectionTitle>Client portal preview</SectionTitle>
       <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-start gap-10 max-tab:grid-cols-1 max-tab:gap-6">
         <div
-          className="border-vz-rule overflow-hidden rounded-[4px] border bg-[#f4f6f8] shadow-[0_8px_24px_rgba(11,31,51,0.08)]"
+          className="border-vz-rule overflow-hidden rounded-[4px] border bg-[#f4f6f8] shadow-[0_8px_24px_rgba(7,14,24,0.08)]"
           aria-hidden="true"
         >
           <div className="bg-vz-blue flex items-center justify-between px-4 py-2.5 text-white">

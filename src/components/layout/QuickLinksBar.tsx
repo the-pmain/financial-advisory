@@ -1,54 +1,50 @@
 import { NavLink } from 'react-router';
 import { ROUTES } from '../../constants/routes';
-import { quickLinks } from '../../data/navigation';
+import { dropdownsFirst, quickLinks } from '../../data/navigation';
+import { NavDropdown } from './NavDropdown';
+
+const triggerClass = (isActive: boolean) =>
+  `text-vz-blue hover:text-vz-orange tracking-vz-01 block py-[9px] text-[19px] leading-[22px] transition-colors duration-250 max-desk:py-[7px] max-desk:text-[17px] max-desk:leading-[20px] max-mob:py-3 ${
+    isActive ? 'vz-underline' : ''
+  }`;
 
 /**
- * The second header row. Rules are drawn on the list itself (0.5px #999 top and
- * bottom) and the row scrolls horizontally with a hidden scrollbar, which is
- * how the reference copes with narrow viewports.
+ * The second header row. Items with a real page tree open as dropdowns.
  */
 export function QuickLinksBar() {
+  const links = dropdownsFirst(quickLinks);
+
   return (
-    <div className="min-h-[54px] overflow-x-clip overflow-y-visible max-desk:min-h-[48px]">
-      {/* Below 1281px the row bleeds into the 25px page gutters so the list can
-          scroll all the way to the viewport edge. */}
-      <nav
-        aria-label="Quick links"
-        className="vz-scroll-x pt-3 max-desk:-mx-[25px] max-desk:-mt-3 max-desk:px-[25px] max-desk:pt-3"
-      >
-        <ul
-          className="inline-flex w-full gap-[5px] whitespace-nowrap"
-          style={{
-            borderTop: '0.5px solid #999999',
-            borderBottom: '0.5px solid #999999',
-          }}
-        >
-          {quickLinks.map((link, i) => (
-            <li
-              key={link.to + link.label}
-              className={`inline-block whitespace-nowrap ${
-                i === 0
-                  ? 'mr-[7px] max-desk:mr-[9px]'
-                  : i === quickLinks.length - 1
-                    ? 'ml-[7px] max-desk:ml-[9px]'
-                    : 'mx-[7px] max-desk:mx-[9px]'
-              }`}
-            >
-              <NavLink
-                to={link.to}
-                end={link.to === ROUTES.about}
-                className={({ isActive }) =>
-                  `text-vz-blue hover:text-vz-orange tracking-vz-01 block py-[9px] text-[19px] leading-[22px] transition-[color,box-shadow] duration-250 max-desk:py-[7px] max-desk:text-[17px] max-desk:leading-[20px] ${
-                    isActive ? 'vz-underline' : 'vz-underline-hover'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
+    <div className="relative min-h-[54px] overflow-x-auto overflow-y-visible max-desk:min-h-[48px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <nav aria-label="Quick links" className="vz-scroll-x pt-3">
+        <ul className="inline-flex w-full items-center gap-6 whitespace-nowrap max-desk:gap-5 max-mob:gap-4">
+          {links.map((link, i) => (
+            <li key={link.to + link.label} className="inline-block whitespace-nowrap">
+              {link.children?.length ? (
+                <NavDropdown
+                  label={link.label}
+                  to={link.to}
+                  items={link.children}
+                  align={i === links.length - 1 ? 'end' : 'start'}
+                  triggerClassName={triggerClass}
+                />
+              ) : (
+                <NavLink
+                  to={link.to}
+                  end={link.to === ROUTES.about}
+                  className={({ isActive }) => triggerClass(isActive)}
+                >
+                  {link.label}
+                </NavLink>
+              )}
             </li>
           ))}
         </ul>
       </nav>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-10 bg-gradient-to-l from-white to-transparent max-lap:block"
+      />
     </div>
   );
 }

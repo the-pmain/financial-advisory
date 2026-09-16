@@ -343,7 +343,7 @@ export function ConsultationForm({
         <button
           type="submit"
           disabled={submitting}
-          className={`${buttonOrangeClass} ${embedded ? 'appointment-form__submit' : 'mt-2'} cursor-pointer border-0 disabled:cursor-wait disabled:opacity-60`}
+          className={`${buttonOrangeClass} ${embedded ? 'appointment-form__submit' : 'mt-2'} cursor-pointer disabled:cursor-wait disabled:opacity-60`}
         >
           {submitting ? 'Sending…' : 'Send'}
         </button>

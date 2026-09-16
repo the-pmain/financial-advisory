@@ -179,12 +179,12 @@ export function DocumentPreviewDialog({
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[rgba(11,31,51,0.46)] p-4">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[rgba(7,14,24,0.46)] p-4">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="document-preview-title"
-        className="flex max-h-[92vh] w-full max-w-[880px] flex-col overflow-hidden rounded-[4px] bg-white shadow-[0_12px_40px_rgba(11,31,51,0.28)]"
+        className="flex max-h-[92vh] w-full max-w-[880px] flex-col overflow-hidden rounded-[4px] bg-white shadow-[0_12px_40px_rgba(7,14,24,0.28)]"
       >
         <header className="border-vz-rule flex items-center justify-between gap-3 border-b px-5 py-4">
           <h2 id="document-preview-title" className="text-vz-ink m-0 text-[18px] font-bold">
@@ -214,7 +214,7 @@ export function DocumentPreviewDialog({
                 key={src}
                 src={src}
                 alt={`Page ${index + 1}`}
-                className="mx-auto mb-4 block w-full max-w-[720px] bg-white shadow-[0_1px_4px_rgba(11,31,51,0.12)]"
+                className="mx-auto mb-4 block w-full max-w-[720px] bg-white shadow-[0_1px_4px_rgba(7,14,24,0.12)]"
               />
             ))}
           {status === 'ready' && iframeUrl && !pages.length && (

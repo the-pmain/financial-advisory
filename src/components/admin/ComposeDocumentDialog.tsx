@@ -81,12 +81,12 @@ export function ComposeDocumentDialog({
   }
 
   return createPortal(
-    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-[rgba(11,31,51,0.46)] p-4">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-[rgba(7,14,24,0.46)] p-4">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="compose-document-title"
-        className="flex max-h-[92vh] w-full max-w-[760px] flex-col overflow-hidden rounded-[4px] bg-white shadow-[0_12px_40px_rgba(11,31,51,0.28)]"
+        className="flex max-h-[92vh] w-full max-w-[760px] flex-col overflow-hidden rounded-[4px] bg-white shadow-[0_12px_40px_rgba(7,14,24,0.28)]"
       >
         <header className="border-vz-rule flex items-center justify-between gap-3 border-b px-5 py-4">
           <h2 id="compose-document-title" className="text-vz-ink m-0 text-[18px] font-bold">

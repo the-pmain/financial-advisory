@@ -47,6 +47,8 @@ export function financialServiceJsonLd(): Record<string, unknown> {
       authority: 'FINMA Switzerland',
     },
     url: company.officialSite.url,
+    logo: `${company.officialSite.url}/images/helfenstein-mark.png`,
+    image: `${company.officialSite.url}/favicon/og-image.png`,
     description: company.business,
     areaServed: { '@type': 'Country', name: 'Switzerland' },
     identifier: [

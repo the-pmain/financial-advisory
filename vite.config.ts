@@ -107,6 +107,11 @@ function ssgPrerender(siteUrl: string): Plugin {
           `<meta property="og:description" content="${escapeAttr(meta.description)}" />`,
           `<meta property="og:type" content="${url === '/' ? 'website' : 'article'}" />`,
           origin ? `<meta property="og:url" content="${escapeAttr(canonical)}" />` : '',
+          origin
+            ? `<meta property="og:image" content="${escapeAttr(`${origin}/favicon/og-image.png`)}" />`
+            : '<meta property="og:image" content="/favicon/og-image.png" />',
+          `<meta property="og:image:alt" content="Helfenstein Group" />`,
+          `<meta name="twitter:image" content="${escapeAttr(origin ? `${origin}/favicon/og-image.png` : '/favicon/og-image.png')}" />`,
           page.includes('helfenstein-jsonld-org')
             ? ''
             : `<script type="application/ld+json" id="helfenstein-jsonld-org">${jsonLd}</script>`,

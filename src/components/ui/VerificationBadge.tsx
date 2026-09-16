@@ -34,7 +34,7 @@ export function VerificationBadge({
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      className={`group border-vz-rule hover:border-vz-blue flex min-h-[44px] flex-col rounded-[3px] border bg-white px-3.5 py-3 no-underline transition-[border-color,box-shadow] duration-250 hover:shadow-[0_0_0_1px_#0B1F33] ${className}`}
+      className={`group border-vz-rule hover:border-vz-blue flex min-h-[44px] flex-col rounded-[3px] border bg-white px-3.5 py-3 no-underline transition-[border-color,box-shadow] duration-250 hover:shadow-[0_0_0_1px_#070E18] ${className}`}
     >
       <img
         src={logo}

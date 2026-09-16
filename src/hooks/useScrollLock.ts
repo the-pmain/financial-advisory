@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 
-/** Locks page scrolling while a full-screen overlay (mega menu, search) is open. */
+/**
+ * Locks page scrolling while a full-screen overlay (mega menu, search) is open.
+ * Overflow is hidden on both roots; the sheet itself stays independently
+ * scrollable. Body is not `position: fixed` so the sticky header stays put.
+ */
 export function useScrollLock(locked: boolean) {
   useEffect(() => {
     if (!locked) return;

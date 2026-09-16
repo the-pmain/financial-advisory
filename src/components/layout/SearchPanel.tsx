@@ -105,14 +105,14 @@ export function SearchPanel({
     <div
       id={id}
       hidden={!open}
-      className={`absolute top-full -right-[30px] -left-[30px] z-10 bg-white px-[30px] pt-[14px] pb-[18px] transition-[opacity,visibility] duration-250 max-lap:-right-[25px] max-lap:-left-[25px] max-lap:px-[25px] ${
+      className={`absolute top-full -right-[30px] -left-[30px] z-90 bg-white px-[30px] pt-[14px] pb-[18px] transition-[opacity,visibility] duration-250 max-lap:fixed max-lap:top-[var(--nav-sheet-top,74px)] max-lap:right-0 max-lap:bottom-0 max-lap:left-0 max-lap:overflow-y-auto max-lap:overscroll-y-contain max-lap:px-[25px] max-lap:pb-[max(2.5rem,env(safe-area-inset-bottom))] max-mob:px-5 ${
         open ? 'visible opacity-100' : 'invisible opacity-0'
-      } after:pointer-events-none after:absolute after:-bottom-1 after:right-0 after:left-0 after:block after:h-1 after:bg-gradient-to-b after:from-black/15 after:to-transparent`}
+      } after:pointer-events-none after:absolute after:-bottom-1 after:right-0 after:left-0 after:block after:h-1 after:bg-gradient-to-b after:from-black/15 after:to-transparent max-lap:after:hidden`}
     >
       <form
         role="search"
         onSubmit={(event) => event.preventDefault()}
-        className="flex items-center gap-3"
+        className="flex items-center gap-3 max-mob:flex-col max-mob:items-stretch"
       >
         <label htmlFor="vz-search-input" className="visually-hidden">
           Search the website
@@ -124,22 +124,30 @@ export function SearchPanel({
           value={query}
           placeholder="What are you looking for?"
           onChange={(event) => setQuery(event.target.value)}
-          className="border-vz-rule text-vz-ink placeholder:text-vz-gray-light focus:border-vz-blue h-[42px] flex-1 rounded-[3px] border bg-white px-3 text-[17px] outline-none"
+          className="border-vz-rule text-vz-ink placeholder:text-vz-gray-light focus:border-vz-blue h-11 min-w-0 flex-1 rounded-[3px] border bg-white px-3 text-[17px] outline-none"
         />
-        <button
-          type="reset"
-          onClick={() => setQuery('')}
-          className="text-vz-blue hover:text-vz-orange cursor-pointer text-[15px] transition-colors duration-250"
-        >
-          Reset
-        </button>
-        <button
-          type="submit"
-          className="bg-vz-blue hover:bg-vz-blue-mid h-[42px] cursor-pointer rounded-[3px] px-5 text-[15px] font-bold text-white transition-colors duration-250"
-        >
-          Search
-        </button>
+        <div className="flex shrink-0 items-center justify-end gap-3 max-mob:justify-between">
+          <button
+            type="reset"
+            onClick={() => setQuery('')}
+            className="text-vz-blue hover:text-vz-orange min-h-11 cursor-pointer px-2 text-[15px] transition-colors duration-250"
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            className="bg-vz-blue hover:bg-vz-blue-mid h-11 cursor-pointer rounded-[3px] px-5 text-[15px] font-bold text-white transition-colors duration-250 max-mob:flex-1"
+          >
+            Search
+          </button>
+        </div>
       </form>
+
+      {query.trim().length < 2 && (
+        <p className="text-vz-gray-mid mt-4 mb-0 hidden text-[15px] leading-[1.4] max-lap:block">
+          Type at least two characters to search the site.
+        </p>
+      )}
 
       {results.length > 0 && (
         <ul className="mt-3">

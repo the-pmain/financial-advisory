@@ -570,7 +570,7 @@ function ActionMenu({
           <div
             ref={panelRef}
             role="menu"
-            className="border-vz-rule fixed z-50 min-w-[240px] rounded-[4px] border bg-white p-1.5 shadow-[0_8px_24px_rgba(11,31,51,0.18)]"
+            className="border-vz-rule fixed z-50 min-w-[240px] rounded-[4px] border bg-white p-1.5 shadow-[0_8px_24px_rgba(7,14,24,0.18)]"
             style={{ top: coords.top, right: coords.right }}
           >
             {children}
@@ -677,7 +677,7 @@ function PagerButton({ label, disabled, onClick }: { label: string; disabled: bo
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className="bg-vz-blue hover:bg-vz-blue-mid focus-visible:outline-vz-orange disabled:bg-vz-blue-panel disabled:text-vz-blue-soft inline-flex h-10 min-w-[108px] cursor-pointer items-center justify-center rounded-[3px] px-4 text-[14px] font-bold text-white shadow-[1px_1px_2px_rgba(11,31,51,0.35)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-default disabled:shadow-none"
+      className="bg-vz-blue hover:bg-vz-blue-mid focus-visible:outline-vz-orange disabled:bg-vz-blue-panel disabled:text-vz-blue-soft inline-flex h-10 min-w-[108px] cursor-pointer items-center justify-center rounded-[3px] px-4 text-[14px] font-bold text-white shadow-[1px_1px_2px_rgba(7,14,24,0.35)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-default disabled:shadow-none"
     >
       {label}
     </button>
@@ -737,7 +737,7 @@ function TestSwitch({
       }`}
     >
       <span
-        className={`absolute top-0.5 left-0.5 block size-6 rounded-full bg-white shadow-[1px_1px_2px_rgba(11,31,51,0.28)] transition-transform duration-150 ${
+        className={`absolute top-0.5 left-0.5 block size-6 rounded-full bg-white shadow-[1px_1px_2px_rgba(7,14,24,0.28)] transition-transform duration-150 ${
           checked ? 'translate-x-5' : 'translate-x-0'
         }`}
       />

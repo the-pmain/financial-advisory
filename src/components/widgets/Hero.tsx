@@ -1,42 +1,78 @@
 import { Link } from 'react-router';
 import { audienceBands, hero } from '../../data/content';
 import { AppointmentButton } from '../appointments/AppointmentModal';
-import { CompassIcon, ShieldIcon } from '../ui/Icons';
+import { ArrowRightIcon, ChartIcon, CompassIcon, PeopleIcon, ShieldIcon } from '../ui/Icons';
 import { PhoneRichText } from '../ui/PhoneNumberDisplay';
-import { UnderlineLink } from '../ui/primitives';
 
 const bandIcons = {
   individuals: CompassIcon,
   'independent-advice': ShieldIcon,
 } as const;
 
+const trustItems = [
+  { label: 'Tailored advice', Icon: CompassIcon },
+  { label: 'Independent advice', Icon: ChartIcon },
+  { label: 'Long-term focus', Icon: ShieldIcon },
+  { label: 'Trusted partnership', Icon: PeopleIcon },
+] as const;
+
 /**
- * Home lead: one headline, one short line, one primary action.
+ * Opening screen: photograph sits in the page container, darkened,
+ * with the same private-client lead over it.
  */
 export function Hero() {
   return (
-    <section className="mx-auto grid max-w-[1100px] grid-cols-[minmax(0,1fr)_minmax(160px,220px)] items-center gap-16 pt-6 max-mob:grid-cols-1 max-mob:gap-8 max-mob:pt-2 max-mob:text-center">
-      <div className="min-w-0">
-        <h1 className="text-vz-ink mt-0 mb-0 text-[40px] leading-[1.15] font-bold tracking-[-0.01em] max-lap:text-[32px] max-mob:text-[26px]">
-          {hero.headline}
-        </h1>
-        <p className="text-vz-ink mt-6 mb-0 max-w-[32rem] text-[18px] leading-[1.45] max-mob:mx-auto max-mob:text-[16px]">
-          <PhoneRichText text={hero.subline} />
-        </p>
-        <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 max-mob:justify-center">
-          <AppointmentButton>Make an appointment</AppointmentButton>
-          <UnderlineLink to={hero.secondaryCta.to}>{hero.secondaryCta.label}</UnderlineLink>
-        </div>
-      </div>
-
-      <div className="mx-auto size-[200px] shrink-0 overflow-hidden rounded-full max-mob:size-[140px]">
+    <section className="overflow-hidden rounded-[6px] text-white">
+      <div className="relative min-h-[min(72vh,640px)] max-mob:min-h-[min(520px,calc(100dvh-14rem))]">
         <img
-          src={hero.image}
-          alt={hero.imageAlt}
-          width={200}
-          height={200}
-          className="h-full w-full object-cover"
+          src="/images/hero-lucerne.jpg"
+          alt="Lake and Alpine view from a terrace — Lucerne and central Switzerland"
+          width={1024}
+          height={576}
+          className="absolute inset-0 h-full w-full object-cover object-[center_42%] brightness-[0.45] contrast-[1.08] saturate-[0.92]"
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/20 to-transparent" />
+
+        <div className="relative z-1 flex min-h-[min(72vh,640px)] flex-col max-mob:min-h-[min(520px,calc(100dvh-14rem))]">
+          <div className="flex flex-1 items-center px-10 py-14 max-mob:px-5 max-mob:py-10">
+            <div className="min-w-0 max-w-[38rem]">
+              <p className="m-0 text-[12px] leading-[1.4] font-bold tracking-[0.18em] text-white/80 uppercase">
+                {hero.brand}
+              </p>
+              <h1 className="mt-4 mb-0 text-[48px] leading-[1.08] font-bold tracking-[-0.02em] text-white max-lap:text-[36px] max-mob:text-[28px]">
+                {hero.headline}
+              </h1>
+              <p className="mt-6 mb-0 max-w-[34rem] text-[18px] leading-[1.5] text-white/90 max-mob:text-[16px]">
+                <PhoneRichText text={hero.subline} />
+              </p>
+              <div className="mt-9">
+                <AppointmentButton className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[13px] tracking-[0.08em] uppercase">
+                  {hero.ctaLabel}
+                  <ArrowRightIcon className="h-3.5 w-3.5" />
+                </AppointmentButton>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-vz-blue/95 px-10 py-5 max-mob:px-5">
+            <div className="flex flex-wrap items-center gap-x-10 gap-y-5 max-mob:flex-col max-mob:items-start">
+              <ul className="m-0 flex min-w-0 flex-1 list-none flex-wrap gap-x-8 gap-y-3 p-0">
+                {trustItems.map(({ label, Icon }) => (
+                  <li
+                    key={label}
+                    className="flex items-center gap-2.5 text-[12px] font-bold tracking-[0.08em] text-white uppercase"
+                  >
+                    <Icon className="text-vz-orange-light h-5 w-5 shrink-0" />
+                    {label}
+                  </li>
+                ))}
+              </ul>
+              <p className="m-0 max-w-[16rem] text-[12px] leading-[1.4] tracking-[0.06em] text-white/75 uppercase max-mob:max-w-none">
+                More than investments. A lasting partnership.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

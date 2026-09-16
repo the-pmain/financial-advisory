@@ -44,7 +44,7 @@ export function AppointmentButton({
   return (
     <button
       type="button"
-      className={`${buttonOrangeClass} cursor-pointer border-0 ${className}`}
+      className={`${buttonOrangeClass} cursor-pointer ${className}`}
       onClick={() => {
         onClick?.();
         open();

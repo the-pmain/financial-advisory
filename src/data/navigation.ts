@@ -4,6 +4,7 @@ export type NavLink = {
   label: string;
   to: string;
   external?: boolean;
+  children?: NavLink[];
 };
 
 export type NavGroup = {
@@ -11,6 +12,38 @@ export type NavGroup = {
   to: string;
   children: NavLink[];
 };
+
+/** Keep items that open a menu ahead of plain links. */
+export function dropdownsFirst<T extends { children?: unknown[] }>(items: T[]): T[] {
+  return [...items].sort((a, b) => Number(!!b.children?.length) - Number(!!a.children?.length));
+}
+
+export const aboutChildren: NavLink[] = [
+  { label: 'Our team', to: ROUTES.aboutTeam },
+  { label: 'Regulatory compliance', to: ROUTES.regulatoryAndCompliance },
+  { label: 'Independent advice', to: ROUTES.aboutIndependentAdvice },
+  { label: 'How we are regulated', to: ROUTES.aboutHowWeAreRegulated },
+  { label: 'Jobs & careers', to: ROUTES.aboutJobs },
+  { label: 'Contact & help', to: ROUTES.aboutContact },
+  { label: 'Client stories', to: ROUTES.aboutClientStories },
+];
+
+export const adviceChildren: NavLink[] = [
+  { label: 'Retirement', to: ROUTES.retirement },
+  { label: 'Financial investments & portfolio management', to: ROUTES.financialInvestments },
+  { label: 'Estate planning', to: ROUTES.estatePlanning },
+  { label: 'Real estate & mortgages', to: ROUTES.realEstate },
+  { label: 'Taxes', to: ROUTES.taxes },
+  { label: 'Pensions', to: ROUTES.pensionPlanning },
+];
+
+export const financeChildren: NavLink[] = [
+  { label: 'Financial investments & portfolio management', to: ROUTES.financialInvestments },
+  { label: 'Markets & analysis', to: ROUTES.stockExchangesAndMarkets },
+  { label: 'Custody & banking partners', to: ROUTES.banking },
+  { label: 'Real estate & mortgages', to: ROUTES.realEstate },
+  { label: 'Helfenstein Financial Portal', to: ROUTES.financialPortal },
+];
 
 /** Main navigation — rendered inside the mega panel and repeated in the footer. */
 export const mainNavigation: NavGroup[] = [
@@ -28,35 +61,25 @@ export const mainNavigation: NavGroup[] = [
   {
     label: 'About us',
     to: ROUTES.about,
-    children: [
-      { label: 'Our team', to: ROUTES.aboutTeam },
-      { label: 'Regulatory compliance', to: `${ROUTES.about}#regulatory-compliance` },
-      { label: 'Independent advice', to: ROUTES.aboutIndependentAdvice },
-      { label: 'How we are regulated', to: ROUTES.aboutHowWeAreRegulated },
-      { label: 'Jobs & careers', to: ROUTES.aboutJobs },
-      { label: 'Contact & help', to: ROUTES.aboutContact },
-      { label: 'Client stories', to: ROUTES.aboutClientStories },
-    ],
+    children: aboutChildren,
   },
 ];
 
 /** Second header row — the horizontally scrollable shortcut bar. */
 export const quickLinks: NavLink[] = [
+  { label: 'Finance', to: ROUTES.financialInvestments, children: financeChildren },
+  { label: 'About us', to: ROUTES.about, children: aboutChildren },
   { label: 'Retirement', to: ROUTES.retirement },
-  { label: 'Investments', to: ROUTES.financialInvestments },
   { label: 'Estate planning', to: ROUTES.estatePlanning },
   { label: 'Real estate', to: ROUTES.realEstate },
   { label: 'Taxes', to: ROUTES.taxes },
   { label: 'Pensions', to: ROUTES.pensionPlanning },
-  { label: 'About us', to: ROUTES.about },
-  { label: 'Regulatory compliance', to: ROUTES.regulatoryAndCompliance },
-  { label: 'Our team', to: ROUTES.aboutTeam },
 ];
 
 /** Top-right utility links in the header's first row. */
 export const topMenu: NavLink[] = [
+  { label: 'Expertise', to: ROUTES.expertise, children: adviceChildren },
   { label: 'Appointments', to: ROUTES.appointments },
-  { label: 'Expertise', to: ROUTES.expertise },
   { label: 'Insights', to: ROUTES.insights },
   { label: 'Helfenstein Financial Portal', to: ROUTES.financialPortal },
 ];

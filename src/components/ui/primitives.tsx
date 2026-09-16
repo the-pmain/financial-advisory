@@ -121,9 +121,9 @@ export function UnderlineLink({
   );
 }
 
-/** Orange pill CTA (`a.button-orange`). */
+/** White pill CTA — ink outline, used for appointments and primary actions. */
 export const buttonOrangeClass =
-  'bg-vz-orange-btn inline-block rounded-[21px] px-4 py-3 text-center text-[14px] leading-4 font-bold text-white shadow-[1px_1px_2px_rgba(0,0,0,0.3)] transition-shadow duration-250 ease-linear hover:text-white hover:shadow-[0.5px_0.5px_4px_rgba(0,0,0,0.15)] active:shadow-none';
+  'inline-block rounded-[21px] border border-vz-blue bg-white px-4 py-3 text-center text-[14px] leading-4 font-bold text-vz-blue transition-[background-color,border-color,color] duration-250 ease-linear hover:border-vz-orange hover:bg-vz-cream hover:text-vz-blue active:bg-vz-cream-light';
 
 export function ButtonOrange({
   to,

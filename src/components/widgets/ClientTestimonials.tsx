@@ -1,5 +1,5 @@
 import { clientTestimonials, trustMetrics, videoTestimonial } from '../../data/clientTestimonials';
-import { SectionTitle } from '../ui/primitives';
+import { buttonOrangeClass, SectionTitle } from '../ui/primitives';
 
 function FamiliesIcon() {
   return (
@@ -90,7 +90,7 @@ export function ClientTestimonials() {
             />
             <button
               type="button"
-              className="bg-vz-orange-btn hover:bg-vz-orange absolute inset-0 m-auto h-11 w-[168px] cursor-pointer rounded-[21px] border-0 text-[14px] font-bold text-white shadow-[1px_1px_2px_rgba(0,0,0,0.3)]"
+              className={`${buttonOrangeClass} absolute inset-0 m-auto h-11 w-[168px] cursor-pointer`}
               aria-label="Watch video testimonial (placeholder)"
             >
               Watch video

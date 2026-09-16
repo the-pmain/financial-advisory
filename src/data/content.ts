@@ -57,13 +57,14 @@ export type PropertySpec = {
 /* -------------------------------------------------------------------------- */
 
 export const hero = {
-  brand: 'Trust. Clarity. Your future.',
-  headline: 'Your interests first. Always.',
+  brand: 'Discipline today. A brighter tomorrow.',
+  headline: 'Your wealth. Our responsibility.',
   subline:
-    'Independent, fee-only advice for retirement, investing, tax and estate planning. Your assets stay at your bank.',
+    'Independent, fee-only advice for private individuals and families. Your assets stay at your bank.',
+  ctaLabel: 'Make an appointment',
   secondaryCta: { label: 'Discover our client-first approach', to: ROUTES.expertise },
-  image: '/team/friedrich-hartmann.png',
-  imageAlt: 'Portrait of Friedrich Hartmann, Chairman and CIO of Helfenstein Group',
+  image: '/images/hero-lucerne.jpg',
+  imageAlt: 'Lake and Alpine view from a terrace — Lucerne and central Switzerland',
 };
 
 /** Kept for i18n catalog compatibility; hero is the primary home lead. */

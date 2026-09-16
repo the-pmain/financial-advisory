@@ -11,11 +11,11 @@ import { PortalPreview } from '../components/widgets/PortalPreview';
 import { TwoColumns } from '../components/widgets/TwoColumns';
 import { UnderlineLink } from '../components/ui/primitives';
 
-const gap = 'mt-20 max-lap:mt-16 max-mob:mt-14';
+const gap = 'mt-12 max-lap:mt-10';
 
 /**
- * Same home sections as before, with more air between them and a shorter
- * lead. Insights, offers, stories, markets and the portal stay on the page.
+ * Home keeps every section. Spacing matches the rest of the site
+ * (`mt-12` / `mt-10`), not an invented wider gap.
  */
 export function HomePage() {
   return (

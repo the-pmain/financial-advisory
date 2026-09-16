@@ -2,7 +2,12 @@ export const LOCALES = ['de', 'fr', 'it', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'en';
 
-export type NavLinkT = { label: string; to: string; external?: boolean };
+export type NavLinkT = {
+  label: string;
+  to: string;
+  external?: boolean;
+  children?: NavLinkT[];
+};
 export type NavGroupT = { label: string; to: string; children: NavLinkT[] };
 
 export type ArticleT = {

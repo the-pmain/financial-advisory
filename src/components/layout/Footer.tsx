@@ -34,7 +34,7 @@ export function Footer() {
   return (
     <footer
       id="footer"
-      className="relative mx-auto w-full max-w-[1280px] px-[30px] pt-4 pb-9 max-mast:px-[25px] max-tab:py-6"
+      className="relative mx-auto w-full max-w-[1280px] px-[30px] pt-4 pb-9 max-mast:px-[25px] max-tab:py-6 max-mob:pb-[max(2.25rem,env(safe-area-inset-bottom))]"
     >
       <div className="mb-[38px] flex flex-wrap items-center justify-between gap-6 max-tab:mb-[31px] max-tab:flex-col max-tab:items-start max-tab:gap-[30px]">
         <Breadcrumb />
