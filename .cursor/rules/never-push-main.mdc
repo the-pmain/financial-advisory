@@ -1,0 +1,13 @@
+---
+description: Never push to main or master in this project
+alwaysApply: true
+---
+
+# Never push to main
+
+This repository’s default branch is `main`. Do not push to it.
+
+- Never run `git push` with destination `main` or `master` (including `origin/main`, `HEAD:main`, or a current branch named `main`).
+- Never fast-forward, force-push, or merge-push into `main` or `master`.
+- Push work to `app` or another non-main branch only.
+- If asked to push to `main` or `master`, refuse and use `app` (or another named working branch) instead.
