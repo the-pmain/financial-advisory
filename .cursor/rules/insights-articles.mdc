@@ -1,9 +1,7 @@
 ---
 description: Insights, articles, knowledge hub, and client-education content
-globs: src/data/articles.ts,src/data/content.ts,src/pages/ArticlePage.tsx,src/pages/InsightsPage.tsx,src/pages/ExpertisePage.tsx,src/components/widgets/ArticleTeaser.tsx,src/seo.ts,src/i18n/fromData.ts,cursor-prompts/MANUAL.md
-alwaysApply: true
+alwaysApply: false
 ---
-
 # Insights / articles
 
 Before creating, rewriting, or wiring Insights or articles, read `cursor-prompts/MANUAL.md` and follow it.

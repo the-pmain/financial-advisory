@@ -1,3 +1,3 @@
 /** Bump both patch numbers after every user prompt. */
-export const CLIENT_VERSION = '1.0.108';
-export const SERVER_VERSION = '1.0.108';
+export const CLIENT_VERSION = '1.0.114';
+export const SERVER_VERSION = '1.0.114';
