@@ -98,7 +98,6 @@ export function DocumentPreviewDialog({
   const [agreed, setAgreed] = useState(false);
   const [pages, setPages] = useState<string[]>([]);
   const [file, setFile] = useState<PreviewFile | null>(null);
-  const [iframeUrl, setIframeUrl] = useState<string | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<PreviewFile | null>(null);
   const prepareRef = useRef(prepare);
@@ -121,10 +120,6 @@ export function DocumentPreviewDialog({
     setPages([]);
     fileRef.current = null;
     setFile(null);
-    setIframeUrl((current) => {
-      if (current) URL.revokeObjectURL(current);
-      return null;
-    });
 
     void run()
       .then(async (next) => {
@@ -137,11 +132,8 @@ export function DocumentPreviewDialog({
         setFile(packed);
         const rendered = await renderPdfPages(packed.bytes, stageRef.current?.clientWidth ?? 720);
         if (cancelled) return;
-        if (rendered.length) {
-          setPages(rendered);
-        } else {
-          setIframeUrl(URL.createObjectURL(pdfBlob(packed.bytes)));
-        }
+        if (!rendered.length) throw new Error('The document preview could not be drawn.');
+        setPages(rendered);
         setStatus('ready');
         onReadyRef.current?.();
       })
@@ -154,12 +146,6 @@ export function DocumentPreviewDialog({
       cancelled = true;
     };
   }, [open, runKey]);
-
-  useEffect(() => {
-    return () => {
-      if (iframeUrl) URL.revokeObjectURL(iframeUrl);
-    };
-  }, [iframeUrl]);
 
   if (!open) return null;
 
@@ -243,9 +229,6 @@ export function DocumentPreviewDialog({
                   className="mx-auto mb-4 block w-full max-w-[720px] bg-white shadow-[0_1px_4px_rgba(7,14,24,0.12)] last:mb-0"
                 />
               ))}
-              {iframeUrl && !pages.length && (
-                <iframe title={copy.title} src={iframeUrl} className="h-full min-h-[70vh] w-full border-0 bg-white" />
-              )}
             </div>
           )}
         </div>
@@ -278,28 +261,27 @@ export function DocumentPreviewDialog({
 }
 
 async function renderPdfPages(bytes: Uint8Array, width: number): Promise<string[]> {
-  try {
-    const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs');
-    const worker = await import('pdfjs-dist/legacy/build/pdf.worker.min.mjs?url');
-    pdfjs.GlobalWorkerOptions.workerSrc = worker.default;
-    const task = pdfjs.getDocument({ data: clonePdfBytes(bytes) });
-    const pdf = await task.promise;
-    const urls: string[] = [];
-    for (let pageNo = 1; pageNo <= pdf.numPages; pageNo += 1) {
-      const page = await pdf.getPage(pageNo);
-      const unscaled = page.getViewport({ scale: 1 });
-      const scale = Math.max(1, (width || 720) / unscaled.width);
-      const viewport = page.getViewport({ scale });
-      const canvas = document.createElement('canvas');
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      const context = canvas.getContext('2d');
-      if (!context) continue;
-      await page.render({ canvasContext: context, viewport }).promise;
-      urls.push(canvas.toDataURL('image/png'));
-    }
-    return urls;
-  } catch {
-    return [];
+  const pdfjs = await import('pdfjs-dist');
+  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.mjs',
+    import.meta.url,
+  ).toString();
+  const task = pdfjs.getDocument({ data: clonePdfBytes(bytes) });
+  const pdf = await task.promise;
+  const urls: string[] = [];
+  const pageWidth = Math.max(320, Math.min(width || 720, 720));
+  for (let pageNo = 1; pageNo <= pdf.numPages; pageNo += 1) {
+    const page = await pdf.getPage(pageNo);
+    const unscaled = page.getViewport({ scale: 1 });
+    const scale = pageWidth / unscaled.width;
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const context = canvas.getContext('2d');
+    if (!context) continue;
+    await page.render({ canvasContext: context, viewport }).promise;
+    urls.push(canvas.toDataURL('image/png'));
   }
+  return urls;
 }
