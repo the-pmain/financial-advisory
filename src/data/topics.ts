@@ -27,6 +27,7 @@ export type Topic = {
   showOmbudsman?: boolean;
   showRegulatoryHistory?: boolean;
   showCustodyBanks?: boolean;
+  showCryptoAssets?: boolean;
   showPortalPreview?: boolean;
   showCaseStudies?: boolean;
   showClientTestimonials?: boolean;
@@ -56,7 +57,7 @@ export const topics: Topic[] = [
       { title: 'Estate planning', text: 'Wills, marriage contracts and gifts arranged so your wishes are legally secure.' },
       { title: 'Taxes', text: 'Long-term tax planning, so the big decisions are structured before the return is filed.' },
     ],
-    relatedSlugs: ['save-on-taxes-with-pillar-3a', 'financial-investments-what-you-need-know'],
+    relatedSlugs: ['fee-only-financial-advisors', 'asset-custody-explained'],
   }),
   t({
     path: ROUTES.retirement,
@@ -73,7 +74,7 @@ export const topics: Topic[] = [
       { title: 'Withdrawal planning', text: 'The order in which to draw OASI, pension fund and private assets.' },
       { title: 'Budget check', text: 'A realistic view of the spending your assets will actually support.' },
     ],
-    relatedSlugs: ['is-it-worth-paying-more-into-your-pension-fund', 'save-on-taxes-with-pillar-3a', 'early-retirement-cost-check'],
+    relatedSlugs: ['fee-only-financial-advisors', 'performance-fee-analysis'],
     expertiseTags: ['retirement', 'pensions'],
     adviceDisclaimer: true,
     challenges: [
@@ -93,16 +94,16 @@ export const topics: Topic[] = [
     title: 'Financial investments & portfolio management',
     subtitle: 'A simple strategy, implemented efficiently.',
     intro: [
-      'We combine a clearly defined investment strategy with low-cost implementation and active support. Your portfolio is held in your own name at a Swiss bank of your choice; we manage it, we never hold it. You always know what you own, what it costs and why it is in your portfolio.',
+      'We combine a clearly defined investment strategy with low-cost implementation and active support. Your portfolio is held in your own name at a bank of your choice; we manage it, we never hold it. You always know what you own, what it costs and why it is in your portfolio.',
       'Because Helfenstein Group receives no retrocessions, the only fee you pay is the one agreed with us.',
     ],
     highlights: [
       { title: 'Asset management mandates', text: 'Discretionary management from a broadly diversified index core.' },
       { title: 'Index investments', text: 'Ongoing charges a fraction of those of actively managed funds.' },
       { title: 'Portfolio analysis', text: 'A written second opinion on the portfolio you hold today.' },
-      { title: 'Your assets stay at your bank', text: 'Helfenstein Group never holds client assets. Custody remains with established Swiss banking partners, in your name.' },
+      { title: 'Your assets stay at your bank', text: 'Helfenstein Group never holds client assets. Custody remains with the bank you choose, in your name and under your control.' },
     ],
-    relatedSlugs: ['financial-investments-what-you-need-know', 'all-you-need-to-know-about-etfs'],
+    relatedSlugs: ['fee-only-financial-advisors', 'alternatives-risk-analysis'],
     expertiseTags: ['investments'],
     showCustodyBanks: true,
     adviceDisclaimer: true,
@@ -115,6 +116,37 @@ export const topics: Topic[] = [
       { title: 'Index-led core', text: 'Low-cost implementation with a clear strategic asset allocation.' },
       { title: 'Fee transparency', text: 'One agreed fee, paid by you. Any third-party payment we cannot avoid is credited to you in full.' },
       { title: 'Ongoing review', text: 'Active support without an incentive to churn.' },
+    ],
+  }),
+  t({
+    path: ROUTES.alternativeInvestments,
+    breadcrumb: ['Finance', 'Alternative investments'],
+    title: 'Alternative investments',
+    subtitle: 'Private markets, real assets and crypto — only where they belong.',
+    intro: [
+      'Alternative investments sit outside listed equities and bonds: private equity and private credit, hedge funds, commodities, infrastructure, selected real-estate funds, and digital assets such as cryptocurrencies. They can add return sources, but they also add cost, complexity, lock-ups and, in some cases, the risk of a total loss. We start from a written core allocation. Alternatives are a satellite, never a substitute for a diversified portfolio held in your name at the bank you choose.',
+      'Cryptocurrencies are the alternative most clients ask about first. Bitcoin, ether and the tokens that follow them are highly volatile, pay no reliable income and can fall to zero. They are not a currency in the ordinary sense, not a bank deposit, and not covered by a deposit-protection scheme. Exchanges, wallet providers and “yield” products have failed, been hacked or turned out to be unauthorised. Any allocation we discuss is sized for a loss you can afford — after the rest of your plan is in place.',
+      'Helfenstein Group does not hold client assets and does not operate a crypto exchange or wallet. If digital assets have a place in your plan, they stay with a custodian you choose — a bank or specialist provider that can hold them in your name. We receive no retrocessions from token issuers or platforms. The first meeting is to decide whether alternatives, including crypto, belong in your situation at all.',
+    ],
+    highlights: [
+      { title: 'Private markets', text: 'Unlisted equity and credit: longer lock-ups, less transparency and higher minimums than a listed fund.' },
+      { title: 'Real assets', text: 'Commodities, infrastructure and selected property funds as diversifiers — not decorations.' },
+      { title: 'Crypto and digital assets', text: 'A small, optional satellite after a written risk budget. Volatility, custody and fraud risk come first. Nothing here is a recommendation to buy.' },
+      { title: 'Suitability first', text: 'FinSA rules still apply. If you cannot explain the holding, it does not belong in the portfolio.' },
+    ],
+    relatedSlugs: ['alternatives-risk-analysis', 'asset-custody-explained'],
+    expertiseTags: ['investments'],
+    showCryptoAssets: true,
+    adviceDisclaimer: true,
+    challenges: [
+      { title: 'Illiquidity', text: 'Many alternatives cannot be sold on demand, and some lock capital for years.' },
+      { title: 'Opacity and fees', text: 'Layers of cost and delayed reporting make true performance harder to see.' },
+      { title: 'Crypto-specific risk', text: 'Price crashes, lost keys, unregulated platforms and scams can wipe out the holding.' },
+    ],
+    benefits: [
+      { title: 'Written allocation', text: 'Alternatives only after the listed core is set and the risk budget is written down.' },
+      { title: 'Independent view', text: 'No token, fund or platform commissions. The only fee is the one agreed with us.' },
+      { title: 'Custody discipline', text: 'Assets stay with the bank or specialist custodian you choose, never with us.' },
     ],
   }),
   t({
@@ -150,7 +182,7 @@ export const topics: Topic[] = [
       { title: 'Affordability', text: 'A conservative check that still holds at higher interest rates.' },
       { title: 'Buying and selling', text: 'Valuations and support through the whole transaction.' },
     ],
-    relatedSlugs: ['tips-for-foreigners-buying-real-estate', 'current-mortgage-interest-rates-comparison'],
+    relatedSlugs: ['swiss-advantage-truth', 'fee-only-financial-advisors'],
     expertiseTags: ['real-estate'],
     adviceDisclaimer: true,
     challenges: [
@@ -179,7 +211,7 @@ export const topics: Topic[] = [
       { title: 'Property taxation', text: 'Imputed rental value, maintenance and value-adding investments.' },
       { title: 'Relocation', text: 'What a change of canton or commune is actually worth.' },
     ],
-    relatedSlugs: ['save-on-taxes-with-pillar-3a', 'cantonal-tax-relocation-checklist'],
+    relatedSlugs: ['fee-only-financial-advisors', 'swiss-advantage-truth'],
     expertiseTags: ['taxes'],
     adviceDisclaimer: true,
     challenges: [
@@ -208,7 +240,7 @@ export const topics: Topic[] = [
       { title: 'Health insurance', text: 'Deductible and model chosen on the arithmetic, reviewed annually.' },
       { title: 'Phishing protection', text: 'A free guide to spotting fraudulent messages and acting fast if one gets through.' },
     ],
-    relatedSlugs: ['compulsory-insurance-switzerland', 'how-to-spot-financial-scams-switzerland'],
+    relatedSlugs: ['financial-portal-analysis', 'appointment-data-collection'],
     expertiseTags: ['insurance'],
     adviceDisclaimer: true,
   }),
@@ -227,7 +259,7 @@ export const topics: Topic[] = [
       { title: 'Several accounts', text: 'Staggered withdrawals that reduce the tax on your capital.' },
       { title: 'Vested benefits', text: 'Where to place your capital between jobs.' },
     ],
-    relatedSlugs: ['save-on-taxes-with-pillar-3a', 'is-it-worth-paying-more-into-your-pension-fund'],
+    relatedSlugs: ['fee-only-financial-advisors', 'performance-fee-analysis'],
     expertiseTags: ['pensions', 'retirement'],
     adviceDisclaimer: true,
   }),
@@ -237,11 +269,11 @@ export const topics: Topic[] = [
     title: 'Custody & banking partners',
     subtitle: 'Your assets stay at your own bank.',
     intro: [
-      'Helfenstein Group never holds client assets. Your securities and cash stay in an account in your own name at a Swiss custodian bank, which reports to you directly; we provide portfolio management and advice on top of it.',
+      'Helfenstein Group never holds client assets. Your securities and cash stay in an account in your own name at a custodian bank you choose, which reports to you directly; we provide portfolio management and advice on top of it.',
       'We help you choose a custodian, compare what each one charges and make sure the reporting is clear. Custody and transaction fees are set and charged by your bank, never by us.',
     ],
     highlights: [
-      { title: 'Assets in your name', text: 'Segregated custody at an authorised Swiss bank you choose.' },
+      { title: 'Assets in your name', text: 'Segregated custody at a bank you choose, under your control.' },
       { title: 'Choosing a custodian', text: 'A like-for-like comparison of custody terms and service.' },
       { title: 'Mortgages', text: 'Financing arranged on comparison-tested terms.' },
       { title: 'Security', text: 'Multi-factor access and the fraud monitoring your bank provides.' },
@@ -257,8 +289,8 @@ export const topics: Topic[] = [
     title: 'About us',
     subtitle: 'Independent advice from Lucerne.',
     intro: [
-      'Helfenstein Group is an independent Swiss adviser and portfolio manager based in Lucerne. We advise private individuals and families — never institutions or companies — on asset management, financial advice, retirement planning and financing.',
-      'We are listed by FINMA as an authorised portfolio manager (No. CH-111.708.730, decision 12.01.2022) and supervised by OSFINcontrol AG (affiliation OSFIN-111.708.730, since 12.01.2022). Our income comes from the fees our clients agree with us, and we hold no client assets: custody stays with Swiss banking partners.',
+      'Helfenstein Group is an independent adviser and portfolio manager based in Lucerne. We advise private individuals and families — never institutions or companies — on asset management, financial advice, retirement planning and financing, wherever they live.',
+      'We are listed by FINMA as an authorised portfolio manager (No. CH-111.708.730, decision 12.01.2022) and supervised by OSFINcontrol AG (affiliation OSFIN-111.708.730, since 12.01.2022). Our income comes from the fees our clients agree with us, and we hold no client assets: custody stays with the bank you choose, under your control.',
     ],
     highlights: [
       { title: 'Our team', text: 'Specialists who stay with you over the long term.' },
@@ -273,8 +305,8 @@ export const topics: Topic[] = [
     title: 'Independent advice',
     subtitle: 'Paid by our clients. By nobody else.',
     intro: [
-      'Most financial advice in Switzerland is funded by the products it recommends. That arrangement is invisible to the client and it systematically favours expensive solutions.',
-      'Helfenstein Group is paid only by its clients — private individuals and families, never institutions or companies. We publish our fees, we credit any retrocession we cannot avoid, our advisers have no product sales targets, and we never hold your assets: custody stays with Swiss banking partners, in your name.',
+      'Most financial advice is funded by the products it recommends. That arrangement is invisible to the client and it systematically favours expensive solutions.',
+      'Helfenstein Group is paid only by its clients — private individuals and families, never institutions or companies. We publish our fees, we credit any retrocession we cannot avoid, our advisers have no product sales targets, and we never hold your assets: custody stays with the bank you choose, in your name and under your control.',
     ],
     highlights: [
       { title: 'Fee transparency', text: 'You know the cost before you decide anything.' },
@@ -293,7 +325,7 @@ export const topics: Topic[] = [
     intro: [
       'Swiss financial advice is governed primarily by the Financial Services Act (FinSA) and, for portfolio managers, by FINMA authorisation with day-to-day supervision by a recognised supervisory organisation. This page explains the framework in plain language.',
       'Helfenstein Asset Management AG is listed by FINMA as an authorised portfolio manager and is supervised by OSFINcontrol AG. FINMA Portfolio Manager Authorisation No: CH-111.708.730 | Decision Date: 12.01.2022. Ongoing Supervision: OSFINcontrol AG | Affiliation Ref: OSFIN-111.708.730 | Since: 12.01.2022. Verify these entries on the official FINMA register (UID CHE-111.708.730, LEI 894500URZFTDV5G7F357).',
-      'Under FinSA, firms must inform you about services, costs, client segmentation and conflicts of interest before providing personalised advice. Advice at Helfenstein Group is paid for by clients alone; we earn no product commissions and hold no client assets — custody is with our Swiss banking partners, and your bank reports to you directly.',
+      'Under FinSA, firms must inform you about services, costs, client segmentation and conflicts of interest before providing personalised advice. Advice at Helfenstein Group is paid for by clients alone; we earn no product commissions and hold no client assets — custody is with the bank you choose, and that bank reports to you directly.',
       'If a dispute cannot be resolved with us directly, you may contact Finanzombudsstelle Schweiz (FINOS), Freigutstrasse 8, 8002 Zürich, +41 44 552 08 00, info@finos.ch, reference FINOS-111.708.730. The same details appear in our FinSA client brochure.',
     ],
     highlights: [
@@ -302,7 +334,7 @@ export const topics: Topic[] = [
       { title: 'Client documents', text: 'Fee schedule, GTC, risk disclosure and FinSA brochure.' },
       { title: 'Ombudsman', text: 'FINOS, Freigutstrasse 8, 8002 Zürich — reference FINOS-111.708.730.' },
     ],
-    relatedSlugs: ['finsa-what-clients-should-know', 'how-to-spot-financial-scams-switzerland'],
+    relatedSlugs: ['finma-regulation-guide', 'asset-custody-explained'],
     showVerifyFinma: true,
     showOmbudsman: true,
     showRegulatoryHistory: true,
@@ -332,7 +364,7 @@ export const topics: Topic[] = [
     path: ROUTES.aboutOffice,
     breadcrumb: ['About us', 'Our office'],
     title: 'Our office',
-    subtitle: 'Based in Lucerne, advising clients across Switzerland.',
+    subtitle: 'Based in Lucerne, advising private clients internationally.',
     intro: [
       'Helfenstein Asset Management AG is based at Pilatusstrasse 23 in Lucerne. We advise clients in German, French, Italian and English.',
       'Call +41 41 211 29 29 or arrange a free first meeting.',
@@ -351,12 +383,12 @@ export const topics: Topic[] = [
     subtitle: 'A Lucerne-based asset manager with a clear advisory model.',
     intro: [
       'Helfenstein Group advises private individuals and families on asset management, financial advice, retirement planning and financing from its office in Lucerne. We do not act for institutions or companies.',
-      'Client assets are held with selected Swiss custody partners, never by us. We are authorised by FINMA as a portfolio manager and supervised by OSFINcontrol AG.',
+      'Client assets are held with a custodian bank you choose, never by us. We are authorised by FINMA as a portfolio manager and supervised by OSFINcontrol AG.',
     ],
     highlights: [
       { title: 'Asset management', text: 'Portfolio mandates built around a clear investment process.' },
       { title: 'Financial advice', text: 'Retirement, financing and personal planning alongside investments.' },
-      { title: 'Custody partners', text: 'Segregated custody in your name with authorised Swiss banks.' },
+      { title: 'Custody partners', text: 'Segregated custody in your name at a bank you choose.' },
       { title: 'Lucerne', text: 'Pilatusstrasse 23, 6003 Luzern.' },
     ],
   }),
@@ -434,19 +466,19 @@ export const topics: Topic[] = [
     subtitle: 'Knowledge, studies and tools from our specialists.',
     intro: [
       'Helfenstein Group publishes research on retirement, pensions, taxes, mortgages and investing, together with checklists you can order free of charge.',
-      'Start with the horizon report, browse insights by topic, or open the full article index. Because we sell no products, what you read here is our own analysis rather than a sales pitch.',
+      'Start with the FINMA guide, browse insights by topic, or open the full article index. Because we sell no products, what you read here is our own analysis rather than a sales pitch.',
     ],
     highlights: [
-      { title: 'Horizon report 2026', text: 'Pensions, mortgages and FinSA developments in plain language.' },
+      { title: 'FINMA guide', text: 'How to read a licence number, a LEI and what deposit protection actually covers.' },
       { title: 'Insights index', text: 'All articles sorted by date, with topic tags.' },
       { title: 'Fact sheets', text: 'Concise printed guides, sent free of charge.' },
       { title: 'Free first meeting', text: 'An hour with an adviser, in Lucerne or by video call.' },
     ],
     relatedSlugs: [
-      'horizon-report-2026',
-      'financial-investments-what-you-need-know',
-      'all-you-need-to-know-about-etfs',
-      'finsa-what-clients-should-know',
+      'finma-regulation-guide',
+      'fee-only-financial-advisors',
+      'alternatives-risk-analysis',
+      'asset-custody-explained',
     ],
   }),
   t({
@@ -456,7 +488,7 @@ export const topics: Topic[] = [
     subtitle: 'Supervision, FinSA information and client documents.',
     intro: [
       'This hub brings together how Helfenstein is supervised, what FinSA means for clients, and the documents that accompany our services.',
-      'Helfenstein Asset Management AG (Helfenstein Group) is listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. FINMA Portfolio Manager Authorisation No: CH-111.708.730 | Decision Date: 12.01.2022. Ongoing Supervision: OSFINcontrol AG | Affiliation Ref: OSFIN-111.708.730 | Since: 12.01.2022. We do not hold client assets — custody is with Swiss banking partners. Advisory relationships are subject to FinSA conduct rules, including transparency on fees, conflicts of interest and client segmentation.',
+      'Helfenstein Asset Management AG (Helfenstein Group) is listed by FINMA as an authorised portfolio manager and supervised by OSFINcontrol AG. FINMA Portfolio Manager Authorisation No: CH-111.708.730 | Decision Date: 12.01.2022. Ongoing Supervision: OSFINcontrol AG | Affiliation Ref: OSFIN-111.708.730 | Since: 12.01.2022. We do not hold client assets — custody stays with the bank you choose, under your control. Advisory relationships are subject to FinSA conduct rules, including transparency on fees, conflicts of interest and client segmentation.',
     ],
     highlights: [
       { title: 'Verify authorisation', text: 'Use the FINMA register to confirm supervised entities.' },
@@ -464,7 +496,7 @@ export const topics: Topic[] = [
       { title: 'Conflicts of interest', text: 'How we disclose and manage them.' },
       { title: 'Complaints', text: 'Contact us first; then FINOS (ref. FINOS-111.708.730) if needed.' },
     ],
-    relatedSlugs: ['finsa-what-clients-should-know', 'how-to-spot-financial-scams-switzerland'],
+    relatedSlugs: ['finma-regulation-guide', 'asset-custody-explained'],
     showVerifyFinma: true,
     showOmbudsman: true,
     showDocuments: true,
@@ -476,7 +508,7 @@ export const topics: Topic[] = [
     title: 'Helfenstein Financial Portal',
     subtitle: 'Your portfolio, your documents, your markets.',
     intro: [
-      'The Helfenstein Financial Portal gives you one consolidated view of the accounts and portfolios you hold at your Swiss banking partners, together with all your documents and current market data.',
+      'The Helfenstein Financial Portal gives you one consolidated view of the accounts and portfolios you hold at your custodian bank, together with all your documents and current market data.',
       'Your assets stay at your bank — the portal is your window onto them, not a place where money is held.',
     ],
     highlights: [
@@ -485,7 +517,7 @@ export const topics: Topic[] = [
       { title: 'Reporting', text: 'Performance, costs and allocation across all your holdings, explained in plain language.' },
       { title: 'Security', text: 'Two-factor authentication on every login.' },
     ],
-    relatedSlugs: ['how-to-spot-financial-scams-switzerland'],
+    relatedSlugs: ['financial-portal-analysis', 'appointment-data-collection'],
     showPortalPreview: true,
     ctaLabel: 'Sign up for free',
   }),
@@ -504,7 +536,7 @@ export const topics: Topic[] = [
       { title: 'Analyses', text: 'Commentary from our investment specialists.' },
       { title: 'Tools', text: 'Screeners, charts and portfolio simulations.' },
     ],
-    relatedSlugs: ['all-you-need-to-know-about-etfs', 'financial-investments-what-you-need-know'],
+    relatedSlugs: ['alternatives-risk-analysis', 'performance-fee-analysis'],
     ctaLabel: 'Sign up for free',
   }),
   t({
@@ -556,7 +588,7 @@ export const topics: Topic[] = [
       { title: "Your bank's safeguards", text: 'Which protections your custodian bank provides, and how to switch them on.' },
       { title: 'If something goes wrong', text: 'Who to call in the first hour, and in what order.' },
     ],
-    relatedSlugs: ['how-to-spot-financial-scams-switzerland'],
+    relatedSlugs: ['financial-portal-analysis', 'asset-custody-explained'],
     ctaLabel: 'Order for free',
   }),
 ];

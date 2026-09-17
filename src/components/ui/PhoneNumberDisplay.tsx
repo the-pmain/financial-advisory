@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { officePhone, toTelHref } from '../../data/phoneNumbers';
+import { SHOW_PUBLIC_PHONES, hidePhonesInText, officePhone, toTelHref } from '../../data/phoneNumbers';
 
 /** Swiss numbers as published on this site: +41 and nine digits, optional separators. */
 const PHONE_IN_TEXT = /\+41(?:[\s./-]*\d){9}/g;
@@ -35,6 +35,8 @@ export function PhoneNumberDisplay({
   jsonLd = true,
   inline = false,
 }: PhoneNumberDisplayProps) {
+  if (!SHOW_PUBLIC_PHONES) return null;
+
   const number = visibleNumber.trim() || officePhone.markup;
   const same = indexedNumber.trim() === number ? indexedNumber.trim() : number;
   const slots = slotsFor(same);
@@ -93,6 +95,8 @@ export function splitPhoneText(text: string): Array<{ type: 'text' | 'phone'; va
 
 /** Renders a string, wrapping every published phone number in `PhoneNumberDisplay`. */
 export function PhoneRichText({ text }: { text: string }) {
+  if (!SHOW_PUBLIC_PHONES) return hidePhonesInText(text);
+
   const parts = splitPhoneText(text);
   if (parts.length === 1 && parts[0]?.type === 'text') return text;
   return (

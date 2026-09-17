@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { ROUTES } from '../../constants/routes';
 import { company } from '../../data/company';
 import { clientDocuments } from '../../data/documents';
+import { SHOW_PUBLIC_PHONES } from '../../data/phoneNumbers';
 import { PhoneNumberDisplay } from '../ui/PhoneNumberDisplay';
 import { SectionTitle } from '../ui/primitives';
 
@@ -28,14 +29,18 @@ export function OmbudsmanDisclosure({
         <p className="text-vz-ink m-0 mt-1 text-[12px] leading-[1.45]">
           {office.addressLine}
           <br />
-          <PhoneNumberDisplay
-            visibleNumber={office.phone}
-            indexedNumber={office.phone}
-            jsonLd={false}
-            inline
-            className="text-[12px]"
-          />
-          {' · '}
+          {SHOW_PUBLIC_PHONES ? (
+            <>
+              <PhoneNumberDisplay
+                visibleNumber={office.phone}
+                indexedNumber={office.phone}
+                jsonLd={false}
+                inline
+                className="text-[12px]"
+              />
+              {' · '}
+            </>
+          ) : null}
           <a href={`mailto:${office.email}`} className="text-vz-blue hover:text-vz-orange">
             {office.email}
           </a>
@@ -68,14 +73,16 @@ export function OmbudsmanDisclosure({
       <dl className="mt-6 max-w-[802px]">
         <OmbudsRow term="Ombudsman" detail={office.name} note={office.description} />
         <OmbudsRow term="Address" detail={office.addressLine} />
-        <OmbudsRow term="Phone">
-          <PhoneNumberDisplay
-            visibleNumber={office.phone}
-            indexedNumber={office.phone}
-            jsonLd={false}
-            className="text-[16px] leading-[1.4]"
-          />
-        </OmbudsRow>
+        {SHOW_PUBLIC_PHONES ? (
+          <OmbudsRow term="Phone">
+            <PhoneNumberDisplay
+              visibleNumber={office.phone}
+              indexedNumber={office.phone}
+              jsonLd={false}
+              className="text-[16px] leading-[1.4]"
+            />
+          </OmbudsRow>
+        ) : null}
         <OmbudsRow term="Email" detail={office.email} href={`mailto:${office.email}`} />
         <OmbudsRow term="Website" detail={office.websiteLabel} href={office.website} external />
         <OmbudsRow term="Reference Number" detail={office.reference} />
@@ -89,8 +96,13 @@ export function OmbudsmanDisclosure({
         ) : (
           'FinSA client brochure'
         )}
-        . You can also write to us first at {company.address.line},{' '}
-        <PhoneNumberDisplay inline jsonLd={false} className="text-[16px]" />.
+        . You can also write to us first at {company.address.line}
+        {SHOW_PUBLIC_PHONES ? (
+          <>
+            , <PhoneNumberDisplay inline jsonLd={false} className="text-[16px]" />
+          </>
+        ) : null}
+        .
       </p>
       <p className="mt-3 mb-0">
         <Link

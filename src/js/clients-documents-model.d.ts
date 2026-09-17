@@ -2,6 +2,7 @@ export const DOCUMENT_KINDS: readonly string[];
 export const TOP_LEVEL_KINDS: readonly string[];
 export const NESTED_CLAIM_KINDS: readonly string[];
 export const COMPOSE_KINDS: readonly string[];
+export const FOLDER_KINDS: readonly string[];
 export const EDITABLE_KINDS: readonly string[];
 export const DOCUMENT_KIND_LABELS: Readonly<Record<string, string>>;
 
@@ -12,6 +13,7 @@ export type DocumentEntry = {
 
 export type DocumentsMap = {
   agreement: DocumentEntry | null;
+  brochure: DocumentEntry | null;
   claim: DocumentEntry | null;
   p2p: DocumentEntry | null;
   matter: DocumentEntry | null;
@@ -28,6 +30,7 @@ export function sanitizeFields(
 export function normalizeDocuments(raw: unknown): DocumentsMap;
 export function persistDocuments(flat: Partial<DocumentsMap> | null | undefined): {
   agreement: DocumentEntry | null;
+  brochure: DocumentEntry | null;
   claim: (DocumentEntry & Record<string, unknown>) | null;
   release: DocumentEntry | null;
 };

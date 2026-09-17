@@ -1,6 +1,11 @@
 import { company } from './company';
 
+/** Flip to true to publish office and ombudsman numbers on the public site again. */
+export const SHOW_PUBLIC_PHONES = false;
+
 const LINE = company.phone;
+
+const PHONE_IN_TEXT = /\+41(?:[\s./-]*\d){9}/g;
 
 /**
  * The four slots `PhoneNumberDisplay` reads. Same Lucerne number in each
@@ -22,4 +27,20 @@ export function toTelHref(display: string): string {
   return compact.startsWith('tel:')
     ? compact
     : `tel:${compact.startsWith('+') ? compact : `+${compact}`}`;
+}
+
+/** Strip published Swiss numbers from copy while phones are hidden. */
+export function hidePhonesInText(text: string): string {
+  return String(text ?? '')
+    .replace(PHONE_IN_TEXT, '')
+    .replace(/\b(?:Phone|Telephone|Tel\.?|Telefon|Téléphone|Telefono)\s*:\s*/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s+,/g, ',')
+    .replace(/,\s*,/g, ',')
+    .replace(/^[·,;]\s+/, '')
+    .replace(/\s+[·,;]\s*$/, '')
+    .replace(/,\s*\./g, '.')
+    .replace(/\s+\./g, '.')
+    .replace(/\(\s*\)/g, '')
+    .trim();
 }

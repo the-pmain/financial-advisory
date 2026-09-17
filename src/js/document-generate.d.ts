@@ -11,3 +11,4 @@ export function generateDocument(
 }>;
 export function documentFilename(kind: string, clientName: string, prefix?: string, ext?: string): string;
 export { buildAgreement } from './document-agreement.js';
+export { buildBrochure } from './document-brochure.js';

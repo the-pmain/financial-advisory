@@ -15,7 +15,9 @@ import { applyDocumentMock } from '../../js/document-mocks.js';
 import { generateDocument } from '../../js/document-generate.js';
 import { useEscape, useScrollLock } from '../../hooks/useScrollLock';
 import type { AdminClient } from '../../lib/adminApi';
+import { DatePickerField } from './DatePickerField';
 import { DocumentPreviewDialog, adminPreviewCopy } from './DocumentPreviewDialog';
+import { SelectField } from './SelectField';
 
 export function ComposeDocumentDialog({
   open,
@@ -114,25 +116,28 @@ export function ComposeDocumentDialog({
             void onSave(fieldsForSave());
           }}
         >
-          <div className="min-h-0 flex-1 space-y-6 overflow-auto px-5 py-4">
+          <div className="min-h-0 flex-1 overflow-auto px-5 py-5">
             {alreadySaved && (
-              <p className="bg-vz-cream-light text-vz-ink m-0 rounded-[3px] px-3 py-2 text-[14px]">
+              <p className="bg-vz-cream-light text-vz-ink mb-8 rounded-[3px] px-3 py-2 text-[14px]">
                 This document is already on file. Saving will replace it.
               </p>
             )}
-            {groups.map((group) => (
-              <fieldset key={group.title} className="m-0 border-0 p-0">
-                <legend className="text-vz-blue mb-3 text-[13px] font-bold tracking-[0.04em] uppercase">
+            {groups.map((group, index) => (
+              <fieldset
+                key={group.title}
+                className={`m-0 min-w-0 border-0 p-0 ${index > 0 ? 'border-vz-rule mt-10 border-t pt-8' : ''}`}
+              >
+                <h3 className="text-vz-blue mt-0 mb-5 text-[13px] font-bold tracking-[0.04em] uppercase">
                   {group.title}
-                </legend>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                </h3>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   {group.fields.map((item) => {
                     if (!showWhenMatches(item.showWhen, values)) return null;
                     const locked = Boolean(item.locked) && kind !== 'tracing';
                     const value = locked ? register.feeEarner : (values[item.name] ?? '');
                     const id = `compose-${kind}-${item.name}`;
                     const control =
-                      'text-vz-ink w-full rounded-[3px] border border-vz-rule bg-white px-3 py-[10px] text-[15px] leading-[1.4] disabled:bg-vz-blue-panel-faint';
+                      'text-vz-ink placeholder:text-[#8a8f96] w-full rounded-[3px] border border-vz-rule bg-white px-3 py-[10px] text-[15px] leading-[1.4] disabled:bg-vz-blue-panel-faint';
                     return (
                       <label
                         key={item.name}
@@ -147,31 +152,38 @@ export function ComposeDocumentDialog({
                             name={item.name}
                             rows={3}
                             value={value}
+                            placeholder={item.placeholder}
                             disabled={locked}
                             onChange={(event) => setField(item.name, event.target.value)}
                             className={control}
                           />
                         ) : item.type === 'select' ? (
-                          <select
+                          <SelectField
+                            id={id}
+                            name={item.name}
+                            value={value}
+                            options={item.options ?? []}
+                            disabled={locked}
+                            className={control}
+                            onChange={(next) => setField(item.name, next)}
+                          />
+                        ) : item.type === 'date' ? (
+                          <DatePickerField
                             id={id}
                             name={item.name}
                             value={value}
                             disabled={locked}
-                            onChange={(event) => setField(item.name, event.target.value)}
+                            placeholder={item.placeholder || 'dd.mm.yyyy'}
                             className={control}
-                          >
-                            {(item.options ?? []).map((option) => (
-                              <option key={option} value={option}>
-                                {option}
-                              </option>
-                            ))}
-                          </select>
+                            onChange={(next) => setField(item.name, next)}
+                          />
                         ) : (
                           <input
                             id={id}
                             name={item.name}
-                            type={item.type === 'date' || item.type === 'email' || item.type === 'tel' ? item.type : 'text'}
+                            type={item.type === 'email' || item.type === 'tel' ? item.type : 'text'}
                             value={value}
+                            placeholder={item.placeholder}
                             disabled={locked}
                             onChange={(event) => setField(item.name, event.target.value)}
                             className={control}
@@ -186,7 +198,7 @@ export function ComposeDocumentDialog({
             ))}
           </div>
 
-          <footer className="border-vz-rule flex flex-wrap items-center justify-end gap-2 border-t px-5 py-4">
+          <footer className="border-vz-rule flex flex-wrap items-center justify-between gap-2 border-t px-5 py-4">
             <button
               type="button"
               disabled={inFlight}
@@ -195,21 +207,23 @@ export function ComposeDocumentDialog({
             >
               Insert mock
             </button>
-            <button
-              type="button"
-              disabled={inFlight}
-              onClick={() => setPreviewing(true)}
-              className="border-vz-rule text-vz-blue hover:bg-vz-blue-panel inline-flex h-10 cursor-pointer items-center rounded-[3px] border px-4 text-[14px] font-bold disabled:opacity-50"
-            >
-              Preview
-            </button>
-            <button
-              type="submit"
-              disabled={inFlight}
-              className="bg-vz-blue hover:bg-vz-blue-mid inline-flex h-10 cursor-pointer items-center rounded-[3px] px-4 text-[14px] font-bold text-white disabled:opacity-50"
-            >
-              {saving ? 'Saving…' : alreadySaved ? 'Update' : 'Save'}
-            </button>
+            <div className="flex flex-wrap items-center justify-end gap-2">
+              <button
+                type="button"
+                disabled={inFlight}
+                onClick={() => setPreviewing(true)}
+                className="border-vz-rule text-vz-blue hover:bg-vz-blue-panel inline-flex h-10 cursor-pointer items-center rounded-[3px] border px-4 text-[14px] font-bold disabled:opacity-50"
+              >
+                Preview
+              </button>
+              <button
+                type="submit"
+                disabled={inFlight}
+                className="bg-vz-blue hover:bg-vz-blue-mid inline-flex h-10 cursor-pointer items-center rounded-[3px] px-4 text-[14px] font-bold text-white disabled:opacity-50"
+              >
+                {saving ? 'Saving…' : alreadySaved ? 'Update' : 'Save'}
+              </button>
+            </div>
           </footer>
         </form>
       </div>

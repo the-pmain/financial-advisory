@@ -16,6 +16,7 @@ export const ROUTES = {
   individuals: '/individuals',
   retirement: '/retirement',
   financialInvestments: '/financial-investments',
+  alternativeInvestments: '/alternative-investments',
   estatePlanning: '/estate-planning',
   realEstate: '/real-estate',
   taxes: '/taxes',
@@ -39,6 +40,7 @@ export const ROUTES = {
   phishingProtection: '/protect-your-assets-from-phishing',
 
   knowledgeHub: '/knowledge-hub',
+  articles: '/articles',
   legal: '/legal',
   legalNotices: '/legal/legal-notices',
   privacyPolicy: '/legal/privacy-policy',
@@ -69,6 +71,7 @@ export const ROUTE_PATTERNS = {
   insights: ROUTES.insights,
   admin: ROUTES.admin,
   knowledgeHubArticle: `${ROUTES.knowledgeHub}/:slug`,
+  article: `${ROUTES.articles}/:slug`,
   legalPage: `${ROUTES.legal}/:slug`,
   teamMember: `${ROUTES.aboutTeam}/:slug`,
   team: ROUTES.aboutTeam,
@@ -77,7 +80,7 @@ export const ROUTE_PATTERNS = {
 } as const;
 
 export function knowledgeHubArticlePath(slug: string): string {
-  return `${ROUTES.knowledgeHub}/${slug}`;
+  return `${ROUTES.articles}/${slug}`;
 }
 
 export function teamMemberPath(slug: string): string {
@@ -89,14 +92,22 @@ export function legalPagePath(slug: string): string {
 }
 
 export function isKnowledgeHubPath(pathname: string): boolean {
-  return pathname === ROUTES.knowledgeHub || pathname.startsWith(`${ROUTES.knowledgeHub}/`);
+  return (
+    pathname === ROUTES.articles ||
+    pathname.startsWith(`${ROUTES.articles}/`) ||
+    pathname === ROUTES.knowledgeHub ||
+    pathname.startsWith(`${ROUTES.knowledgeHub}/`)
+  );
 }
 
 export function matchKnowledgeHubSlug(pathname: string): string | undefined {
-  const prefix = `${ROUTES.knowledgeHub}/`;
-  if (!pathname.startsWith(prefix)) return undefined;
-  const slug = pathname.slice(prefix.length).split('/')[0];
-  return slug || undefined;
+  for (const root of [ROUTES.articles, ROUTES.knowledgeHub]) {
+    const prefix = `${root}/`;
+    if (!pathname.startsWith(prefix)) continue;
+    const slug = pathname.slice(prefix.length).split('/')[0];
+    return slug || undefined;
+  }
+  return undefined;
 }
 
 export function matchTeamMemberSlug(pathname: string): string | undefined {

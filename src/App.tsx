@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 import { PageShell } from './components/layout/PageShell';
 import { DocumentMeta } from './components/seo/DocumentMeta';
-import { LEGACY_REDIRECTS, ROUTES, ROUTE_PATTERNS } from './constants/routes';
+import { knowledgeHubArticlePath, LEGACY_REDIRECTS, ROUTES, ROUTE_PATTERNS } from './constants/routes';
+import { OLD_ARTICLE_REDIRECTS } from './data/articles';
 import { AdminPage } from './pages/AdminPage';
 import { AboutPage } from './pages/AboutPage';
 import { HomePage } from './pages/HomePage';
@@ -50,7 +51,10 @@ export function App() {
           <Route path={ROUTE_PATTERNS.home} element={<HomePage />} />
           <Route path={ROUTE_PATTERNS.expertise} element={<ExpertisePage />} />
           <Route path={ROUTE_PATTERNS.insights} element={<InsightsPage />} />
+          <Route path={ROUTE_PATTERNS.article} element={<ArticlePage />} />
           <Route path={ROUTE_PATTERNS.knowledgeHubArticle} element={<ArticlePage />} />
+          <Route path={ROUTES.articles} element={<Navigate to={ROUTES.insights} replace />} />
+          <Route path={ROUTES.knowledgeHub} element={<Navigate to={ROUTES.insights} replace />} />
           <Route path={ROUTE_PATTERNS.legalPage} element={<LegalPage />} />
           <Route path={ROUTE_PATTERNS.teamMember} element={<TeamMemberPage />} />
           <Route path={ROUTE_PATTERNS.team} element={<TeamPage />} />
@@ -58,6 +62,13 @@ export function App() {
           {Object.entries(LEGACY_REDIRECTS).map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />
           ))}
+          {Object.entries(OLD_ARTICLE_REDIRECTS).flatMap(([from, to]) => {
+            const dest = knowledgeHubArticlePath(to);
+            return [
+              <Route key={`kh-${from}`} path={`${ROUTES.knowledgeHub}/${from}`} element={<Navigate to={dest} replace />} />,
+              <Route key={`art-${from}`} path={`${ROUTES.articles}/${from}`} element={<Navigate to={dest} replace />} />,
+            ];
+          })}
           <Route path={ROUTE_PATTERNS.aboutSub} element={<TopicPage />} />
           <Route path={ROUTE_PATTERNS.topic} element={<TopicPage />} />
           <Route path="*" element={<NotFoundPage />} />

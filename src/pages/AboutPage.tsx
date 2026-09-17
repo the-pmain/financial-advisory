@@ -137,7 +137,7 @@ export function AboutPage() {
           <p className="text-vz-ink m-0 text-[19px] leading-[1.45] max-mob:text-[18px]">
             {record.legalName} (trading as {company.groupName}) is{' '}
             {company.regulation.summary} Advisory conduct is subject to the Swiss Financial Services
-            Act (FinSA). We do not hold client assets — custody stays with Swiss banking partners.
+            Act (FinSA). We do not hold client assets — custody stays with the bank you choose, under your control.
           </p>
         </div>
 

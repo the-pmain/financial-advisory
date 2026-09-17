@@ -8,6 +8,7 @@ import { ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { CaseStudiesBand } from '../components/widgets/CaseStudiesBand';
 import { ClientTestimonials } from '../components/widgets/ClientTestimonials';
 import { ChallengesBenefits } from '../components/widgets/ChallengesBenefits';
+import { CryptoAssets } from '../components/widgets/CryptoAssets';
 import { CustodyBanks } from '../components/widgets/CustodyBanks';
 import { DocumentsList } from '../components/widgets/DocumentsList';
 import { OmbudsmanDisclosure } from '../components/widgets/OmbudsmanDisclosure';
@@ -77,6 +78,12 @@ export function TopicPage() {
           <AppointmentButton className="mt-2">{ctaLabel ?? 'Make an appointment'}</AppointmentButton>
         )}
       </div>
+
+      {topic.showCryptoAssets && (
+        <div className="mt-12 max-lap:mt-10">
+          <CryptoAssets />
+        </div>
+      )}
 
       {topic.showClientTestimonials && (
         <div className="mt-12 max-lap:mt-10">

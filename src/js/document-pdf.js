@@ -3,7 +3,7 @@ import { documentFilename } from './document-generate.js';
 
 export { DOCUMENT_KIND_LABELS } from './clients-documents-model.js';
 export { generateDocument, documentFilename } from './document-generate.js';
-export { agreementFromRecord } from './document-fields.js';
+export { agreementFromRecord, brochureFromRecord } from './document-fields.js';
 export { firmFromCompany, personFromSlug } from './document-register.js';
 export { toWinAnsi } from './document-pdf-write.js';
 

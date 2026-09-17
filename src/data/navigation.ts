@@ -31,6 +31,7 @@ export const aboutChildren: NavLink[] = [
 export const adviceChildren: NavLink[] = [
   { label: 'Retirement', to: ROUTES.retirement },
   { label: 'Financial investments & portfolio management', to: ROUTES.financialInvestments },
+  { label: 'Alternative investments', to: ROUTES.alternativeInvestments },
   { label: 'Estate planning', to: ROUTES.estatePlanning },
   { label: 'Real estate & mortgages', to: ROUTES.realEstate },
   { label: 'Taxes', to: ROUTES.taxes },
@@ -39,6 +40,7 @@ export const adviceChildren: NavLink[] = [
 
 export const financeChildren: NavLink[] = [
   { label: 'Financial investments & portfolio management', to: ROUTES.financialInvestments },
+  { label: 'Alternative investments', to: ROUTES.alternativeInvestments },
   { label: 'Markets & analysis', to: ROUTES.stockExchangesAndMarkets },
   { label: 'Custody & banking partners', to: ROUTES.banking },
   { label: 'Real estate & mortgages', to: ROUTES.realEstate },
@@ -53,6 +55,7 @@ export const mainNavigation: NavGroup[] = [
     children: [
       { label: 'Retirement', to: ROUTES.retirement },
       { label: 'Financial investments & portfolio management', to: ROUTES.financialInvestments },
+      { label: 'Alternative investments', to: ROUTES.alternativeInvestments },
       { label: 'Estate planning', to: ROUTES.estatePlanning },
       { label: 'Real estate & mortgages', to: ROUTES.realEstate },
       { label: 'Taxes', to: ROUTES.taxes },
@@ -70,6 +73,7 @@ export const quickLinks: NavLink[] = [
   { label: 'Finance', to: ROUTES.financialInvestments, children: financeChildren },
   { label: 'About us', to: ROUTES.about, children: aboutChildren },
   { label: 'Retirement', to: ROUTES.retirement },
+  { label: 'Alternative investments', to: ROUTES.alternativeInvestments },
   { label: 'Estate planning', to: ROUTES.estatePlanning },
   { label: 'Real estate', to: ROUTES.realEstate },
   { label: 'Taxes', to: ROUTES.taxes },

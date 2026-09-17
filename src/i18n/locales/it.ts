@@ -9,6 +9,7 @@ const navPaths = {
       children: [
         { label: 'Previdenza', to: ROUTES.retirement },
         { label: 'Investimenti finanziari e gestione del patrimonio', to: ROUTES.financialInvestments },
+        { label: 'Investimenti alternativi', to: ROUTES.alternativeInvestments },
         { label: 'Pianificazione successoria', to: ROUTES.estatePlanning },
         { label: 'Immobili e ipoteche', to: ROUTES.realEstate },
         { label: 'Imposte', to: ROUTES.taxes },
@@ -34,6 +35,7 @@ const navPaths = {
       to: ROUTES.financialInvestments,
       children: [
         { label: 'Investimenti finanziari e gestione del patrimonio', to: ROUTES.financialInvestments },
+        { label: 'Investimenti alternativi', to: ROUTES.alternativeInvestments },
         { label: 'Mercati e analisi', to: ROUTES.stockExchangesAndMarkets },
         { label: 'Custodia e partner bancari', to: ROUTES.banking },
         { label: 'Immobili e ipoteche', to: ROUTES.realEstate },
@@ -54,6 +56,7 @@ const navPaths = {
       ],
     },
     { label: 'Previdenza', to: ROUTES.retirement },
+    { label: 'Investimenti alternativi', to: ROUTES.alternativeInvestments },
     { label: 'Pianificazione successoria', to: ROUTES.estatePlanning },
     { label: 'Immobili', to: ROUTES.realEstate },
     { label: 'Imposte', to: ROUTES.taxes },
@@ -66,6 +69,7 @@ const navPaths = {
       children: [
         { label: 'Previdenza', to: ROUTES.retirement },
         { label: 'Investimenti finanziari e gestione del patrimonio', to: ROUTES.financialInvestments },
+        { label: 'Investimenti alternativi', to: ROUTES.alternativeInvestments },
         { label: 'Pianificazione successoria', to: ROUTES.estatePlanning },
         { label: 'Immobili e ipoteche', to: ROUTES.realEstate },
         { label: 'Imposte', to: ROUTES.taxes },
@@ -95,7 +99,7 @@ export const it: Translations = {
   meta: {
     siteName: 'Helfenstein Group',
     defaultTitle:
-      'Helfenstein Group – Consulenza indipendente a onorario per la clientela privata in Svizzera',
+      'Helfenstein Group – Consulenza indipendente a onorario per la clientela privata nel mondo',
     defaultDescription:
       'Consulenza indipendente su previdenza, investimenti finanziari, pianificazione successoria, immobili, imposte, assicurazioni e casse pensione. Siamo remunerati soltanto dai nostri clienti e non deteniamo patrimoni della clientela.',
     teamDescription:
@@ -176,7 +180,7 @@ export const it: Translations = {
     regulatoryChallenges: 'Sfide normative',
     howWeHelp: 'Come aiutiamo',
     adviceDisclaimer:
-      'Solo informazioni generali. Non costituisce consulenza personalizzata in materia di investimenti, fiscalità o diritto. Helfenstein Group non detiene patrimoni della clientela; la custodia è interamente affidata a banche depositarie svizzere partner.',
+      'Solo informazioni generali. Non costituisce consulenza personalizzata in materia di investimenti, fiscalità o diritto. Helfenstein Group non detiene patrimoni della clientela; la custodia resta presso la banca di Sua scelta, sotto il Suo controllo.',
     verified: 'Verificato',
     viewOnMap: 'Vedi sulla mappa',
     trustSignals: 'Verifica e contatto',
@@ -193,7 +197,7 @@ export const it: Translations = {
   home: {
     testimonial: {
       quote:
-        'Presso partner di custodia svizzeri selezionati, i clienti beneficiano di costi inferiori e maggiore sicurezza.',
+        'Presso la banca depositaria di Sua scelta, i clienti beneficiano di costi inferiori e maggiore sicurezza.',
       positionLabel: 'Posizione',
       position: 'Managing Director, Client Operations',
       imageAlt: 'Ritratto di Marc Weber, Managing Director, Client Operations di Helfenstein',
@@ -205,96 +209,7 @@ export const it: Translations = {
     },
   },
   content: {
-    articles: {
-      'compulsory-insurance-switzerland': {
-        slug: 'compulsory-insurance-switzerland',
-        tagline: 'Assicurazioni',
-        title: 'Assicurazioni obbligatorie in Svizzera',
-        teaser:
-          'Quando stranieri si trasferiscono per la prima volta in Svizzera e vi lavorano, devono sapere quali assicurazioni sono prescritte per legge.',
-        body: [
-          'Chiunque stabilisca la propria residenza in Svizzera è tenuto per legge a stipulare determinate assicurazioni. Quali di esse si applicano dipende dallo status di soggiorno, dalla situazione professionale e dalle circostanze familiari.',
-          'L\'assicurazione malattie di base è obbligatoria per tutte le persone residenti in Svizzera e deve essere sottoscritta entro tre mesi dall\'arrivo. La copertura decorre dalla data di ingresso, senza lacune – ma i premi sono dovuti a partire da quella data.',
-          'I dipendenti sono automaticamente assicurati contro gli infortuni professionali tramite il datore di lavoro. La copertura per infortuni non professionali è inclusa non appena si lavora almeno otto ore settimanali presso lo stesso datore di lavoro.',
-          'Chiunque possieda un veicolo a motore necessita di un\'assicurazione di responsabilità civile prima che il veicolo possa essere immatricolato. In molti cantoni, l\'assicurazione immobiliare è obbligatoria.',
-        ],
-      },
-      'save-on-taxes-with-pillar-3a': {
-        slug: 'save-on-taxes-with-pillar-3a',
-        tagline: 'Pilastro 3a',
-        title: 'Come risparmiare sulle imposte con il pilastro 3a',
-        teaser:
-          'Chi utilizza il pilastro 3a, oltre ai pilastri AVS e cassa pensione, per risparmiare in vista della vecchiaia può dedurre i versamenti dal reddito imponibile.',
-        body: [
-          'Il pilastro 3a è il modo più diffuso per risparmiare sulle imposte in Svizzera. I versamenti possono essere dedotti integralmente dal reddito imponibile, fino a un importo massimo annuo periodicamente adeguato. Poiché siamo remunerati soltanto da Lei, possiamo raccomandare il fornitore 3a più adatto – banca, fondazione o assicuratore – senza alcuna preferenza nostra.',
-          'I dipendenti affiliati a una cassa pensione possono versare ogni anno fino a un importo fisso in franchi. I lavoratori indipendenti senza cassa pensione possono contribuire fino al 20 per cento del reddito netto da lavoro dipendente, entro un limite massimo.',
-          'I patrimoni del pilastro 3a sono esenti dall\'imposta patrimoniale e i rendimenti sono esenti dall\'imposta sul reddito finché restano sul conto. Al prelievo, il capitale è tassato separatamente dagli altri redditi a un\'aliquota ridotta.',
-          'Distribuire i risparmi su più conti e prelevarli in anni diversi mantiene bassa la progressione e può far risparmiare diverse migliaia di franchi.',
-        ],
-      },
-      'tips-for-foreigners-buying-real-estate': {
-        slug: 'tips-for-foreigners-buying-real-estate',
-        tagline: 'Immobili',
-        title: 'Consigli per stranieri che desiderano acquistare un immobile',
-        teaser:
-          'Esistono diversi fattori che gli acquirenti stranieri dovrebbero considerare quando acquistano un immobile in Svizzera. L\'acquisto immobiliare è un investimento rilevante, che comporta anche un certo rischio.',
-        body: [
-          'I cittadini stranieri residenti in Svizzera con permesso C possono acquistare immobili alle stesse condizioni dei cittadini svizzeri. I titolari di un permesso B possono acquistare un\'abitazione per uso proprio nel luogo di residenza.',
-          'Gli istituti di credito richiedono generalmente almeno il 20 per cento del prezzo d\'acquisto a titolo di capitale proprio, di cui almeno il 10 per cento deve provenire da fonti diverse dalla previdenza professionale.',
-          'La capacità di sostenere l\'onere finanziario viene valutata in modo prudente: i costi imputati dell\'ipoteca, della manutenzione e dell\'ammortamento non dovrebbero superare circa un terzo del reddito lordo.',
-          'Gli acquirenti devono prevedere spese notarili, tasse di registro fondiario e imposta sul trasferimento immobiliare, che variano sensibilmente da cantone a cantone.',
-        ],
-      },
-      'is-it-worth-paying-more-into-your-pension-fund': {
-        slug: 'is-it-worth-paying-more-into-your-pension-fund',
-        tagline: 'Cassa pensione',
-        title: 'Conviene versare di più nella cassa pensione?',
-        teaser:
-          'Con versamenti volontari nella cassa pensione è possibile risparmiare molto sulle imposte e disporre di maggiori mezzi di sussistenza in età avanzata.',
-        imageAlt: 'Tabella che mostra i rendimenti di un versamento volontario nella cassa pensione',
-        body: [
-          'Gli acquisti volontari di prestazioni supplementari nella cassa pensione sono integralmente deducibili dal reddito imponibile nell\'anno in cui vengono effettuati. Per i contribuenti con redditi elevati ciò può significare un risparmio immediato pari a un terzo o più dell\'importo versato.',
-          'Il capitale cresce esente da imposta sul reddito e patrimoniale fino al momento del prelievo. Più lungo è il periodo residuo fino al pensionamento, maggiore è l\'effetto composto del vantaggio d\'interesse.',
-          'Gli acquisti effettuati nei tre anni precedenti al pensionamento non possono essere prelevati in capitale senza perdere la deduzione fiscale; il tempismo è quindi determinante.',
-          'Prima di effettuare un acquisto, verifichi il grado di copertura della Sua cassa pensione e confronti il tasso di conversione con quanto potrebbe ottenere investendo la stessa somma privatamente.',
-        ],
-      },
-      'financial-investments-what-you-need-know': {
-        slug: 'financial-investments-what-you-need-know',
-        tagline: 'Investimenti finanziari',
-        title: 'Investimenti finanziari: ciò che deve sapere',
-        teaser:
-          'Chi desidera investire denaro con successo dovrebbe adottare un approccio strutturato e, innanzitutto, definire la strategia d\'investimento appropriata.',
-        body: [
-          'Una solida strategia d\'investimento parte dalle Sue circostanze personali: quanto del Suo patrimonio può vincolare, per quanto tempo e quanta oscillazione è in grado di sopportare.',
-          'Solo una volta fissata la strategia segue la scelta dei singoli investimenti. Fondi indicizzati diversificati e a basso costo sono il mattoncino più efficiente per la maggior parte degli investitori.',
-          'I costi sono una delle poche certezze negli investimenti. Ogni franco risparmiato sulle commissioni resta investito e si capitalizza per l\'intera durata del detenimento – ed è per questo che un consulente che non riceve alcuna parte di quelle commissioni è l\'unico a non avere motivo di trascurarle.',
-        ],
-      },
-      'all-you-need-to-know-about-etfs': {
-        slug: 'all-you-need-to-know-about-etfs',
-        tagline: 'Investimenti',
-        title: 'Tutto ciò che deve sapere sugli ETF',
-        teaser: 'Gli ETF sono economici, trasparenti e liquidi, e offrono numerosi altri vantaggi.',
-        body: [
-          'Gli exchange traded fund replicano un indice e possono essere acquistati e venduti in borsa durante l\'intera giornata di negoziazione, come un\'azione.',
-          'Poiché sono gestiti passivamente, i loro costi correnti ammontano a una frazione di quelli dei fondi gestiti attivamente – tipicamente poche centesimi di percento per gli indici ampi e liquidi.',
-          'Presti attenzione al metodo di replica, al domicilio del fondo e all\'entità del tracking difference, e non solo alla commissione nominale.',
-        ],
-      },
-      'current-mortgage-interest-rates-comparison': {
-        slug: 'current-mortgage-interest-rates-comparison',
-        tagline: 'Ipoteche',
-        title: 'Tassi ipotecari attuali – un confronto',
-        teaser:
-          'Helfenstein confronta continuamente i tassi ipotecari attuali dei principali fornitori in Svizzera.',
-        body: [
-          'I tassi ipotecari differiscono sensibilmente tra banche, assicuratori e casse pensioni – spesso di oltre mezzo punto percentuale per una identica durata fissa.',
-          'Su un\'ipoteca di un milione di franchi, tale differenza corrisponde a diverse migliaia di franchi all\'anno, il che rende il confronto delle offerte una delle ore più redditizie che possa dedicare.',
-          'I tassi sono anche negoziabili. I tassi pubblicati sono prezzi di listino, e un mutuatario ben preparato con solida capacità di sostenere l\'onere finanziario può generalmente ottenere condizioni migliori.',
-        ],
-      },
-    },
+    articles: {},
     offers: [
       {
         id: 'checklist-retirement',
@@ -328,7 +243,7 @@ export const it: Translations = {
       },
       {
         title: 'Pilastro 3a con investimenti indicizzati',
-        text: 'La aiutiamo a collocare il pilastro 3a in soluzioni indicizzate a basso costo, depositate presso la banca o la fondazione svizzera di Sua scelta. Nell\'arco di una vita lavorativa, commissioni più basse possono valere decine di migliaia di franchi.',
+        text: 'La aiutiamo a collocare il pilastro 3a in soluzioni indicizzate a basso costo, depositate presso la banca o la fondazione di Sua scelta. Nell\'arco di una vita lavorativa, commissioni più basse possono valere decine di migliaia di franchi.',
       },
       {
         title: 'Consulenza fiscale',
@@ -391,14 +306,31 @@ export const it: Translations = {
       title: 'Investimenti finanziari e gestione patrimoniale',
       subtitle: 'Una strategia semplice, implementata in modo efficiente.',
       intro: [
-        'Combiniamo una strategia d\'investimento chiaramente definita con un\'implementazione a basso costo e un\'assistenza attiva. Il Suo portafoglio è intestato a Lei presso una banca svizzera di Sua scelta; noi lo gestiamo, non lo deteniamo mai. Sa sempre cosa possiede, quanto costa e perché è nel Suo portafoglio.',
+        'Combiniamo una strategia d\'investimento chiaramente definita con un\'implementazione a basso costo e un\'assistenza attiva. Il Suo portafoglio è intestato a Lei presso una banca di Sua scelta; noi lo gestiamo, non lo deteniamo mai. Sa sempre cosa possiede, quanto costa e perché è nel Suo portafoglio.',
         'Poiché Helfenstein Group non percepisce retrocessioni, l\'unica commissione che paga è quella concordata con noi.',
       ],
       highlights: [
         { title: 'Mandati di gestione patrimoniale', text: 'Gestione discrezionale a partire da un nucleo indicizzato ampiamente diversificato.' },
         { title: 'Investimenti indicizzati', text: 'Costi correnti pari a una frazione di quelli dei fondi gestiti attivamente.' },
         { title: 'Analisi del portafoglio', text: 'Un secondo parere scritto sul portafoglio che detiene oggi.' },
-        { title: 'I Suoi patrimoni restano presso la Sua banca', text: 'Helfenstein Group non detiene mai patrimoni della clientela. La custodia resta presso banche svizzere consolidate, a Suo nome.' },
+        { title: 'I Suoi patrimoni restano presso la Sua banca', text: 'Helfenstein Group non detiene mai patrimoni della clientela. La custodia resta presso la banca di Sua scelta, a Suo nome e sotto il Suo controllo.' },
+      ],
+    },
+    [ROUTES.alternativeInvestments]: {
+      path: ROUTES.alternativeInvestments,
+      breadcrumb: ['Finanza', 'Investimenti alternativi'],
+      title: 'Investimenti alternativi',
+      subtitle: 'Mercati privati, attività reali e cripto — solo dove hanno senso.',
+      intro: [
+        'Gli investimenti alternativi stanno al di fuori di azioni e obbligazioni quotate: private equity e private credit, hedge fund, materie prime, infrastrutture, fondi immobiliari selezionati e attività digitali come le criptovalute. Possono aggiungere fonti di rendimento, ma anche costi, complessità, periodi di vincolo e, in alcuni casi, il rischio di una perdita totale. Partiamo da un\'allocazione di nucleo scritta. Le alternative sono un satellite, mai un sostituto di un portafoglio diversificato intestato a Lei presso la banca di Sua scelta.',
+        'Le criptovalute sono l\'alternativa di cui la maggior parte dei clienti chiede per prima. Bitcoin, ether e i token che li seguono sono molto volatili, non pagano un reddito affidabile e possono scendere a zero. Non sono una valuta in senso ordinario, né un deposito bancario, e non sono coperti da un sistema di garanzia dei depositi. Borse, gestori di wallet e prodotti di «rendimento» sono falliti, sono stati violati o si sono rivelati non autorizzati. Qualsiasi allocazione di cui parliamo è dimensionata su una perdita che Lei può sostenere — dopo che il resto del piano è a posto.',
+        'Helfenstein Group non detiene patrimoni della clientela e non gestisce una borsa cripto né un wallet. Se le attività digitali hanno un posto nel Suo piano, restano presso un depositario di Sua scelta — una banca o un fornitore specializzato che possa detenerle a Suo nome. Non percepiamo retrocessioni da emittenti di token o piattaforme. Il primo colloquio serve a decidere se le alternative, cripto comprese, appartengono affatto alla Sua situazione.',
+      ],
+      highlights: [
+        { title: 'Mercati privati', text: 'Capitale e credito non quotati: vincoli più lunghi, meno trasparenza e minimi più elevati rispetto a un fondo quotato.' },
+        { title: 'Attività reali', text: 'Materie prime, infrastrutture e fondi immobiliari selezionati come diversificatori — non come decorazione.' },
+        { title: 'Cripto e attività digitali', text: 'Un satellite piccolo e facoltativo, dopo un budget di rischio scritto. Prima vengono volatilità, custodia e rischio di frode. Nulla di quanto segue è una raccomandazione di acquisto.' },
+        { title: 'Idoneità prima di tutto', text: 'Le regole LSerFi restano applicabili. Se non sa spiegare la posizione, non appartiene al portafoglio.' },
       ],
     },
     [ROUTES.estatePlanning]: {
@@ -487,11 +419,11 @@ export const it: Translations = {
       title: 'Custodia e banche partner',
       subtitle: 'I Suoi patrimoni restano presso la Sua banca.',
       intro: [
-        'Helfenstein Group non detiene mai patrimoni della clientela. I Suoi titoli e la Sua liquidità restano su un conto intestato a Lei presso una banca depositaria svizzera, che Le invia direttamente i rendiconti; noi vi aggiungiamo la gestione del portafoglio e la consulenza.',
+        'Helfenstein Group non detiene mai patrimoni della clientela. I Suoi titoli e la Sua liquidità restano su un conto intestato a Lei presso una banca depositaria di Sua scelta, che Le invia direttamente i rendiconti; noi vi aggiungiamo la gestione del portafoglio e la consulenza.',
         'La aiutiamo a scegliere un depositario, a confrontare quanto addebita ciascuno e ad assicurarsi che il reporting sia chiaro. Le commissioni di custodia e di transazione sono fissate e addebitate dalla Sua banca, mai da noi.',
       ],
       highlights: [
-        { title: 'Patrimoni a Suo nome', text: 'Custodia segregata presso una banca svizzera autorizzata di Sua scelta.' },
+        { title: 'Patrimoni a Suo nome', text: 'Custodia segregata presso una banca di Sua scelta, sotto il Suo controllo.' },
         { title: 'Scegliere un depositario', text: 'Un confronto omogeneo di condizioni di custodia e servizio.' },
         { title: 'Ipoteche', text: 'Finanziamento strutturato su condizioni verificate mediante confronto.' },
         { title: 'Sicurezza', text: 'Accesso multifattoriale e monitoraggio delle frodi offerto dalla Sua banca.' },
@@ -503,8 +435,8 @@ export const it: Translations = {
       title: 'Chi siamo',
       subtitle: 'Consulenza indipendente da Lucerna.',
       intro: [
-        'Helfenstein Group è una società svizzera indipendente di consulenza e gestione patrimoniale con sede a Lucerna. Consigliamo persone e famiglie private – mai istituzioni o aziende – in materia di gestione patrimoniale, consulenza finanziaria, previdenza e finanziamenti.',
-        'Siamo iscritti presso la FINMA come gestori patrimoniali autorizzati e sottoposti alla vigilanza di OSFINcontrol AG. Il nostro reddito proviene esclusivamente dagli onorari concordati con i nostri clienti e non deteniamo patrimoni della clientela: la custodia resta presso banche partner svizzere.',
+        'Helfenstein Group è un consulente e gestore patrimoniale indipendente con sede a Lucerna. Consigliamo persone e famiglie private – mai istituzioni o aziende – in materia di gestione patrimoniale, consulenza finanziaria, previdenza e finanziamenti, ovunque vivano.',
+        'Siamo iscritti presso la FINMA come gestori patrimoniali autorizzati e sottoposti alla vigilanza di OSFINcontrol AG. Il nostro reddito proviene esclusivamente dagli onorari concordati con i nostri clienti e non deteniamo patrimoni della clientela: la custodia resta presso la banca di Sua scelta, sotto il Suo controllo.',
       ],
       highlights: [
         { title: 'Il nostro team', text: 'Specialisti che La accompagnano a lungo termine.' },
@@ -519,8 +451,8 @@ export const it: Translations = {
       title: 'Consulenza indipendente',
       subtitle: 'Remunerati dai nostri clienti. Da nessun altro.',
       intro: [
-        'La maggior parte della consulenza finanziaria in Svizzera è finanziata dai prodotti che raccomanda. Questo rapporto è invisibile al cliente e favorisce sistematicamente soluzioni costose.',
-        'Helfenstein Group è remunerata esclusivamente dai propri clienti – persone e famiglie private, mai istituzioni o aziende. Pubblichiamo i nostri onorari, accreditiamo qualsiasi retrocessione che non possiamo evitare, i nostri consulenti non hanno obiettivi di vendita di prodotti e non deteniamo mai i Suoi patrimoni: la custodia resta presso banche partner svizzere, a Suo nome.',
+        'La maggior parte della consulenza finanziaria è finanziata dai prodotti che raccomanda. Questo rapporto è invisibile al cliente e favorisce sistematicamente soluzioni costose.',
+        'Helfenstein Group è remunerata esclusivamente dai propri clienti – persone e famiglie private, mai istituzioni o aziende. Pubblichiamo i nostri onorari, accreditiamo qualsiasi retrocessione che non possiamo evitare, i nostri consulenti non hanno obiettivi di vendita di prodotti e non deteniamo mai i Suoi patrimoni: la custodia resta presso la banca di Sua scelta, a Suo nome e sotto il Suo controllo.',
       ],
       highlights: [
         { title: 'Trasparenza delle commissioni', text: 'Conosce il costo prima di decidere qualsiasi cosa.' },
@@ -533,7 +465,7 @@ export const it: Translations = {
       path: ROUTES.aboutOffice,
       breadcrumb: ['Chi siamo', 'La nostra sede'],
       title: 'La nostra sede',
-      subtitle: 'Con sede a Lucerna, al servizio di clienti in tutta la Svizzera.',
+      subtitle: 'Con sede a Lucerna, al servizio di clienti privati nel mondo.',
       intro: [
         'Helfenstein Asset Management AG ha sede in Pilatusstrasse 23, a Lucerna. Consigliamo i nostri clienti in tedesco, francese, italiano e inglese.',
         'Ci chiami allo +41 41 211 29 29 oppure fissi un primo colloquio gratuito.',
@@ -552,12 +484,12 @@ export const it: Translations = {
       subtitle: 'Un gestore patrimoniale lucernese con un modello di consulenza chiaro.',
       intro: [
         'Helfenstein Group consiglia dal proprio ufficio di Lucerna persone e famiglie private in materia di gestione patrimoniale, consulenza finanziaria, previdenza e finanziamenti. Non operiamo per istituzioni o aziende.',
-        'I patrimoni della clientela sono custoditi presso partner di custodia svizzeri selezionati, mai da noi. Siamo autorizzati dalla FINMA come gestori patrimoniali e sottoposti alla vigilanza di OSFINcontrol AG.',
+        'I patrimoni della clientela sono custoditi presso una banca depositaria di Sua scelta, mai da noi. Siamo autorizzati dalla FINMA come gestori patrimoniali e sottoposti alla vigilanza di OSFINcontrol AG.',
       ],
       highlights: [
         { title: 'Gestione patrimoniale', text: 'Mandati costruiti attorno a un processo d\'investimento chiaro.' },
         { title: 'Consulenza finanziaria', text: 'Previdenza, finanziamenti e pianificazione personale accanto agli investimenti.' },
-        { title: 'Partner di custodia', text: 'Custodia segregata a Suo nome presso banche svizzere autorizzate.' },
+        { title: 'Partner di custodia', text: 'Custodia segregata a Suo nome presso una banca di Sua scelta.' },
         { title: 'Lucerna', text: 'Pilatusstrasse 23, 6003 Luzern.' },
       ],
     },
@@ -648,7 +580,7 @@ export const it: Translations = {
       title: 'Portale finanziario Helfenstein',
       subtitle: 'Il Suo portafoglio, i Suoi documenti, i Suoi mercati.',
       intro: [
-        'Il Portale finanziario Helfenstein Le offre una visione consolidata dei conti e dei portafogli che detiene presso le Sue banche partner svizzere, insieme a tutti i Suoi documenti e ai dati di mercato aggiornati.',
+        'Il Portale finanziario Helfenstein Le offre una visione consolidata dei conti e dei portafogli che detiene presso la Sua banca depositaria, insieme a tutti i Suoi documenti e ai dati di mercato aggiornati.',
         'I Suoi patrimoni restano presso la Sua banca: il portale è la Sua finestra su di essi, non un luogo in cui viene custodito denaro.',
       ],
       highlights: [
@@ -734,7 +666,7 @@ export const it: Translations = {
       sections: [
         {
           paragraphs: [
-            'Le informazioni pubblicate su questo sito web sono fornite esclusivamente a scopo informativo generale. Non costituiscono un\'offerta, una raccomandazione o un invito ad acquistare o vendere strumenti finanziari, né costituiscono consulenza in materia di investimenti, legale o fiscale. Helfenstein Asset Management AG (Helfenstein Group) è una consulente e gestore patrimoniale indipendente; non detiene patrimoni della clientela, che restano presso la banca depositaria svizzera del cliente.',
+            'Le informazioni pubblicate su questo sito web sono fornite esclusivamente a scopo informativo generale. Non costituiscono un\'offerta, una raccomandazione o un invito ad acquistare o vendere strumenti finanziari, né costituiscono consulenza in materia di investimenti, legale o fiscale. Helfenstein Asset Management AG (Helfenstein Group) è una consulente e gestore patrimoniale indipendente; non detiene patrimoni della clientela, che restano presso la banca depositaria scelta dal cliente.',
           ],
         },
         {
@@ -877,7 +809,7 @@ export const it: Translations = {
         {
           heading: 'Attività',
           paragraphs: [
-            'Consulenza finanziaria indipendente remunerata esclusivamente a onorario e gestione patrimoniale per la clientela privata: previdenza, investimenti, imposte, immobili e pianificazione successoria. I patrimoni della clientela sono custoditi presso banche partner svizzere e non dalla società.',
+            'Consulenza finanziaria indipendente remunerata esclusivamente a onorario e gestione patrimoniale per la clientela privata nel mondo: previdenza, investimenti, imposte, immobili e pianificazione successoria. I patrimoni della clientela restano presso la banca di Sua scelta e non presso la società.',
           ],
         },
         {
@@ -1017,11 +949,11 @@ export const it: Translations = {
         slug: 'marc-weber',
         role: 'Managing Director, Client Operations',
         about:
-          'Marc Weber coordina le operazioni clienti e i rapporti con le nostre banche depositarie. Proviene dal private banking e si assicura che i clienti ricevano un reporting chiaro dalla banca che custodisce i loro patrimoni, a Lucerna e in tutta la Svizzera.',
+          'Marc Weber coordina le operazioni clienti e i rapporti con le nostre banche depositarie. Proviene dal private banking e si assicura che i clienti ricevano un reporting chiaro dalla banca che custodisce i loro patrimoni, da Lucerna e a livello internazionale.',
         results: [
           'Ha ridotto del 18% dal 2020 i costi di custodia e regolamento che i clienti Helfenstein pagano alla propria banca.',
           'Ha guidato la revisione che ha trasferito i clienti su conti di custodia segregati intestati a loro nome.',
-          'Negozia le condizioni di custodia con le nostre banche partner svizzere per conto della clientela privata.',
+          'Negozia le condizioni di custodia con le banche depositarie per conto della clientela privata.',
         ],
       },
       'anja-hoffmann': {

@@ -128,6 +128,26 @@ export const company = {
     { id: 'vontobel', name: 'Bank Vontobel AG', city: 'Zürich', logo: '/images/banks/vontobel.svg' },
   ],
   /**
+   * Banks shown on the public “preferred banks” strip. Not a claim that every
+   * name is a live mandate partner — the client chooses the custodian.
+   */
+  preferredBanks: [
+    { id: 'deutsche-bank', name: 'Deutsche Bank AG', city: 'Frankfurt', logo: '/images/banks/deutsche-bank.svg', mark: 'Deutsche Bank', region: 'Germany' },
+    { id: 'commerzbank', name: 'Commerzbank AG', city: 'Frankfurt', logo: '/images/banks/commerzbank.svg', mark: 'Commerzbank', region: 'Germany' },
+    { id: 'dz-bank', name: 'DZ BANK AG', city: 'Frankfurt', logo: '/images/banks/dz-bank.svg', mark: 'DZ BANK', region: 'Germany' },
+    { id: 'hvb', name: 'UniCredit Bank GmbH', city: 'München', logo: '/images/banks/hvb.svg', mark: 'HVB', region: 'Germany' },
+    { id: 'lbbw', name: 'Landesbank Baden-Württemberg', city: 'Stuttgart', logo: '/images/banks/lbbw.svg', mark: 'LBBW', region: 'Germany' },
+    { id: 'ing', name: 'ING Bank N.V.', city: 'Amsterdam', logo: '/images/banks/ing.svg', mark: 'ING', region: 'Netherlands' },
+    { id: 'abn-amro', name: 'ABN AMRO Bank N.V.', city: 'Amsterdam', logo: '/images/banks/abn-amro.svg', mark: 'ABN AMRO', region: 'Netherlands' },
+    { id: 'rabobank', name: 'Coöperatieve Rabobank U.A.', city: 'Utrecht', logo: '/images/banks/rabobank.svg', mark: 'Rabobank', region: 'Netherlands' },
+    { id: 'nordea', name: 'Nordea Bank Abp', city: 'Helsinki', logo: '/images/banks/nordea.svg', mark: 'Nordea', region: 'Nordics' },
+    { id: 'danske', name: 'Danske Bank A/S', city: 'Copenhagen', logo: '/images/banks/danske.svg', mark: 'Danske Bank', region: 'Nordics' },
+    { id: 'seb', name: 'Skandinaviska Enskilda Banken AB', city: 'Stockholm', logo: '/images/banks/seb.svg', mark: 'SEB', region: 'Nordics' },
+    { id: 'swedbank', name: 'Swedbank AB', city: 'Stockholm', logo: '/images/banks/swedbank.svg', mark: 'Swedbank', region: 'Nordics' },
+    { id: 'dnb', name: 'DNB Bank ASA', city: 'Oslo', logo: '/images/banks/dnb.svg', mark: 'DNB', region: 'Nordics' },
+    { id: 'handelsbanken', name: 'Svenska Handelsbanken AB', city: 'Stockholm', logo: '/images/banks/handelsbanken.svg', mark: 'Handelsbanken', region: 'Nordics' },
+  ],
+  /**
    * The current Revisionsstelle is the appointment on the live Zefix extract.
    * Mertenat Treuhand appears on older extracts (resigned 2008). We do not
    * invent a Big-Four auditor or publish a fabricated opinion.
@@ -142,7 +162,7 @@ export const company = {
     footerLine: 'Audit & filings | Statutory auditor recorded on Zefix',
   },
   business:
-    'Independent, fee-only financial advice and portfolio management for private clients: retirement, investments, taxes, real estate and estate planning. Client assets are held with Swiss banking partners, not by the company.',
+    'Independent, fee-only financial advice and portfolio management for private clients worldwide: retirement, investments, taxes, real estate and estate planning. Client assets stay with the bank you choose, not with the company.',
 } as const;
 
 export type Company = typeof company;

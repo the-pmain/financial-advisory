@@ -1,11 +1,11 @@
-import { useParams, Link } from 'react-router';
-import { ROUTES } from '../constants/routes';
-import { allArticles, findArticle } from '../data/content';
+import { useParams, Link, Navigate } from 'react-router';
+import { knowledgeHubArticlePath, ROUTES } from '../constants/routes';
+import { allArticles, findArticle, OLD_ARTICLE_REDIRECTS } from '../data/content';
 import { ArticleSlim } from '../components/widgets/ArticleTeaser';
 import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
 import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
-import { SectionTitle, Tagline } from '../components/ui/primitives';
+import { ButtonOrange, SectionTitle, Tagline } from '../components/ui/primitives';
 import { NotFoundPage } from './NotFoundPage';
 
 function formatDate(iso?: string): string {
@@ -16,6 +16,9 @@ function formatDate(iso?: string): string {
 
 export function ArticlePage() {
   const { slug } = useParams();
+  const redirected = slug ? OLD_ARTICLE_REDIRECTS[slug] : undefined;
+  if (redirected) return <Navigate to={knowledgeHubArticlePath(redirected)} replace />;
+
   const article = slug ? findArticle(slug) : undefined;
 
   if (!article) return <NotFoundPage />;
@@ -70,7 +73,27 @@ export function ArticlePage() {
               <PhoneRichText text={paragraph} />
             </p>
           ))}
+          {(article.sections ?? []).map((section) => (
+            <section key={section.heading ?? section.paragraphs[0]} className="mt-10">
+              {section.heading ? (
+                <h2 className="text-vz-ink m-0 text-[26px] leading-[1.25] font-bold max-mob:text-[22px]">
+                  {section.heading}
+                </h2>
+              ) : null}
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="text-vz-ink text-[19px] leading-[1.55] max-mob:text-[18px]">
+                  <PhoneRichText text={paragraph} />
+                </p>
+              ))}
+            </section>
+          ))}
         </div>
+
+        {article.cta ? (
+          <p className="mt-10 mb-0">
+            <ButtonOrange to={article.cta.to}>{article.cta.label}</ButtonOrange>
+          </p>
+        ) : null}
 
         <AdviceDisclaimer className="mt-10" />
       </article>

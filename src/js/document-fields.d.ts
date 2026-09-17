@@ -5,6 +5,7 @@ export type FieldDef = {
   options?: string[];
   showWhen?: string;
   locked?: boolean;
+  placeholder?: string;
 };
 
 export const AGREEMENT_DEFAULTS: Readonly<{
@@ -27,6 +28,8 @@ export function initialsFromName(name: string): string;
 export function matterReferenceFromDate(iso?: string): string;
 export function todayIso(): string;
 export function prefillFromClient(client: unknown): Record<string, string>;
+export const BROCHURE_DEFAULTS: Readonly<Record<string, string>>;
+export function brochureFromRecord(client: unknown, register: unknown): Record<string, string>;
 export function agreementFromRecord(client: unknown, register: unknown): Record<string, string>;
 export function valuesForCompose(
   kind: string,

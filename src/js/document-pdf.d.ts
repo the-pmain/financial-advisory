@@ -34,6 +34,7 @@ export function personFromSlug(
 
 export function toWinAnsi(value: unknown): string;
 export function agreementFromRecord(client: unknown, register: unknown): Record<string, string>;
+export function brochureFromRecord(client: unknown, register: unknown): Record<string, string>;
 
 export function generateDocument(
   kind: string,

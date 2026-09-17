@@ -9,6 +9,7 @@ const navPaths = {
       children: [
         { label: 'Vorsorge', to: ROUTES.retirement },
         { label: 'Finanzanlagen & Vermögensverwaltung', to: ROUTES.financialInvestments },
+        { label: 'Alternative Anlagen', to: ROUTES.alternativeInvestments },
         { label: 'Nachlassplanung', to: ROUTES.estatePlanning },
         { label: 'Immobilien & Hypotheken', to: ROUTES.realEstate },
         { label: 'Steuern', to: ROUTES.taxes },
@@ -34,6 +35,7 @@ const navPaths = {
       to: ROUTES.financialInvestments,
       children: [
         { label: 'Finanzanlagen & Vermögensverwaltung', to: ROUTES.financialInvestments },
+        { label: 'Alternative Anlagen', to: ROUTES.alternativeInvestments },
         { label: 'Märkte & Analysen', to: ROUTES.stockExchangesAndMarkets },
         { label: 'Depot & Bankpartner', to: ROUTES.banking },
         { label: 'Immobilien & Hypotheken', to: ROUTES.realEstate },
@@ -54,6 +56,7 @@ const navPaths = {
       ],
     },
     { label: 'Vorsorge', to: ROUTES.retirement },
+    { label: 'Alternative Anlagen', to: ROUTES.alternativeInvestments },
     { label: 'Nachlassplanung', to: ROUTES.estatePlanning },
     { label: 'Immobilien', to: ROUTES.realEstate },
     { label: 'Steuern', to: ROUTES.taxes },
@@ -66,6 +69,7 @@ const navPaths = {
       children: [
         { label: 'Vorsorge', to: ROUTES.retirement },
         { label: 'Finanzanlagen & Vermögensverwaltung', to: ROUTES.financialInvestments },
+        { label: 'Alternative Anlagen', to: ROUTES.alternativeInvestments },
         { label: 'Nachlassplanung', to: ROUTES.estatePlanning },
         { label: 'Immobilien & Hypotheken', to: ROUTES.realEstate },
         { label: 'Steuern', to: ROUTES.taxes },
@@ -95,7 +99,7 @@ export const de: Translations = {
   meta: {
     siteName: 'Helfenstein Group',
     defaultTitle:
-      'Helfenstein Group – Unabhängige Honorarberatung für Privatkundinnen und Privatkunden in der Schweiz',
+      'Helfenstein Group – Unabhängige Honorarberatung für Privatkundinnen und Privatkunden weltweit',
     defaultDescription:
       'Unabhängige Beratung zu Vorsorgeplanung, Finanzanlagen, Nachlassplanung, Immobilien, Steuern, Versicherungen und Pensionen. Ausschliesslich von unseren Kundinnen und Kunden bezahlt; wir verwahren keine Kundenvermögen.',
     teamDescription:
@@ -176,7 +180,7 @@ export const de: Translations = {
     regulatoryChallenges: 'Regulatorische Herausforderungen',
     howWeHelp: 'Wie wir helfen',
     adviceDisclaimer:
-      'Nur allgemeine Informationen. Keine persönliche Anlage-, Steuer- oder Rechtsberatung. Die Helfenstein Group verwahrt keine Kundenvermögen; die Verwahrung liegt vollständig bei Schweizer Depotbank-Partnern.',
+      'Nur allgemeine Informationen. Keine persönliche Anlage-, Steuer- oder Rechtsberatung. Die Helfenstein Group verwahrt keine Kundenvermögen; die Verwahrung liegt vollständig bei der Bank Ihrer Wahl.',
     verified: 'Verifiziert',
     viewOnMap: 'Auf der Karte anzeigen',
     trustSignals: 'Verifizierung und Kontakt',
@@ -193,7 +197,7 @@ export const de: Translations = {
   home: {
     testimonial: {
       quote:
-        'Bei ausgewählten Schweizer Depotbanken profitieren Kundinnen und Kunden von tieferen Kosten und höherer Sicherheit.',
+        'Bei einer Depotbank Ihrer Wahl profitieren Kundinnen und Kunden von tieferen Kosten und höherer Sicherheit.',
       positionLabel: 'Position',
       position: 'Managing Director, Client Operations',
       imageAlt: 'Porträt von Marc Weber, Managing Director Client Operations bei Helfenstein',
@@ -205,96 +209,7 @@ export const de: Translations = {
     },
   },
   content: {
-    articles: {
-      'compulsory-insurance-switzerland': {
-        slug: 'compulsory-insurance-switzerland',
-        tagline: 'Versicherungen',
-        title: 'Obligatorische Versicherungen in der Schweiz',
-        teaser:
-          'Wenn Ausländerinnen und Ausländer zum ersten Mal in die Schweiz ziehen und hier arbeiten, sollten sie wissen, welche Versicherungen gesetzlich vorgeschrieben sind.',
-        body: [
-          'Jede Person, die ihren Wohnsitz in der Schweiz nimmt, ist gesetzlich verpflichtet, eine Reihe von Versicherungen abzuschliessen. Welche davon gelten, hängt von Ihrem Aufenthaltsstatus, Ihrer Erwerbssituation und Ihren familiären Verhältnissen ab.',
-          'Die obligatorische Krankenversicherung gilt für alle in der Schweiz wohnhaften Personen und muss innerhalb von drei Monaten nach der Ankunft abgeschlossen werden. Der Versicherungsschutz gilt rückwirkend ab dem Einreisedatum – es entsteht also keine Lücke, jedoch sind die Prämien ebenfalls ab diesem Datum geschuldet.',
-          'Arbeitnehmende sind über ihren Arbeitgeber automatisch gegen Berufsunfälle versichert. Die Deckung für Nichtberufsunfälle ist enthalten, sobald Sie mindestens acht Stunden pro Woche beim gleichen Arbeitgeber arbeiten.',
-          'Wer ein Motorfahrzeug besitzt, benötigt vor der Zulassung eine Haftpflichtversicherung. In vielen Kantonen ist zudem eine Gebäudeversicherung obligatorisch.',
-        ],
-      },
-      'save-on-taxes-with-pillar-3a': {
-        slug: 'save-on-taxes-with-pillar-3a',
-        tagline: 'Säule 3a',
-        title: 'So sparen Sie Steuern mit der Säule 3a',
-        teaser:
-          'Wer neben AHV und Pensionskasse die Säule 3a zur Altersvorsorge nutzt, kann die Einzahlungen vom steuerbaren Einkommen abziehen.',
-        body: [
-          'Die Säule 3a ist in der Schweiz das am weitesten verbreitete Instrument zur Steuerersparnis. Einzahlungen können vollständig vom steuerbaren Einkommen abgezogen werden, bis zu einem periodisch angepassten jährlichen Höchstbetrag. Da wir ausschliesslich von Ihnen bezahlt werden, können wir Ihnen den für Sie passenden 3a-Anbieter empfehlen – Bank, Stiftung oder Versicherung – ganz ohne eigene Präferenz.',
-          'Arbeitnehmende mit Pensionskassenanschluss dürfen jährlich bis zu einem festgelegten Frankenbetrag einzahlen. Selbstständige ohne Pensionskasse können bis zu 20 Prozent ihres Nettoerwerbseinkommens einzahlen, innerhalb einer Obergrenze.',
-          'Vermögen in der Säule 3a ist von der Vermögenssteuer befreit, und die Erträge sind solange steuerfrei, wie sie auf dem Konto verbleiben. Bei der Auszahlung wird das Kapital getrennt vom übrigen Einkommen zu einem reduzierten Satz besteuert.',
-          'Wenn Sie Ihr Sparguthaben auf mehrere Konten verteilen und in verschiedenen Jahren auszahlen, bleibt die Progression tief – das kann mehrere tausend Franken einsparen.',
-        ],
-      },
-      'tips-for-foreigners-buying-real-estate': {
-        slug: 'tips-for-foreigners-buying-real-estate',
-        tagline: 'Immobilien',
-        title: 'Tipps für Ausländerinnen und Ausländer beim Immobilienkauf',
-        teaser:
-          'Beim Erwerb von Liegenschaften in der Schweiz sollten ausländische Käuferinnen und Käufer mehrere Faktoren berücksichtigen. Der Immobilienerwerb ist eine bedeutende Investition, die auch mit einem gewissen Risiko verbunden ist.',
-        body: [
-          'Ausländerinnen und Ausländer mit Wohnsitz in der Schweiz und C-Ausweis können Immobilien zu denselben Bedingungen erwerben wie Schweizer Bürgerinnen und Bürger. Inhaberinnen und Inhaber eines B-Ausweises dürfen an ihrem Wohnort eine Liegenschaft zum Eigenbedarf erwerben.',
-          'Kreditgeber verlangen in der Regel mindestens 20 Prozent des Kaufpreises als Eigenmittel, wovon mindestens 10 Prozent aus anderen Quellen als der beruflichen Vorsorge stammen müssen.',
-          'Die Tragbarkeit wird konservativ beurteilt: Die kalkulatorischen Kosten für Hypothek, Unterhalt und Amortisation sollten etwa ein Drittel des Bruttoeinkommens nicht übersteigen.',
-          'Käuferinnen und Käufer sollten Notariatsgebühren, Grundbuchgebühren und Handänderungssteuern einplanen, die von Kanton zu Kanton erheblich variieren.',
-        ],
-      },
-      'is-it-worth-paying-more-into-your-pension-fund': {
-        slug: 'is-it-worth-paying-more-into-your-pension-fund',
-        tagline: 'Pensionskasse',
-        title: 'Lohnt sich eine freiwillige Einzahlung in die Pensionskasse?',
-        teaser:
-          'Mit freiwilligen Einzahlungen in Ihre Pensionskasse können Sie erheblich Steuern sparen und im Alter über mehr Mittel verfügen.',
-        imageAlt: 'Tabelle mit der Rendite einer freiwilligen Pensionskasseneinzahlung',
-        body: [
-          'Freiwillige Einkäufe in die Pensionskasse sind im Jahr der Zahlung vollständig vom steuerbaren Einkommen abziehbar. Für Personen mit höherem Einkommen kann das eine unmittelbare Steuerersparnis von einem Drittel oder mehr des eingezahlten Betrags bedeuten.',
-          'Das Kapital wächst anschliessend steuerfrei, bis es ausbezahlt wird. Je länger die verbleibende Zeit bis zur Pensionierung, desto stärker wirkt sich der Zinsvorteil aus.',
-          'Einkäufe in den drei Jahren vor der Pensionierung können nicht als Kapital bezogen werden, ohne den Steuerabzug zu verlieren – das Timing ist daher entscheidend.',
-          'Prüfen Sie vor einem Einkauf das Deckungsgrad Ihrer Pensionskasse und vergleichen Sie den Umwandlungssatz mit dem, was Sie mit dem gleichen Betrag privat anlegen könnten.',
-        ],
-      },
-      'financial-investments-what-you-need-know': {
-        slug: 'financial-investments-what-you-need-know',
-        tagline: 'Finanzanlagen',
-        title: 'Finanzanlagen: Was Sie wissen sollten',
-        teaser:
-          'Wer Geld erfolgreich anlegen möchte, sollte strukturiert vorgehen und zuerst die richtige Anlagestrategie festlegen.',
-        body: [
-          'Eine solide Anlagestrategie beginnt mit Ihrer eigenen Situation: Wie viel Ihres Vermögens Sie binden können, für wie lange und welche Schwankungen Sie verkraften.',
-          'Erst wenn die Strategie steht, folgt die Auswahl einzelner Anlagen. Breit diversifizierte, kostengünstige Indexfonds sind für die meisten Anlegerinnen und Anleger der effizienteste Baustein.',
-          'Kosten gehören zu den wenigen Gewissheiten beim Anlegen. Jeder Franken, den Sie an Gebühren sparen, bleibt investiert und wirkt über die gesamte Haltedauer – weshalb eine Beraterin oder ein Berater ohne Anteil an diesen Gebühren als einzige Instanz keinen Grund hat, sie zu übersehen.',
-        ],
-      },
-      'all-you-need-to-know-about-etfs': {
-        slug: 'all-you-need-to-know-about-etfs',
-        tagline: 'Anlagen',
-        title: 'Alles, was Sie über ETFs wissen müssen',
-        teaser: 'ETFs sind günstig, transparent und liquide und bieten viele weitere Vorteile.',
-        body: [
-          'Exchange Traded Funds (ETFs) bilden einen Index ab und können wie eine Aktie während der gesamten Handelszeit an der Börse gekauft und verkauft werden.',
-          'Da sie passiv verwaltet werden, liegen ihre laufenden Kosten nur bei einem Bruchteil jener aktiv verwalteter Fonds – typischerweise wenige Hundertstel Prozent bei grossen, liquiden Indizes.',
-          'Achten Sie auf die Replikationsmethode, den Fondsdomizil und die Tracking-Differenz – nicht nur auf die ausgewiesene Gebühr.',
-        ],
-      },
-      'current-mortgage-interest-rates-comparison': {
-        slug: 'current-mortgage-interest-rates-comparison',
-        tagline: 'Hypotheken',
-        title: 'Aktuelle Hypothekarzinsen – ein Vergleich',
-        teaser:
-          'Helfenstein vergleicht laufend die aktuellen Hypothekarzinsen der wichtigsten Anbieter in der Schweiz.',
-        body: [
-          'Hypothekarzinsen unterscheiden sich deutlich zwischen Banken, Versicherern und Pensionskassen – oft um mehr als einen halben Prozentpunkt bei gleicher Fixlaufzeit.',
-          'Bei einer Hypothek von einer Million Franken entspricht diese Differenz mehreren tausend Franken pro Jahr. Ein Angebotsvergleich ist daher eine der rentabelsten Stunden, die Sie investieren können.',
-          'Zinsen sind verhandelbar. Die publizierten Sätze sind Listenpreise – gut vorbereitete Kreditnehmerinnen und Kreditnehmer mit solider Tragbarkeit können sie in der Regel verbessern.',
-        ],
-      },
-    },
+    articles: {},
     offers: [
       {
         id: 'checklist-retirement',
@@ -328,7 +243,7 @@ export const de: Translations = {
       },
       {
         title: 'Säule 3a mit Indexanlagen',
-        text: 'Wir helfen Ihnen, Ihre Säule 3a in kostengünstige Indexlösungen bei einer Schweizer Bank oder Stiftung Ihrer Wahl zu investieren. Über ein Erwerbsleben können tiefere Gebühren einen Unterschied von Zehntausenden von Franken ausmachen.',
+        text: 'Wir helfen Ihnen, Ihre Säule 3a in kostengünstige Indexlösungen bei einer Bank oder Stiftung Ihrer Wahl zu investieren. Über ein Erwerbsleben können tiefere Gebühren einen Unterschied von Zehntausenden von Franken ausmachen.',
       },
       {
         title: 'Steuerberatung',
@@ -391,14 +306,31 @@ export const de: Translations = {
       title: 'Finanzanlagen & Vermögensverwaltung',
       subtitle: 'Eine einfache Strategie, effizient umgesetzt.',
       intro: [
-        'Wir verbinden eine klar definierte Anlagestrategie mit kostengünstiger Umsetzung und aktiver Betreuung. Ihr Portfolio wird auf Ihren Namen bei einer Schweizer Bank Ihrer Wahl gehalten; wir verwalten es, wir verwahren es nie. Sie wissen jederzeit, was Sie besitzen, was es kostet und warum es in Ihrem Portfolio ist.',
+        'Wir verbinden eine klar definierte Anlagestrategie mit kostengünstiger Umsetzung und aktiver Betreuung. Ihr Portfolio wird auf Ihren Namen bei einer Bank Ihrer Wahl gehalten; wir verwalten es, wir verwahren es nie. Sie wissen jederzeit, was Sie besitzen, was es kostet und warum es in Ihrem Portfolio ist.',
         'Da die Helfenstein Group keine Retrozessionen erhält, zahlen Sie nur die mit uns vereinbarte Gebühr.',
       ],
       highlights: [
         { title: 'Vermögens\u00ADverwaltungs\u00ADmandate', text: 'Discretionary Management mit breit diversifiziertem Index-Kern.' },
         { title: 'Indexanlagen', text: 'Laufende Kosten nur ein Bruchteil jener aktiv verwalteter Fonds.' },
         { title: 'Portfolioanalyse', text: 'Eine schriftliche Zweitmeinung zu Ihrem heutigen Portfolio.' },
-        { title: 'Ihre Vermögenswerte bleiben bei Ihrer Bank', text: 'Die Helfenstein Group verwahrt nie Kundenvermögen. Die Verwahrung bleibt auf Ihren Namen bei etablierten Schweizer Depotbank-Partnern.' },
+        { title: 'Ihre Vermögenswerte bleiben bei Ihrer Bank', text: 'Die Helfenstein Group verwahrt nie Kundenvermögen. Die Verwahrung bleibt auf Ihren Namen bei der Bank Ihrer Wahl, unter Ihrer Kontrolle.' },
+      ],
+    },
+    [ROUTES.alternativeInvestments]: {
+      path: ROUTES.alternativeInvestments,
+      breadcrumb: ['Finanzen', 'Alternative Anlagen'],
+      title: 'Alternative Anlagen',
+      subtitle: 'Private Märkte, Sachwerte und Krypto – nur dort, wo sie hingehören.',
+      intro: [
+        'Alternative Anlagen liegen ausserhalb kotierter Aktien und Anleihen: Private Equity und Private Credit, Hedgefonds, Rohstoffe, Infrastruktur, ausgewählte Immobilienfonds und digitale Vermögenswerte wie Kryptowährungen. Sie können zusätzliche Ertragsquellen erschliessen, erhöhen aber auch Kosten, Komplexität, Bindungsfristen und in manchen Fällen das Risiko eines Totalverlusts. Wir beginnen mit einer schriftlichen Kernallokation. Alternativen sind ein Satellit – kein Ersatz für ein diversifiziertes Portfolio auf Ihren Namen bei der Bank Ihrer Wahl.',
+        'Kryptowährungen sind die Alternative, nach der die meisten Kundinnen und Kunden zuerst fragen. Bitcoin, Ether und die darauf folgenden Token sind stark schwankend, zahlen kein verlässliches Einkommen und können auf null fallen. Sie sind keine Währung im üblichen Sinn, kein Bankguthaben und nicht durch eine Einlagensicherung gedeckt. Handelsplätze, Wallet-Anbieter und «Yield»-Produkte sind gescheitert, gehackt worden oder erwiesen sich als unbewilligt. Jede Allokation, die wir besprechen, ist auf einen Verlust bemessen, den Sie tragen können – nachdem der Rest Ihrer Planung steht.',
+        'Die Helfenstein Group verwahrt keine Kundenvermögen und betreibt keine Krypto-Börse und kein Wallet. Wenn digitale Vermögenswerte in Ihre Planung gehören, bleiben sie bei einer Depotstelle Ihrer Wahl – einer Bank oder einem spezialisierten Anbieter, der sie auf Ihren Namen halten kann. Wir erhalten keine Retrozessionen von Token-Emittenten oder Plattformen. Das Erstgespräch klärt, ob Alternativen – einschliesslich Krypto – in Ihrer Situation überhaupt einen Platz haben.',
+      ],
+      highlights: [
+        { title: 'Private Märkte', text: 'Nicht kotiertes Eigen- und Fremdkapital: längere Bindung, weniger Transparenz und höhere Mindestbeträge als ein kotierter Fonds.' },
+        { title: 'Sachwerte', text: 'Rohstoffe, Infrastruktur und ausgewählte Immobilienfonds als Diversifikatoren – nicht als Dekoration.' },
+        { title: 'Krypto und digitale Vermögenswerte', text: 'Ein kleiner, optionaler Satellit nach einem schriftlichen Risikobudget. Volatilität, Verwahrung und Betrugsrisiko stehen zuerst. Nichts hiervon ist eine Kaufempfehlung.' },
+        { title: 'Eignung zuerst', text: 'Die FIDLEG-Regeln gelten weiter. Was Sie nicht erklären können, gehört nicht ins Portfolio.' },
       ],
     },
     [ROUTES.estatePlanning]: {
@@ -487,11 +419,11 @@ export const de: Translations = {
       title: 'Verwahrung & Depotbank-Partner',
       subtitle: 'Ihre Vermögenswerte bleiben bei Ihrer eigenen Bank.',
       intro: [
-        'Die Helfenstein Group verwahrt nie Kundenvermögen. Ihre Wertschriften und Ihr Bargeld bleiben auf einem Konto in Ihrem eigenen Namen bei einer Schweizer Depotbank, die Ihnen direkt Bericht erstattet; wir erbringen darauf aufbauend Vermögensverwaltung und Beratung.',
+        'Die Helfenstein Group verwahrt nie Kundenvermögen. Ihre Wertschriften und Ihr Bargeld bleiben auf einem Konto in Ihrem eigenen Namen bei einer Depotbank Ihrer Wahl, die Ihnen direkt Bericht erstattet; wir erbringen darauf aufbauend Vermögensverwaltung und Beratung.',
         'Wir helfen Ihnen bei der Wahl der Depotbank, vergleichen deren Konditionen und sorgen für ein verständliches Reporting. Depot- und Transaktionsgebühren werden von Ihrer Bank festgelegt und belastet, nie von uns.',
       ],
       highlights: [
-        { title: 'Vermögen auf Ihren Namen', text: 'Segregierte Verwahrung bei einer bewilligten Schweizer Bank Ihrer Wahl.' },
+        { title: 'Vermögen auf Ihren Namen', text: 'Segregierte Verwahrung bei einer Bank Ihrer Wahl, unter Ihrer Kontrolle.' },
         { title: 'Wahl der Depotbank', text: 'Ein direkter Vergleich von Depotkonditionen und Servicequalität.' },
         { title: 'Hypotheken', text: 'Finanzierung zu verglichenen Konditionen.' },
         { title: 'Sicherheit', text: 'Mehrfaktor-Zugang und die Betrugsüberwachung Ihrer Bank.' },
@@ -503,8 +435,8 @@ export const de: Translations = {
       title: 'Über uns',
       subtitle: 'Unabhängige Beratung aus Luzern.',
       intro: [
-        'Die Helfenstein Group ist eine unabhängige Schweizer Beratungs- und Vermögensverwaltungsgesellschaft mit Sitz in Luzern. Wir beraten Privatpersonen und Familien – nie Institutionen oder Unternehmen – zu Vorsorge, Anlagen, Steuern und Immobilien.',
-        'Wir nehmen keine Provisionen von Produktanbietern an. Unser Einkommen stammt ausschliesslich aus den Honoraren, die unsere Kundinnen und Kunden mit uns vereinbaren, und wir verwahren keine Kundenvermögen: Die Verwahrung bleibt bei Schweizer Depotbank-Partnern.',
+        'Die Helfenstein Group ist eine unabhängige Beratungs- und Vermögensverwaltungsgesellschaft mit Sitz in Luzern. Wir beraten Privatpersonen und Familien – nie Institutionen oder Unternehmen – zu Vorsorge, Anlagen, Steuern und Immobilien, wo immer sie leben.',
+        'Wir nehmen keine Provisionen von Produktanbietern an. Unser Einkommen stammt ausschliesslich aus den Honoraren, die unsere Kundinnen und Kunden mit uns vereinbaren, und wir verwahren keine Kundenvermögen: Die Verwahrung bleibt bei der Bank Ihrer Wahl.',
       ],
       highlights: [
         { title: 'Unser Team', text: 'Spezialistinnen und Spezialisten, die Sie langfristig begleiten.' },
@@ -519,8 +451,8 @@ export const de: Translations = {
       title: 'Unabhängige Beratung',
       subtitle: 'Bezahlt von unseren Kundinnen und Kunden. Von niemandem sonst.',
       intro: [
-        'Der Grossteil der Finanzberatung in der Schweiz wird über die empfohlenen Produkte finanziert. Diese Regelung ist für Kundinnen und Kunden unsichtbar und begünstigt systematisch teure Lösungen.',
-        'Die Helfenstein Group wird ausschliesslich von ihren Kundinnen und Kunden bezahlt – Privatpersonen und Familien, nie Institutionen oder Unternehmen. Wir veröffentlichen unsere Honorare, schreiben nicht vermeidbare Retrozessionen vollständig gut, unsere Beraterinnen und Berater haben keine Produktverkaufsziele, und wir verwahren Ihre Vermögenswerte nie: Die Verwahrung bleibt auf Ihren Namen bei Schweizer Depotbank-Partnern.',
+        'Der Grossteil der Finanzberatung wird über die empfohlenen Produkte finanziert. Diese Regelung ist für Kundinnen und Kunden unsichtbar und begünstigt systematisch teure Lösungen.',
+        'Die Helfenstein Group wird ausschliesslich von ihren Kundinnen und Kunden bezahlt – Privatpersonen und Familien, nie Institutionen oder Unternehmen. Wir veröffentlichen unsere Honorare, schreiben nicht vermeidbare Retrozessionen vollständig gut, unsere Beraterinnen und Berater haben keine Produktverkaufsziele, und wir verwahren Ihre Vermögenswerte nie: Die Verwahrung bleibt auf Ihren Namen bei der Bank Ihrer Wahl.',
       ],
       highlights: [
         { title: 'Honorartransparenz', text: 'Sie kennen die Kosten, bevor Sie eine Entscheidung treffen.' },
@@ -533,7 +465,7 @@ export const de: Translations = {
       path: ROUTES.aboutOffice,
       breadcrumb: ['Über uns', 'Standort'],
       title: 'Standort',
-      subtitle: 'Mit Sitz in Luzern, für Kundinnen und Kunden in der ganzen Schweiz.',
+      subtitle: 'Mit Sitz in Luzern, Beratung für Privatkundinnen und Privatkunden weltweit.',
       intro: [
         'Die Helfenstein Asset Management AG hat ihren Sitz an der Pilatusstrasse 23 in Luzern. Wir beraten auf Deutsch, Französisch, Italienisch und Englisch.',
         'Rufen Sie uns unter +41 41 211 29 29 an oder vereinbaren Sie ein kostenloses Erstgespräch.',
@@ -552,12 +484,12 @@ export const de: Translations = {
       subtitle: 'Ein Luzerner Vermögensverwalter mit klarem Beratungsmodell.',
       intro: [
         'Die Helfenstein Group berät von Luzern aus Privatpersonen und Familien zu Vermögensverwaltung, Finanzberatung, Vorsorge und Finanzierung. Für Institutionen oder Unternehmen sind wir nicht tätig.',
-        'Kundenvermögen werden bei ausgewählten Schweizer Depotbanken verwahrt, nie bei uns. Wir sind von der FINMA als Vermögensverwalter bewilligt und werden von der OSFINcontrol AG beaufsichtigt.',
+        'Kundenvermögen werden bei einer Depotbank Ihrer Wahl verwahrt, nie bei uns. Wir sind von der FINMA als Vermögensverwalter bewilligt und werden von der OSFINcontrol AG beaufsichtigt.',
       ],
       highlights: [
         { title: 'Vermögensverwaltung', text: 'Mandate auf Basis eines klaren Anlageprozesses.' },
         { title: 'Finanzberatung', text: 'Vorsorge, Finanzierung und persönliche Planung neben den Anlagen.' },
-        { title: 'Depotbank-Partner', text: 'Segregierte Verwahrung auf Ihren Namen bei bewilligten Schweizer Banken.' },
+        { title: 'Depotbank-Partner', text: 'Segregierte Verwahrung auf Ihren Namen bei einer Bank Ihrer Wahl.' },
         { title: 'Luzern', text: 'Pilatusstrasse 23, 6003 Luzern.' },
       ],
     },
@@ -648,7 +580,7 @@ export const de: Translations = {
       title: 'Helfenstein Financial Portal',
       subtitle: 'Ihr Portfolio, Ihre Dokumente, Ihre Märkte.',
       intro: [
-        'Das Helfenstein Financial Portal bietet Ihnen eine konsolidierte Sicht auf die Konten und Portfolios, die Sie bei Ihren Schweizer Depotbank-Partnern halten, zusammen mit allen Ihren Dokumenten und aktuellen Marktdaten.',
+        'Das Helfenstein Financial Portal bietet Ihnen eine konsolidierte Sicht auf die Konten und Portfolios, die Sie bei Ihrer Depotbank halten, zusammen mit allen Ihren Dokumenten und aktuellen Marktdaten.',
         'Ihre Vermögenswerte bleiben bei Ihrer Bank – das Portal ist Ihr Fenster darauf und kein Ort, an dem Geld verwahrt wird.',
       ],
       highlights: [
@@ -716,7 +648,7 @@ export const de: Translations = {
       subtitle: 'Ein kostenloser Ratgeber zum Erkennen und Melden von Angriffen.',
       intro: [
         'Phishing ist zum häufigsten Weg für unbefugten Zugang zu Finanzkonten geworden. Selbst vorsichtige, gut informierte Menschen geraten gelegentlich auf eine überzeugende Nachricht herein.',
-        'Unser kostenloser Ratgeber zeigt, woran Sie betrügerische Nachrichten erkennen, wie Sie Ihre Zugänge absichern und wen Sie sofort informieren, wenn Sie doch geklickt haben. Da Ihre Vermögenswerte bei Ihrer Schweizer Depotbank liegen, erklären wir auch, welche Rolle die Bank in einem solchen Fall spielt.',
+        'Unser kostenloser Ratgeber zeigt, woran Sie betrügerische Nachrichten erkennen, wie Sie Ihre Zugänge absichern und wen Sie sofort informieren, wenn Sie doch geklickt haben. Da Ihre Vermögenswerte bei Ihrer Depotbank liegen, erklären wir auch, welche Rolle die Bank in einem solchen Fall spielt.',
       ],
       highlights: [
         { title: 'Warnzeichen', text: 'Woran Sie eine betrügerische E-Mail, SMS oder einen Anruf erkennen.' },
@@ -734,7 +666,7 @@ export const de: Translations = {
       sections: [
         {
           paragraphs: [
-            'Die auf dieser Website veröffentlichten Informationen dienen ausschliesslich allgemeinen Informationszwecken. Sie stellen weder ein Angebot noch eine Empfehlung oder Aufforderung zum Kauf oder Verkauf von Finanzinstrumenten dar und sind keine Anlage-, Rechts- oder Steuerberatung. Die Helfenstein Asset Management AG (Helfenstein Group) ist eine unabhängige Beraterin und Vermögensverwalterin; sie verwahrt keine Kundenvermögen – diese bleiben bei der Schweizer Depotbank der Kundin oder des Kunden.',
+            'Die auf dieser Website veröffentlichten Informationen dienen ausschliesslich allgemeinen Informationszwecken. Sie stellen weder ein Angebot noch eine Empfehlung oder Aufforderung zum Kauf oder Verkauf von Finanzinstrumenten dar und sind keine Anlage-, Rechts- oder Steuerberatung. Die Helfenstein Asset Management AG (Helfenstein Group) ist eine unabhängige Beraterin und Vermögensverwalterin; sie verwahrt keine Kundenvermögen – diese bleiben bei der Depotbank der Kundin oder des Kunden.',
           ],
         },
         {
@@ -877,7 +809,7 @@ export const de: Translations = {
         {
           heading: 'Geschäftstätigkeit',
           paragraphs: [
-            'Unabhängige, ausschliesslich honorarbasierte Finanzberatung und Vermögensverwaltung für Privatkundinnen und Privatkunden: Vorsorge, Anlagen, Steuern, Immobilien und Nachlassplanung. Kundenvermögen werden bei Schweizer Bankpartnern gehalten, nicht durch das Unternehmen.',
+            'Unabhängige, ausschliesslich honorarbasierte Finanzberatung und Vermögensverwaltung für Privatkundinnen und Privatkunden weltweit: Vorsorge, Anlagen, Steuern, Immobilien und Nachlassplanung. Kundenvermögen bleiben bei der Bank Ihrer Wahl, nicht beim Unternehmen.',
           ],
         },
         {
@@ -1017,11 +949,11 @@ export const de: Translations = {
         slug: 'marc-weber',
         role: 'Managing Director, Client Operations',
         about:
-          'Marc Weber koordiniert Client Operations und die Beziehungen zu unseren Depotbanken. Er kam aus dem Private Banking und sorgt dafür, dass Kundinnen und Kunden von der Bank, die ihre Vermögenswerte verwahrt, ein klares Reporting erhalten – in Luzern und in der ganzen Schweiz.',
+          'Marc Weber koordiniert Client Operations und die Beziehungen zu unseren Depotbanken. Er kam aus dem Private Banking und sorgt dafür, dass Kundinnen und Kunden von der Bank, die ihre Vermögenswerte verwahrt, ein klares Reporting erhalten – aus Luzern und international.',
         results: [
           'Senkte die Verwahrungs- und Abwicklungskosten, die Helfenstein-Kundinnen und -Kunden ihren Banken zahlen, seit 2020 um 18 %.',
           'Leitete die Überprüfung, die Kundinnen und Kunden auf segregierte Depots in ihrem eigenen Namen überführte.',
-          'Verhandelt Depotkonditionen mit unseren Schweizer Bankpartnern im Namen der Privatkundschaft.',
+          'Verhandelt Depotkonditionen mit Depotbanken im Namen der Privatkundschaft.',
         ],
       },
       'anja-hoffmann': {

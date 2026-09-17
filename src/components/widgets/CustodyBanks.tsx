@@ -4,21 +4,25 @@ import { SectionTitle } from '../ui/primitives';
 
 function BankMark({
   name,
+  mark,
+  city,
   logo,
 }: {
   name: string;
+  mark: string;
+  city: string;
   logo: string;
 }) {
   const [failed, setFailed] = useState(false);
-  const word = name.replace(/\s+AG$/, '');
 
   if (failed) {
     return (
       <div
-        className="bg-vz-blue flex h-12 w-full max-w-[220px] items-center px-4"
+        className="bg-vz-blue flex h-12 w-full max-w-[220px] items-center gap-2 px-4"
         aria-hidden="true"
       >
-        <span className="font-serif text-[16px] leading-none font-bold text-white">{word}</span>
+        <span className="font-serif text-[16px] leading-none font-bold text-white">{mark}</span>
+        <span className="text-[11px] leading-none text-white/70">{city}</span>
       </div>
     );
   }
@@ -26,7 +30,7 @@ function BankMark({
   return (
     <img
       src={logo}
-      alt=""
+      alt={name}
       width={220}
       height={48}
       className="h-12 w-auto max-w-full"
@@ -37,27 +41,29 @@ function BankMark({
 }
 
 export function CustodyBanks({ className = '' }: { className?: string }) {
-  const banks = company.custodyBanks;
-  const names = banks.map((bank) => bank.name).join(', ');
+  const banks = company.preferredBanks;
 
   return (
     <section className={className}>
-      <SectionTitle>Client asset custody</SectionTitle>
+      <SectionTitle>Your preferred banks</SectionTitle>
       <p className="text-vz-ink m-0 max-w-[802px] text-[17px] leading-[1.5]">
-        Client assets are custodied at leading Swiss financial institutions including:
+        Clients can hold assets at major European banks — including leading German, Dutch and Nordic
+        institutions:
       </p>
-      <ul className="mt-6 mb-0 grid list-none grid-cols-3 gap-4 p-0 max-tab:grid-cols-1">
+      <ul className="mt-6 mb-0 grid list-none grid-cols-4 gap-4 p-0 max-lap:grid-cols-3 max-tab:grid-cols-2 max-mob:grid-cols-1">
         {banks.map((bank) => (
           <li key={bank.id} className="border-vz-rule bg-white p-4">
-            <BankMark name={bank.name} logo={bank.logo} />
+            <BankMark name={bank.name} mark={bank.mark} city={bank.city} logo={bank.logo} />
             <p className="text-vz-ink m-0 mt-3 text-[16px] leading-[1.3] font-bold">{bank.name}</p>
-            <p className="text-vz-gray-mid m-0 mt-1 text-[14px] leading-[1.3]">{bank.city}</p>
+            <p className="text-vz-gray-mid m-0 mt-1 text-[14px] leading-[1.3]">
+              {bank.city} · {bank.region}
+            </p>
           </li>
         ))}
       </ul>
       <p className="text-vz-ink mt-6 mb-0 max-w-[802px] text-[16px] leading-[1.5] font-bold">
-        Assets held in client names at {names}, ensuring segregation from our operating accounts. No
-        commingling of funds.
+        Assets stay in the client’s name at the chosen bank, segregated from our operating accounts.
+        No commingling of funds.
       </p>
       <p className="text-vz-gray-mid mt-3 mb-0 max-w-[802px] text-[14px] leading-[1.45]">
         The custodian is chosen with you; not every mandate uses every bank. Custody and transaction

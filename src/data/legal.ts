@@ -20,7 +20,7 @@ export const legalPages: LegalPage[] = [
     sections: [
       {
         paragraphs: [
-          `The information published on this website is provided for general information purposes only. It does not constitute an offer, a recommendation or an invitation to buy or sell any financial instrument, nor does it constitute investment, legal or tax advice. ${company.legalName} (${company.groupName}) is an independent adviser and portfolio manager; it does not hold client assets, which remain with the client's Swiss custodian bank.`,
+          `The information published on this website is provided for general information purposes only. It does not constitute an offer, a recommendation or an invitation to buy or sell any financial instrument, nor does it constitute investment, legal or tax advice. ${company.legalName} (${company.groupName}) is an independent adviser and portfolio manager; it does not hold client assets, which remain with the client's chosen custodian bank.`,
         ],
       },
       {

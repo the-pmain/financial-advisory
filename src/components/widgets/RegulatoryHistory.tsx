@@ -68,7 +68,7 @@ export function RegulatoryHistory({ className = '' }: { className?: string }) {
             <CompareRow term="Supervision" ours={company.regulation.supervisor} theirs="None" />
             <CompareRow
               term="Client assets"
-              ours="Segregated at Swiss banks, in the client’s name"
+              ours="Segregated at your bank, in your name"
               theirs="Do not send funds"
             />
           </tbody>

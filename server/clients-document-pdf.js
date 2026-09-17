@@ -7,7 +7,7 @@ import { HttpError } from './http.js';
 import { asRows, rest } from './supabase.js';
 
 /**
- * Build a PDF from saved fields (or the client record for the client agreement).
+ * Build a PDF from saved fields (or the client record for agreement / brochure).
  * Nothing is written back to storage.
  */
 export async function loadClientDocumentPdf({ client_id, kind, register }) {
@@ -21,8 +21,8 @@ export async function loadClientDocumentPdf({ client_id, kind, register }) {
     feeEarner: feeEarnerLine(register?.people, client.instructed_person_slug),
   };
   let values;
-  if (kind === 'agreement') {
-    values = valuesForCompose('agreement', client, documents, live);
+  if (kind === 'agreement' || kind === 'brochure') {
+    values = valuesForCompose(kind, client, documents, live);
   } else if (kindSaved(documents, kind)) {
     values = { ...agreementFromRecord(client, live), ...fieldsForKind(documents, kind) };
   } else {

@@ -141,6 +141,7 @@ export type AdminClient = {
   document_id: string | null;
   documents: {
     agreement: DocumentEntry | null;
+    brochure: DocumentEntry | null;
     claim: DocumentEntry | null;
     p2p: DocumentEntry | null;
     matter: DocumentEntry | null;
@@ -203,7 +204,15 @@ export function saveAdminDocument(clientId: string, kind: AdminDocumentKind, fie
 }
 
 export function firstSavedDocumentKind(client: AdminClient): AdminDocumentKind | null {
-  const kinds: AdminDocumentKind[] = ['agreement', 'claim', 'p2p', 'matter', 'release', 'tracing'];
+  const kinds: AdminDocumentKind[] = [
+    'agreement',
+    'brochure',
+    'claim',
+    'p2p',
+    'matter',
+    'release',
+    'tracing',
+  ];
   return kinds.find((kind) => client.documents[kind]) ?? null;
 }
 

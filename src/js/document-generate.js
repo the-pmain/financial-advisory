@@ -1,5 +1,6 @@
 import { DOCUMENT_KIND_LABELS, isDocumentKind } from './clients-documents-model.js';
 import { buildAgreement } from './document-agreement.js';
+import { buildBrochure } from './document-brochure.js';
 import {
   addDaysIso,
   addYearsIso,
@@ -12,6 +13,7 @@ import { printCaseRef, sanitizeForPdf, validateDocument } from './document-valid
 import { slot, writePdf } from './document-pdf-write.js';
 
 export { buildAgreement } from './document-agreement.js';
+export { buildBrochure } from './document-brochure.js';
 
 export async function generateDocument(kind, values, { people, register } = {}) {
   if (!isDocumentKind(kind)) {
@@ -29,6 +31,11 @@ export async function generateDocument(kind, values, { people, register } = {}) 
     bytes = await writePdf(buildAgreement(sanitized, register), {
       profile: 'letterhead',
       runningFooter: 'Confidential',
+    });
+  } else if (kind === 'brochure') {
+    bytes = await writePdf(buildBrochure(sanitized, register), {
+      profile: 'brochure',
+      runningFooter: 'Confidential — for the named client only',
     });
   } else {
     if (kind === 'claim') trust = buildClaimTrust(sanitized, validation);

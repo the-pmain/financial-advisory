@@ -89,7 +89,7 @@ const gtc = [
   { type: 'h', text: '1. Parties and services' },
   {
     type: 'p',
-    text: 'We provide financial advice and, if the mandate so provides, discretionary portfolio management to private individuals and families. We do not act for institutions or companies. We do not hold client assets: securities and cash remain in your name with a Swiss custodian bank of your choice.',
+    text: 'We provide financial advice and, if the mandate so provides, discretionary portfolio management to private individuals and families. We do not act for institutions or companies. We do not hold client assets: securities and cash remain in your name with a custodian bank of your choice.',
   },
   { type: 'h', text: '2. Mandate and instructions' },
   {

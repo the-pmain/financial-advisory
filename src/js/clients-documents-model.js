@@ -1,5 +1,6 @@
 export const DOCUMENT_KINDS = Object.freeze([
   'agreement',
+  'brochure',
   'claim',
   'p2p',
   'matter',
@@ -7,13 +8,15 @@ export const DOCUMENT_KINDS = Object.freeze([
   'tracing',
 ]);
 
-export const TOP_LEVEL_KINDS = Object.freeze(['agreement', 'claim', 'release']);
+export const TOP_LEVEL_KINDS = Object.freeze(['agreement', 'brochure', 'claim', 'release']);
 export const NESTED_CLAIM_KINDS = Object.freeze(['p2p', 'matter', 'tracing']);
 export const COMPOSE_KINDS = Object.freeze(['claim', 'p2p', 'matter', 'release', 'tracing']);
-export const EDITABLE_KINDS = Object.freeze(['agreement', ...COMPOSE_KINDS]);
+export const FOLDER_KINDS = Object.freeze(['brochure', ...COMPOSE_KINDS]);
+export const EDITABLE_KINDS = Object.freeze(['agreement', 'brochure', ...COMPOSE_KINDS]);
 
 export const DOCUMENT_KIND_LABELS = Object.freeze({
   agreement: 'Client agreement',
+  brochure: 'Private client brochure',
   claim: 'Victim claim',
   p2p: 'P2P agreement',
   matter: 'Application of release order',
@@ -38,6 +41,7 @@ export function isDocumentKind(value) {
 export function emptyDocuments() {
   return {
     agreement: null,
+    brochure: null,
     claim: null,
     p2p: null,
     matter: null,
@@ -105,12 +109,13 @@ function cloneEntry(entry) {
   };
 }
 
-/** Flatten stored 3-key JSON into the 6-kind API view. Missing kinds are null. */
+/** Flatten stored top-level JSON into the flattened API view. Missing kinds are null. */
 export function normalizeDocuments(raw) {
   const out = emptyDocuments();
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out;
 
   out.agreement = readEntry(raw.agreement);
+  out.brochure = readEntry(raw.brochure);
   out.release = readEntry(raw.release);
 
   const claim = raw.claim && typeof raw.claim === 'object' && !Array.isArray(raw.claim) ? raw.claim : null;
@@ -135,11 +140,12 @@ function readOwnClaimEntry(claim) {
   return { fields, saved_at };
 }
 
-/** Persist flattened 6-kind view as the 3-key JSON shape. Nested kinds omit if null. */
+/** Persist flattened view as the top-level JSON shape. Nested kinds omit if null. */
 export function persistDocuments(flat) {
   const view = { ...emptyDocuments(), ...(flat && typeof flat === 'object' ? flat : {}) };
 
   const agreement = cloneEntry(view.agreement);
+  const brochure = cloneEntry(view.brochure);
   const release = cloneEntry(view.release);
 
   const nested = {};
@@ -160,7 +166,7 @@ export function persistDocuments(flat) {
     claim = { ...nested };
   }
 
-  return { agreement, claim, release };
+  return { agreement, brochure, claim, release };
 }
 
 export function kindSaved(documents, kind) {
@@ -177,7 +183,7 @@ export function fieldsForKind(documents, kind) {
 }
 
 export function composeKindsSaved(documents) {
-  return COMPOSE_KINDS.filter((kind) => kindSaved(documents, kind));
+  return FOLDER_KINDS.filter((kind) => kindSaved(documents, kind));
 }
 
 export function mergeKind(existingFlat, kind, fields, savedAt = new Date().toISOString()) {

@@ -1,3 +1,4 @@
+import { todayIsoLocal } from './admin-date.js';
 import { fieldsForKind, kindSaved } from './clients-documents-model.js';
 
 export function field(name, label, opts = {}) {
@@ -29,6 +30,101 @@ export const DOCUMENT_FIELD_GROUPS = Object.freeze({
         field('clientName', 'Name'),
         field('clientEmail', 'Email', { type: 'email' }),
         field('clientPhone', 'Phone', { type: 'tel' }),
+        field('feeEarner', 'Adviser', { locked: true }),
+      ],
+    },
+  ],
+  brochure: [
+    {
+      title: 'Client information',
+      fields: [
+        field('clientName', 'Client name', { placeholder: 'Anna Keller' }),
+        field('clientTitle', 'Title / salutation', { placeholder: 'Ms' }),
+        field('clientAddr', 'Address', { type: 'textarea', placeholder: 'Pilatusstrasse 12, 6003 Luzern' }),
+        field('clientEmail', 'Email', { type: 'email', placeholder: 'anna@example.com' }),
+        field('clientPhone', 'Phone', { type: 'tel', placeholder: '+41 41 211 29 29' }),
+        field('brochureDate', 'Brochure date', { type: 'date' }),
+        field('brochureVersion', 'Brochure version', { placeholder: '1.0' }),
+      ],
+    },
+    {
+      title: 'Financial profile',
+      fields: [
+        field('assetsUnderAdvice', 'Assets under advice', { placeholder: 'CHF 2,400,000' }),
+        field('riskProfile', 'Risk profile', {
+          type: 'select',
+          options: ['Conservative', 'Moderate', 'Aggressive'],
+        }),
+        field('investmentGoals', 'Investment goals', {
+          type: 'textarea',
+          placeholder: 'Preserve purchasing power and fund retirement in CHF',
+        }),
+        field('allocation', 'Asset allocation', {
+          type: 'textarea',
+          placeholder: '35% CHF bonds, 40% global equities, 15% real assets, 10% cash',
+        }),
+        field('horizon', 'Investment horizon', { placeholder: '7–10 years' }),
+        field('currencyFocus', 'Currency focus', { placeholder: 'CHF, with EUR and USD satellites' }),
+      ],
+    },
+    {
+      title: 'Service selection',
+      fields: [
+        field('svcRetirement', 'Retirement and pension', { type: 'select', options: ['Yes', 'No'] }),
+        field('svcInvestment', 'Investment advice', { type: 'select', options: ['Yes', 'No'] }),
+        field('svcEstate', 'Estate and succession', { type: 'select', options: ['Yes', 'No'] }),
+        field('svcProperty', 'Real-estate advisory', { type: 'select', options: ['Yes', 'No'] }),
+        field('svcTax', 'Tax-optimisation analysis', { type: 'select', options: ['Yes', 'No'] }),
+        field('svcInsurance', 'Insurance review', { type: 'select', options: ['Yes', 'No'] }),
+      ],
+    },
+    {
+      title: 'Recommended approaches',
+      fields: [
+        field('service1Type', 'Service 1', { placeholder: 'Investment advice' }),
+        field('service1Desc', 'Approach 1', {
+          type: 'textarea',
+          placeholder: 'Suitability-led portfolio with your existing custody bank',
+        }),
+        field('service1Priority', 'Priority 1', { type: 'select', options: ['High', 'Medium', 'Low'] }),
+        field('service1Timeline', 'Timeline 1', { placeholder: '30 days' }),
+        field('service2Type', 'Service 2', { placeholder: 'Retirement planning' }),
+        field('service2Desc', 'Approach 2', {
+          type: 'textarea',
+          placeholder: 'Pillar 2 / 3a review and drawdown sequencing',
+        }),
+        field('service2Priority', 'Priority 2', { type: 'select', options: ['High', 'Medium', 'Low'] }),
+        field('service2Timeline', 'Timeline 2', { placeholder: '90 days' }),
+        field('service3Type', 'Service 3', { placeholder: 'Estate and succession' }),
+        field('service3Desc', 'Approach 3', {
+          type: 'textarea',
+          placeholder: 'Cross-border will and beneficial-owner map',
+        }),
+        field('service3Priority', 'Priority 3', { type: 'select', options: ['High', 'Medium', 'Low'] }),
+        field('service3Timeline', 'Timeline 3', { placeholder: '6 months' }),
+      ],
+    },
+    {
+      title: 'Fee structure',
+      fields: [
+        field('managementFee', 'Management fee % p.a.', { placeholder: '0.70' }),
+        field('performanceFee', 'Performance fee %', { placeholder: 'None' }),
+        field('otherCosts', 'Other costs', {
+          type: 'textarea',
+          placeholder: 'Custody, brokerage and product TER charged by your bank, never as Adviser commission',
+        }),
+        field('paymentTerms', 'Payment terms', { placeholder: 'Quarterly in arrears' }),
+      ],
+    },
+    {
+      title: 'Next steps',
+      fields: [
+        field('action1', 'Step 1', { placeholder: 'Discovery meeting in Lucerne or by video' }),
+        field('action2', 'Step 2', { placeholder: 'Complete the suitability and KYC pack' }),
+        field('action3', 'Step 3', { placeholder: 'Confirm custody bank and reporting access' }),
+        field('contactName', 'Contact person'),
+        field('contactEmail', 'Contact email', { type: 'email' }),
+        field('contactPhone', 'Contact phone', { type: 'tel' }),
         field('feeEarner', 'Adviser', { locked: true }),
       ],
     },
@@ -346,6 +442,16 @@ const SELECT_DEFAULTS = Object.freeze({
   feeModel: 'Percentage of AUM',
   invoiceSchedule: 'Quarterly in arrears',
   noticePeriod: '30 days',
+  riskProfile: 'Moderate',
+  svcRetirement: 'Yes',
+  svcInvestment: 'Yes',
+  svcEstate: 'Yes',
+  svcProperty: 'No',
+  svcTax: 'No',
+  svcInsurance: 'No',
+  service1Priority: 'High',
+  service2Priority: 'Medium',
+  service3Priority: 'Medium',
 });
 
 export function emptyFormValues(kind) {
@@ -418,6 +524,68 @@ function dateFromCreatedAt(value) {
   return raw.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] ?? '';
 }
 
+export const BROCHURE_DEFAULTS = Object.freeze({
+  service1Type: 'Investment advice',
+  service1Desc: 'Suitability-led portfolio construction, kept in your name at your custody bank.',
+  service1Timeline: '30 days',
+  service2Type: 'Retirement planning',
+  service2Desc: 'Pillar 2 / 3a review, contribution timing and drawdown sequencing.',
+  service2Timeline: '90 days',
+  service3Type: 'Estate and succession',
+  service3Desc: 'Family map of accounts, wills and beneficial ownership across borders.',
+  service3Timeline: '6 months',
+  allocation: '35% CHF bonds and cash-like, 40% global equities, 15% real assets, 10% liquidity.',
+  horizon: '7–10 years',
+  currencyFocus: 'CHF core, with EUR and USD satellites where suitable',
+  managementFee: '0.70',
+  performanceFee: 'None',
+  otherCosts: 'Custody, brokerage, stamp duty and product TER are charged by your bank or the product issuer. The Adviser takes no retrocessions.',
+  paymentTerms: 'Quarterly in arrears',
+  action1: 'Discovery meeting in Lucerne or by video',
+  action2: 'Complete the suitability, identification and beneficial-owner pack',
+  action3: 'Confirm the custody bank and grant read access for reporting',
+});
+
+export function brochureFromRecord(client, register) {
+  const earner = String(register?.feeEarner ?? '');
+  const contactName = earner.split('·')[0].trim() || register?.keyContact || 'Friedrich Hartmann';
+  const contactEmail = earner.includes('·') ? earner.split('·')[1].trim() : '';
+  return {
+    clientName: client?.name ?? '',
+    clientTitle: '',
+    clientAddr: '',
+    clientEmail: client?.email ?? '',
+    clientPhone: client?.phone ?? '',
+    brochureDate: todayIsoLocal(),
+    brochureVersion: '',
+    assetsUnderAdvice: '',
+    investmentGoals: '',
+    allocation: BROCHURE_DEFAULTS.allocation,
+    horizon: BROCHURE_DEFAULTS.horizon,
+    currencyFocus: BROCHURE_DEFAULTS.currencyFocus,
+    service1Type: BROCHURE_DEFAULTS.service1Type,
+    service1Desc: BROCHURE_DEFAULTS.service1Desc,
+    service1Timeline: BROCHURE_DEFAULTS.service1Timeline,
+    service2Type: BROCHURE_DEFAULTS.service2Type,
+    service2Desc: BROCHURE_DEFAULTS.service2Desc,
+    service2Timeline: BROCHURE_DEFAULTS.service2Timeline,
+    service3Type: BROCHURE_DEFAULTS.service3Type,
+    service3Desc: BROCHURE_DEFAULTS.service3Desc,
+    service3Timeline: BROCHURE_DEFAULTS.service3Timeline,
+    managementFee: BROCHURE_DEFAULTS.managementFee,
+    performanceFee: BROCHURE_DEFAULTS.performanceFee,
+    otherCosts: BROCHURE_DEFAULTS.otherCosts,
+    paymentTerms: BROCHURE_DEFAULTS.paymentTerms,
+    action1: BROCHURE_DEFAULTS.action1,
+    action2: BROCHURE_DEFAULTS.action2,
+    action3: BROCHURE_DEFAULTS.action3,
+    contactName,
+    contactEmail,
+    contactPhone: register?.firm?.phone || '+41 41 211 29 29',
+    feeEarner: register?.feeEarner ?? '',
+  };
+}
+
 export function agreementFromRecord(client, register) {
   const created = dateFromCreatedAt(client?.created_at);
   return {
@@ -450,6 +618,20 @@ export function valuesForCompose(kind, client, documents, register) {
       ...emptyFormValues(kind),
       ...base,
       ...overlayAgreementContact(documents),
+      feeEarner: register?.feeEarner ?? '',
+    };
+  }
+  if (kind === 'brochure') {
+    const saved = fieldsForKind(documents, 'brochure');
+    const fromRecord = brochureFromRecord(client, register);
+    const created = dateFromCreatedAt(client?.created_at);
+    const brochureDate =
+      saved.brochureDate && saved.brochureDate !== created ? saved.brochureDate : fromRecord.brochureDate;
+    return {
+      ...emptyFormValues(kind),
+      ...fromRecord,
+      ...saved,
+      brochureDate,
       feeEarner: register?.feeEarner ?? '',
     };
   }

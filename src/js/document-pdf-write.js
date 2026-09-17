@@ -39,9 +39,13 @@ export const PAGE_HEIGHT = 841.89;
 export const MARGIN = 54;
 export const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
 export const INK = rgb(0.043, 0.122, 0.2);
+export const NAVY = rgb(11 / 255, 31 / 255, 51 / 255);
+export const GOLD = rgb(147 / 255, 122 / 255, 67 / 255);
 export const MUTED = rgb(0.42, 0.45, 0.5);
 export const RULE = rgb(0.78, 0.8, 0.82);
 export const WASH = rgb(0.94, 0.95, 0.96);
+export const SLOT_WASH = rgb(0.96, 0.945, 0.9);
+export const CREAM = rgb(0.86, 0.8, 0.66);
 
 export function slot(value, label) {
   const raw = value == null ? '' : String(value).trim();
@@ -145,8 +149,9 @@ export async function writePdf(blocks, { profile = 'letterhead', watermark, runn
     profile,
     watermark: watermark || (profile === 'court-draft' ? 'DRAFT' : ''),
     page: null,
+    pageIndex: 0,
     y: 0,
-    footerReserve: runningFooter ? 52 : 48,
+    footerReserve: runningFooter || profile === 'brochure' ? 52 : 48,
   };
   ctx.ensure = (needed) => ensure(ctx, needed);
   ctx.newPage = () => newPage(ctx);
@@ -154,29 +159,38 @@ export async function writePdf(blocks, { profile = 'letterhead', watermark, runn
   for (const block of blocks ?? []) {
     drawBlock(ctx, block);
   }
-  if (runningFooter) {
-    stampRunningFooter(pdf, regular, runningFooter === true ? 'Confidential' : String(runningFooter));
+  if (runningFooter || profile === 'brochure') {
+    const label =
+      runningFooter && runningFooter !== true
+        ? String(runningFooter)
+        : profile === 'brochure'
+          ? 'Confidential — for the named client only'
+          : 'Confidential';
+    stampRunningFooter(pdf, regular, label, { coverNavy: profile === 'brochure' });
   }
   return pdf.save({ useObjectStreams: false });
 }
 
-function stampRunningFooter(pdf, font, label) {
+function stampRunningFooter(pdf, font, label, { coverNavy } = {}) {
   const pages = pdf.getPages();
   const total = pages.length;
   pages.forEach((page, index) => {
     const { width } = page.getSize();
+    const navy = coverNavy && index === 0;
+    const ink = navy ? CREAM : MUTED;
+    const rule = navy ? GOLD : RULE;
     page.drawLine({
       start: { x: MARGIN, y: 38 },
       end: { x: width - MARGIN, y: 38 },
-      thickness: 0.4,
-      color: RULE,
+      thickness: navy ? 0.8 : 0.4,
+      color: rule,
     });
     page.drawText(toWinAnsi(label), {
       x: MARGIN,
       y: 24,
       size: 8,
       font,
-      color: MUTED,
+      color: ink,
     });
     const pageLabel = `${index + 1} / ${total}`;
     const pageWidth = font.widthOfTextAtSize(pageLabel, 8);
@@ -185,14 +199,18 @@ function stampRunningFooter(pdf, font, label) {
       y: 24,
       size: 8,
       font,
-      color: MUTED,
+      color: ink,
     });
   });
 }
 
 function newPage(ctx) {
   ctx.page = ctx.pdf.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
+  ctx.pageIndex = (ctx.pageIndex || 0) + 1;
   ctx.y = PAGE_HEIGHT - MARGIN;
+  if (ctx.profile === 'brochure' && ctx.pageIndex > 1) {
+    drawBrochureHeader(ctx);
+  }
   if (ctx.watermark) {
     ctx.page.drawText(toWinAnsi(ctx.watermark), {
       x: 180,
@@ -233,6 +251,21 @@ function drawBlock(ctx, block) {
     ctx.y -= 10;
     return;
   }
+  if (type === 'cover') {
+    drawCover(ctx, block);
+    return;
+  }
+  if (type === 'table') {
+    drawTable(ctx, block);
+    return;
+  }
+  if (type === 'facts') {
+    drawFacts(ctx, block.items ?? []);
+    return;
+  }
+  if (type === 'bullet') {
+    return text(ctx, `•  ${block.text || ''}`, ctx.regular, 10, block.filled === false ? MUTED : INK, 8);
+  }
   if (type === 'kicker') return text(ctx, block.text, ctx.regular, 9, MUTED, 10);
   if (type === 'title') return text(ctx, block.text, ctx.bold, 16, INK, 8);
   if (type === 'subject') {
@@ -245,7 +278,7 @@ function drawBlock(ctx, block) {
   }
   if (type === 'p') {
     const prefix = block.n != null ? `${block.n}. ` : '';
-    return text(ctx, prefix + (block.text || ''), ctx.regular, 10, INK, 10);
+    return text(ctx, prefix + (block.text || ''), ctx.regular, 10, block.filled === false ? MUTED : INK, 10);
   }
   if (type === 'footnote') return text(ctx, block.text, ctx.regular, 8, MUTED, 6);
   if (type === 'parties') {
@@ -472,4 +505,276 @@ function drawSignatures(ctx, cards) {
     });
   });
   ctx.y = top - h - 10;
+}
+
+function drawBrochureHeader(ctx) {
+  ctx.page.drawRectangle({
+    x: 0,
+    y: PAGE_HEIGHT - 46,
+    width: PAGE_WIDTH,
+    height: 46,
+    color: NAVY,
+  });
+  ctx.page.drawRectangle({
+    x: MARGIN,
+    y: PAGE_HEIGHT - 36,
+    width: 22,
+    height: 22,
+    borderColor: GOLD,
+    borderWidth: 0.9,
+  });
+  ctx.page.drawText('HG', {
+    x: MARGIN + 3.5,
+    y: PAGE_HEIGHT - 30,
+    size: 9,
+    font: ctx.bold,
+    color: CREAM,
+  });
+  ctx.page.drawText('Helfenstein Group', {
+    x: MARGIN + 30,
+    y: PAGE_HEIGHT - 22,
+    size: 10,
+    font: ctx.bold,
+    color: rgb(1, 1, 1),
+  });
+  ctx.page.drawText('Private Client Brochure', {
+    x: MARGIN + 30,
+    y: PAGE_HEIGHT - 34,
+    size: 8,
+    font: ctx.regular,
+    color: CREAM,
+  });
+  ctx.page.drawLine({
+    start: { x: 0, y: PAGE_HEIGHT - 46 },
+    end: { x: PAGE_WIDTH, y: PAGE_HEIGHT - 46 },
+    thickness: 1.2,
+    color: GOLD,
+  });
+  ctx.y = PAGE_HEIGHT - 64;
+}
+
+function drawCover(ctx, block) {
+  const page = ctx.page;
+  page.drawRectangle({
+    x: 0,
+    y: 0,
+    width: PAGE_WIDTH,
+    height: PAGE_HEIGHT,
+    color: NAVY,
+  });
+  page.drawRectangle({
+    x: MARGIN,
+    y: PAGE_HEIGHT - 86,
+    width: 36,
+    height: 36,
+    borderColor: GOLD,
+    borderWidth: 1.1,
+  });
+  page.drawText('HG', {
+    x: MARGIN + 6,
+    y: PAGE_HEIGHT - 75,
+    size: 14,
+    font: ctx.bold,
+    color: CREAM,
+  });
+  page.drawText(toWinAnsi(block.company || 'Helfenstein Group'), {
+    x: MARGIN + 50,
+    y: PAGE_HEIGHT - 64,
+    size: 16,
+    font: ctx.bold,
+    color: rgb(1, 1, 1),
+  });
+  page.drawText(toWinAnsi(block.location || 'Lucerne, Switzerland'), {
+    x: MARGIN + 50,
+    y: PAGE_HEIGHT - 80,
+    size: 10,
+    font: ctx.regular,
+    color: CREAM,
+  });
+  page.drawLine({
+    start: { x: MARGIN, y: PAGE_HEIGHT - 118 },
+    end: { x: PAGE_WIDTH - MARGIN, y: PAGE_HEIGHT - 118 },
+    thickness: 1.2,
+    color: GOLD,
+  });
+  page.drawText(toWinAnsi(block.title || 'Private Client Brochure'), {
+    x: MARGIN,
+    y: PAGE_HEIGHT - 168,
+    size: 28,
+    font: ctx.bold,
+    color: rgb(1, 1, 1),
+  });
+  const tagLines = wrapLines(ctx.regular, block.tagline || '', 11, CONTENT_WIDTH);
+  tagLines.forEach((line, index) => {
+    page.drawText(toWinAnsi(line), {
+      x: MARGIN,
+      y: PAGE_HEIGHT - 196 - index * 16,
+      size: 11,
+      font: ctx.regular,
+      color: CREAM,
+    });
+  });
+
+  let y = PAGE_HEIGHT - 280;
+  for (const field of block.fields ?? []) {
+    page.drawText(toWinAnsi(String(field.label || '').toUpperCase()), {
+      x: MARGIN,
+      y,
+      size: 8,
+      font: ctx.bold,
+      color: GOLD,
+    });
+    const color = field.filled === false ? rgb(0.7, 0.66, 0.58) : rgb(1, 1, 1);
+    const lines = wrapLines(ctx.regular, field.text || '', 13, CONTENT_WIDTH);
+    lines.forEach((line, index) => {
+      page.drawText(toWinAnsi(line), {
+        x: MARGIN,
+        y: y - 18 - index * 16,
+        size: 13,
+        font: ctx.regular,
+        color,
+      });
+    });
+    y -= 18 + lines.length * 16 + 18;
+  }
+
+  if (block.legalName) {
+    page.drawText(toWinAnsi(block.legalName), {
+      x: MARGIN,
+      y: 56,
+      size: 8,
+      font: ctx.regular,
+      color: CREAM,
+    });
+  }
+  newPage(ctx);
+}
+
+function cellSlot(value) {
+  if (value && typeof value === 'object' && 'text' in value) {
+    return { text: String(value.text ?? ''), filled: value.filled !== false };
+  }
+  return { text: String(value ?? ''), filled: true };
+}
+
+function drawTable(ctx, block) {
+  const columns = block.columns ?? [];
+  if (!columns.length) return;
+  const widths = columns.map((col) => CONTENT_WIDTH * (col.width || 1 / columns.length));
+
+  const drawHeader = () => {
+    const h = 22;
+    ensure(ctx, h + 8);
+    ctx.page.drawRectangle({
+      x: MARGIN,
+      y: ctx.y - h,
+      width: CONTENT_WIDTH,
+      height: h,
+      color: NAVY,
+    });
+    let x = MARGIN + 6;
+    columns.forEach((col, index) => {
+      ctx.page.drawText(toWinAnsi(col.label || ''), {
+        x,
+        y: ctx.y - 15,
+        size: 8,
+        font: ctx.bold,
+        color: rgb(1, 1, 1),
+      });
+      x += widths[index];
+    });
+    ctx.y -= h;
+  };
+
+  drawHeader();
+  for (const row of block.rows ?? []) {
+    const cells = columns.map((col, index) => {
+      const slot = cellSlot(row[col.key]);
+      return {
+        ...slot,
+        lines: wrapLines(ctx.regular, slot.text, 8, widths[index] - 12),
+      };
+    });
+    const h = Math.max(20, ...cells.map((cell) => cell.lines.length * 11 + 10));
+    if (ctx.y - h <= MARGIN + ctx.footerReserve) {
+      newPage(ctx);
+      drawHeader();
+    }
+    ctx.page.drawRectangle({
+      x: MARGIN,
+      y: ctx.y - h,
+      width: CONTENT_WIDTH,
+      height: h,
+      borderColor: RULE,
+      borderWidth: 0.4,
+    });
+    let x = MARGIN;
+    cells.forEach((cell, index) => {
+      const w = widths[index];
+      if (cell.filled === false) {
+        ctx.page.drawRectangle({
+          x,
+          y: ctx.y - h,
+          width: w,
+          height: h,
+          color: SLOT_WASH,
+        });
+      }
+      cell.lines.forEach((line, lineIndex) => {
+        ctx.page.drawText(toWinAnsi(line), {
+          x: x + 6,
+          y: ctx.y - 13 - lineIndex * 11,
+          size: 8,
+          font: ctx.regular,
+          color: cell.filled === false ? MUTED : INK,
+        });
+      });
+      x += w;
+    });
+    ctx.y -= h;
+  }
+  ctx.y -= 10;
+}
+
+function drawFacts(ctx, items) {
+  const labelW = 128;
+  const valueW = CONTENT_WIDTH - labelW - 12;
+  for (const item of items) {
+    const lines = wrapLines(ctx.regular, item.text || '', 10, valueW);
+    const h = Math.max(22, lines.length * 13 + 10);
+    ensure(ctx, h + 4);
+    if (item.filled === false) {
+      ctx.page.drawRectangle({
+        x: MARGIN,
+        y: ctx.y - h,
+        width: CONTENT_WIDTH,
+        height: h,
+        color: SLOT_WASH,
+      });
+    }
+    ctx.page.drawText(toWinAnsi(item.label || ''), {
+      x: MARGIN + 6,
+      y: ctx.y - 14,
+      size: 8,
+      font: ctx.bold,
+      color: NAVY,
+    });
+    lines.forEach((line, index) => {
+      ctx.page.drawText(toWinAnsi(line), {
+        x: MARGIN + labelW,
+        y: ctx.y - 14 - index * 13,
+        size: 10,
+        font: ctx.regular,
+        color: item.filled === false ? MUTED : INK,
+      });
+    });
+    ctx.y -= h;
+    ctx.page.drawLine({
+      start: { x: MARGIN, y: ctx.y },
+      end: { x: PAGE_WIDTH - MARGIN, y: ctx.y },
+      thickness: 0.3,
+      color: RULE,
+    });
+  }
+  ctx.y -= 8;
 }

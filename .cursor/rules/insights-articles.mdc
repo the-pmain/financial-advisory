@@ -1,0 +1,16 @@
+---
+description: Insights, articles, knowledge hub, and client-education content
+globs: src/data/articles.ts,src/data/content.ts,src/pages/ArticlePage.tsx,src/pages/InsightsPage.tsx,src/pages/ExpertisePage.tsx,src/components/widgets/ArticleTeaser.tsx,src/seo.ts,src/i18n/fromData.ts,cursor-prompts/MANUAL.md
+alwaysApply: true
+---
+
+# Insights / articles
+
+Before creating, rewriting, or wiring Insights or articles, read `cursor-prompts/MANUAL.md` and follow it.
+
+- Catalog is `src/data/articles.ts` (`insightCatalog`). Home, Insights, Expertise, search, and topic related-links must use that list only.
+- URL is `/articles/:slug` via `knowledgeHubArticlePath()`. Do not write `/articles/[slug].html`.
+- Add entries with `article()`. Wire `articleSlugs`, topic `relatedSlugs`, home slices, and `OLD_ARTICLE_REDIRECTS` when replacing a URL.
+- Voice: candid client education in the firm’s voice. Do not attack Helfenstein or invent exposé claims.
+- CTAs must use existing routes. Do not invent PDF/Excel downloads.
+- Do not resurrect retired slugs except as redirect keys.

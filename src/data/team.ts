@@ -188,11 +188,11 @@ export const teamMembers: TeamMember[] = [
     section: 'business',
     photo: '/team/marc-weber.png',
     about:
-      'Marc Weber coordinates client operations and the relationships with our custodian banks. He joined from private banking and makes sure clients get clear reporting from the bank that holds their assets, in Lucerne and across Switzerland.',
+      'Marc Weber coordinates client operations and the relationships with our custodian banks. He joined from private banking and makes sure clients get clear reporting from the bank that holds their assets, from Lucerne and internationally.',
     results: [
       'Reduced the custody and settlement costs Helfenstein clients pay their banks by 18% since 2020.',
       'Led the review that moved clients onto segregated custody accounts held in their own names.',
-      'Negotiates custody terms with our Swiss banking partners on behalf of private clients.',
+      'Negotiates custody terms with custodian banks on behalf of private clients.',
     ],
     credentials: ['Swiss banking diploma'],
     languages: ['German', 'French', 'English'],

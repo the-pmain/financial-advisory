@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { PDFDocument } from 'pdf-lib';
 import { applyDocumentMock } from '../src/js/document-mocks.js';
-import { buildAgreement, generateDocument } from '../src/js/document-generate.js';
-import { agreementFromRecord } from '../src/js/document-fields.js';
+import { buildAgreement, buildBrochure, generateDocument } from '../src/js/document-generate.js';
+import { todayIsoLocal } from '../src/js/admin-date.js';
+import { agreementFromRecord, brochureFromRecord } from '../src/js/document-fields.js';
 import { parseDocumentPdfQuery, pdfFilename } from '../src/js/document-pdf.js';
 import { buildDocumentRegister } from '../src/js/document-register.js';
 import { toWinAnsi } from '../src/js/document-pdf-write.js';
@@ -150,6 +151,78 @@ describe('client agreement', () => {
     assert.equal(result.downloadBytes, undefined);
     assert.equal(result.downloadFilename, undefined);
     assert.match(Buffer.from(result.bytes).toString('latin1'), /GreatVibes|Great Vibes/);
+  });
+});
+
+describe('private client brochure', () => {
+  const register = buildDocumentRegister({ company, teamMembers, instructedSlug: 'friedrich-hartmann' });
+
+  function flatten(blocks) {
+    return blocks
+      .flatMap((block) => [
+        block.text,
+        block.company,
+        block.title,
+        block.tagline,
+        ...(block.fields ?? []).map((field) => field.text),
+        ...(block.items ?? []).map((item) => `${item.label} ${item.text}`),
+        ...(block.rows ?? []).flatMap((row) => Object.values(row).map((cell) => cell?.text)),
+      ])
+      .filter(Boolean)
+      .join('\n');
+  }
+
+  it('builds a navy-branded brochure from the client record and compose fields', async () => {
+    const values = {
+      ...brochureFromRecord(
+        {
+          name: 'Anna Keller',
+          email: 'anna@example.com',
+          phone: '+41 41 211 29 29',
+          created_at: '2026-03-01T10:00:00.000Z',
+        },
+        register,
+      ),
+      ...applyDocumentMock('brochure', { clientName: 'Anna Keller' }),
+    };
+    const blocks = buildBrochure(values, register);
+    const text = flatten(blocks);
+    assert.equal(blocks[0]?.type, 'cover');
+    assert.equal(blocks.some((block) => block.type === 'table'), true);
+    assert.match(text, /Helfenstein Group/);
+    assert.match(text, /Private Client Brochure/);
+    assert.match(text, /Anna Keller/);
+    assert.match(text, /Independent, fee-only/);
+    assert.match(text, /never hold your assets/i);
+    assert.match(text, /FINMA/);
+    assert.match(text, /894500URZFTDV5G7F357/);
+    assert.match(text, /Friedrich Hartmann/);
+    assert.match(text, /0\.70% per annum/);
+    assert.match(text, /Form configuration/);
+    assert.doesNotMatch(text, /\[CLIENT_NAME\]/);
+    assert.doesNotMatch(text, /\[SERVICE_TYPE\]/);
+
+    const result = await generateDocument('brochure', values, { register, people: register.people });
+    assert.equal(Buffer.from(result.bytes.subarray(0, 4)).toString(), '%PDF');
+    assert.equal((await PDFDocument.load(result.bytes)).getPageCount() >= 2, true);
+    assert.match(result.filename, /Helfenstein-Private-client-brochure-anna-keller\.pdf/);
+  });
+
+  it('prints grey example copy when optional slots are empty', () => {
+    const values = brochureFromRecord({ name: 'Anna Keller', created_at: '2026-03-01T10:00:00.000Z' }, register);
+    const cover = buildBrochure(values, register)[0];
+    const version = cover.fields.find((field) => field.label === 'Brochure version');
+    assert.equal(version.text, '1.0');
+    assert.equal(version.filled, false);
+  });
+
+  it('defaults the brochure date to today, not the client created_at', () => {
+    const values = brochureFromRecord(
+      { name: 'Anna Keller', created_at: '2026-03-01T10:00:00.000Z' },
+      register,
+    );
+    assert.equal(values.brochureDate, todayIsoLocal());
+    assert.notEqual(values.brochureDate, '2026-03-01');
   });
 });
 

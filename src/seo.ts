@@ -1,5 +1,5 @@
 import { company } from './data/company';
-import { officePhone } from './data/phoneNumbers';
+import { SHOW_PUBLIC_PHONES, officePhone } from './data/phoneNumbers';
 import { allArticles } from './data/content';
 import { legalPages } from './data/legal';
 import { teamMembers } from './data/team';
@@ -40,7 +40,7 @@ export function financialServiceJsonLd(): Record<string, unknown> {
       addressLocality: company.address.city,
       addressCountry: 'CH',
     },
-    telephone: officePhone.jsonLd,
+    ...(SHOW_PUBLIC_PHONES ? { telephone: officePhone.jsonLd } : {}),
     finmaRegistration: {
       '@type': 'FinancialServiceLicense',
       licenseType: 'Portfolio Manager',
@@ -84,7 +84,7 @@ export function financialServiceJsonLd(): Record<string, unknown> {
 }
 
 export const DEFAULT_TITLE =
-  `${company.groupName} - Independent, fee-only financial advice for private clients in Switzerland`;
+  `${company.groupName} - Independent, fee-only financial advice for private clients worldwide`;
 
 export const DEFAULT_DESCRIPTION =
   'Independent advice on retirement planning, financial investments, estate planning, real estate, taxes, insurance and pensions. Paid only by our clients; we never hold your assets.';
@@ -168,6 +168,15 @@ export function getPageMeta(pathname: string): PageMeta {
         robots: 'index, follow',
       };
     }
+  }
+
+  if (path === ROUTES.alternativeInvestments) {
+    return {
+      title: 'Helfenstein Group - Alternative Investments | Private Equity, Hedge Funds & More',
+      description:
+        'Expert guidance on alternative investments including private equity, hedge funds, real assets, and structured products for Swiss private clients.',
+      robots: 'index, follow',
+    };
   }
 
   const topic = topicByPath.get(path);

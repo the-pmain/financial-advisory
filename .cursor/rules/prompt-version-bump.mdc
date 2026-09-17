@@ -1,0 +1,14 @@
+---
+description: After every user prompt, increment client and server versions
+alwaysApply: true
+---
+
+# Prompt version bump
+
+After every user prompt, once that prompt's work is done:
+
+1. Increment the patch on `CLIENT_VERSION` and `SERVER_VERSION` in `src/version.ts` (e.g. 1.0.1 → 1.0.2).
+2. Bump both values, even if the prompt did not change product code.
+3. Mention the new versions in the reply.
+
+Do not change `package.json` for these prompt bumps.

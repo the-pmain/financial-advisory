@@ -55,7 +55,7 @@ export function PortalPreview({ className = '' }: { className?: string }) {
 
         <div>
           <p className="text-vz-ink m-0 text-[17px] leading-[1.5]">
-            The portal is a window onto accounts held in your name at your Swiss custodian. It is
+            The portal is a window onto accounts held in your name at your custodian bank. It is
             not a place where money is received or sent. Access is issued after we know you — never
             through an unsolicited login link.
           </p>

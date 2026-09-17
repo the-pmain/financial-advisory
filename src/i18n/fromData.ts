@@ -55,18 +55,16 @@ function teamRecord(): Record<string, TeamMemberT> {
 }
 
 const articleSlugs = [
-  'compulsory-insurance-switzerland',
-  'save-on-taxes-with-pillar-3a',
-  'tips-for-foreigners-buying-real-estate',
-  'is-it-worth-paying-more-into-your-pension-fund',
-  'financial-investments-what-you-need-know',
-  'all-you-need-to-know-about-etfs',
-  'current-mortgage-interest-rates-comparison',
-  'horizon-report-2026',
-  'how-to-spot-financial-scams-switzerland',
-  'finsa-what-clients-should-know',
-  'early-retirement-cost-check',
-  'cantonal-tax-relocation-checklist',
+  'fee-only-financial-advisors',
+  'asset-custody-explained',
+  'alternatives-risk-analysis',
+  'finma-regulation-guide',
+  'single-contact-risk',
+  'financial-portal-analysis',
+  'appointment-data-collection',
+  'performance-fee-analysis',
+  'testimonial-verification',
+  'swiss-advantage-truth',
 ] as const;
 
 /** Build the English catalog from existing data modules (single source of truth). */

@@ -4,7 +4,7 @@ import type { Translations } from '../types';
 const meta: Translations['meta'] = {
   siteName: 'Helfenstein Group',
   defaultTitle:
-    'Helfenstein Group - Independent, fee-only financial advice for private clients in Switzerland',
+    'Helfenstein Group - Independent, fee-only financial advice for private clients worldwide',
   defaultDescription:
     'Independent advice on retirement planning, financial investments, estate planning, real estate, taxes, insurance and pensions. Paid only by our clients; we never hold your assets.',
   teamDescription: 'Independent advisers who answer only to their clients at Helfenstein Group.',
@@ -85,7 +85,7 @@ const ui: Translations['ui'] = {
   regulatoryChallenges: 'Regulatory challenges',
   howWeHelp: 'How we help',
   adviceDisclaimer:
-    'General information only. Nothing on this page constitutes personalised investment, tax or legal advice. Helfenstein Group does not hold client assets; all custody is with Swiss banking partners.',
+    'General information only. Nothing on this page constitutes personalised investment, tax or legal advice. Helfenstein Group does not hold client assets; all custody stays with the bank you choose, under your control.',
   verified: 'Verified',
   viewOnMap: 'View on Map',
   trustSignals: 'Verification and contact',

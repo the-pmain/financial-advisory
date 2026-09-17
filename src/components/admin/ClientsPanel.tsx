@@ -1,12 +1,21 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type Ref } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MutableRefObject,
+  type ReactNode,
+  type Ref,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { FolderIcon, MoreIcon, PreviewIcon } from '../ui/Icons';
 import { company } from '../../data/company';
 import { teamBySlug, teamMembers } from '../../data/team';
 import { useEscape } from '../../hooks/useScrollLock';
+import { formatAdminDateTime } from '../../js/admin-date.js';
 import {
   DOCUMENT_KIND_LABELS,
-  EDITABLE_KINDS,
   composeKindsSaved,
   kindSaved,
 } from '../../js/clients-documents-model.js';
@@ -24,6 +33,7 @@ import {
 import { ComposeDocumentDialog } from './ComposeDocumentDialog';
 import { DocumentPreviewDialog, adminPreviewCopy } from './DocumentPreviewDialog';
 
+const ADMIN_DOCUMENT_KINDS = ['brochure'] as const satisfies readonly AdminDocumentKind[];
 const PER_PAGE = 10;
 const ROW_H = 76;
 const LIST_MIN_H = PER_PAGE * ROW_H;
@@ -35,15 +45,7 @@ type MenuKind = 'folder' | 'kebab';
 type OpenMenu = { id: string; kind: MenuKind } | null;
 
 function formatWhen(iso: string): string {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(date);
+  return formatAdminDateTime(iso);
 }
 
 function adviserName(slug: string | null): string {
@@ -61,9 +63,7 @@ function initials(name: string): string {
 }
 
 function savedKindList(client: AdminClient): AdminDocumentKind[] {
-  return (Object.keys(DOCUMENT_KIND_LABELS) as AdminDocumentKind[]).filter((kind) =>
-    kindSaved(client.documents, kind),
-  );
+  return ADMIN_DOCUMENT_KINDS.filter((kind) => kindSaved(client.documents, kind));
 }
 
 export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void }) {
@@ -444,7 +444,9 @@ function RowActions({
   onPreviewKind: (kind: AdminDocumentKind) => void;
   onComposeKind: (kind: AdminDocumentKind) => void;
 }) {
-  const folderSaved = composeKindsSaved(client.documents) as AdminDocumentKind[];
+  const folderSaved = composeKindsSaved(client.documents).filter((kind) =>
+    ADMIN_DOCUMENT_KINDS.includes(kind as (typeof ADMIN_DOCUMENT_KINDS)[number]),
+  ) as AdminDocumentKind[];
   const folderOpen = menu?.id === client.id && menu.kind === 'folder';
   const kebabOpen = menu?.id === client.id && menu.kind === 'kebab';
 
@@ -453,7 +455,7 @@ function RowActions({
       <ActionMenu
         label={`Saved documents for ${client.name}`}
         disabled={!folderSaved.length}
-        title={folderSaved.length ? undefined : 'No documents yet'}
+        title={folderSaved.length ? 'Saved documents' : 'No saved documents yet'}
         open={folderOpen}
         busy={pdfBusy}
         icon={<FolderIcon className="size-4" />}
@@ -471,25 +473,27 @@ function RowActions({
       </ActionMenu>
       <IconButton
         label={`Preview client agreement for ${client.name}`}
+        title="Preview client agreement"
         disabled={pdfBusy}
         onClick={() => onPreviewKind('agreement')}
       >
         <PreviewIcon className="size-4" />
       </IconButton>
       <ActionMenu
-        label={`Add or edit documents for ${client.name}`}
+        label={`Add or edit Private client brochure for ${client.name}`}
+        title="Add or edit Private client brochure"
         open={kebabOpen}
         icon={<MoreIcon className="size-4" />}
         onToggle={() => onToggleMenu('kebab')}
         onClose={onCloseMenu}
       >
-        {EDITABLE_KINDS.map((kind) => {
+        {ADMIN_DOCUMENT_KINDS.map((kind) => {
           const saved = kindSaved(client.documents, kind);
           return (
             <MenuAction
               key={kind}
               label={saved ? `${DOCUMENT_KIND_LABELS[kind]} · Saved` : `Add ${DOCUMENT_KIND_LABELS[kind]}`}
-              onClick={() => onComposeKind(kind as AdminDocumentKind)}
+              onClick={() => onComposeKind(kind)}
             />
           );
         })}
@@ -559,7 +563,7 @@ function ActionMenu({
         ref={buttonRef}
         label={label}
         disabled={disabled || busy}
-        title={title}
+        title={title ?? label}
         expanded={open}
         onClick={onToggle}
       >
@@ -598,19 +602,59 @@ function IconButton({
   children: ReactNode;
   ref?: Ref<HTMLButtonElement>;
 }) {
+  const tip = title ?? label;
+  const innerRef = useRef<HTMLButtonElement>(null);
+  const [tipPos, setTipPos] = useState<{ top: number; right: number } | null>(null);
+
+  function setButtonRef(node: HTMLButtonElement | null) {
+    innerRef.current = node;
+    if (typeof ref === 'function') ref(node);
+    else if (ref) (ref as MutableRefObject<HTMLButtonElement | null>).current = node;
+  }
+
+  function showTip() {
+    if (expanded) return;
+    const node = innerRef.current;
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    setTipPos({ top: rect.top - 8, right: window.innerWidth - rect.right });
+  }
+
+  function hideTip() {
+    setTipPos(null);
+  }
+
+  useEffect(() => {
+    if (expanded) setTipPos(null);
+  }, [expanded]);
+
   return (
-    <button
-      ref={ref}
-      type="button"
-      aria-label={label}
-      title={title}
-      aria-expanded={expanded}
-      disabled={disabled}
-      onClick={onClick}
-      className="border-vz-rule text-vz-blue hover:border-vz-blue hover:bg-vz-blue-panel focus-visible:outline-vz-orange flex size-9 cursor-pointer items-center justify-center rounded-[3px] border bg-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
-    >
-      {children}
-    </button>
+    <span className="relative inline-flex" onMouseEnter={showTip} onMouseLeave={hideTip}>
+      <button
+        ref={setButtonRef}
+        type="button"
+        aria-label={label}
+        aria-expanded={expanded}
+        disabled={disabled}
+        onFocus={showTip}
+        onBlur={hideTip}
+        onClick={onClick}
+        className="border-vz-rule text-vz-blue hover:border-vz-blue hover:bg-vz-blue-panel focus-visible:outline-vz-orange flex size-9 cursor-pointer items-center justify-center rounded-[3px] border bg-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        {children}
+      </button>
+      {tipPos &&
+        createPortal(
+          <span
+            role="tooltip"
+            className="pointer-events-none fixed z-[80] -translate-y-full rounded-[3px] bg-[#0B1F33] px-2 py-1 text-[11px] font-bold whitespace-nowrap text-white shadow-[0_4px_12px_rgba(7,14,24,0.2)]"
+            style={{ top: tipPos.top, right: tipPos.right }}
+          >
+            {tip}
+          </span>,
+          document.body,
+        )}
+    </span>
   );
 }
 
