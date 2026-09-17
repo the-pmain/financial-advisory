@@ -1,4 +1,5 @@
 import { DOCUMENT_KIND_LABELS, isDocumentKind } from './clients-documents-model.js';
+import { buildAgreement } from './document-agreement.js';
 import {
   addDaysIso,
   addYearsIso,
@@ -9,6 +10,8 @@ import {
 import { courtAddressFor } from './document-register.js';
 import { printCaseRef, sanitizeForPdf, validateDocument } from './document-validate.js';
 import { slot, writePdf } from './document-pdf-write.js';
+
+export { buildAgreement } from './document-agreement.js';
 
 export async function generateDocument(kind, values, { people, register } = {}) {
   if (!isDocumentKind(kind)) {
@@ -23,7 +26,10 @@ export async function generateDocument(kind, values, { people, register } = {}) 
   } else if (kind === 'p2p') {
     bytes = await writePdf(buildP2pAgreement(sanitized, register), { profile: 'letterhead' });
   } else if (kind === 'agreement') {
-    bytes = await writePdf(buildAgreement(sanitized, register), { profile: 'letterhead' });
+    bytes = await writePdf(buildAgreement(sanitized, register), {
+      profile: 'letterhead',
+      runningFooter: 'Confidential',
+    });
   } else {
     if (kind === 'claim') trust = buildClaimTrust(sanitized, validation);
     bytes = await writePdf(buildClaimFamily(kind, sanitized, register, trust), {
@@ -32,16 +38,17 @@ export async function generateDocument(kind, values, { people, register } = {}) 
   }
   const clientName =
     sanitized.clientName || sanitized.applicant || sanitized.sellerName || sanitized.buyerName || 'client';
+  const filename = documentFilename(kind, clientName, register?.filenamePrefix);
   return {
     bytes,
-    filename: documentFilename(kind, clientName, register?.filenamePrefix),
+    filename,
     validation,
     sanitized,
     trust,
   };
 }
 
-export function documentFilename(kind, clientName, prefix = 'Helfenstein') {
+export function documentFilename(kind, clientName, prefix = 'Helfenstein', ext = 'pdf') {
   const kindSlug = String(DOCUMENT_KIND_LABELS[kind] || kind)
     .normalize('NFKD')
     .replace(/[^\w]+/g, '-')
@@ -53,7 +60,8 @@ export function documentFilename(kind, clientName, prefix = 'Helfenstein') {
     .replace(/^-+|-+$/g, '')
     .toLowerCase()
     .slice(0, 40);
-  return `${prefix}-${kindSlug}-${name || 'client'}.pdf`;
+  const suffix = String(ext || 'pdf').replace(/^\./, '');
+  return `${prefix}-${kindSlug}-${name || 'client'}.${suffix}`;
 }
 
 function letterhead(register, kicker) {
@@ -63,24 +71,6 @@ function letterhead(register, kicker) {
     { type: 'title', text: firm.legalName || 'Firm' },
     { type: 'p', text: [firm.addressLine, firm.phone, firm.uid && `UID ${firm.uid}`, firm.lei && `LEI ${firm.lei}`].filter(Boolean).join('  ·  ') },
     { type: 'rule' },
-  ];
-}
-
-export function buildAgreement(values, register) {
-  const firm = register?.firm ?? {};
-  return [
-    ...letterhead(register, 'Client authority'),
-    { type: 'subject', text: 'Authority to act' },
-    {
-      type: 'p',
-      text: `${slot(values.clientName, 'client name')} (${slot(values.clientEmail, 'email')}, ${slot(values.clientPhone, 'phone')}) authorises ${firm.legalName || 'the firm'} to act in connection with matter ${slot(values.matterReference, 'reference')}.`,
-    },
-    { type: 'p', text: `Occupation: ${slot(values.clientOccupation, 'occupation')}. Date of birth: ${formatUkDate(values.clientDob) || slot(values.clientDob, 'date of birth')}. Initials: ${slot(values.clientInitials || initialsFromName(values.clientName), 'initials')}.` },
-    { type: 'p', text: `Agreement date: ${formatUkDate(values.agreementDate) || slot(values.agreementDate, 'date')}. Fee earner: ${slot(values.feeEarner, 'fee earner')}.` },
-    { type: 'p', text: `${firm.legalName || 'The firm'} is ${firm.legalName ? 'an independent, fee-only adviser. Client assets remain with the client’s banking partners.' : slot('', 'firm terms')}` },
-    { type: 'space', h: 16 },
-    { type: 'p', text: `Signed: ____________________    ${slot(values.clientName, 'client name')}` },
-    { type: 'footnote', text: `Generated ${formatUkDate(todayIso())}. This PDF is not stored.` },
   ];
 }
 

@@ -10,9 +10,10 @@ export const DOCUMENT_KINDS = Object.freeze([
 export const TOP_LEVEL_KINDS = Object.freeze(['agreement', 'claim', 'release']);
 export const NESTED_CLAIM_KINDS = Object.freeze(['p2p', 'matter', 'tracing']);
 export const COMPOSE_KINDS = Object.freeze(['claim', 'p2p', 'matter', 'release', 'tracing']);
+export const EDITABLE_KINDS = Object.freeze(['agreement', ...COMPOSE_KINDS]);
 
 export const DOCUMENT_KIND_LABELS = Object.freeze({
-  agreement: 'Client authority',
+  agreement: 'Client agreement',
   claim: 'Victim claim',
   p2p: 'P2P agreement',
   matter: 'Application of release order',

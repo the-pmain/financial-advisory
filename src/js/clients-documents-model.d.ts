@@ -2,6 +2,7 @@ export const DOCUMENT_KINDS: readonly string[];
 export const TOP_LEVEL_KINDS: readonly string[];
 export const NESTED_CLAIM_KINDS: readonly string[];
 export const COMPOSE_KINDS: readonly string[];
+export const EDITABLE_KINDS: readonly string[];
 export const DOCUMENT_KIND_LABELS: Readonly<Record<string, string>>;
 
 export type DocumentEntry = {

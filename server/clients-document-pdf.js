@@ -1,13 +1,13 @@
 import { shapeClient, CLIENTS_SELECT } from '../src/js/clients-model.js';
 import { fieldsForKind, kindSaved, normalizeDocuments } from '../src/js/clients-documents-model.js';
-import { agreementFromRecord } from '../src/js/document-fields.js';
+import { agreementFromRecord, valuesForCompose } from '../src/js/document-fields.js';
 import { generateDocument } from '../src/js/document-generate.js';
 import { feeEarnerLine } from '../src/js/document-register.js';
 import { HttpError } from './http.js';
 import { asRows, rest } from './supabase.js';
 
 /**
- * Build a PDF from saved fields (or the client record for authority).
+ * Build a PDF from saved fields (or the client record for the client agreement).
  * Nothing is written back to storage.
  */
 export async function loadClientDocumentPdf({ client_id, kind, register }) {
@@ -22,9 +22,7 @@ export async function loadClientDocumentPdf({ client_id, kind, register }) {
   };
   let values;
   if (kind === 'agreement') {
-    values = kindSaved(documents, 'agreement')
-      ? { ...agreementFromRecord(client, live), ...fieldsForKind(documents, 'agreement') }
-      : agreementFromRecord(client, live);
+    values = valuesForCompose('agreement', client, documents, live);
   } else if (kindSaved(documents, kind)) {
     values = { ...agreementFromRecord(client, live), ...fieldsForKind(documents, kind) };
   } else {
@@ -35,7 +33,10 @@ export async function loadClientDocumentPdf({ client_id, kind, register }) {
     register: live,
     people: live.people,
   });
-  return { bytes: result.bytes, filename: result.filename };
+  return {
+    bytes: result.bytes,
+    filename: result.filename,
+  };
 }
 
 async function findClientById(id) {

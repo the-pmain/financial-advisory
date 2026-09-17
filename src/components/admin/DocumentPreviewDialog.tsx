@@ -12,7 +12,12 @@ export type PreviewCopy = {
   signing?: string;
 };
 
-export type PreviewPrepare = () => Promise<{ bytes: Uint8Array; filename: string }>;
+export type PreviewFile = {
+  bytes: Uint8Array;
+  filename: string;
+};
+
+export type PreviewPrepare = () => Promise<PreviewFile>;
 
 function clonePdfBytes(bytes: Uint8Array): Uint8Array {
   const copy = new Uint8Array(bytes.byteLength);
@@ -27,24 +32,26 @@ function pdfBlob(bytes: Uint8Array): Blob {
   return new Blob([buffer], { type: 'application/pdf' });
 }
 
-function safePdfFilename(name: string): string {
+function safeDownloadFilename(name: string, fallbackExt = 'pdf'): string {
   const cleaned = String(name || 'document')
     .replace(/[/\\?%*:|"<>]/g, '-')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-+|-+$/g, '');
-  return cleaned.toLowerCase().endsWith('.pdf') ? cleaned : `${cleaned || 'document'}.pdf`;
+  if (/\.pdf$/i.test(cleaned)) return cleaned;
+  return `${cleaned || 'document'}.${fallbackExt}`;
 }
 
-function triggerPdfDownload(bytes: Uint8Array, filename: string): void {
+function triggerFileDownload(bytes: Uint8Array, filename: string): void {
   if (!bytes.byteLength) {
-    throw new Error('The PDF is empty.');
+    throw new Error('The document is empty.');
   }
+  const safeName = safeDownloadFilename(filename);
   const blob = pdfBlob(bytes);
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = safePdfFilename(filename);
+  link.download = safeName;
   link.style.display = 'none';
   document.body.appendChild(link);
   link.click();
@@ -90,10 +97,10 @@ export function DocumentPreviewDialog({
   const [status, setStatus] = useState<'loading' | 'ready' | 'error' | 'signing'>('loading');
   const [agreed, setAgreed] = useState(false);
   const [pages, setPages] = useState<string[]>([]);
-  const [file, setFile] = useState<{ bytes: Uint8Array; filename: string } | null>(null);
+  const [file, setFile] = useState<PreviewFile | null>(null);
   const [iframeUrl, setIframeUrl] = useState<string | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-  const fileRef = useRef<{ bytes: Uint8Array; filename: string } | null>(null);
+  const fileRef = useRef<PreviewFile | null>(null);
   const prepareRef = useRef(prepare);
   const onReadyRef = useRef(onReady);
   prepareRef.current = prepare;
@@ -168,7 +175,7 @@ export function DocumentPreviewDialog({
       }
     }
     try {
-      triggerPdfDownload(packed.bytes, packed.filename);
+      triggerFileDownload(packed.bytes, packed.filename);
     } catch {
       setStatus('error');
       return;
@@ -184,9 +191,9 @@ export function DocumentPreviewDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="document-preview-title"
-        className="flex max-h-[92vh] w-full max-w-[880px] flex-col overflow-hidden rounded-[4px] bg-white shadow-[0_12px_40px_rgba(7,14,24,0.28)]"
+        className="flex h-[min(92vh,calc(100dvh-2rem))] w-full max-w-[880px] flex-col overflow-hidden rounded-[4px] bg-white shadow-[0_12px_40px_rgba(7,14,24,0.28)]"
       >
-        <header className="border-vz-rule flex items-center justify-between gap-3 border-b px-5 py-4">
+        <header className="border-vz-rule flex shrink-0 items-center justify-between gap-3 border-b px-5 py-4">
           <h2 id="document-preview-title" className="text-vz-ink m-0 text-[18px] font-bold">
             {copy.title}
           </h2>
@@ -200,29 +207,50 @@ export function DocumentPreviewDialog({
           </button>
         </header>
 
-        <div ref={stageRef} className="min-h-[320px] flex-1 overflow-auto bg-[#f4f6f8] px-5 py-4">
-          {status === 'loading' && <p className="text-vz-gray m-0 text-[15px]">{copy.loading}</p>}
-          {status === 'error' && (
-            <p className="text-vz-orange m-0 text-[15px]" role="alert">
-              {copy.fail}
-            </p>
+        <div ref={stageRef} className="flex min-h-0 flex-1 flex-col overflow-auto bg-[#f4f6f8]">
+          {status === 'loading' && (
+            <div className="flex flex-1 flex-col items-center justify-center gap-4 px-5" role="status">
+              <svg className="text-vz-blue size-24 animate-spin" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <circle cx="24" cy="24" r="18" stroke="currentColor" strokeOpacity="0.18" strokeWidth="4" />
+                <path d="M42 24a18 18 0 00-18-18" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              </svg>
+              <p className="text-vz-ink m-0 text-[16px] font-bold">{copy.loading}</p>
+            </div>
           )}
-          {status === 'signing' && <p className="text-vz-gray m-0 text-[15px]">{copy.signing}</p>}
-          {status === 'ready' &&
-            pages.map((src, index) => (
-              <img
-                key={src}
-                src={src}
-                alt={`Page ${index + 1}`}
-                className="mx-auto mb-4 block w-full max-w-[720px] bg-white shadow-[0_1px_4px_rgba(7,14,24,0.12)]"
-              />
-            ))}
-          {status === 'ready' && iframeUrl && !pages.length && (
-            <iframe title={copy.title} src={iframeUrl} className="h-[70vh] w-full border-0 bg-white" />
+          {status === 'error' && (
+            <div className="flex flex-1 items-center justify-center px-5">
+              <p className="text-vz-orange m-0 text-[15px]" role="alert">
+                {copy.fail}
+              </p>
+            </div>
+          )}
+          {status === 'signing' && (
+            <div className="flex flex-1 flex-col items-center justify-center gap-4 px-5" role="status">
+              <svg className="text-vz-blue size-24 animate-spin" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <circle cx="24" cy="24" r="18" stroke="currentColor" strokeOpacity="0.18" strokeWidth="4" />
+                <path d="M42 24a18 18 0 00-18-18" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              </svg>
+              <p className="text-vz-ink m-0 text-[16px] font-bold">{copy.signing}</p>
+            </div>
+          )}
+          {status === 'ready' && (
+            <div className="px-5 py-4">
+              {pages.map((src, index) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`Page ${index + 1}`}
+                  className="mx-auto mb-4 block w-full max-w-[720px] bg-white shadow-[0_1px_4px_rgba(7,14,24,0.12)] last:mb-0"
+                />
+              ))}
+              {iframeUrl && !pages.length && (
+                <iframe title={copy.title} src={iframeUrl} className="h-full min-h-[70vh] w-full border-0 bg-white" />
+              )}
+            </div>
           )}
         </div>
 
-        <footer className="border-vz-rule flex flex-wrap items-center justify-end gap-3 border-t px-5 py-4">
+        <footer className="border-vz-rule flex shrink-0 flex-wrap items-center justify-end gap-3 border-t px-5 py-4">
           {confirm && (
             <label className="text-vz-ink mr-auto flex items-center gap-2 text-[14px]">
               <input

@@ -7,7 +7,19 @@ export type FieldDef = {
   locked?: boolean;
 };
 
+export const AGREEMENT_DEFAULTS: Readonly<{
+  servicesIncluded: string;
+  servicesExcluded: string;
+  advisoryFeeRate: string;
+  discretionaryFeeRate: string;
+  hourlyFeeRate: string;
+  projectFeeRate: string;
+  retainerFeeRate: string;
+  expenseReimbursement: string;
+  additionalWorkRate: string;
+}>;
 export const DOCUMENT_FIELD_GROUPS: Record<string, Array<{ title: string; fields: FieldDef[] }>>;
+export function defaultFeeRateFor(mandateType?: string, feeModel?: string): string;
 export function fieldsForKindDef(kind: string): FieldDef[];
 export function emptyFormValues(kind: string): Record<string, string>;
 export function showWhenMatches(spec: string | undefined, values: Record<string, string>): boolean;

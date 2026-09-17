@@ -1,8 +1,5 @@
 export const DOCUMENT_MOCK = Object.freeze({
-  agreement: {
-    clientOccupation: 'Teacher',
-    clientDob: '1978-04-12',
-  },
+  agreement: {},
   claim: {
     clientAddr: 'Pilatusstrasse 12, 6003 Luzern',
     crimeRef: 'NFRC123456789',

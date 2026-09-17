@@ -5,12 +5,12 @@ import { company } from '../../data/company';
 import { teamBySlug, teamMembers } from '../../data/team';
 import { useEscape } from '../../hooks/useScrollLock';
 import {
-  COMPOSE_KINDS,
   DOCUMENT_KIND_LABELS,
+  EDITABLE_KINDS,
   composeKindsSaved,
   kindSaved,
 } from '../../js/clients-documents-model.js';
-import { agreementFromRecord, valuesForCompose } from '../../js/document-fields.js';
+import { valuesForCompose } from '../../js/document-fields.js';
 import { generateDocument } from '../../js/document-generate.js';
 import { buildDocumentRegister } from '../../js/document-register.js';
 import {
@@ -84,7 +84,10 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
   const [preview, setPreview] = useState<{
     title: string;
     runKey: string;
-    prepare: () => Promise<{ bytes: Uint8Array; filename: string }>;
+    prepare: () => Promise<{
+      bytes: Uint8Array;
+      filename: string;
+    }>;
   } | null>(null);
 
   const registerFor = useCallback(
@@ -147,15 +150,12 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
       title,
       runKey: `${client.id}:${kind}`,
       prepare: async () => {
-        const values =
-          kind === 'agreement'
-            ? {
-                ...agreementFromRecord(client, register),
-                ...(kindSaved(client.documents, 'agreement') ? client.documents.agreement?.fields : {}),
-              }
-            : valuesForCompose(kind, client, client.documents, register);
+        const values = valuesForCompose(kind, client, client.documents, register);
         const result = await generateDocument(kind, values, { register, people: register.people });
-        return { bytes: result.bytes, filename: result.filename };
+        return {
+          bytes: result.bytes,
+          filename: result.filename,
+        };
       },
     });
   }
@@ -470,7 +470,7 @@ function RowActions({
         ))}
       </ActionMenu>
       <IconButton
-        label={`Preview authority for ${client.name}`}
+        label={`Preview client agreement for ${client.name}`}
         disabled={pdfBusy}
         onClick={() => onPreviewKind('agreement')}
       >
@@ -483,7 +483,7 @@ function RowActions({
         onToggle={() => onToggleMenu('kebab')}
         onClose={onCloseMenu}
       >
-        {COMPOSE_KINDS.map((kind) => {
+        {EDITABLE_KINDS.map((kind) => {
           const saved = kindSaved(client.documents, kind);
           return (
             <MenuAction

@@ -174,7 +174,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     optimizeDeps: {
-      include: ['pdfjs-dist', 'pdf-lib'],
+      include: ['pdfjs-dist', 'pdf-lib', '@pdf-lib/fontkit'],
     },
     server: {
       port: 5173,

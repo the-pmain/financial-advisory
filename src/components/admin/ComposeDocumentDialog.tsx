@@ -77,6 +77,11 @@ export function ComposeDocumentDialog({
       }
     }
     if (kind !== 'tracing' && register) out.feeEarner = register.feeEarner;
+    if (kind === 'agreement') {
+      for (const key of ['clientConsent', 'intakeDate', 'agreementDate'] as const) {
+        if (values[key]) out[key] = values[key];
+      }
+    }
     return out;
   }
 

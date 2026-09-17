@@ -23,7 +23,10 @@ export function createAdminDocumentPdf(input: { client_id: string; kind: string 
 
 export function sendGeneratedPdf(
   res: Response,
-  file: { bytes: Uint8Array; filename: string },
+  file: {
+    bytes: Uint8Array;
+    filename: string;
+  },
   disposition: 'inline' | 'attachment',
 ) {
   const filename = file.filename.replace(/["\r\n]/g, '');

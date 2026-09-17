@@ -43,6 +43,15 @@ export function buildDocumentRegister(input?: {
   filenamePrefix: string;
   copyTo: string[];
   privacyUrl: string;
+  groupName: string;
+  website: string;
+  jurisdiction: string;
+  applicableLaw: { governing: string; venue: string };
+  ombudsman: unknown;
+  custodyBanks: unknown[];
+  regulation: { authority?: string; supervisor?: string };
+  dataProtection: unknown;
+  keyContact: string;
 };
 export function personFromSlug(
   slug: string | null | undefined,

@@ -9,4 +9,5 @@ export function generateDocument(
   sanitized: Record<string, string>;
   trust?: unknown;
 }>;
-export function documentFilename(kind: string, clientName: string, prefix?: string): string;
+export function documentFilename(kind: string, clientName: string, prefix?: string, ext?: string): string;
+export { buildAgreement } from './document-agreement.js';

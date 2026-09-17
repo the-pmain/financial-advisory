@@ -77,6 +77,19 @@ export function buildDocumentRegister({ company, teamMembers, instructedSlug } =
     filenamePrefix: firm.shortName || 'Helfenstein',
     copyTo: ['OSFINcontrol AG', 'FINMA'],
     privacyUrl: '/legal/privacy-policy',
+    groupName: String(company?.groupName ?? 'Helfenstein Group'),
+    website: String(company?.officialSite?.url ?? 'https://financial-advisory-production.up.railway.app/'),
+    jurisdiction: String(company?.jurisdiction ?? 'Lucerne, Switzerland'),
+    applicableLaw: company?.applicableLaw ?? {
+      governing: 'Swiss substantive law (excluding CISG)',
+      venue: 'Courts of Lucerne, Canton of Luzern',
+    },
+    ombudsman: company?.ombudsman ?? null,
+    custodyBanks: company?.custodyBanks ?? [],
+    regulation: company?.regulation ?? { authority: 'FINMA' },
+    dataProtection: company?.dataProtection ?? null,
+    keyContact:
+      people.find((person) => person.principal)?.name ?? 'Friedrich Hartmann',
   };
 }
 

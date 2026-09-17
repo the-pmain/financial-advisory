@@ -4,16 +4,32 @@ export function field(name, label, opts = {}) {
   return { name, label, type: opts.type ?? 'text', ...opts };
 }
 
+export const AGREEMENT_DEFAULTS = Object.freeze({
+  servicesIncluded:
+    'Retirement and pension planning; investment advice and, where elected, discretionary portfolio management; estate and succession planning; real-estate advisory; tax-optimisation analysis (not a tax ruling); insurance review; and related written reporting.',
+  servicesExcluded:
+    'Custody of client assets; execution-only brokerage as a standalone service; legal representation before courts or authorities; tax-return preparation or tax representation unless separately agreed in writing; audit or accounting; insurance intermediation for commission; and the issue or management of collective investment schemes.',
+  advisoryFeeRate:
+    '0.70% p.a. on the first CHF 2,000,000, 0.55% on the next CHF 3,000,000, 0.40% above CHF 5,000,000 (minimum CHF 6,000 p.a.)',
+  discretionaryFeeRate:
+    '0.95% p.a. on the first CHF 2,000,000, 0.75% on the next CHF 3,000,000, 0.55% above CHF 5,000,000 (minimum CHF 8,500 p.a.)',
+  hourlyFeeRate: 'CHF 280 per hour',
+  projectFeeRate: 'A fixed project quote (second opinions from CHF 1,800)',
+  retainerFeeRate: 'A fixed quarterly retainer as recorded below',
+  expenseReimbursement: 'Pre-approved out-of-pocket expenses only, invoiced at cost with receipts.',
+  additionalWorkRate:
+    'CHF 280 per hour, or a written fixed quote, for work outside the elected scope.',
+});
+
 export const DOCUMENT_FIELD_GROUPS = Object.freeze({
   agreement: [
     {
-      title: 'Client',
+      title: 'Client record',
       fields: [
         field('clientName', 'Name'),
         field('clientEmail', 'Email', { type: 'email' }),
         field('clientPhone', 'Phone', { type: 'tel' }),
-        field('clientOccupation', 'Occupation'),
-        field('clientDob', 'Date of birth', { type: 'date' }),
+        field('feeEarner', 'Adviser', { locked: true }),
       ],
     },
   ],
@@ -315,17 +331,28 @@ export function fieldsForKindDef(kind) {
   return (DOCUMENT_FIELD_GROUPS[kind] ?? []).flatMap((group) => group.fields);
 }
 
+const SELECT_DEFAULTS = Object.freeze({
+  claimants: 'none',
+  destination: "solicitors' client account",
+  agreeWith: 'Respondent',
+  costs: 'none',
+  confirmations: '6',
+  hops: '4',
+  hearing: 'neither supporting nor opposing',
+  mandateType: 'Investment advisory (non-discretionary)',
+  reportingFrequency: 'Quarterly',
+  contractLanguage: 'English',
+  jurisdictionCourt: 'Lucerne',
+  feeModel: 'Percentage of AUM',
+  invoiceSchedule: 'Quarterly in arrears',
+  noticePeriod: '30 days',
+});
+
 export function emptyFormValues(kind) {
   const values = {};
   for (const item of fieldsForKindDef(kind)) {
     if (item.type === 'select' && item.options?.includes('include')) values[item.name] = 'include';
-    else if (item.name === 'claimants') values[item.name] = 'none';
-    else if (item.name === 'destination') values[item.name] = "solicitors' client account";
-    else if (item.name === 'agreeWith') values[item.name] = 'Respondent';
-    else if (item.name === 'costs') values[item.name] = 'none';
-    else if (item.name === 'confirmations') values[item.name] = '6';
-    else if (item.name === 'hops') values[item.name] = '4';
-    else if (item.name === 'hearing') values[item.name] = 'neither supporting nor opposing';
+    else if (SELECT_DEFAULTS[item.name] != null) values[item.name] = SELECT_DEFAULTS[item.name];
     else values[item.name] = '';
   }
   return values;
@@ -373,22 +400,59 @@ export function prefillFromClient(client) {
   };
 }
 
+export function defaultFeeRateFor(mandateType, feeModel) {
+  const model = String(feeModel || '');
+  const mandate = String(mandateType || '');
+  if (model === 'Hourly') return AGREEMENT_DEFAULTS.hourlyFeeRate;
+  if (model === 'Project-based') return AGREEMENT_DEFAULTS.projectFeeRate;
+  if (model === 'Retainer') return AGREEMENT_DEFAULTS.retainerFeeRate;
+  if (mandate.startsWith('Discretionary')) return AGREEMENT_DEFAULTS.discretionaryFeeRate;
+  return AGREEMENT_DEFAULTS.advisoryFeeRate;
+}
+
+function dateFromCreatedAt(value) {
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value.toISOString().slice(0, 10);
+  }
+  const raw = String(value ?? '').trim();
+  return raw.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] ?? '';
+}
+
 export function agreementFromRecord(client, register) {
-  const name = client?.name ?? '';
+  const created = dateFromCreatedAt(client?.created_at);
   return {
-    clientName: name,
+    clientName: client?.name ?? '',
     clientEmail: client?.email ?? '',
     clientPhone: client?.phone ?? '',
-    clientOccupation: '',
-    clientDob: '',
-    clientInitials: initialsFromName(name),
-    matterReference: matterReferenceFromDate(client?.created_at),
-    agreementDate: todayIso(),
+    clientConsent: client?.consent === true ? 'Given' : '',
+    intakeDate: created,
+    agreementDate: created,
     feeEarner: register?.feeEarner ?? '',
   };
 }
 
+const AGREEMENT_SAVED_KEYS = Object.freeze(['clientName', 'clientEmail', 'clientPhone']);
+
+function overlayAgreementContact(documents) {
+  const saved = fieldsForKind(documents, 'agreement');
+  const overlay = {};
+  for (const key of AGREEMENT_SAVED_KEYS) {
+    const raw = String(saved[key] ?? '').trim();
+    if (raw) overlay[key] = raw;
+  }
+  return overlay;
+}
+
 export function valuesForCompose(kind, client, documents, register) {
+  if (kind === 'agreement') {
+    const base = agreementFromRecord(client, register);
+    return {
+      ...emptyFormValues(kind),
+      ...base,
+      ...overlayAgreementContact(documents),
+      feeEarner: register?.feeEarner ?? '',
+    };
+  }
   const base = emptyFormValues(kind);
   const fromClient = prefillFromClient(client);
   const saved = fieldsForKind(documents, kind);
@@ -445,8 +509,10 @@ export function roundTo(amount, step) {
 
 export function formatUkDate(iso) {
   if (!iso) return '';
-  const date = new Date(`${iso}T00:00:00Z`);
-  if (Number.isNaN(date.getTime())) return iso;
+  const raw = String(iso).trim();
+  const day = raw.match(/^(\d{4}-\d{2}-\d{2})/)?.[1];
+  const date = day ? new Date(`${day}T00:00:00Z`) : new Date(`${raw}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return raw;
   return new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',
     month: 'long',
