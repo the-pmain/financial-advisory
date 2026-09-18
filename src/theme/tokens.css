@@ -245,4 +245,10 @@
   --app-header-pad-left: max(16px, env(safe-area-inset-left));
   --app-duration: var(--duration-chrome);
   --app-ease: var(--ease-chrome);
+  --viz-well: 48px;
+  --viz-initials: 40px;
+  --viz-dot: 15px;
+  --viz-mix: 12px;
+  --viz-bar: 6px;
+  --doc-card: 176px;
 }

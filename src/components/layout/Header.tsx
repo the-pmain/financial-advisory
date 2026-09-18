@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useLocation } from "react-router";
 import { navKeyFromPath } from "../../app/nav.ts";
 import { useAuth } from "../../auth/AuthContext.tsx";
+import { isDocSlug } from "../../documents/catalog.ts";
 import { useI18n } from "../../i18n/context.tsx";
 import { Icon } from "../ui/icon.tsx";
 import { MenuIcon } from "../ui/Icons.tsx";
@@ -18,7 +19,8 @@ export function Header({
   const { t } = useI18n();
   const { pathname } = useLocation();
   const [pending, setPending] = useState(false);
-  const title = t.app.nav[navKeyFromPath(pathname)];
+  const slug = pathname.startsWith("/documents/") ? pathname.slice("/documents/".length) : "";
+  const title = isDocSlug(slug) ? t.docs.kinds[slug].title : t.app.nav[navKeyFromPath(pathname)];
 
   async function onLogout() {
     setPending(true);

@@ -1,4 +1,5 @@
-import { sampleAccount, sampleHoldings } from "../sample/portal.ts";
+import { MixBar } from "../components/viz/MixBar.tsx";
+import { formatWeight, sampleAccount, sampleAllocations, sampleHoldings } from "../sample/portal.ts";
 import { useI18n } from "../i18n/context.tsx";
 
 export function HoldingsPage() {
@@ -11,6 +12,21 @@ export function HoldingsPage() {
       <p className="sample-lede">
         {sampleAccount.currency} {sampleAccount.value} · {sampleHoldings.length} {t.sample.positions}
       </p>
+
+      <div className="viz-panel viz-panel--solo">
+        <p className="viz-caption">{t.sample.composition}</p>
+        <MixBar slices={sampleAllocations} label={t.sample.allocationRing} />
+        <ul className="viz-legend viz-legend--row">
+          {sampleAllocations.map((row) => (
+            <li key={row.name}>
+              <span className={`viz-swatch viz-tone-${row.tone}`} />
+              <span>{row.name}</span>
+              <span>{row.share}%</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div className="sample-table-wrap">
         <table className="sample-table">
           <thead>
@@ -25,11 +41,26 @@ export function HoldingsPage() {
             {sampleHoldings.map((row) => (
               <tr key={row.name}>
                 <td>{row.name}</td>
-                <td>{row.asset}</td>
+                <td>
+                  <span className="viz-asset">
+                    <span className={`viz-swatch viz-tone-${row.tone}`} />
+                    {row.asset}
+                  </span>
+                </td>
                 <td>
                   {sampleAccount.currency} {row.value}
                 </td>
-                <td>{row.weight}</td>
+                <td>
+                  <div className="viz-weight">
+                    <span>{formatWeight(row.weight)}</span>
+                    <span className="viz-weight__track" aria-hidden="true">
+                      <span
+                        className={`viz-weight__fill viz-tone-${row.tone}`}
+                        style={{ width: `${row.weight}%` }}
+                      />
+                    </span>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

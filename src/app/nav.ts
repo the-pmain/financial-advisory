@@ -4,7 +4,7 @@ import type { LucideIcon } from "lucide-react";
 export const APP_NAV = [
   { to: "/overview", key: "overview" as const, end: true, icon: LayoutDashboard },
   { to: "/holdings", key: "holdings" as const, end: true, icon: Briefcase },
-  { to: "/documents", key: "documents" as const, end: true, icon: FileText },
+  { to: "/documents", key: "documents" as const, end: false, icon: FileText },
   { to: "/messages", key: "messages" as const, end: true, icon: Mail },
 ] as const satisfies ReadonlyArray<{
   to: string;
@@ -16,6 +16,7 @@ export const APP_NAV = [
 export type AppNavKey = (typeof APP_NAV)[number]["key"];
 
 export function navKeyFromPath(pathname: string): AppNavKey {
+  if (pathname === "/documents" || pathname.startsWith("/documents/")) return "documents";
   const match = APP_NAV.find((item) => item.to === pathname);
   return match?.key ?? "overview";
 }
