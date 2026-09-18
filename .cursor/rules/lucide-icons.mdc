@@ -1,0 +1,16 @@
+---
+description: Use Lucide for UI icons
+alwaysApply: false
+---
+# Icons
+
+Use `lucide-react` for new icons. Import the glyph from `lucide-react` and render it with `Icon` from `src/components/ui/icon.tsx` so size (18) and stroke (1.5) stay consistent.
+
+```tsx
+import { FileText } from "lucide-react";
+import { Icon } from "../components/ui/icon.tsx";
+
+<Icon icon={FileText} />
+```
+
+Do not add another icon package. Do not inline a new SVG when Lucide already has the mark.

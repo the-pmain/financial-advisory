@@ -1,12 +1,20 @@
 import { Link } from "react-router";
 
-export function Logo({ to = "/" }: { to?: string }) {
+export function Logo({
+  to = "/",
+  className = "",
+  imgClassName = "block h-12 w-auto max-w-full object-contain object-left max-desk:h-10 max-lap:h-9 max-mob:h-8 max-mob:max-w-[min(100%,calc(100vw-9.5rem))]",
+}: {
+  to?: string;
+  className?: string;
+  imgClassName?: string;
+}) {
   return (
     <Link
       to={to}
       rel="home"
       aria-label="Helfenstein Asset Management — home"
-      className="mr-auto flex min-w-0 shrink items-center transition-opacity duration-250 hover:opacity-80"
+      className={`mr-auto flex min-w-0 shrink items-center transition-opacity duration-250 hover:opacity-80 ${className}`}
       title="Helfenstein Asset Management"
     >
       <img
@@ -14,7 +22,7 @@ export function Logo({ to = "/" }: { to?: string }) {
         alt=""
         width={1710}
         height={311}
-        className="block h-12 w-auto max-w-full object-contain object-left max-desk:h-10 max-lap:h-9 max-mob:h-8 max-mob:max-w-[min(100%,calc(100vw-9.5rem))]"
+        className={imgClassName}
         decoding="async"
       />
       <span className="visually-hidden">Helfenstein Asset Management</span>

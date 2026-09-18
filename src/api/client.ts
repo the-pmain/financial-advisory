@@ -8,6 +8,7 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
     ...init,
     headers,
     credentials: "same-origin",
+    cache: "no-store",
   });
 
   if (res.status === 204) {

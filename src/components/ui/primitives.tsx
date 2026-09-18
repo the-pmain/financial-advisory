@@ -194,10 +194,19 @@ export const buttonNavyClass =
 export function ButtonNavy({
   children,
   className = "",
+  loading = false,
+  disabled,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) {
+}: ButtonHTMLAttributes<HTMLButtonElement> & { loading?: boolean }) {
   return (
-    <button type="submit" className={`${buttonNavyClass} ${className}`} {...props}>
+    <button
+      type="submit"
+      className={`${buttonNavyClass} ${className}`}
+      disabled={disabled || loading}
+      aria-busy={loading}
+      {...props}
+    >
+      {loading ? <span className="vz-loader mr-2" aria-hidden="true" /> : null}
       {children}
     </button>
   );

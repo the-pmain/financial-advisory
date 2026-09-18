@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Design tokens — Helfenstein Asset Management
+
+   Three layers so new screens scale without new hex:
+     1. Primitive  — raw brand values (ink, gold, cream, paper, signal)
+     2. Semantic   — purpose aliases (foreground, border, accent, vz-*)
+     3. Component  — chrome, motion, elevation used by the app shell
+
+   @theme keys become Tailwind utilities (bg-ink-950, text-foreground,
+   duration-fast, z-header, tracking-tight, …). Keep vz-* names — existing
+   markup (bg-vz-page, text-vz-ink, tracking-vz-02) stays valid.
+   ========================================================================== */
+
+@theme {
+  /* --------------------------------------------------------------------------
+     Breakpoints — desktop-first. Each token is min-width (legacy + 1px).
+     mob 741  tab 861  lap 1025  mast 1271  desk 1281
+     -------------------------------------------------------------------------- */
+  --breakpoint-*: initial;
+  --breakpoint-mob: 741px;
+  --breakpoint-tab: 861px;
+  --breakpoint-lap: 1025px;
+  --breakpoint-mast: 1271px;
+  --breakpoint-desk: 1281px;
+
+  /* --------------------------------------------------------------------------
+     Primitive color — ink (wordmark #070E18)
+     -------------------------------------------------------------------------- */
+  --color-ink-950: #070e18;
+  --color-ink-900: #0c1520;
+  --color-ink-800: #15202c;
+  --color-ink-700: #1a222c;
+  --color-ink-400: #6d7682;
+  --color-ink-300: #8a9099;
+  --color-ink-200: #cfd2d6;
+  --color-ink-150: #d8dbe0;
+  --color-ink-100: #e4e6e9;
+  --color-ink-75: #e6e8eb;
+  --color-ink-50: #eceef0;
+  --color-ink-25: #f3f4f5;
+
+  /* Primitive color — gold (logo #937A43) */
+  --color-gold-700: #7d6634;
+  --color-gold-500: #937a43;
+  --color-gold-400: #b49a5c;
+
+  /* Primitive color — cream */
+  --color-cream-100: #f4efe3;
+  --color-cream-50: #faf7f0;
+
+  /* Primitive color — paper / page */
+  --color-paper-200: #dde1e6;
+  --color-paper-100: #e8ebef;
+  --color-paper-0: #ffffff;
+
+  /* Primitive color — text greys */
+  --color-gray-800: #3f3f3f;
+  --color-gray-700: #525252;
+  --color-gray-600: #666666;
+
+  /* Primitive color — signal */
+  --color-signal-up: #4e924a;
+  --color-signal-down: #d90000;
+  --color-signal-danger: #b42318;
+  --color-signal-highlight: #fff48e;
+
+  /* --------------------------------------------------------------------------
+     Semantic color — purpose (use these in new CSS)
+     -------------------------------------------------------------------------- */
+  --color-background: var(--color-paper-100);
+  --color-background-mobile: var(--color-paper-200);
+  --color-elevated: var(--color-paper-0);
+  --color-foreground: var(--color-ink-950);
+  --color-muted: var(--color-gray-800);
+  --color-muted-mid: var(--color-gray-700);
+  --color-muted-light: var(--color-gray-600);
+  --color-border: var(--color-ink-200);
+  --color-border-soft: var(--color-ink-150);
+  --color-border-hover: var(--color-ink-400);
+  --color-accent: var(--color-gold-700);
+  --color-accent-strong: var(--color-gold-500);
+  --color-accent-light: var(--color-gold-400);
+  --color-accent-soft: var(--color-cream-100);
+  --color-accent-softer: var(--color-cream-50);
+  --color-track: var(--color-ink-400);
+  --color-ring: var(--color-ink-800);
+  --color-scrim: rgb(7 14 24 / 0.36);
+  --color-focus: rgb(11 31 51 / 0.12);
+  --color-danger: var(--color-signal-danger);
+  --color-danger-focus: rgb(180 35 24 / 0.12);
+  --color-positive: var(--color-signal-up);
+  --color-negative: var(--color-signal-down);
+
+  /* --------------------------------------------------------------------------
+     Semantic color — vz-* brand-book aliases (do not remove)
+     -------------------------------------------------------------------------- */
+  --color-vz-blue: var(--color-ink-950);
+  --color-vz-blue-link: var(--color-ink-900);
+  --color-vz-blue-mid: var(--color-ink-800);
+  --color-vz-slate: var(--color-ink-700);
+  --color-vz-blue-soft: var(--color-ink-400);
+  --color-vz-shadow: var(--color-ink-300);
+  --color-vz-rule: var(--color-ink-200);
+  --color-vz-rule-soft: var(--color-ink-150);
+  --color-vz-blue-tint: var(--color-ink-100);
+  --color-vz-blue-panel-alt: var(--color-ink-75);
+  --color-vz-blue-panel: var(--color-ink-50);
+  --color-vz-blue-panel-faint: var(--color-ink-25);
+  --color-vz-orange: var(--color-gold-700);
+  --color-vz-orange-btn: var(--color-gold-500);
+  --color-vz-orange-light: var(--color-gold-400);
+  --color-vz-cream: var(--color-cream-100);
+  --color-vz-cream-light: var(--color-cream-50);
+  --color-vz-page: var(--color-paper-100);
+  --color-vz-page-mobile: var(--color-paper-200);
+  --color-vz-surface: var(--color-paper-100);
+  --color-vz-ink: var(--color-ink-950);
+  --color-vz-gray: var(--color-gray-800);
+  --color-vz-gray-mid: var(--color-gray-700);
+  --color-vz-gray-light: var(--color-gray-600);
+  --color-vz-up: var(--color-signal-up);
+  --color-vz-down: var(--color-signal-down);
+  --color-vz-cart: var(--color-signal-highlight);
+
+  /* --------------------------------------------------------------------------
+     Typography
+     -------------------------------------------------------------------------- */
+  --font-sans:
+    "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", Times, serif;
+
+  --tracking-tight: -0.019em;
+  --tracking-head: -0.014em;
+  --tracking-base: -0.009em;
+  --tracking-01: 0.001em;
+  --tracking-02: 0.011em;
+  --tracking-vz-tight: var(--tracking-tight);
+  --tracking-vz-head: var(--tracking-head);
+  --tracking-vz-base: var(--tracking-base);
+  --tracking-vz-01: var(--tracking-01);
+  --tracking-vz-02: var(--tracking-02);
+
+  --text-xxs: 11px;
+  --text-xs: 12px;
+  --text-13: 13px;
+  --text-sm: 14px;
+  --text-base: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-19: 19px;
+  --text-20: 20px;
+  --text-21: 21px;
+  --text-22: 22px;
+  --text-23: 23px;
+  --text-24: 24px;
+  --text-26: 26px;
+  --text-28: 28px;
+  --text-30: 30px;
+  --text-32: 32px;
+  --text-34: 34px;
+  --text-36: 36px;
+  --text-42: 42px;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.25;
+  --leading-body: 1.4;
+  --leading-heading: 1.1875;
+
+  /* --------------------------------------------------------------------------
+     Space — named sizes beyond Tailwind’s default 4px scale
+     -------------------------------------------------------------------------- */
+  --spacing-hairline: 1px;
+  --spacing-chrome: 64px;
+  --spacing-sidebar: 16.25rem;
+  --spacing-logo: 2.25rem;
+  --spacing-logo-sm: 1.75rem;
+  --spacing-measure: 40rem;
+  --spacing-prose: 48rem;
+  --spacing-table: 36rem;
+
+  /* --------------------------------------------------------------------------
+     Shape, line, motion, elevation, z
+     -------------------------------------------------------------------------- */
+  --radius-sm: 3px;
+  --radius-pill: 21px;
+  --radius-full: 9999px;
+
+  --border-hairline: 1px;
+
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-vz: var(--ease-standard);
+
+  --duration-fast: 180ms;
+  --duration-normal: 220ms;
+  --duration-slow: 320ms;
+  --duration-chrome: 420ms;
+  --ease-chrome: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-loader: 600ms;
+  --duration-sheen: 1.6s;
+
+  --shadow-vz-card: 1px 1px 3px rgb(11 31 51 / 0.18);
+  --shadow-vz-btn: 1px 1px 2px rgb(11 31 51 / 0.35);
+  --shadow-vz-btn-hover: 0.5px 0.5px 4px rgb(11 31 51 / 0.2);
+  --shadow-vz-header: 0 0.5px 0 var(--color-gray-600);
+  --shadow-vz-modal: 0 0 20px rgb(0 0 0 / 0.25);
+  --shadow-focus: 0 0 0 3px var(--color-focus);
+  --shadow-danger: 0 0 0 3px var(--color-danger-focus);
+
+  --z-index-header: 110;
+  --z-index-scrim: 210;
+  --z-index-sidebar: 220;
+  --z-index-loader: 400;
+  --z-index-skip: 1000;
+
+  /* --------------------------------------------------------------------------
+     Layout measure
+     -------------------------------------------------------------------------- */
+  --container-mast: 1220px;
+  --container-page: 1280px;
+  --container-measure: 802px;
+}
+
+/* --------------------------------------------------------------------------
+   Component tokens — app chrome. Override on a subtree to restyle a shell.
+   -------------------------------------------------------------------------- */
+@property --app-sidebar-offset {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+:root {
+  --app-chrome: var(--spacing-chrome);
+  --app-sidebar: var(--spacing-sidebar);
+  --app-sidebar-rail: var(--spacing-chrome);
+  --app-rail-mark: 28px;
+  --app-rail-icon: 18px;
+  --app-nav-row: 40px;
+  --app-sidebar-offset: 0px;
+  --app-line: var(--border-hairline) solid var(--color-border);
+  --app-logo-height: var(--spacing-logo);
+  --app-header-gap: 14px;
+  --app-header-pad-left: max(16px, env(safe-area-inset-left));
+  --app-duration: var(--duration-chrome);
+  --app-ease: var(--ease-chrome);
+}

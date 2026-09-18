@@ -1,26 +1,64 @@
+import { LogOut } from "lucide-react";
+import { useState } from "react";
+import { useLocation } from "react-router";
+import { navKeyFromPath } from "../../app/nav.ts";
 import { useAuth } from "../../auth/AuthContext.tsx";
 import { useI18n } from "../../i18n/context.tsx";
-import { Logo } from "../ui/Logo.tsx";
+import { Icon } from "../ui/icon.tsx";
+import { MenuIcon } from "../ui/Icons.tsx";
 
-export function Header() {
+export function Header({
+  sidebarOpen,
+  onToggleSidebar,
+}: {
+  sidebarOpen: boolean;
+  onToggleSidebar: () => void;
+}) {
   const { user, logout } = useAuth();
   const { t } = useI18n();
+  const { pathname } = useLocation();
+  const [pending, setPending] = useState(false);
+  const title = t.app.nav[navKeyFromPath(pathname)];
+
+  async function onLogout() {
+    setPending(true);
+    try {
+      await logout();
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
-    <header
-      id="header"
-      className="sticky top-0 z-[110] bg-white shadow-[0_0.5px_0_#999999] max-lap:-mx-[25px] max-lap:px-[25px] max-mob:-mx-[12.5px] max-mob:px-[12.5px]"
-    >
-      <div className="flex min-h-[71px] items-center gap-6 max-desk:min-h-[60px]">
-        <Logo to={user ? "/app" : "/"} />
+    <header id="header" className="app-header">
+      <div className="app-header__bar">
+        <button
+          type="button"
+          className="app-icon-btn"
+          onClick={onToggleSidebar}
+          aria-controls="app-sidebar"
+          aria-expanded={sidebarOpen}
+        >
+          <MenuIcon className="h-4 w-4" />
+          <span className="visually-hidden">
+            {sidebarOpen ? t.app.sidebar.close : t.app.sidebar.open}
+          </span>
+        </button>
+        <p className="app-header__title">{title}</p>
         {user ? (
-          <button
-            type="button"
-            onClick={() => void logout()}
-            className="vz-underline-hover text-vz-blue hover:text-vz-orange cursor-pointer border-0 bg-transparent text-[15px] leading-[17px] tracking-vz-02"
-          >
-            {t.app.logout}
-          </button>
+          <div className="app-header__meta">
+            <span className="app-header__user">{user.name}</span>
+            <button
+              type="button"
+              disabled={pending}
+              aria-busy={pending}
+              onClick={() => void onLogout()}
+              className="app-header__logout"
+            >
+              {pending ? <span className="vz-loader" aria-hidden="true" /> : <Icon icon={LogOut} />}
+              <span className="app-header__logout-label">{t.app.logout}</span>
+            </button>
+          </div>
         ) : null}
       </div>
     </header>

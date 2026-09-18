@@ -28,6 +28,29 @@ export const en = {
     greeting: "Welcome, {name}.",
     body: "This is the start of the workspace. Further tools will appear here.",
     logout: "Sign out",
+    loading: "Loading the portal",
+    nav: {
+      label: "Workspace",
+      overview: "Overview",
+      holdings: "Holdings",
+      documents: "Documents",
+      messages: "Messages",
+    },
+    sidebar: {
+      open: "Open menu",
+      close: "Close menu",
+    },
+  },
+  sample: {
+    notice: "Illustrative sample. This is not a live account.",
+    ytd: "YTD",
+    allocation: "Allocation",
+    recentDocuments: "Recent documents",
+    positions: "positions",
+    holding: "Holding",
+    asset: "Asset",
+    marketValue: "Market value",
+    weight: "Weight",
   },
 };
 

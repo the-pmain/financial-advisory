@@ -3,6 +3,7 @@ import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import { App } from "./App.tsx";
+import { hasSessionHint } from "./auth/sessionHint.ts";
 import "./index.css";
 
 const root = document.getElementById("root");
@@ -16,8 +17,9 @@ const tree = (
   </StrictMode>
 );
 
-if (root.hasChildNodes()) {
+if (root.hasChildNodes() && !hasSessionHint()) {
   hydrateRoot(root, tree);
 } else {
+  if (root.hasChildNodes()) root.replaceChildren();
   createRoot(root).render(tree);
 }

@@ -12,6 +12,7 @@ export type SessionPayload = SessionUser & {
 };
 
 const COOKIE = "sid";
+const HINT_COOKIE = "portal";
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
 function secret(): string {
@@ -54,6 +55,16 @@ export function sessionCookieOptions() {
   };
 }
 
+export function sessionHintCookieOptions() {
+  return {
+    httpOnly: false,
+    sameSite: "lax" as const,
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: WEEK_MS,
+  };
+}
+
 export function readSession(cookieHeader: string | undefined): SessionPayload | null {
   if (!cookieHeader) return null;
   const match = cookieHeader
@@ -63,4 +74,4 @@ export function readSession(cookieHeader: string | undefined): SessionPayload | 
   return verifySession(match?.slice(COOKIE.length + 1));
 }
 
-export { COOKIE as SESSION_COOKIE };
+export { COOKIE as SESSION_COOKIE, HINT_COOKIE as SESSION_HINT_COOKIE };
