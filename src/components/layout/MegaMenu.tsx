@@ -13,8 +13,8 @@ import { VerificationRegisterCards } from './TrustSignals';
 
 /**
  * The panel the Menu button reveals. On desktop it hangs from the header chrome
- * and covers the quick-links bar. Below 1025px it becomes a viewport sheet
- * pinned under `--nav-sheet-top` so it cannot overlap the logo row.
+ * and covers the quick-links bar. Below 1025px it is a sheet pinned under the
+ * full header box so the logo row and quick links do not shift.
  */
 export function MegaMenu({
   id,
@@ -44,7 +44,7 @@ export function MegaMenu({
       id={id}
       ref={panel}
       hidden={!open}
-      className={`absolute top-[71px] -right-[30px] -left-[30px] z-90 bg-white px-[30px] transition-[opacity,visibility] duration-250 ease-linear max-desk:top-[60px] max-lap:fixed max-lap:top-[var(--nav-sheet-top,74px)] max-lap:right-0 max-lap:bottom-0 max-lap:left-0 max-lap:overflow-y-auto max-lap:overscroll-y-contain max-lap:px-[25px] max-lap:pb-[max(2.5rem,env(safe-area-inset-bottom))] max-mob:px-5 ${
+      className={`absolute top-[71px] -right-[30px] -left-[30px] z-90 bg-white px-[30px] transition-[opacity,visibility] duration-250 ease-linear max-desk:top-[60px] max-lap:fixed max-lap:top-[var(--nav-sheet-top,74px)] max-lap:left-[var(--nav-sheet-left,0px)] max-lap:w-[var(--nav-sheet-width,100%)] max-lap:right-auto max-lap:bottom-auto max-lap:h-[calc(100dvh-var(--nav-sheet-top,74px))] max-lap:overflow-y-auto max-lap:overscroll-y-contain max-lap:px-[25px] max-lap:pb-[max(2.5rem,env(safe-area-inset-bottom))] max-mob:px-[12.5px] ${
         open ? 'visible opacity-100' : 'invisible opacity-0'
       } after:pointer-events-none after:absolute after:-bottom-1 after:right-0 after:left-0 after:block after:h-1 after:bg-gradient-to-b after:from-black/15 after:to-transparent max-lap:after:hidden`}
     >

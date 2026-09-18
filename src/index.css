@@ -131,6 +131,14 @@
     overscroll-behavior: none;
   }
 
+  /* Pin only; left/top/width are copied from the in-flow box so padding
+     does not jump. Do not stretch to the viewport or zero the card inset. */
+  @media (width < 1025px) {
+    html.vz-nav-open #header {
+      position: fixed !important;
+    }
+  }
+
   html.vz-nav-open [data-cookie-notice] {
     display: none;
   }
@@ -435,6 +443,20 @@
 
 .phone-number-display--inline .phone-number-display__link::after {
   align-items: baseline;
+}
+
+#vz-search-input {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#vz-search-input::-webkit-search-decoration,
+#vz-search-input::-webkit-search-cancel-button,
+#vz-search-input::-webkit-search-results-button,
+#vz-search-input::-webkit-search-results-decoration {
+  display: none;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .visually-hidden {

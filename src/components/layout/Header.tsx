@@ -23,6 +23,7 @@ export function Header() {
   const { pathname } = useLocation();
   const isDrawer = useMediaQuery(DRAWER_QUERY);
   const chromeRef = useRef<HTMLDivElement>(null);
+  const spacerRef = useRef<HTMLDivElement>(null);
   const overlayOpen = menuOpen || searchOpen;
 
   const closeAll = useCallback(() => {
@@ -32,34 +33,65 @@ export function Header() {
 
   useEffect(closeAll, [pathname, closeAll]);
   useEscape(overlayOpen, closeAll);
-  useScrollLock(overlayOpen && isDrawer);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const on = overlayOpen && isDrawer;
-    root.classList.toggle('vz-nav-open', on);
-    return () => root.classList.remove('vz-nav-open');
-  }, [overlayOpen, isDrawer]);
 
   useLayoutEffect(() => {
-    const chrome = chromeRef.current;
-    const header = chrome?.closest('#header');
-    if (!chrome || !(header instanceof HTMLElement)) return;
+    const header = chromeRef.current?.closest('#header');
+    const spacer = spacerRef.current;
+    const root = document.documentElement;
+    if (!(header instanceof HTMLElement)) return;
 
-    const sync = () => {
-      header.style.setProperty('--nav-sheet-top', `${chrome.getBoundingClientRect().bottom}px`);
+    const clearPin = () => {
+      header.style.top = '';
+      header.style.left = '';
+      header.style.width = '';
+      header.style.marginLeft = '';
+      header.style.marginRight = '';
+      header.style.removeProperty('--nav-sheet-left');
+      header.style.removeProperty('--nav-sheet-width');
+      if (spacer) spacer.style.height = '';
     };
-    sync();
-    const observer = new ResizeObserver(sync);
-    observer.observe(chrome);
-    window.addEventListener('resize', sync);
-    window.addEventListener('scroll', sync, { passive: true });
+
+    const pinFromBox = () => {
+      const on = overlayOpen && isDrawer;
+      if (!on) {
+        root.classList.remove('vz-nav-open');
+        clearPin();
+        header.style.setProperty('--nav-sheet-top', `${Math.round(header.getBoundingClientRect().bottom)}px`);
+        return;
+      }
+
+      const wasOpen = root.classList.contains('vz-nav-open');
+      if (!wasOpen) {
+        const box = header.getBoundingClientRect();
+        if (spacer) spacer.style.height = `${box.height}px`;
+        header.style.top = `${box.top}px`;
+        header.style.left = `${box.left}px`;
+        header.style.width = `${box.width}px`;
+        header.style.marginLeft = '0';
+        header.style.marginRight = '0';
+        header.style.setProperty('--nav-sheet-left', `${box.left}px`);
+        header.style.setProperty('--nav-sheet-width', `${box.width}px`);
+        root.classList.add('vz-nav-open');
+      }
+
+      const pinned = header.getBoundingClientRect();
+      header.style.setProperty('--nav-sheet-top', `${pinned.bottom}px`);
+      header.style.setProperty('--nav-sheet-left', `${pinned.left}px`);
+      header.style.setProperty('--nav-sheet-width', `${pinned.width}px`);
+    };
+
+    pinFromBox();
+    window.addEventListener('resize', pinFromBox);
+    window.visualViewport?.addEventListener('resize', pinFromBox);
     return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', sync);
-      window.removeEventListener('scroll', sync);
+      window.removeEventListener('resize', pinFromBox);
+      window.visualViewport?.removeEventListener('resize', pinFromBox);
+      root.classList.remove('vz-nav-open');
+      clearPin();
     };
-  }, [overlayOpen]);
+  }, [overlayOpen, isDrawer]);
+
+  useScrollLock(overlayOpen && isDrawer);
 
   const toggleMenu = () => {
     setMenuOpen((open) => !open);
@@ -72,6 +104,8 @@ export function Header() {
   };
 
   return (
+    <>
+    <div ref={spacerRef} aria-hidden className="hidden max-lap:block" />
     <header
       id="header"
       className="sticky top-0 z-100 bg-white shadow-[0_0.5px_0_#999999] max-lap:-mx-[25px] max-lap:px-[25px] max-mob:-mx-[12.5px] max-mob:px-[12.5px]"
@@ -140,5 +174,6 @@ export function Header() {
       <SearchPanel id={SEARCH_ID} open={searchOpen} onClose={closeAll} />
       <MegaMenu id={MENU_ID} open={menuOpen} onClose={closeAll} />
     </header>
+    </>
   );
 }
