@@ -1,5 +1,5 @@
-import { clientTestimonials, trustMetrics, videoTestimonial } from '../../data/clientTestimonials';
-import { buttonOrangeClass, SectionTitle } from '../ui/primitives';
+import { clientTestimonials, trustMetrics } from '../../data/clientTestimonials';
+import { SectionTitle } from '../ui/primitives';
 
 function FamiliesIcon() {
   return (
@@ -49,7 +49,6 @@ export function ClientTestimonials() {
       <ul className="m-0 grid list-none grid-cols-3 gap-x-8 gap-y-10 p-0 max-tab:grid-cols-1">
         {clientTestimonials.map((item) => (
           <li key={item.id} className="border-vz-rule min-w-0 border-t pt-5">
-            {/* TODO: Replace with actual client photo */}
             <img
               src={item.photo}
               alt={item.photoAlt}
@@ -72,40 +71,6 @@ export function ClientTestimonials() {
           </li>
         ))}
       </ul>
-
-      <div className="mt-12 max-lap:mt-10">
-        <h3 className="text-vz-gray-mid border-vz-gray-light m-0 mb-[30px] border-b pb-[7px] text-[22px] leading-[28px] font-bold max-mob:mb-5 max-mob:text-[20px]">
-          Video
-        </h3>
-        <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] items-center gap-x-10 gap-y-5 max-tab:grid-cols-1">
-          {/* TODO: Replace video thumbnail */}
-          <div className="relative overflow-hidden bg-vz-blue">
-            <img
-              src={videoTestimonial.thumbnail}
-              alt={videoTestimonial.thumbnailAlt}
-              width={600}
-              height={400}
-              className="block aspect-[3/2] w-full object-cover"
-              decoding="async"
-            />
-            <button
-              type="button"
-              className={`${buttonOrangeClass} absolute inset-0 m-auto h-11 w-[168px] cursor-pointer`}
-              aria-label="Watch video testimonial (placeholder)"
-            >
-              Watch video
-            </button>
-          </div>
-          <div>
-            <p className="text-vz-ink m-0 text-[22px] leading-[1.3] font-bold max-mob:text-[20px]">
-              {videoTestimonial.title}
-            </p>
-            <p className="text-vz-ink mt-3 mb-0 text-[16px] leading-[1.45]">
-              {videoTestimonial.description}
-            </p>
-          </div>
-        </div>
-      </div>
 
       {/* TODO: Replace trust metrics with verified figures */}
       <div className="mt-12 max-lap:mt-10">
