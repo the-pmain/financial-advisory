@@ -1,0 +1,155 @@
+/* Helfenstein Asset Management — design tokens
+   Sampled from the lockup: ink #070E18, gold #937A43.
+   Token names keep the historical vz- prefix. */
+
+@import 'tailwindcss';
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-mob: 741px;
+  --breakpoint-tab: 861px;
+  --breakpoint-lap: 1025px;
+  --breakpoint-mast: 1271px;
+  --breakpoint-desk: 1281px;
+
+  --color-vz-blue: #070e18;
+  --color-vz-blue-mid: #15202c;
+  --color-vz-blue-link: #0c1520;
+  --color-vz-blue-soft: #6d7682;
+  --color-vz-blue-tint: #e4e6e9;
+  --color-vz-blue-panel: #eceef0;
+  --color-vz-blue-panel-alt: #e6e8eb;
+  --color-vz-blue-panel-faint: #f3f4f5;
+
+  --color-vz-orange: #7d6634;
+  --color-vz-orange-btn: #937a43;
+  --color-vz-orange-light: #b49a5c;
+
+  --color-vz-ink: #070e18;
+  --color-vz-gray: #3f3f3f;
+  --color-vz-gray-mid: #525252;
+  --color-vz-gray-light: #666666;
+  --color-vz-rule: #cfd2d6;
+  --color-vz-rule-soft: #d8dbe0;
+  --color-vz-page: #e8ebef;
+  --color-vz-page-mobile: #dde1e6;
+  --color-vz-surface: #e8ebef;
+  --color-vz-slate: #1a222c;
+
+  --color-vz-cream: #f4efe3;
+  --color-vz-cream-light: #faf7f0;
+
+  --color-vz-down: #d90000;
+  --color-vz-up: #4e924a;
+  --color-vz-cart: #fff48e;
+  --color-vz-shadow: #8a9099;
+
+  --font-sans:
+    'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', Times, serif;
+
+  /* Inter Variable is ~0.009em wider than the reference subset at regular,
+     ~0.014em wider at bold. Tokens are declared spacing minus that correction. */
+  --tracking-vz-tight: -0.019em;
+  --tracking-vz-base: -0.009em;
+  --tracking-vz-01: 0.001em;
+  --tracking-vz-02: 0.011em;
+  --tracking-vz-head: -0.014em;
+
+  --text-xxs: 11px;
+  --text-xs: 12px;
+  --text-13: 13px;
+  --text-sm: 14px;
+  --text-base: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-19: 19px;
+  --text-20: 20px;
+  --text-21: 21px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-26: 26px;
+  --text-28: 28px;
+  --text-30: 30px;
+  --text-32: 32px;
+  --text-34: 34px;
+  --text-42: 42px;
+
+  --container-mast: 1220px;
+  --container-page: 1280px;
+  --container-measure: 802px;
+
+  --shadow-vz-card: 1px 1px 3px rgb(11 31 51 / 0.18);
+  --shadow-vz-btn: 1px 1px 2px rgb(11 31 51 / 0.35);
+  --shadow-vz-btn-hover: 0.5px 0.5px 4px rgb(11 31 51 / 0.2);
+  --shadow-vz-header: 0 0.5px 0 #666666;
+  --shadow-vz-modal: 0 0 20px rgb(0 0 0 / 0.25);
+
+  --ease-vz: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Plain :root copy if the new project is not Tailwind v4 */
+:root {
+  --color-vz-blue: #070e18;
+  --color-vz-blue-mid: #15202c;
+  --color-vz-blue-link: #0c1520;
+  --color-vz-blue-soft: #6d7682;
+  --color-vz-blue-tint: #e4e6e9;
+  --color-vz-blue-panel: #eceef0;
+  --color-vz-blue-panel-alt: #e6e8eb;
+  --color-vz-blue-panel-faint: #f3f4f5;
+  --color-vz-orange: #7d6634;
+  --color-vz-orange-btn: #937a43;
+  --color-vz-orange-light: #b49a5c;
+  --color-vz-ink: #070e18;
+  --color-vz-gray: #3f3f3f;
+  --color-vz-gray-mid: #525252;
+  --color-vz-gray-light: #666666;
+  --color-vz-rule: #cfd2d6;
+  --color-vz-rule-soft: #d8dbe0;
+  --color-vz-page: #e8ebef;
+  --color-vz-page-mobile: #dde1e6;
+  --color-vz-surface: #e8ebef;
+  --color-vz-slate: #1a222c;
+  --color-vz-cream: #f4efe3;
+  --color-vz-cream-light: #faf7f0;
+  --color-vz-down: #d90000;
+  --color-vz-up: #4e924a;
+  --color-vz-cart: #fff48e;
+  --color-vz-shadow: #8a9099;
+  --font-sans:
+    'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', Times, serif;
+  --tracking-vz-tight: -0.019em;
+  --tracking-vz-base: -0.009em;
+  --tracking-vz-01: 0.001em;
+  --tracking-vz-02: 0.011em;
+  --tracking-vz-head: -0.014em;
+  --container-mast: 1220px;
+  --container-page: 1280px;
+  --container-measure: 802px;
+  --shadow-vz-card: 1px 1px 3px rgb(11 31 51 / 0.18);
+  --shadow-vz-btn: 1px 1px 2px rgb(11 31 51 / 0.35);
+  --shadow-vz-header: 0 0.5px 0 #666666;
+  --shadow-vz-modal: 0 0 20px rgb(0 0 0 / 0.25);
+  --ease-vz: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@utility vz-underline {
+  box-shadow: 0 2px 0 -1px var(--color-vz-orange);
+  transition:
+    color 0.25s ease 0s,
+    box-shadow 0.25s ease 0s;
+}
+
+@utility vz-underline-hover {
+  transition:
+    color 0.25s ease 0s,
+    box-shadow 0.25s ease 0s;
+  &:hover {
+    box-shadow: 0 2px 0 -1px var(--color-vz-orange);
+  }
+}
