@@ -1,6 +1,7 @@
 import { MixBar } from "../components/viz/MixBar.tsx";
-import { formatWeight, sampleAccount, sampleAllocations, sampleHoldings } from "../sample/portal.ts";
 import { useI18n } from "../i18n/context.tsx";
+import { formatWeight } from "../lib/format.ts";
+import { sampleAccount, sampleAllocations, sampleHoldings } from "../sample/portal.ts";
 
 export function HoldingsPage() {
   const { t } = useI18n();

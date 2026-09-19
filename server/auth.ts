@@ -1,6 +1,6 @@
 import { randomBytes, timingSafeEqual } from "node:crypto";
 import { Router, type Response } from "express";
-import { employeePhotoUrl, findEmployeeBySlug, listEmployeeDirectory, publicEmployee } from "./employees.ts";
+import { employeePhotoUrl, findClientNameByEmail, findEmployeeBySlug, listEmployeeDirectory, publicEmployee } from "./employees.ts";
 import { postgrest, supabaseConfigured } from "./postgrest.ts";
 import { requireAuth, type AuthedRequest } from "./requireAuth.ts";
 import {
@@ -35,6 +35,24 @@ function publicUser(user: SessionUser): SessionUser {
     };
   }
   return { id: user.id, email: user.email, name: user.name, role: user.role };
+}
+
+function personName(value: string | null | undefined, email: string): string | null {
+  const name = (value ?? "").trim();
+  if (!name) return null;
+  if (name.toLowerCase() === email.trim().toLowerCase()) return null;
+  if (isEmail(name)) return null;
+  return name;
+}
+
+async function clientSessionUser(user: SessionUser): Promise<SessionUser> {
+  const published = publicUser(user);
+  if (published.role === "employee") return published;
+  const fromAccount = personName(published.name, published.email);
+  if (fromAccount) return { ...published, name: fromAccount };
+  const fromApplication = personName(await findClientNameByEmail(published.email), published.email);
+  if (fromApplication) return { ...published, name: fromApplication };
+  return published;
 }
 
 function passwordsMatch(stored: string, given: string): boolean {
@@ -116,8 +134,9 @@ authRouter.post("/signup", async (req, res) => {
       password,
     });
 
-    writeAuthCookies(res, publicUser(user));
-    res.status(201).json(publicUser(user));
+    const session = await clientSessionUser(user);
+    writeAuthCookies(res, session);
+    res.status(201).json(session);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Could not create this account." });
@@ -135,8 +154,9 @@ authRouter.post("/login", async (req, res) => {
       return;
     }
 
-    writeAuthCookies(res, publicUser(user));
-    res.json(publicUser(user));
+    const session = await clientSessionUser(user);
+    writeAuthCookies(res, session);
+    res.json(session);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Could not sign in." });
@@ -184,11 +204,21 @@ authRouter.post("/logout", (_req, res) => {
   res.status(204).end();
 });
 
-authRouter.get("/me", requireAuth, (req, res) => {
-  const user = publicUser((req as AuthedRequest).user);
-  if (user.role === "employee" && !user.photoUrl && user.slug) {
-    user.photoUrl = employeePhotoUrl(`${user.slug}.png`);
+authRouter.get("/me", requireAuth, async (req, res) => {
+  try {
+    let user = publicUser((req as AuthedRequest).user);
+    if (user.role === "employee") {
+      if (!user.photoUrl && user.slug) {
+        user.photoUrl = employeePhotoUrl(`${user.slug}.png`);
+      }
+    } else {
+      const stored = await findUser(user.email);
+      user = await clientSessionUser(stored ?? user);
+    }
+    writeAuthCookies(res, user);
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not load your session." });
   }
-  res.cookie(SESSION_HINT_COOKIE, "1", sessionHintCookieOptions());
-  res.json(user);
 });

@@ -1,3 +1,4 @@
+/** Firm legal PDF kinds. Client KYC slugs live in src/documents/catalog.ts. */
 export const DOCUMENT_KINDS = Object.freeze([
   'agreement',
   'brochure',

@@ -1,5 +1,6 @@
-import { initials, sampleMessages } from "../sample/portal.ts";
 import { useI18n } from "../i18n/context.tsx";
+import { initials } from "../lib/format.ts";
+import { sampleMessages } from "../sample/portal.ts";
 
 export function MessagesPage() {
   const { t } = useI18n();

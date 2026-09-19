@@ -1,0 +1,18 @@
+---
+description: Portal architecture invariants every agent must keep
+alwaysApply: true
+---
+
+# Architecture invariants
+
+Read `AGENTS.md` before adding a page, route, document type, or chart.
+
+- One repo, two portals: client (`/overview`) and employee (`/`).
+- Auth is HMAC cookies in `server/session.ts`, not Supabase Auth.
+- Server uses PostgREST (`server/postgrest.ts`) when Supabase env is set; always keep a memory fallback.
+- Two document systems: KYC in `src/documents/` (localStorage) vs firm PDFs in `src/js/` (employees API). Do not merge them.
+- Table `clients_applicatitons` spelling is live. Do not rename it.
+- Overview / Holdings / Messages read `src/sample/`. That is illustrative data, not a live ledger.
+- `.sample-*` CSS classes style real pages. Do not delete them as leftover demo code.
+- User-facing strings go in `src/i18n/locales/en.ts`. New colors go in `src/theme/tokens.css`.
+- Shared formatters live in `src/lib/format.ts`, not in `src/sample/`.

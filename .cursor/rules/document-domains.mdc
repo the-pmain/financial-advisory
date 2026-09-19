@@ -1,0 +1,22 @@
+---
+description: Keep KYC pack and firm PDF engines separate
+globs: src/documents/**,src/js/**,src/employees/**,src/components/documents/**,src/components/admin/**
+alwaysApply: false
+---
+
+# Document domains
+
+**KYC (client uploads):** `src/documents/catalog.ts` + `storage.ts`. Status lives in localStorage. Add a slug, fields, and `docs.kinds` / `docs.fields` copy together.
+
+**Firm PDFs:** `src/js/clients-documents-model.js` and the generate / fields / register / pdf-write modules. Staff download goes through `server/employees.ts`. Client agreement preview uses `src/employees/agreement.ts`.
+
+```ts
+// KYC
+import { DOC_CATALOG } from "../documents/catalog.ts";
+
+// Firm PDF
+import { DOCUMENT_KIND_LABELS } from "../js/clients-documents-model.js";
+```
+
+- Extend the JS PDF engine in place. Do not rewrite it to TypeScript as a drive-by.
+- `components/admin/DocumentPreviewDialog.tsx` is a preview shell used by clients and staff, not an admin-role gate.

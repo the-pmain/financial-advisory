@@ -280,6 +280,22 @@ export async function findApplicationByEmail(email: string): Promise<ClientAppli
   return memoryApplications.find((row) => row.email.toLowerCase() === needle) ?? null;
 }
 
+export async function findClientNameByEmail(email: string): Promise<string | null> {
+  const needle = email.trim().toLowerCase();
+  if (!needle) return null;
+
+  if (supabaseConfigured()) {
+    const escaped = needle.replaceAll("\\", "\\\\").replaceAll("%", "\\%").replaceAll("_", "\\_");
+    const rows = await postgrest<Array<{ name: string }>>(
+      `/${APPLICATIONS_TABLE}?email=ilike.${encodeURIComponent(escaped)}&select=name&order=created_at.desc,id.desc&limit=1`,
+    );
+    const name = rows[0]?.name?.trim() ?? "";
+    return name || null;
+  }
+
+  return memoryApplications.find((row) => row.email.toLowerCase() === needle)?.name.trim() || null;
+}
+
 export async function loadClientAgreementPdf(client: ClientApplication, people: EmployeeOption[]) {
   const register = buildDocumentRegister({
     company,

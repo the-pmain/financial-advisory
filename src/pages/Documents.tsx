@@ -1,7 +1,5 @@
 import { ScrollText } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { api } from "../api/client.ts";
-import { useAuth } from "../auth/AuthContext.tsx";
+import { useMemo, useState } from "react";
 import {
   adminPreviewCopy,
   DocumentPreviewDialog,
@@ -11,16 +9,12 @@ import { DocCard } from "../components/documents/DocCard.tsx";
 import { DOC_CATALOG } from "../documents/catalog.ts";
 import { readDocPack } from "../documents/storage.ts";
 import { emptyClientDocuments, prepareClientAgreement } from "../employees/agreement.ts";
-import type { ClientApplication, EmployeeOption } from "../employees/types.ts";
+import type { ClientApplication } from "../employees/types.ts";
+import { useMandate } from "../hooks/useMandate.ts";
 import { useI18n } from "../i18n/context.tsx";
 import { DOCUMENT_KIND_LABELS } from "../js/clients-documents-model.js";
 import { DOC_KIND_ICON } from "../sample/kinds.ts";
 import { sampleDocuments } from "../sample/portal.ts";
-
-type MandatePayload = {
-  application: ClientApplication | null;
-  people: EmployeeOption[];
-};
 
 function recordFromUser(
   user: { id: string; name: string; email: string },
@@ -44,39 +38,13 @@ function recordFromUser(
 
 export function DocumentsPage() {
   const { t } = useI18n();
-  const { user } = useAuth();
+  const { user, mandate, people, mandateReady } = useMandate();
   const pack = useMemo(
     () => (user ? readDocPack(user.id, user.name) : null),
     [user],
   );
   const received = pack ? DOC_CATALOG.filter((item) => pack[item.slug].status === "complete").length : 0;
-  const [people, setPeople] = useState<EmployeeOption[]>([]);
-  const [mandate, setMandate] = useState<ClientApplication | null>(null);
-  const [mandateReady, setMandateReady] = useState(false);
   const [preview, setPreview] = useState<{ runKey: string; prepare: PreviewPrepare } | null>(null);
-
-  useEffect(() => {
-    if (!user) return;
-    let cancelled = false;
-    setMandateReady(false);
-    api<MandatePayload>("/api/documents/mandate")
-      .then((payload) => {
-        if (cancelled) return;
-        setMandate(payload.application);
-        setPeople(payload.people);
-      })
-      .catch(() => {
-        if (cancelled) return;
-        setMandate(null);
-        setPeople([]);
-      })
-      .finally(() => {
-        if (!cancelled) setMandateReady(true);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [user]);
 
   function openAgreement() {
     if (!user) return;

@@ -1,0 +1,15 @@
+---
+description: Express router, auth guard, and PostgREST conventions
+globs: server/**
+alwaysApply: false
+---
+
+# Server API
+
+- Mount new routers in `server/index.ts`. Public auth stays under `/api/auth` (rate-limited). Client documents use `requireAuth` + `requireClient`. Staff use `requireAuth` + `requireEmployee`.
+- Fail with `{ error: string }` so `src/api/client.ts` can surface the message.
+- Prefer `postgrest()` over a new Supabase SDK. If `supabaseConfigured()` is false, write to the existing in-memory maps.
+- Do not change `public.users.password` into a second column. Hashing, if added, stays in that column.
+- Do not “fix” `clients_applicatitons`.
+- `admin` is on the session type and unused. Do not invent an admin console unless asked.
+- Import shared types from `src/employees/types.ts` and PDF helpers from `src/js/`. Do not copy those types into `server/`.

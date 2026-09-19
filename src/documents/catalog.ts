@@ -1,3 +1,4 @@
+/** Client KYC pack (passport, address, …). Firm legal PDFs live in `src/js/`. */
 import { BookUser, CarFront, House, IdCard, Landmark, Receipt } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 

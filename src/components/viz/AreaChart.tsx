@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { formatChf } from "../../sample/portal.ts";
+import { formatChf } from "../../lib/format.ts";
 
 type Point = { month: string; value: number };
 

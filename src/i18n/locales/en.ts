@@ -30,6 +30,7 @@ export const en = {
     greeting: "Welcome, {name}.",
     body: "This is the start of the workspace. Further tools will appear here.",
     logout: "Sign out",
+    accountMenu: "Account",
     loading: "Loading the portal",
     nav: {
       label: "Workspace",

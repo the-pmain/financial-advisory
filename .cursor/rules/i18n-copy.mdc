@@ -1,0 +1,13 @@
+---
+description: All user-visible UI copy goes through i18n
+globs: src/**/*.tsx,src/i18n/**
+alwaysApply: false
+---
+
+# Copy
+
+- Screen chrome, buttons, errors, and empty states: `src/i18n/locales/en.ts` via `useI18n()`.
+- Locale files are English-only today. Add a key to `en.ts`; do not invent `de.ts` until a locale switch exists.
+- Sample portfolio names and message bodies stay in `src/sample/portal.ts`.
+- Firm PDF titles stay in `DOCUMENT_KIND_LABELS` / `src/data/company.ts`.
+- Do not hardcode new button labels in `DocumentPreviewDialog` — extend `PreviewCopy` or i18n.

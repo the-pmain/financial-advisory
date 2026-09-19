@@ -1,3 +1,5 @@
+/** Illustrative client portfolio. Not a live ledger. Formatters live in `src/lib/format.ts`. */
+
 export const VIZ_TONES = 4;
 
 export const sampleAccount = {
@@ -77,23 +79,3 @@ export const sampleMessages = [
 ] as const;
 
 export type DocKind = (typeof sampleDocuments)[number]["kind"];
-
-export function initials(name: string): string {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0] ?? "")
-    .join("")
-    .toUpperCase();
-}
-
-export function formatWeight(weight: number): string {
-  return `${weight.toFixed(1)}%`;
-}
-
-export function formatChf(value: number): string {
-  return Math.round(value)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-}

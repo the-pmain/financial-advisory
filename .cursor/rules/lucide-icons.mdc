@@ -1,5 +1,6 @@
 ---
 description: Use Lucide for UI icons
+globs: src/**/*.tsx
 alwaysApply: false
 ---
 # Icons

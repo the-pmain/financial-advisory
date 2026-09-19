@@ -1,0 +1,19 @@
+---
+description: How to add and extend client and employee pages
+globs: src/pages/**/*.tsx
+alwaysApply: false
+---
+
+# Pages
+
+```tsx
+<section className="app-page">
+  <h1 className="app-page__title">{t.app.nav.overview}</h1>
+</section>
+```
+
+- Register the route in `src/App.tsx` on the matching layout (`ClientLayout` vs employee/guest).
+- Client nav: `APP_NAV` in `src/app/nav.ts`. Employee nav: `EMPLOYEE_NAV`. Add the i18n key in the same change.
+- Live data: `api()` from `src/api/client.ts` inside a hook under `src/hooks/`. Do not copy `useEffect` fetch blocks between pages.
+- Illustrative portfolio: import from `src/sample/`. Do not silently treat it as an API.
+- `/employees` is a legacy redirect to the staff gate on `/`. Do not add real routes there.

@@ -1,0 +1,14 @@
+---
+description: Tokens, BEM shell, and Tailwind on auth screens
+globs: src/index.css,src/theme/**,src/components/**/*.tsx
+alwaysApply: false
+---
+
+# UI and styling
+
+- New colors: add a token in `src/theme/tokens.css`, then use `var(--color-…)` or the Tailwind name. No new hex in components.
+- Authenticated chrome and viz: BEM in `src/index.css` (`.app-*`, `.viz-*`, `.doc-*`, `.staff-*`). Keep new rules in the matching section comment.
+- Auth / marketing screens: Tailwind utilities plus existing `vz-*` aliases.
+- `.sample-*` classes are production styles for Overview / Holdings. Rename only with a full CSS + JSX pass.
+- `.appointment-form__*` is the shared form error class. Do not invent a third error class for one form.
+- Viz components take data as props. Format money / weights with `src/lib/format.ts`.
