@@ -1,10 +1,10 @@
 import { FormEvent, useState } from "react";
 import { useAuth } from "../auth/AuthContext.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
-import { ButtonNavy, FormField, UnderlineLink } from "../components/ui/primitives.tsx";
+import { ButtonNavy, FormField, UnderlineButton, UnderlineLink } from "../components/ui/primitives.tsx";
 import { useI18n } from "../i18n/context.tsx";
 
-export function LoginPage() {
+export function LoginPage({ onStaffPortal }: { onStaffPortal?: () => void }) {
   const { t } = useI18n();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
@@ -66,6 +66,18 @@ export function LoginPage() {
           <UnderlineLink to="/signup" bold>
             {t.login.signupLink}
           </UnderlineLink>
+        </p>
+        <p className="text-vz-gray mt-3 mb-0 text-[15px] leading-[21px]">
+          {t.login.staffPrompt}{" "}
+          {onStaffPortal ? (
+            <UnderlineButton bold onClick={onStaffPortal}>
+              {t.login.staffLink}
+            </UnderlineButton>
+          ) : (
+            <UnderlineLink to="/" bold>
+              {t.login.staffLink}
+            </UnderlineLink>
+          )}
         </p>
       </div>
     </main>

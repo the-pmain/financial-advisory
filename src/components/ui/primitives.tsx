@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from "react";
 import { Link } from "react-router";
 import { ArrowRightIcon } from "./Icons.tsx";
 
@@ -92,6 +92,30 @@ export function UnderlineLink({
     >
       {children}
     </Link>
+  );
+}
+
+export function UnderlineButton({
+  children,
+  bold = false,
+  className = "",
+  onClick,
+}: {
+  children: ReactNode;
+  bold?: boolean;
+  className?: string;
+  onClick?: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`vz-underline text-vz-ink hover:text-vz-orange tracking-vz-02 cursor-pointer border-0 bg-transparent p-0 pb-[2px] text-[15px] leading-[21px] ${
+        bold ? "font-bold" : ""
+      } ${className}`}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -225,6 +249,27 @@ export function FormField({
     <label className={`appointment-form__field ${className}`}>
       <span className="appointment-form__label">{label}</span>
       <input className={`appointment-form__control ${invalid ? "is-invalid" : ""}`} {...props} />
+    </label>
+  );
+}
+
+export function FormSelect({
+  label,
+  className = "",
+  invalid = false,
+  children,
+  ...props
+}: SelectHTMLAttributes<HTMLSelectElement> & {
+  label: string;
+  invalid?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <label className={`appointment-form__field ${className}`}>
+      <span className="appointment-form__label">{label}</span>
+      <select className={`appointment-form__control ${invalid ? "is-invalid" : ""}`} {...props}>
+        {children}
+      </select>
     </label>
   );
 }

@@ -8,7 +8,9 @@ export type User = {
   id: string;
   email: string;
   name: string;
-  role: "advisor" | "admin";
+  role: "advisor" | "admin" | "employee";
+  slug?: string;
+  photoUrl?: string;
 };
 
 type AuthValue = {
@@ -16,6 +18,7 @@ type AuthValue = {
   ready: boolean;
   entering: boolean;
   login: (email: string, password: string) => Promise<void>;
+  employeeLogin: (slug: string, password: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -64,6 +67,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const next = await api<User>("/api/auth/login", {
           method: "POST",
           body: JSON.stringify({ email, password }),
+        });
+        startedAt.current = performance.now();
+        setEntering(true);
+        setUser(next);
+      },
+      async employeeLogin(slug, password) {
+        const next = await api<User>("/api/auth/employee/login", {
+          method: "POST",
+          body: JSON.stringify({ slug, password }),
         });
         startedAt.current = performance.now();
         setEntering(true);

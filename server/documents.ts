@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { PDFDocument, StandardFonts } from "pdf-lib";
+import { findApplicationByEmail, listEmployeeDirectory } from "./employees.ts";
+import type { AuthedRequest } from "./requireAuth.ts";
 
 export const documentsRouter = Router();
 
@@ -40,4 +42,26 @@ documentsRouter.get("/sample.pdf", async (_req, res) => {
   const bytes = await createSamplePdf();
   res.setHeader("Content-Type", "application/pdf");
   res.send(Buffer.from(bytes));
+});
+
+documentsRouter.get("/mandate", async (req, res) => {
+  try {
+    const user = (req as AuthedRequest).user;
+    const [application, directory] = await Promise.all([
+      findApplicationByEmail(user.email),
+      listEmployeeDirectory(),
+    ]);
+    res.json({
+      application,
+      people: directory.map((person) => ({
+        slug: person.slug,
+        name: person.name,
+        role: person.role,
+        photoUrl: "",
+      })),
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not load your documents." });
+  }
 });

@@ -1,5 +1,6 @@
-import { randomBytes } from "node:crypto";
+import { randomBytes, timingSafeEqual } from "node:crypto";
 import { Router, type Response } from "express";
+import { employeePhotoUrl, findEmployeeBySlug, listEmployeeDirectory, publicEmployee } from "./employees.ts";
 import { postgrest, supabaseConfigured } from "./postgrest.ts";
 import { requireAuth, type AuthedRequest } from "./requireAuth.ts";
 import {
@@ -23,7 +24,24 @@ type DbUser = {
 const memoryUsers = new Map<string, StoredUser>();
 
 function publicUser(user: SessionUser): SessionUser {
+  if (user.role === "employee") {
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      slug: user.slug,
+      photoUrl: user.photoUrl,
+    };
+  }
   return { id: user.id, email: user.email, name: user.name, role: user.role };
+}
+
+function passwordsMatch(stored: string, given: string): boolean {
+  const a = Buffer.from(stored);
+  const b = Buffer.from(given);
+  if (a.length !== b.length) return false;
+  return timingSafeEqual(a, b);
 }
 
 function fromDb(row: DbUser): StoredUser {
@@ -125,6 +143,41 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
+authRouter.get("/employee/directory", async (_req, res) => {
+  try {
+    res.json(await listEmployeeDirectory());
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not load the staff list." });
+  }
+});
+
+authRouter.post("/employee/login", async (req, res) => {
+  try {
+    const slug = String(req.body?.slug ?? req.body?.username ?? "")
+      .trim()
+      .toLowerCase();
+    const password = String(req.body?.password ?? "");
+
+    if (slug.length < 2 || slug.length > 80 || !password) {
+      res.status(400).json({ error: "Choose your name and enter your password." });
+      return;
+    }
+
+    const employee = await findEmployeeBySlug(slug);
+    if (!employee || !passwordsMatch(employee.password, password)) {
+      res.status(401).json({ error: "Invalid password." });
+      return;
+    }
+
+    writeAuthCookies(res, publicEmployee(employee));
+    res.json(publicEmployee(employee));
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Could not sign in." });
+  }
+});
+
 authRouter.post("/logout", (_req, res) => {
   res.clearCookie(SESSION_COOKIE, { path: "/" });
   res.clearCookie(SESSION_HINT_COOKIE, { path: "/" });
@@ -132,6 +185,10 @@ authRouter.post("/logout", (_req, res) => {
 });
 
 authRouter.get("/me", requireAuth, (req, res) => {
+  const user = publicUser((req as AuthedRequest).user);
+  if (user.role === "employee" && !user.photoUrl && user.slug) {
+    user.photoUrl = employeePhotoUrl(`${user.slug}.png`);
+  }
   res.cookie(SESSION_HINT_COOKIE, "1", sessionHintCookieOptions());
-  res.json(publicUser((req as AuthedRequest).user));
+  res.json(user);
 });

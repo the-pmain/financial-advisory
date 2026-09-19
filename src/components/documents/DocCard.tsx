@@ -11,6 +11,7 @@ export function DocCard({
   hint,
   status,
   statusLabel,
+  onClick,
 }: {
   to?: string;
   icon: LucideIcon;
@@ -18,8 +19,9 @@ export function DocCard({
   hint: string;
   status: DocStatus;
   statusLabel?: string;
+  onClick?: () => void;
 }) {
-  const className = `doc-card is-${status}${to ? "" : " is-static"}`;
+  const className = `doc-card is-${status}${to || onClick ? "" : " is-static"}`;
   const body = (
     <>
       {status === "complete" ? (
@@ -41,6 +43,14 @@ export function DocCard({
       <Link to={to} className={className}>
         {body}
       </Link>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <button type="button" className={className} onClick={onClick}>
+        {body}
+      </button>
     );
   }
 

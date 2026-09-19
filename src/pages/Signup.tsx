@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { homePathForRole } from "../app/nav.ts";
 import { useAuth } from "../auth/AuthContext.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
 import { ButtonNavy, FormField, UnderlineLink } from "../components/ui/primitives.tsx";
@@ -16,7 +17,7 @@ export function SignupPage() {
   const [pending, setPending] = useState(false);
 
   useEffect(() => {
-    if (user) navigate("/", { replace: true });
+    if (user) navigate(homePathForRole(user.role), { replace: true });
   }, [user, navigate]);
 
   async function onSubmit(event: FormEvent) {
@@ -25,7 +26,7 @@ export function SignupPage() {
     setPending(true);
     try {
       await signup(name, email, password);
-      navigate("/", { replace: true });
+      navigate(homePathForRole("advisor"), { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : t.signup.error);
     } finally {

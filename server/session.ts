@@ -4,7 +4,9 @@ export type SessionUser = {
   id: string;
   email: string;
   name: string;
-  role: "advisor" | "admin";
+  role: "advisor" | "admin" | "employee";
+  slug?: string;
+  photoUrl?: string;
 };
 
 export type SessionPayload = SessionUser & {

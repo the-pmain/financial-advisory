@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router";
-import { APP_NAV } from "../../app/nav.ts";
+import { homePathForRole, navItemsForRole } from "../../app/nav.ts";
+import { useAuth } from "../../auth/AuthContext.tsx";
 import { useI18n } from "../../i18n/context.tsx";
 import { Icon } from "../ui/icon.tsx";
 import { Logo, LogoMark } from "../ui/Logo.tsx";
@@ -14,8 +15,11 @@ export function Sidebar({
   onClose: () => void;
 }) {
   const { t } = useI18n();
+  const { user } = useAuth();
   const collapsed = docked && !open;
   const available = open || docked;
+  const items = navItemsForRole(user?.role);
+  const home = homePathForRole(user?.role);
 
   return (
     <aside
@@ -27,7 +31,7 @@ export function Sidebar({
     >
       <div className="app-sidebar__head">
         <Link
-          to="/"
+          to={home}
           rel="home"
           className="app-sidebar__mark"
           title="Helfenstein Asset Management"
@@ -36,12 +40,13 @@ export function Sidebar({
           <LogoMark className="app-sidebar__mark-img" />
         </Link>
         <Logo
+          to={home}
           className="app-sidebar__logo mr-0"
           imgClassName="block h-9 w-auto max-w-full object-contain object-left"
         />
       </div>
       <nav id="app-nav" className="app-sidebar__nav" aria-label={t.app.nav.label}>
-        {APP_NAV.map((item) => {
+        {items.map((item) => {
           const label = t.app.nav[item.key];
           return (
             <NavLink

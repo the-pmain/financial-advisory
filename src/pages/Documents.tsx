@@ -1,11 +1,46 @@
-import { useMemo } from "react";
+import { ScrollText } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { api } from "../api/client.ts";
 import { useAuth } from "../auth/AuthContext.tsx";
+import {
+  adminPreviewCopy,
+  DocumentPreviewDialog,
+  type PreviewPrepare,
+} from "../components/admin/DocumentPreviewDialog.tsx";
 import { DocCard } from "../components/documents/DocCard.tsx";
 import { DOC_CATALOG } from "../documents/catalog.ts";
 import { readDocPack } from "../documents/storage.ts";
+import { emptyClientDocuments, prepareClientAgreement } from "../employees/agreement.ts";
+import type { ClientApplication, EmployeeOption } from "../employees/types.ts";
 import { useI18n } from "../i18n/context.tsx";
+import { DOCUMENT_KIND_LABELS } from "../js/clients-documents-model.js";
 import { DOC_KIND_ICON } from "../sample/kinds.ts";
 import { sampleDocuments } from "../sample/portal.ts";
+
+type MandatePayload = {
+  application: ClientApplication | null;
+  people: EmployeeOption[];
+};
+
+function recordFromUser(
+  user: { id: string; name: string; email: string },
+  application: ClientApplication | null,
+): ClientApplication {
+  if (application) {
+    return { ...application, documents: application.documents ?? emptyClientDocuments() };
+  }
+  return {
+    id: user.id,
+    createdAt: "",
+    name: user.name,
+    email: user.email,
+    phone: "",
+    instructedPersonSlug: null,
+    registered: true,
+    portalAccount: { id: user.id, name: user.name, email: user.email, createdAt: "" },
+    documents: emptyClientDocuments(),
+  };
+}
 
 export function DocumentsPage() {
   const { t } = useI18n();
@@ -15,7 +50,42 @@ export function DocumentsPage() {
     [user],
   );
   const received = pack ? DOC_CATALOG.filter((item) => pack[item.slug].status === "complete").length : 0;
-  const personalReady = received === DOC_CATALOG.length;
+  const [people, setPeople] = useState<EmployeeOption[]>([]);
+  const [mandate, setMandate] = useState<ClientApplication | null>(null);
+  const [mandateReady, setMandateReady] = useState(false);
+  const [preview, setPreview] = useState<{ runKey: string; prepare: PreviewPrepare } | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    setMandateReady(false);
+    api<MandatePayload>("/api/documents/mandate")
+      .then((payload) => {
+        if (cancelled) return;
+        setMandate(payload.application);
+        setPeople(payload.people);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setMandate(null);
+        setPeople([]);
+      })
+      .finally(() => {
+        if (!cancelled) setMandateReady(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  function openAgreement() {
+    if (!user) return;
+    const client = recordFromUser(user, mandate);
+    setPreview({
+      runKey: `${client.id}:agreement`,
+      prepare: () => prepareClientAgreement(client, people),
+    });
+  }
 
   return (
     <section className="app-page">
@@ -46,20 +116,39 @@ export function DocumentsPage() {
       </ul>
 
       <h2 className="app-page__section">{t.docs.otherDocuments}</h2>
-      <p className="doc-pack__count">{personalReady ? t.docs.otherLead : t.docs.otherLocked}</p>
+      <p className="doc-pack__count">{t.docs.houseLead}</p>
       <ul className="doc-grid">
+        <li>
+          <DocCard
+            icon={ScrollText}
+            title={DOCUMENT_KIND_LABELS.agreement}
+            hint={t.docs.agreementHint}
+            status={mandateReady ? "started" : "disabled"}
+            statusLabel={mandateReady ? t.docs.preview : t.docs.status.disabled}
+            onClick={mandateReady ? openAgreement : undefined}
+          />
+        </li>
         {sampleDocuments.map((item) => (
           <li key={item.title}>
             <DocCard
               icon={DOC_KIND_ICON[item.kind]}
               title={item.title}
               hint={`${item.kind} · ${item.date}`}
-              status={personalReady ? "complete" : "disabled"}
-              statusLabel={personalReady ? t.docs.status.complete : undefined}
+              status="disabled"
+              statusLabel={t.docs.status.disabled}
             />
           </li>
         ))}
       </ul>
+
+      <DocumentPreviewDialog
+        open={Boolean(preview)}
+        copy={adminPreviewCopy(DOCUMENT_KIND_LABELS.agreement)}
+        prepare={preview?.prepare ?? null}
+        runKey={preview?.runKey}
+        wait="close"
+        onClose={() => setPreview(null)}
+      />
     </section>
   );
 }

@@ -12,3 +12,21 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
   (req as AuthedRequest).user = user;
   next();
 }
+
+export function requireEmployee(req: Request, res: Response, next: NextFunction) {
+  const user = (req as AuthedRequest).user;
+  if (!user || user.role !== "employee" || !user.slug) {
+    res.status(403).json({ error: "Employee access required." });
+    return;
+  }
+  next();
+}
+
+export function requireClient(req: Request, res: Response, next: NextFunction) {
+  const user = (req as AuthedRequest).user;
+  if (!user || user.role === "employee") {
+    res.status(403).json({ error: "Client access required." });
+    return;
+  }
+  next();
+}

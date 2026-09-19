@@ -5,8 +5,9 @@ import express from "express";
 import { SERVER_VERSION } from "../src/version.ts";
 import { authRouter } from "./auth.ts";
 import { documentsRouter } from "./documents.ts";
+import { employeesRouter, sendEmployeePhoto } from "./employees.ts";
 import { rateLimit } from "./rateLimit.ts";
-import { requireAuth } from "./requireAuth.ts";
+import { requireAuth, requireClient, requireEmployee } from "./requireAuth.ts";
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;
@@ -22,7 +23,9 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api/auth", rateLimit({ windowMs: 15 * 60 * 1000, max: 20 }), authRouter);
-app.use("/api/documents", requireAuth, documentsRouter);
+app.get("/api/staff/photos/:file", sendEmployeePhoto);
+app.use("/api/documents", requireAuth, requireClient, documentsRouter);
+app.use("/api/employees", requireAuth, requireEmployee, employeesRouter);
 
 app.use("/api", (_req, res) => {
   res.status(404).json({ error: "Not found" });

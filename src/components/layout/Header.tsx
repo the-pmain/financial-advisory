@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useLocation } from "react-router";
 import { navKeyFromPath } from "../../app/nav.ts";
 import { useAuth } from "../../auth/AuthContext.tsx";
+import { isEmployee } from "../../auth/role.ts";
 import { isDocSlug } from "../../documents/catalog.ts";
 import { useI18n } from "../../i18n/context.tsx";
 import { Icon } from "../ui/icon.tsx";
 import { MenuIcon } from "../ui/Icons.tsx";
+import { StaffAvatar } from "../employees/StaffAvatar.tsx";
 
 export function Header({
   sidebarOpen,
@@ -20,7 +22,7 @@ export function Header({
   const { pathname } = useLocation();
   const [pending, setPending] = useState(false);
   const slug = pathname.startsWith("/documents/") ? pathname.slice("/documents/".length) : "";
-  const title = isDocSlug(slug) ? t.docs.kinds[slug].title : t.app.nav[navKeyFromPath(pathname)];
+  const title = isDocSlug(slug) ? t.docs.kinds[slug].title : t.app.nav[navKeyFromPath(pathname, user?.role)];
 
   async function onLogout() {
     setPending(true);
@@ -49,7 +51,16 @@ export function Header({
         <p className="app-header__title">{title}</p>
         {user ? (
           <div className="app-header__meta">
-            <span className="app-header__user">{user.name}</span>
+            <span className="app-header__identity">
+              {isEmployee(user) ? (
+                <StaffAvatar
+                  name={user.name}
+                  photoUrl={user.photoUrl || (user.slug ? `/api/staff/photos/${encodeURIComponent(user.slug)}.png` : "")}
+                  size="header"
+                />
+              ) : null}
+              <span className="app-header__user">{user.name}</span>
+            </span>
             <button
               type="button"
               disabled={pending}
