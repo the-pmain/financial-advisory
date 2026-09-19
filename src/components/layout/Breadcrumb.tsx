@@ -7,12 +7,13 @@ import {
 } from '../../constants/routes';
 import { legalBySlug } from '../../data/legal';
 import { findArticle } from '../../data/content';
-import { teamBySlug } from '../../data/team';
+import { useEmployees } from '../../hooks/useEmployees';
 import { topicByPath } from '../../data/topics';
 
 /** Derives the trail from the current route so every page carries a breadcrumb. */
 function useTrail(): { label: string; to?: string }[] {
   const { pathname } = useLocation();
+  const { bySlug } = useEmployees();
   const trail: { label: string; to?: string }[] = [{ label: 'Home', to: ROUTES.home }];
 
   if (pathname === ROUTES.home) return trail;
@@ -25,7 +26,7 @@ function useTrail(): { label: string; to?: string }[] {
 
   const memberSlug = matchTeamMemberSlug(pathname);
   if (memberSlug) {
-    const member = teamBySlug.get(memberSlug);
+    const member = bySlug.get(memberSlug);
     trail.push({ label: 'About us', to: ROUTES.about });
     trail.push({ label: 'Our team', to: ROUTES.aboutTeam });
     trail.push({ label: member?.name ?? 'Team' });

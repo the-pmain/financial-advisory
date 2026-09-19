@@ -2,7 +2,8 @@ import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
 import { ROUTES } from '../../constants/routes';
 import { company } from '../../data/company';
-import { teamBySlug, teamMembers, type TeamMember } from '../../data/team';
+import { type TeamMember } from '../../data/team';
+import { useEmployees } from '../../hooks/useEmployees';
 import { submitClient } from '../../lib/clientsApi';
 import { useOptionalAppointmentModal } from '../appointments/appointmentModalContext';
 import { ChevronDownIcon } from '../ui/Icons';
@@ -30,8 +31,6 @@ const EMPTY: Values = {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 const PHONE_ALLOWED = /^[+\d][\d\s()./-]*$/;
 
-const ADVISERS = [...teamMembers].sort((a, b) => a.name.localeCompare(b.name, 'en'));
-
 const FIELD_LABELS: Record<FieldName, string> = {
   adviser: 'Adviser',
   name: 'Name',
@@ -44,7 +43,7 @@ function fieldOrder(pickAdviser: boolean): FieldName[] {
   return pickAdviser ? ['adviser', 'name', 'email', 'phone', 'consent'] : ['name', 'email', 'phone', 'consent'];
 }
 
-function validate(values: Values, pickAdviser: boolean): Errors {
+function validate(values: Values, pickAdviser: boolean, knownSlugs: Set<string>): Errors {
   const errors: Errors = {};
   const name = values.name.trim();
   const email = values.email.trim();
@@ -52,7 +51,7 @@ function validate(values: Values, pickAdviser: boolean): Errors {
   const phoneDigits = phone.replace(/\D/g, '');
 
   if (pickAdviser) {
-    if (!values.adviser || !teamBySlug.has(values.adviser)) {
+    if (!values.adviser || !knownSlugs.has(values.adviser)) {
       errors.adviser = 'Please choose who should receive your details.';
     }
   }
@@ -103,9 +102,12 @@ export function ConsultationForm({
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const { employees, bySlug } = useEmployees();
+  const advisers = [...employees].sort((a, b) => a.name.localeCompare(b.name, 'en'));
+  const knownSlugs = new Set(employees.map((person) => person.slug));
 
   const appointment = useOptionalAppointmentModal();
-  const selected = pickAdviser ? teamBySlug.get(values.adviser) : member;
+  const selected = pickAdviser ? bySlug.get(values.adviser) : member;
   const firstName = firstNameOf(selected, 'an adviser');
 
   const fieldId = (name: FieldName) => `${idPrefix}-${name}`;
@@ -117,19 +119,19 @@ export function ConsultationForm({
   function setValue<K extends FieldName>(name: K, value: Values[K]) {
     const next = { ...values, [name]: value };
     setValues(next);
-    if (submitAttempted || touched[name]) setErrors(validate(next, pickAdviser));
+    if (submitAttempted || touched[name]) setErrors(validate(next, pickAdviser, knownSlugs));
   }
 
   function markTouched(name: FieldName) {
     setTouched((prev) => ({ ...prev, [name]: true }));
-    setErrors(validate(values, pickAdviser));
+    setErrors(validate(values, pickAdviser, knownSlugs));
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting) return;
 
-    const nextErrors = validate(values, pickAdviser);
+    const nextErrors = validate(values, pickAdviser, knownSlugs);
     setErrors(nextErrors);
     setSubmitAttempted(true);
     setSubmitError(null);
@@ -262,7 +264,7 @@ export function ConsultationForm({
                 className={`${controlClass(Boolean(visible('adviser')))} ${embedded ? '' : 'cursor-pointer appearance-auto'}`}
               >
                 <option value="">Select name and role</option>
-                {ADVISERS.map((person) => (
+                {advisers.map((person) => (
                   <option key={person.slug} value={person.slug}>
                     {person.name} — {person.role}
                   </option>

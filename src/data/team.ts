@@ -7,6 +7,7 @@ export type TeamMember = {
   role: string;
   section: 'investment' | 'business' | 'investors';
   photo?: string;
+  featured?: boolean;
   /** Shown only on the member profile page. */
   about: string;
   results: string[];
@@ -26,7 +27,7 @@ export type TeamSection = {
   members: TeamMember[];
 };
 
-/** Temporary mock roster — Germanic display names + local portraits. */
+/** Catalog for i18n, prerender slugs, and SQL emit. Pages load live rows from GET /api/employees. */
 export const teamMembers: TeamMember[] = [
   {
     slug: 'friedrich-hartmann',
@@ -340,28 +341,34 @@ export const teamMembers: TeamMember[] = [
 
 export const featuredMember = teamMembers[0];
 
-export const teamSections: TeamSection[] = [
-  {
-    id: 'investment',
-    title: 'Investment team',
-    // Featured above the grid — omit duplicate card in this section.
-    members: teamMembers.filter(
-      (m) => m.section === 'investment' && m.slug !== featuredMember.slug,
-    ),
-  },
-  {
-    id: 'business',
-    title: 'Business development',
-    members: teamMembers.filter((m) => m.section === 'business'),
-  },
-  {
-    id: 'investors',
-    title: 'Client advisers',
-    members: teamMembers.filter((m) => m.section === 'investors'),
-  },
-];
+const SECTION_TITLES: Record<TeamMember['section'], string> = {
+  investment: 'Investment team',
+  business: 'Business development',
+  investors: 'Client advisers',
+};
 
-export const teamBySlug = new Map(teamMembers.map((m) => [m.slug, m]));
+export function featuredFrom(members: TeamMember[]): TeamMember | undefined {
+  return members.find((member) => member.featured) ?? members[0];
+}
+
+export function teamBySlugFrom(members: TeamMember[]): Map<string, TeamMember> {
+  return new Map(members.map((member) => [member.slug, member]));
+}
+
+export function teamSectionsFrom(members: TeamMember[]): TeamSection[] {
+  const featured = featuredFrom(members);
+  return (['investment', 'business', 'investors'] as const).map((id) => ({
+    id,
+    title: SECTION_TITLES[id],
+    members: members.filter(
+      (member) => member.section === id && member.slug !== featured?.slug,
+    ),
+  }));
+}
+
+export const teamSections: TeamSection[] = teamSectionsFrom(teamMembers);
+
+export const teamBySlug = teamBySlugFrom(teamMembers);
 
 const CFA_DIRECTORY = 'https://www.cfainstitute.org/en/membership/directory';
 
@@ -382,8 +389,11 @@ export function cfaDirectoryUrl(): string {
   return CFA_DIRECTORY;
 }
 
-export function teamByExpertise(tags: ExpertiseTag[] | undefined): TeamMember[] {
+export function teamByExpertise(
+  tags: ExpertiseTag[] | undefined,
+  members: TeamMember[] = teamMembers,
+): TeamMember[] {
   if (!tags?.length) return [];
   const set = new Set(tags);
-  return teamMembers.filter((m) => m.expertise?.some((tag) => set.has(tag))).slice(0, 4);
+  return members.filter((m) => m.expertise?.some((tag) => set.has(tag))).slice(0, 4);
 }

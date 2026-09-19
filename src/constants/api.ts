@@ -3,6 +3,7 @@ export const API = {
   health: '/api/health',
   markets: '/api/markets',
   company: '/api/company',
+  employees: '/api/employees',
   session: '/api/auth/session',
   login: '/api/auth/login',
   logout: '/api/auth/logout',

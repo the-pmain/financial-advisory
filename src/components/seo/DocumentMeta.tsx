@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { matchKnowledgeHubSlug } from '../../constants/routes';
 import { allArticles } from '../../data/content';
+import { useEmployees } from '../../hooks/useEmployees';
 import { financialServiceJsonLd, getPageMeta, SITE_NAME, JSON_LD_ORG_ID } from '../../seo';
 
 function upsertMeta(name: string, content: string) {
@@ -32,9 +33,10 @@ function upsertJsonLd(id: string, data: Record<string, unknown> | null) {
 /** Keeps <title>, description, organisation JSON-LD and article JSON-LD in sync. */
 export function DocumentMeta() {
   const { pathname } = useLocation();
+  const { employees } = useEmployees();
 
   useEffect(() => {
-    const meta = getPageMeta(pathname);
+    const meta = getPageMeta(pathname, employees);
     document.title = meta.title;
     upsertMeta('description', meta.description);
     upsertMeta('robots', meta.robots);
@@ -64,7 +66,7 @@ export function DocumentMeta() {
       }
     }
     upsertJsonLd('helfenstein-jsonld-article', null);
-  }, [pathname]);
+  }, [employees, pathname]);
 
   return null;
 }

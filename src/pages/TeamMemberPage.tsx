@@ -1,7 +1,8 @@
 import { Link, useParams } from 'react-router';
 import { ROUTES, teamMemberPath } from '../constants/routes';
 import { company } from '../data/company';
-import { cfaDirectoryUrl, finmaAdviserNoFor, teamBySlug, teamSections } from '../data/team';
+import { cfaDirectoryUrl, finmaAdviserNoFor } from '../data/team';
+import { useEmployees } from '../hooks/useEmployees';
 import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { SectionTitle } from '../components/ui/primitives';
 import { TeamAvatar } from '../components/ui/TeamAvatar';
@@ -11,11 +12,15 @@ import { NotFoundPage } from './NotFoundPage';
 
 export function TeamMemberPage() {
   const { slug } = useParams();
-  const member = slug ? teamBySlug.get(slug) : undefined;
+  const { bySlug, sections, status } = useEmployees();
+  const member = slug ? bySlug.get(slug) : undefined;
 
+  if (status === 'loading') {
+    return <p className="text-vz-gray m-0 text-[16px]">Loading…</p>;
+  }
   if (!member) return <NotFoundPage />;
 
-  const peers = (teamSections.find((s) => s.id === member.section)?.members ?? []).filter(
+  const peers = (sections.find((s) => s.id === member.section)?.members ?? []).filter(
     (m) => m.slug !== member.slug,
   );
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { teamMemberPath } from '../constants/routes';
-import { featuredMember, teamSections, type TeamMember } from '../data/team';
+import { type TeamMember } from '../data/team';
+import { useEmployees } from '../hooks/useEmployees';
 import { AppointmentButton } from '../components/appointments/AppointmentModal';
 import { SectionTitle } from '../components/ui/primitives';
 import { NewsletterCta } from '../components/widgets/NewsletterCta';
@@ -50,6 +51,8 @@ function MemberCard({ member }: { member: TeamMember }) {
 }
 
 export function TeamPage() {
+  const { featured: featuredMember, sections: teamSections, status } = useEmployees();
+
   return (
     <>
       <header className="max-w-[802px]">
@@ -59,7 +62,14 @@ export function TeamPage() {
         </p>
       </header>
 
-      <section className="mt-12 grid max-w-[1100px] grid-cols-[minmax(220px,320px)_minmax(0,1fr)] items-stretch gap-8 max-mob:grid-cols-1 max-mob:gap-5">
+      {status === 'loading' && (
+        <p className="text-vz-gray mt-12 mb-0 text-[16px]">Loading the team…</p>
+      )}
+      {status === 'error' && (
+        <p className="text-vz-gray mt-12 mb-0 text-[16px]">The team list could not be loaded.</p>
+      )}
+
+      {featuredMember && <section className="mt-12 grid max-w-[1100px] grid-cols-[minmax(220px,320px)_minmax(0,1fr)] items-stretch gap-8 max-mob:grid-cols-1 max-mob:gap-5">
         <Link
           to={teamMemberPath(featuredMember.slug)}
           className="group focus-visible:outline-vz-orange block overflow-hidden bg-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -76,7 +86,12 @@ export function TeamPage() {
               />
             ) : (
               <div className="text-vz-blue flex size-full items-center justify-center text-[48px] font-bold tracking-wide">
-                FH
+                {featuredMember.name
+                  .split(/\s+/)
+                  .filter((part) => !/^(de|del|la|las|los|y)$/i.test(part))
+                  .slice(0, 2)
+                  .map((part) => part[0]?.toUpperCase() ?? '')
+                  .join('')}
               </div>
             )}
           </div>
@@ -101,7 +116,7 @@ export function TeamPage() {
             </Link>
           </p>
         </div>
-      </section>
+      </section>}
 
       {teamSections.map((section) => (
         <section key={section.id} className="mt-14 max-lap:mt-12">

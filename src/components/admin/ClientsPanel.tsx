@@ -11,7 +11,7 @@ import {
 import { createPortal } from 'react-dom';
 import { FolderIcon, MoreIcon, PreviewIcon } from '../ui/Icons';
 import { company } from '../../data/company';
-import { teamBySlug, teamMembers } from '../../data/team';
+import { useEmployees } from '../../hooks/useEmployees';
 import { useEscape } from '../../hooks/useScrollLock';
 import { formatAdminDateTime } from '../../js/admin-date.js';
 import {
@@ -48,9 +48,9 @@ function formatWhen(iso: string): string {
   return formatAdminDateTime(iso);
 }
 
-function adviserName(slug: string | null): string {
+function adviserName(slug: string | null, bySlug: Map<string, { name: string }>): string {
   if (!slug) return '—';
-  return teamBySlug.get(slug)?.name ?? slug;
+  return bySlug.get(slug)?.name ?? slug;
 }
 
 function initials(name: string): string {
@@ -67,6 +67,7 @@ function savedKindList(client: AdminClient): AdminDocumentKind[] {
 }
 
 export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void }) {
+  const { employees, bySlug } = useEmployees();
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState<TestFilter>('all');
   const [items, setItems] = useState<AdminClient[]>([]);
@@ -94,10 +95,10 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
     (client?: AdminClient | null) =>
       buildDocumentRegister({
         company,
-        teamMembers,
+        teamMembers: employees,
         instructedSlug: client?.instructed_person_slug,
       }),
-    [],
+    [employees],
   );
 
   const load = useCallback(
@@ -263,6 +264,7 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
                     <ClientRow
                       key={(entry as AdminClient).id}
                       client={entry as AdminClient}
+                      bySlug={bySlug}
                       menu={menu}
                       pdfBusy={pdfBusyId === (entry as AdminClient).id}
                       toggling={togglingId === (entry as AdminClient).id}
@@ -339,6 +341,7 @@ export function ClientsPanel({ onUnauthorized }: { onUnauthorized: () => void })
 
 function ClientRow({
   client,
+  bySlug,
   menu,
   pdfBusy,
   toggling,
@@ -349,6 +352,7 @@ function ClientRow({
   onToggleTest,
 }: {
   client: AdminClient;
+  bySlug: Map<string, { name: string }>;
   menu: OpenMenu;
   pdfBusy: boolean;
   toggling: boolean;
@@ -383,7 +387,7 @@ function ClientRow({
           <p className="text-vz-ink m-0 truncate text-[14px]">{client.email}</p>
           <p className="text-vz-gray m-0 mt-0.5 truncate text-[13px]">{client.phone || '—'}</p>
         </div>
-        <p className="text-vz-ink m-0 truncate text-[14px]">{adviserName(client.instructed_person_slug)}</p>
+        <p className="text-vz-ink m-0 truncate text-[14px]">{adviserName(client.instructed_person_slug, bySlug)}</p>
         <p className="m-0">
           <span
             className={`inline-block rounded-[3px] px-1.5 py-0.5 text-[11px] font-bold tracking-[0.04em] uppercase ${

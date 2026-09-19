@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 import { PageShell } from './components/layout/PageShell';
 import { DocumentMeta } from './components/seo/DocumentMeta';
+import { EmployeesProvider } from './hooks/useEmployees';
 import { knowledgeHubArticlePath, LEGACY_REDIRECTS, ROUTES, ROUTE_PATTERNS } from './constants/routes';
 import { OLD_ARTICLE_REDIRECTS } from './data/articles';
 import { AdminPage } from './pages/AdminPage';
@@ -42,7 +43,7 @@ function MarketingLayout() {
 
 export function App() {
   return (
-    <>
+    <EmployeesProvider>
       <DocumentMeta />
       <ScrollToTop />
       <Routes>
@@ -74,6 +75,6 @@ export function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-    </>
+    </EmployeesProvider>
   );
 }

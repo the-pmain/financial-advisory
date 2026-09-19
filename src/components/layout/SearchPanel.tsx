@@ -7,13 +7,14 @@ import {
 } from '../../constants/routes';
 import { allArticles } from '../../data/content';
 import { legalPages } from '../../data/legal';
-import { teamMembers } from '../../data/team';
+import { type TeamMember } from '../../data/team';
 import { topics } from '../../data/topics';
+import { useEmployees } from '../../hooks/useEmployees';
 import { CloseIcon, SearchIcon } from '../ui/Icons';
 
 type Result = { label: string; to: string; context: string; weight: number; haystack: string };
 
-function buildIndex(): Result[] {
+function buildIndex(members: TeamMember[]): Result[] {
   const items: Result[] = [
     ...topics.map((topic) => ({
       label: topic.title,
@@ -38,7 +39,7 @@ function buildIndex(): Result[] {
         .join(' ')
         .toLowerCase(),
     })),
-    ...teamMembers.map((member) => ({
+    ...members.map((member) => ({
       label: member.name,
       to: teamMemberPath(member.slug),
       context: member.role,
@@ -63,8 +64,6 @@ function buildIndex(): Result[] {
   return items;
 }
 
-const index = buildIndex();
-
 /**
  * Search drawer that drops out of the header. Weighted title matches first.
  */
@@ -79,6 +78,8 @@ export function SearchPanel({
 }) {
   const [query, setQuery] = useState('');
   const input = useRef<HTMLInputElement>(null);
+  const { employees } = useEmployees();
+  const index = useMemo(() => buildIndex(employees), [employees]);
 
   useEffect(() => {
     if (open) input.current?.focus({ preventScroll: true });
@@ -100,7 +101,7 @@ export function SearchPanel({
       .filter((item): item is Result & { score: number } => Boolean(item))
       .sort((a, b) => b.score - a.score)
       .slice(0, 10);
-  }, [query]);
+  }, [index, query]);
 
   return (
     <div

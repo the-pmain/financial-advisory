@@ -66,3 +66,5 @@ revoke all on table public.clients_documents from anon, authenticated;
 
 grant select, insert, update, delete on table public.clients to service_role;
 grant select, insert, update, delete on table public.clients_documents to service_role;
+
+-- Team roster + portrait bucket: supabase/team.sql (prompt: cursor-prompts/supabase-team.md)

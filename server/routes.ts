@@ -3,7 +3,7 @@ import { allArticles } from '../src/data/content.ts';
 import { caseStudies } from '../src/data/caseStudies.ts';
 import { clientDocuments } from '../src/data/documents.ts';
 import { legalPages } from '../src/data/legal.ts';
-import { teamMembers } from '../src/data/team.ts';
+import { employeeBySlug, listEmployees, sendEmployeePhoto } from './employees.js';
 import { topics } from '../src/data/topics.ts';
 import {
   clearSessionCookie,
@@ -59,6 +59,23 @@ export function createApiRouter(): Router {
     }
   });
 
+  router.get('/employees/:slug/photo', async (req, res) => {
+    try {
+      await sendEmployeePhoto(req, res);
+    } catch (err) {
+      sendRouteError(res, err);
+    }
+  });
+
+  router.get('/employees', async (_req, res) => {
+    try {
+      const employees = await listEmployees();
+      res.json({ ok: true, employees });
+    } catch (err) {
+      sendRouteError(res, err);
+    }
+  });
+
   router.get('/auth/session', (req, res) => {
     const session = getSessionFromRequest(req);
     if (!session) {
@@ -103,6 +120,14 @@ export function createApiRouter(): Router {
       if (!parsed.ok) {
         res.status(400).json({ error: parsed.error });
         return;
+      }
+
+      if (parsed.value.instructed_person_slug) {
+        const adviser = await employeeBySlug(parsed.value.instructed_person_slug);
+        if (!adviser) {
+          res.status(400).json({ error: 'Please provide a valid adviser.' });
+          return;
+        }
       }
 
       const result = await rest('clients', {
@@ -156,14 +181,20 @@ export function createApiRouter(): Router {
     await sendAdminDocumentPdf(req, res, 'attachment');
   });
 
-  router.get('/admin/overview', requireAdmin, (_req, res) => {
+  router.get('/admin/overview', requireAdmin, async (_req, res) => {
     const articles = allArticles.filter((a) => a.kind !== 'video');
+    let teamCount = 0;
+    try {
+      teamCount = (await listEmployees()).length;
+    } catch {
+      teamCount = 0;
+    }
     res.json({
       ok: true,
       overview: {
         articles: articles.length,
         topics: topics.length,
-        teamMembers: teamMembers.length,
+        teamMembers: teamCount,
         legalPages: legalPages.length,
         caseStudies: caseStudies.length,
         documents: clientDocuments.length,
@@ -201,19 +232,24 @@ export function createApiRouter(): Router {
     });
   });
 
-  router.get('/admin/team', requireAdmin, (_req, res) => {
-    res.json({
-      ok: true,
-      team: teamMembers.map((member) => ({
-        slug: member.slug,
-        name: member.name,
-        role: member.role,
-        section: member.section,
-        credentials: member.credentials ?? [],
-        languages: member.languages ?? [],
-        expertise: member.expertise ?? [],
-      })),
-    });
+  router.get('/admin/team', requireAdmin, async (_req, res) => {
+    try {
+      const employees = await listEmployees();
+      res.json({
+        ok: true,
+        team: employees.map((member) => ({
+          slug: member.slug,
+          name: member.name,
+          role: member.role,
+          section: member.section,
+          credentials: member.credentials ?? [],
+          languages: member.languages ?? [],
+          expertise: member.expertise ?? [],
+        })),
+      });
+    } catch (err) {
+      sendRouteError(res, err);
+    }
   });
 
   router.get('/admin/documents', requireAdmin, (_req, res) => {

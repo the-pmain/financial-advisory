@@ -1,11 +1,12 @@
 import { Link } from 'react-router';
 import { teamMemberPath } from '../../constants/routes';
-import { teamByExpertise } from '../../data/team';
+import { useEmployees } from '../../hooks/useEmployees';
 import type { ExpertiseTag } from '../../data/topics';
 import { SectionTitle } from '../ui/primitives';
 
 export function SpecialistsBand({ tags }: { tags?: ExpertiseTag[] }) {
-  const members = teamByExpertise(tags);
+  const { specialists } = useEmployees();
+  const members = specialists(tags);
   if (!members.length) return null;
 
   return (

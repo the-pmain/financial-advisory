@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { ROUTES, teamMemberPath } from '../constants/routes';
 import { company } from '../data/company';
-import { featuredMember } from '../data/team';
+import { useEmployees } from '../hooks/useEmployees';
 import { topicByPath } from '../data/topics';
 import { AuthorisationMarks } from '../components/ui/AuthorisationMarks';
 import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
@@ -26,12 +26,14 @@ const highlightTo: Record<string, string> = {
   'Client stories': ROUTES.aboutClientStories,
 };
 
-const initials = featuredMember.name
-  .split(/\s+/)
-  .filter((part) => !/^(de|del|la|las|los|y)$/i.test(part))
-  .slice(0, 2)
-  .map((part) => part[0]?.toUpperCase() ?? '')
-  .join('');
+function memberInitials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter((part) => !/^(de|del|la|las|los|y)$/i.test(part))
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('');
+}
 
 /**
  * About us landing: company portrait, a single team introduction, and the
@@ -39,6 +41,7 @@ const initials = featuredMember.name
  */
 export function AboutPage() {
   const [photoFailed, setPhotoFailed] = useState(false);
+  const { featured: featuredMember } = useEmployees();
   const record = usePublicCompany();
   const t = useT();
   const topic = topicByPath.get(ROUTES.about);
@@ -80,7 +83,7 @@ export function AboutPage() {
 
       <section id="our-team" className="mt-12 scroll-mt-[132px] max-lap:mt-10">
         <SectionTitle>Our team</SectionTitle>
-        <div className="grid max-w-[1100px] grid-cols-[minmax(220px,320px)_minmax(0,1fr)] items-stretch gap-8 max-mob:grid-cols-1 max-mob:gap-5">
+        {featuredMember && <div className="grid max-w-[1100px] grid-cols-[minmax(220px,320px)_minmax(0,1fr)] items-stretch gap-8 max-mob:grid-cols-1 max-mob:gap-5">
           <Link
             to={teamMemberPath(featuredMember.slug)}
             className="group focus-visible:outline-vz-orange block overflow-hidden bg-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -98,7 +101,7 @@ export function AboutPage() {
                 />
               ) : (
                 <div className="text-vz-blue flex size-full items-center justify-center text-[48px] font-bold tracking-wide">
-                  {initials}
+                  {memberInitials(featuredMember.name)}
                 </div>
               )}
             </div>
@@ -128,7 +131,7 @@ export function AboutPage() {
               </Link>
             </p>
           </div>
-        </div>
+        </div>}
       </section>
 
       <section id="regulatory-compliance" className="mt-12 scroll-mt-[132px] max-lap:mt-10">

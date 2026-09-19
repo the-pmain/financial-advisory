@@ -119,7 +119,10 @@ export function getStaticPaths(): string[] {
   return [...paths];
 }
 
-export function getPageMeta(pathname: string): PageMeta {
+export function getPageMeta(
+  pathname: string,
+  roster: Array<Pick<(typeof teamMembers)[number], 'slug' | 'name' | 'role' | 'about'>> = teamMembers,
+): PageMeta {
   const path = normalizePath(pathname);
 
   if (path === ROUTES.home) {
@@ -160,7 +163,7 @@ export function getPageMeta(pathname: string): PageMeta {
 
   const teamSlug = matchTeamMemberSlug(path);
   if (teamSlug) {
-    const member = teamMembers.find((item) => item.slug === teamSlug);
+    const member = roster.find((item) => item.slug === teamSlug);
     if (member) {
       return {
         title: `${member.name} | ${SITE_NAME}`,

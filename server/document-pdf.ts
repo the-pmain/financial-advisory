@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { company } from '../src/data/company.ts';
-import { teamMembers } from '../src/data/team.ts';
+import { listEmployees } from './employees.js';
 import { loadClientDocumentPdf } from './clients-document-pdf.js';
 import { parseDocumentPdfQuery } from '../src/js/document-pdf.js';
 import { buildDocumentRegister } from '../src/js/document-register.js';
@@ -13,7 +13,8 @@ export function parseAdminDocumentPdfQuery(query: Request['query']) {
   return parseDocumentPdfQuery(params);
 }
 
-export function createAdminDocumentPdf(input: { client_id: string; kind: string }) {
+export async function createAdminDocumentPdf(input: { client_id: string; kind: string }) {
+  const teamMembers = await listEmployees();
   return loadClientDocumentPdf({
     client_id: input.client_id,
     kind: input.kind,
