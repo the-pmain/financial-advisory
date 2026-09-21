@@ -12,8 +12,9 @@ alwaysApply: false
 </section>
 ```
 
-- Register the route in `src/App.tsx` on the matching layout (`ClientLayout` vs employee/guest).
-- Client nav: `APP_NAV` in `src/app/nav.ts`. Employee nav: `EMPLOYEE_NAV`. Add the i18n key in the same change.
+- Register the route in `src/App.tsx` on the matching layout (`ClientLayout`, employee/guest, or `AdminLayout`).
+- Client nav: `APP_NAV` in `src/app/nav.ts`. Employee nav: `EMPLOYEE_NAV`. Super admin nav: `ADMIN_NAV`. Add the i18n key in the same change.
 - Live data: `api()` from `src/api/client.ts` inside a hook under `src/hooks/`. Do not copy `useEffect` fetch blocks between pages.
+- Types and rules for that data come from `@domain/<ctx>/model.ts` — the same module the API validates with. Do not restate a payload shape in a page.
 - Illustrative portfolio: import from `src/sample/`. Do not silently treat it as an API.
 - `/employees` is a legacy redirect to the staff gate on `/`. Do not add real routes there.

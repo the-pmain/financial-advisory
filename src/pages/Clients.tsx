@@ -8,8 +8,9 @@ import {
 } from "../components/admin/DocumentPreviewDialog.tsx";
 import { DocCard } from "../components/documents/DocCard.tsx";
 import { DOC_CATALOG } from "../documents/catalog.ts";
-import { emptyClientDocuments, prepareClientAgreement } from "../employees/agreement.ts";
-import type { ClientApplication, EmployeeOption } from "../employees/types.ts";
+import { emptyClientDocuments, prepareClientAgreement } from "@domain/documents/agreement.ts";
+import type { ClientApplication } from "@domain/onboarding/model.ts";
+import type { EmployeeProfile } from "@domain/staff/model.ts";
 import { useI18n } from "../i18n/context.tsx";
 import { DOCUMENT_KIND_LABELS } from "../js/clients-documents-model.js";
 
@@ -26,7 +27,7 @@ function formatReceived(iso: string): string {
 export function ClientsPage() {
   const { t } = useI18n();
   const [items, setItems] = useState<ClientApplication[] | null>(null);
-  const [people, setPeople] = useState<EmployeeOption[]>([]);
+  const [people, setPeople] = useState<EmployeeProfile[]>([]);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [preview, setPreview] = useState<{ runKey: string; prepare: PreviewPrepare } | null>(null);
@@ -35,7 +36,7 @@ export function ClientsPage() {
     let cancelled = false;
     Promise.all([
       api<ClientApplication[]>("/api/employees/clients"),
-      api<EmployeeOption[]>("/api/auth/employee/directory"),
+      api<EmployeeProfile[]>("/api/auth/employee/directory"),
     ])
       .then(([rows, directory]) => {
         if (cancelled) return;

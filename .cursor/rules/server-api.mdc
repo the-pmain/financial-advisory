@@ -1,15 +1,31 @@
 ---
-description: Express router, auth guard, and PostgREST conventions
+description: Context, port, adapter, and router conventions for the API
 globs: server/**
 alwaysApply: false
 ---
 
 # Server API
 
-- Mount new routers in `server/index.ts`. Public auth stays under `/api/auth` (rate-limited). Client documents use `requireAuth` + `requireClient`. Staff use `requireAuth` + `requireEmployee`.
-- Fail with `{ error: string }` so `src/api/client.ts` can surface the message.
-- Prefer `postgrest()` over a new Supabase SDK. If `supabaseConfigured()` is false, write to the existing in-memory maps.
-- Do not change `public.users.password` into a second column. Hashing, if added, stays in that column.
-- Do not “fix” `clients_applicatitons`.
-- `admin` is on the session type and unused. Do not invent an admin console unless asked.
-- Import shared types from `src/employees/types.ts` and PDF helpers from `src/js/`. Do not copy those types into `server/`.
+Four layers. Work out which one your change belongs in before you start.
+
+```
+server/platform/            postgrest, supabase access, object storage, rate limit, errors, http, secrets
+server/contexts/<ctx>/
+  ports.ts                  interfaces this context needs satisfied
+  service.ts                use cases: no express, no process.env, no SQL
+  adapters/                 postgrest*.ts and memory*.ts per port
+server/interfaces/http/     express routers, one per portal surface
+server/container.ts         builds every adapter and service once
+server/index.ts             middleware, mounts, static files
+```
+
+- New data for an existing context: add the method to `ports.ts`, implement it in **both** adapters, then use it from `service.ts`. A memory adapter is not optional — the app has to run with no Supabase configured.
+- New endpoint: a router under `server/interfaces/http/`, created by a `createXRouter(deps)` factory taking services, mounted in `server/index.ts`. Public auth stays under `/api/auth` (rate-limited). `/api/documents` is `requireAuth` + `requireClient`, `/api/employees` is `requireEmployee`, `/api/admin` is `requireAdmin`.
+- Wrap handlers in `route(handler, whenBroken)` and let services throw `invalid()`, `unauthorized()`, `notFound()`, `conflict()`, `unavailable()` from `platform/errors.ts`. Every failure leaves as `{ error: string }` so `src/api/client.ts` can surface it. Do not hand-roll try/catch plus `res.status(500)` again.
+- Only `platform/supabase.ts` and `container.ts` read `process.env` for data access. `ADMIN_PIN` is the one exception, read in the identity service.
+- Reach another context through a port, not its adapter or its table: identity asks staff to `authenticate`, onboarding asks identity `findByEmails`, onboarding asks documents `findForClients`. Staff and onboarding each own a `PhotoStore`; both talk to `platform/storage.ts` rather than copying fetch calls.
+- Types and validation come from `@domain/<ctx>/model.ts`. Do not restate a shape or a limit inside `server/`.
+- A record with a password on it (`EmployeeRecord`, `AccountRecord`) stays inside its context. Publish `EmployeeAccount`, `EmployeeProfile`, or a `SessionUser`.
+- Prefer `postgrest()` over a new Supabase SDK. Do not change `public.users.password` into a second column; hashing, if added, stays in that column.
+- Do not "fix" `clients_applicatitons`.
+- `admin` is the super admin: a PIN session from `ADMIN_PIN`, not a row in `users`. It owns `/api/admin` only, and `requireClient` / `requireEmployee` reject it.

@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/client.ts";
 import { useAuth } from "../auth/AuthContext.tsx";
-import type { ClientApplication, EmployeeOption } from "../employees/types.ts";
+import type { ClientApplication } from "@domain/onboarding/model.ts";
+import type { EmployeeProfile } from "@domain/staff/model.ts";
 
 export type MandatePayload = {
   application: ClientApplication | null;
-  people: EmployeeOption[];
+  people: EmployeeProfile[];
 };
 
 export function useMandate() {
   const { user } = useAuth();
-  const [people, setPeople] = useState<EmployeeOption[]>([]);
+  const [people, setPeople] = useState<EmployeeProfile[]>([]);
   const [mandate, setMandate] = useState<ClientApplication | null>(null);
   const [mandateReady, setMandateReady] = useState(false);
 

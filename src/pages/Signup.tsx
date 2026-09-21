@@ -4,12 +4,14 @@ import { homePathForRole } from "../app/nav.ts";
 import { useAuth } from "../auth/AuthContext.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
 import { ButtonNavy, FormField, UnderlineLink } from "../components/ui/primitives.tsx";
+import { useAdminShortcut } from "../hooks/useAdminShortcut.ts";
 import { useI18n } from "../i18n/context.tsx";
 
 export function SignupPage() {
   const { t } = useI18n();
   const { user, signup } = useAuth();
   const navigate = useNavigate();
+  useAdminShortcut();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

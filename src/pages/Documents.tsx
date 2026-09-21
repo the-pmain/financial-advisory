@@ -8,8 +8,8 @@ import {
 import { DocCard } from "../components/documents/DocCard.tsx";
 import { DOC_CATALOG } from "../documents/catalog.ts";
 import { readDocPack } from "../documents/storage.ts";
-import { emptyClientDocuments, prepareClientAgreement } from "../employees/agreement.ts";
-import type { ClientApplication } from "../employees/types.ts";
+import { emptyClientDocuments, prepareClientAgreement } from "@domain/documents/agreement.ts";
+import type { ClientApplication } from "@domain/onboarding/model.ts";
 import { useMandate } from "../hooks/useMandate.ts";
 import { useI18n } from "../i18n/context.tsx";
 import { DOCUMENT_KIND_LABELS } from "../js/clients-documents-model.js";
@@ -32,6 +32,7 @@ function recordFromUser(
     instructedPersonSlug: null,
     registered: true,
     portalAccount: { id: user.id, name: user.name, email: user.email, createdAt: "" },
+    photoStoragePath: null,
     documents: emptyClientDocuments(),
   };
 }

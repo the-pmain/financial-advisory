@@ -14,6 +14,10 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@domain/*": ["src/domains/*"]
+    },
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "types": ["node", "vite/client"]

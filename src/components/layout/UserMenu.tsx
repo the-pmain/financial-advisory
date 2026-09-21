@@ -1,9 +1,9 @@
 import { ChevronDown, LogOut } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { useAuth } from "../../auth/AuthContext.tsx";
-import { isEmployee } from "../../auth/role.ts";
+import { isEmployee } from "@domain/identity/model.ts";
 import { useI18n } from "../../i18n/context.tsx";
-import { StaffAvatar } from "../employees/StaffAvatar.tsx";
+import { Avatar } from "../ui/avatar.tsx";
 import { Icon } from "../ui/icon.tsx";
 
 export function UserMenu() {
@@ -58,7 +58,7 @@ export function UserMenu() {
         aria-label={`${user.name}, ${t.app.accountMenu}`}
         onClick={() => setOpen((next) => !next)}
       >
-        <StaffAvatar name={user.name} photoUrl={photoUrl} size="header" placeholder={!staff} />
+        <Avatar name={user.name} photoUrl={photoUrl} size="header" placeholder={!staff} />
         <span className="app-header__user">{user.name}</span>
         <Icon icon={ChevronDown} className={`app-header__chevron${open ? " is-open" : ""}`} />
       </button>

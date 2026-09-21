@@ -1,4 +1,4 @@
-import { Briefcase, ClipboardList, FileText, LayoutDashboard, Mail, Users } from "lucide-react";
+import { Briefcase, ClipboardList, FileText, LayoutDashboard, Mail, UserCog, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const APP_NAV = [
@@ -23,17 +23,37 @@ export const EMPLOYEE_NAV = [
   icon: LucideIcon;
 }>;
 
-export type AppNavKey = (typeof APP_NAV)[number]["key"] | (typeof EMPLOYEE_NAV)[number]["key"];
+export const ADMIN_NAV = [
+  { to: "/admin/employees", key: "employees" as const, end: false, icon: UserCog },
+  { to: "/admin/clients", key: "allClients" as const, end: false, icon: Users },
+] as const satisfies ReadonlyArray<{
+  to: string;
+  key: "employees" | "allClients";
+  end: boolean;
+  icon: LucideIcon;
+}>;
+
+export type AppNavKey =
+  | (typeof APP_NAV)[number]["key"]
+  | (typeof EMPLOYEE_NAV)[number]["key"]
+  | (typeof ADMIN_NAV)[number]["key"];
 
 export function navItemsForRole(role: string | undefined) {
-  return role === "employee" ? EMPLOYEE_NAV : APP_NAV;
+  if (role === "employee") return EMPLOYEE_NAV;
+  if (role === "admin") return ADMIN_NAV;
+  return APP_NAV;
 }
 
 export function homePathForRole(role: string | undefined): string {
-  return role === "employee" ? "/" : "/overview";
+  if (role === "employee") return "/";
+  if (role === "admin") return "/admin/employees";
+  return "/overview";
 }
 
 export function navKeyFromPath(pathname: string, role?: string): AppNavKey {
+  if (role === "admin") {
+    return pathname.startsWith("/admin/clients") ? "allClients" : "employees";
+  }
   if (role === "employee") {
     if (pathname === "/clients" || pathname.startsWith("/clients/")) return "clients";
     return "applications";

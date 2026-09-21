@@ -1,8 +1,8 @@
 import { Check, ChevronDown, Search } from "lucide-react";
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
-import type { EmployeeOption } from "../../employees/types.ts";
+import type { EmployeeProfile } from "@domain/staff/model.ts";
 import { Icon } from "../ui/icon.tsx";
-import { StaffAvatar } from "./StaffAvatar.tsx";
+import { Avatar } from "../ui/avatar.tsx";
 
 export function StaffPicker({
   label,
@@ -18,7 +18,7 @@ export function StaffPicker({
   loadingLabel,
 }: {
   label: string;
-  people: EmployeeOption[];
+  people: EmployeeProfile[];
   value: string;
   onChange: (slug: string) => void;
   disabled?: boolean;
@@ -134,7 +134,7 @@ export function StaffPicker({
         >
           {selected ? (
             <>
-              <StaffAvatar key={selected.slug} name={selected.name} photoUrl={selected.photoUrl} size="md" />
+              <Avatar key={selected.slug} name={selected.name} photoUrl={selected.photoUrl} size="md" />
               <span className="staff-picker__copy">
                 <span className="staff-picker__name">{selected.name}</span>
                 {selected.role ? <span className="staff-picker__role">{selected.role}</span> : null}
@@ -190,7 +190,7 @@ export function StaffPicker({
                       onMouseEnter={() => setActive(index)}
                       onClick={() => choose(person.slug)}
                     >
-                      <StaffAvatar key={person.slug} name={person.name} photoUrl={person.photoUrl} size="sm" />
+                      <Avatar key={person.slug} name={person.name} photoUrl={person.photoUrl} size="sm" />
                       <span className="staff-picker__copy">
                         <span className="staff-picker__name">{person.name}</span>
                         {person.role ? <span className="staff-picker__role">{person.role}</span> : null}

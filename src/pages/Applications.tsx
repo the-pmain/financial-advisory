@@ -2,7 +2,7 @@ import { CircleCheck, CircleDashed } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { api } from "../api/client.ts";
 import { Icon } from "../components/ui/icon.tsx";
-import type { ClientApplication } from "../employees/types.ts";
+import type { ClientApplication } from "@domain/onboarding/model.ts";
 import { useI18n } from "../i18n/context.tsx";
 
 function formatReceived(iso: string): string {

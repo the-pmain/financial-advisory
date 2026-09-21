@@ -2,10 +2,16 @@ import { useState } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router";
 import { homePathForRole } from "./app/nav.ts";
 import { AuthProvider, useAuth } from "./auth/AuthContext.tsx";
-import { isEmployee } from "./auth/role.ts";
+import { isAdmin, isEmployee } from "@domain/identity/model.ts";
 import { PageShell } from "./components/layout/PageShell.tsx";
 import { AuthSplash } from "./components/ui/AppLoader.tsx";
+import { useAdminShortcut } from "./hooks/useAdminShortcut.ts";
 import { I18nProvider } from "./i18n/context.tsx";
+import { AdminClientPage } from "./pages/AdminClient.tsx";
+import { AdminClientsPage } from "./pages/AdminClients.tsx";
+import { AdminEmployeePage } from "./pages/AdminEmployee.tsx";
+import { AdminEmployeesPage } from "./pages/AdminEmployees.tsx";
+import { AdminGatePage } from "./pages/AdminGate.tsx";
 import { ApplicationsPage } from "./pages/Applications.tsx";
 import { ClientsPage } from "./pages/Clients.tsx";
 import { DocumentFormPage } from "./pages/DocumentForm.tsx";
@@ -26,6 +32,7 @@ function readStaffGate(): boolean {
 
 function GuestAuth() {
   const [staff, setStaff] = useState(readStaffGate);
+  useAdminShortcut();
 
   function showStaff() {
     window.sessionStorage.setItem(STAFF_GATE, "1");
@@ -73,7 +80,25 @@ function EmployeeClientsPage() {
 function ClientLayout() {
   const { user } = useAuth();
   if (!user) return <Navigate to="/" replace />;
-  if (isEmployee(user)) return <Navigate to="/" replace />;
+  if (isEmployee(user) || isAdmin(user)) return <Navigate to={homePathForRole(user.role)} replace />;
+  return (
+    <PageShell>
+      <Outlet />
+    </PageShell>
+  );
+}
+
+function AdminIndex() {
+  const { user, ready } = useAuth();
+  if (!ready) return null;
+  if (isAdmin(user)) return <Navigate to={homePathForRole(user.role)} replace />;
+  return <AdminGatePage />;
+}
+
+function AdminLayout() {
+  const { user, ready } = useAuth();
+  if (!ready) return null;
+  if (!isAdmin(user)) return <Navigate to="/admin" replace />;
   return (
     <PageShell>
       <Outlet />
@@ -100,6 +125,13 @@ function AppRoutes() {
             <Route path="/clients" element={<EmployeeClientsPage />} />
           </Route>
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/admin" element={<AdminIndex />} />
+          <Route element={<AdminLayout />}>
+            <Route path="/admin/employees" element={<AdminEmployeesPage />} />
+            <Route path="/admin/employees/:slug" element={<AdminEmployeePage />} />
+            <Route path="/admin/clients" element={<AdminClientsPage />} />
+            <Route path="/admin/clients/:id" element={<AdminClientPage />} />
+          </Route>
           <Route path="/employees/*" element={<LegacyEmployeePath />} />
           <Route path="/employees" element={<LegacyEmployeePath />} />
           <Route element={<ClientLayout />}>

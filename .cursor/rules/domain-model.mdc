@@ -1,0 +1,17 @@
+---
+description: What belongs in the shared domain model under src/domains
+globs: src/domains/**
+alwaysApply: false
+---
+
+# Domain model
+
+`src/domains/<ctx>/model.ts` is the shared language of one bounded context. The API and the browser both import it as `@domain/<ctx>/model.ts`, so it has to run in both.
+
+- Allowed: types, constants, invariants, parsers, projections, URL shapes. Anything a form and a route handler should agree on.
+- Not allowed: express, `postgrest`, `process.env`, React, `localStorage`, `fetch`, `node:*`. The one exception is the PDF engine in `src/js`, which is isomorphic already.
+- Put validation here, not in the router. `parseEmployeeAccountPatch` is the only rule set for a staff edit, and `toClientSummary` is the only definition of what the console may see. Paging (`parsePageQuery`, `paginate`) lives in `src/domains/shared/page.ts` because no context owns it.
+- Name things the way the firm does: `EmployeeAccount`, `ClientApplication`, `ClientSummary`. Do not name a domain type after the widget that renders it.
+- Model to model, the only edge is staff → onboarding. Do not add an import that closes a cycle.
+- Repository interfaces are not domain: they live in `server/contexts/<ctx>/ports.ts`.
+- Tests next to the model, as `*.test.js` under `src/domains/`, picked up by `npm test`.

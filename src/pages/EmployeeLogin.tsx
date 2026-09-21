@@ -6,14 +6,14 @@ import { useAuth } from "../auth/AuthContext.tsx";
 import { StaffPicker } from "../components/employees/StaffPicker.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
 import { ButtonNavy, UnderlineButton } from "../components/ui/primitives.tsx";
-import type { EmployeeOption } from "../employees/types.ts";
+import type { EmployeeProfile } from "@domain/staff/model.ts";
 import { useI18n } from "../i18n/context.tsx";
 
 export function EmployeeLoginPage({ onClientPortal }: { onClientPortal?: () => void }) {
   const { t } = useI18n();
   const { user, employeeLogin } = useAuth();
   const navigate = useNavigate();
-  const [staff, setStaff] = useState<EmployeeOption[] | null>(null);
+  const [staff, setStaff] = useState<EmployeeProfile[] | null>(null);
   const [slug, setSlug] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,7 +25,7 @@ export function EmployeeLoginPage({ onClientPortal }: { onClientPortal?: () => v
 
   useEffect(() => {
     let cancelled = false;
-    api<EmployeeOption[]>("/api/auth/employee/directory")
+    api<EmployeeProfile[]>("/api/auth/employee/directory")
       .then((rows) => {
         if (!cancelled) setStaff(rows);
       })

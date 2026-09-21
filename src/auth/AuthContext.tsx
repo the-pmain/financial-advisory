@@ -1,24 +1,17 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import type { SessionUser } from "@domain/identity/model.ts";
 import { api } from "../api/client.ts";
 import { clearSessionHint, hasSessionHint } from "./sessionHint.ts";
 
 const BOOT_MS = 1600;
 
-export type User = {
-  id: string;
-  email: string;
-  name: string;
-  role: "advisor" | "admin" | "employee";
-  slug?: string;
-  photoUrl?: string;
-};
-
 type AuthValue = {
-  user: User | null;
+  user: SessionUser | null;
   ready: boolean;
   entering: boolean;
   login: (email: string, password: string) => Promise<void>;
   employeeLogin: (slug: string, password: string) => Promise<void>;
+  adminLogin: (pin: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -32,13 +25,13 @@ function bootHoldMs(startedAt: number): number {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<SessionUser | null>(null);
   const [ready, setReady] = useState(false);
   const [entering, setEntering] = useState(hasSessionHint);
   const startedAt = useRef(typeof performance === "undefined" ? 0 : performance.now());
 
   useEffect(() => {
-    api<User>("/api/auth/me")
+    api<SessionUser>("/api/auth/me")
       .then(setUser)
       .catch(() => {
         clearSessionHint();
@@ -64,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       ready,
       entering,
       async login(email, password) {
-        const next = await api<User>("/api/auth/login", {
+        const next = await api<SessionUser>("/api/auth/login", {
           method: "POST",
           body: JSON.stringify({ email, password }),
         });
@@ -73,7 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(next);
       },
       async employeeLogin(slug, password) {
-        const next = await api<User>("/api/auth/employee/login", {
+        const next = await api<SessionUser>("/api/auth/employee/login", {
           method: "POST",
           body: JSON.stringify({ slug, password }),
         });
@@ -81,8 +74,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setEntering(true);
         setUser(next);
       },
+      async adminLogin(pin) {
+        const next = await api<SessionUser>("/api/auth/admin", {
+          method: "POST",
+          body: JSON.stringify({ pin }),
+        });
+        startedAt.current = performance.now();
+        setEntering(true);
+        setUser(next);
+      },
       async signup(name, email, password) {
-        const next = await api<User>("/api/auth/signup", {
+        const next = await api<SessionUser>("/api/auth/signup", {
           method: "POST",
           body: JSON.stringify({ name, email, password }),
         });
