@@ -1,13 +1,22 @@
 import { ArrowLeft, Camera } from "lucide-react";
-import { ChangeEvent, ReactNode, useRef, useState } from "react";
+import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
-import type { ClientWithAdviser } from "@domain/staff/model.ts";
+import { emptyClientDocuments, prepareClientAgreement } from "@domain/documents/agreement.ts";
+import type { ClientApplication } from "@domain/onboarding/model.ts";
+import type { ClientWithAdviser, EmployeeProfile } from "@domain/staff/model.ts";
+import { api } from "../api/client.ts";
 import { ClientDocuments, DOC_KINDS, filedCount, RegisteredTag } from "../components/admin/ClientCard.tsx";
+import {
+  adminPreviewCopy,
+  DocumentPreviewDialog,
+  type PreviewPrepare,
+} from "../components/admin/DocumentPreviewDialog.tsx";
 import { SecretField } from "../components/admin/SecretField.tsx";
 import { Avatar } from "../components/ui/avatar.tsx";
 import { Icon } from "../components/ui/icon.tsx";
 import { useAdminClient } from "../hooks/useAdminClient.ts";
 import { useI18n } from "../i18n/context.tsx";
+import { DOCUMENT_KIND_LABELS, type DocumentsMap } from "../js/clients-documents-model.js";
 import { formatDay } from "../lib/format.ts";
 import { squarePngBlob } from "../lib/image.ts";
 
@@ -271,10 +280,62 @@ function AdviserTab({ client }: { client: ClientWithAdviser }) {
   );
 }
 
+function applicationFromAdminClient(client: ClientWithAdviser): ClientApplication {
+  return {
+    id: client.id,
+    createdAt: client.createdAt,
+    name: client.name,
+    email: client.email,
+    phone: client.phone,
+    instructedPersonSlug: client.instructedPersonSlug,
+    registered: client.registered,
+    portalAccount: client.portalAccount,
+    photoStoragePath: null,
+    documents: emptyClientDocuments(),
+  };
+}
+
+function prepareAdminDocument(
+  kind: keyof DocumentsMap,
+  client: ClientWithAdviser,
+  people: EmployeeProfile[],
+): Promise<{ bytes: Uint8Array; filename: string }> {
+  if (kind !== "agreement") {
+    return Promise.reject(new Error("This workspace generates the client agreement only."));
+  }
+  return prepareClientAgreement(applicationFromAdminClient(client), people);
+}
+
 function DocumentsTab({ client }: { client: ClientWithAdviser }) {
   const { t } = useI18n();
   const copy = t.admin.clients;
   const shared = t.admin.client;
+  const [people, setPeople] = useState<EmployeeProfile[]>(() => (client.adviser ? [client.adviser] : []));
+  const [preview, setPreview] = useState<{ kind: keyof DocumentsMap; prepare: PreviewPrepare } | null>(
+    null,
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    api<EmployeeProfile[]>("/api/auth/employee/directory")
+      .then((directory) => {
+        if (!cancelled) setPeople(directory);
+      })
+      .catch(() => {
+        if (!cancelled) setPeople(client.adviser ? [client.adviser] : []);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [client.adviser]);
+
+  function open(kind: keyof DocumentsMap) {
+    if (kind !== "agreement") return;
+    setPreview({
+      kind,
+      prepare: () => prepareAdminDocument(kind, client, people),
+    });
+  }
 
   return (
     <article className="staff-apps__panel">
@@ -284,8 +345,19 @@ function DocumentsTab({ client }: { client: ClientWithAdviser }) {
           .replace("{n}", String(filedCount(client)))
           .replace("{total}", String(DOC_KINDS.length))}
       </p>
-      <ClientDocuments documents={client.documents} />
+      <ClientDocuments documents={client.documents} onOpen={open} />
       <p className="admin-hint admin-hint--after">{shared.kycNote}</p>
+      <DocumentPreviewDialog
+        open={Boolean(preview)}
+        copy={{
+          ...adminPreviewCopy(preview ? DOCUMENT_KIND_LABELS[preview.kind] : ""),
+          ...(preview && preview.kind !== "agreement" ? { fail: shared.previewUnavailable } : {}),
+        }}
+        prepare={preview?.prepare ?? null}
+        runKey={preview ? `${client.id}:${preview.kind}` : undefined}
+        wait="close"
+        onClose={() => setPreview(null)}
+      />
     </article>
   );
 }

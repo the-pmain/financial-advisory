@@ -28,7 +28,13 @@ export function RegisteredTag({ registered }: { registered: boolean }) {
 }
 
 /** What the firm has on file for a client, as dates. Field values stay server side. */
-export function ClientDocuments({ documents }: { documents: ClientSummary["documents"] }) {
+export function ClientDocuments({
+  documents,
+  onOpen,
+}: {
+  documents: ClientSummary["documents"];
+  onOpen?: (kind: keyof DocumentsMap) => void;
+}) {
   const { t } = useI18n();
   const copy = t.admin.client;
 
@@ -36,17 +42,28 @@ export function ClientDocuments({ documents }: { documents: ClientSummary["docum
     <ul className="admin-docs">
       {DOC_KINDS.map((kind) => {
         const filedAt = documents?.[kind] ?? null;
+        const className = `admin-doc${filedAt ? " is-filed" : ""}`;
+        const body = (
+          <>
+            <Icon icon={filedAt ? CircleCheck : CircleDashed} size={13} />
+            {DOCUMENT_KIND_LABELS[kind]}
+            <span className="admin-doc__when">
+              {filedAt
+                ? copy.documentsFiled.replace("{date}", formatDay(filedAt))
+                : copy.documentsPending}
+            </span>
+          </>
+        );
+        const canOpen = kind === "agreement" ? onOpen : undefined;
         return (
           <li key={kind}>
-            <span className={`admin-doc${filedAt ? " is-filed" : ""}`}>
-              <Icon icon={filedAt ? CircleCheck : CircleDashed} size={13} />
-              {DOCUMENT_KIND_LABELS[kind]}
-              <span className="admin-doc__when">
-                {filedAt
-                  ? copy.documentsFiled.replace("{date}", formatDay(filedAt))
-                  : copy.documentsPending}
-              </span>
-            </span>
+            {canOpen ? (
+              <button type="button" className={className} onClick={() => canOpen(kind)}>
+                {body}
+              </button>
+            ) : (
+              <span className={className}>{body}</span>
+            )}
           </li>
         );
       })}

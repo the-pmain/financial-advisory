@@ -2,6 +2,7 @@ import { emptyDocuments } from "../../../src/js/clients-documents-model.js";
 import {
   isClientPhotoFile,
   nextClientPhotoFile,
+  withAccountPortrait,
   type ClientApplication,
 } from "@domain/onboarding/model.ts";
 import { invalid, notFound, unavailable } from "../../platform/errors.ts";
@@ -32,7 +33,7 @@ export function createOnboardingService(deps: {
     return rows.map((row) => {
       const portalAccount = held.get(row.email.trim().toLowerCase());
       // Only ever an upgrade, so a seeded registration is not undone by a miss.
-      return portalAccount ? { ...row, registered: true, portalAccount } : row;
+      return portalAccount ? withAccountPortrait(row, portalAccount) : row;
     });
   }
 

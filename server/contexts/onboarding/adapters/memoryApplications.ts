@@ -18,6 +18,7 @@ function seed(): ClientApplication[] {
         name: "Clara Meier",
         email: "clara.meier@example.com",
         createdAt: "2026-09-18T09:12:00.000Z",
+        photoStoragePath: null,
       },
       photoStoragePath: null,
       documents: emptyDocuments(),

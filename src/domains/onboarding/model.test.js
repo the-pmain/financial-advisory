@@ -1,7 +1,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { emptyDocuments } from "../../js/clients-documents-model.js";
-import { clientPhotoUrl, isClientPhotoFile, nextClientPhotoFile, toClientSummary } from "./model.ts";
+import {
+  clientPhotoUrl,
+  isClientPhotoFile,
+  nextClientPhotoFile,
+  toClientSummary,
+  withAccountPortrait,
+} from "./model.ts";
 
 describe("client portraits", () => {
   it("names a new object from the record id", () => {
@@ -37,5 +43,31 @@ describe("client portraits", () => {
 
     assert.equal(summary.photoUrl, "");
     assert.equal("photoStoragePath" in summary, false);
+  });
+
+  it("prefers the portal account portrait once they have signed up", () => {
+    const application = {
+      id: "1",
+      createdAt: "2026-09-18T00:00:00.000Z",
+      name: "Clara Meier",
+      email: "clara.meier@example.com",
+      phone: "",
+      instructedPersonSlug: "staff",
+      registered: false,
+      portalAccount: null,
+      photoStoragePath: "application-old.png",
+      documents: emptyDocuments(),
+    };
+    const joined = withAccountPortrait(application, {
+      id: "acc",
+      name: "Clara Meier",
+      email: "clara.meier@example.com",
+      createdAt: "2026-09-18T00:00:00.000Z",
+      photoStoragePath: "account-new.png",
+    });
+
+    assert.equal(joined.registered, true);
+    assert.equal(joined.photoStoragePath, "account-new.png");
+    assert.equal(toClientSummary(joined).photoUrl, "/api/admin/clients/photos/account-new.png");
   });
 });

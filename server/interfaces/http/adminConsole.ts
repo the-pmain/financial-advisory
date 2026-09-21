@@ -155,7 +155,11 @@ export function createAdminConsoleRouter(deps: {
     "/clients/:id/photo",
     photoBody,
     route(async (req, res) => {
-      res.json(await oneWithAdviser(await onboarding.replacePhoto(param(req, "id"), readPhoto(req.body))));
+      const saved = await onboarding.replacePhoto(param(req, "id"), readPhoto(req.body));
+      if (saved.photoStoragePath) {
+        await identity.setPhotoPath(saved.email, saved.photoStoragePath);
+      }
+      res.json(await oneWithAdviser(saved));
     }, "Could not save this picture."),
   );
 

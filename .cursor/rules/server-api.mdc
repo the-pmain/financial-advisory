@@ -22,10 +22,10 @@ server/index.ts             middleware, mounts, static files
 - New data for an existing context: add the method to `ports.ts`, implement it in **both** adapters, then use it from `service.ts`. A memory adapter is not optional — the app has to run with no Supabase configured.
 - New endpoint: a router under `server/interfaces/http/`, created by a `createXRouter(deps)` factory taking services, mounted in `server/index.ts`. Public auth stays under `/api/auth` (rate-limited). `/api/documents` is `requireAuth` + `requireClient`, `/api/employees` is `requireEmployee`, `/api/admin` is `requireAdmin`.
 - Wrap handlers in `route(handler, whenBroken)` and let services throw `invalid()`, `unauthorized()`, `notFound()`, `conflict()`, `unavailable()` from `platform/errors.ts`. Every failure leaves as `{ error: string }` so `src/api/client.ts` can surface it. Do not hand-roll try/catch plus `res.status(500)` again.
-- Only `platform/supabase.ts` and `container.ts` read `process.env` for data access. `ADMIN_PIN` is the one exception, read in the identity service.
+- Only `platform/supabase.ts` and `container.ts` read `process.env` for data access. `ADMIN_PASS` is the one exception, read in the identity service.
 - Reach another context through a port, not its adapter or its table: identity asks staff to `authenticate`, onboarding asks identity `findByEmails`, onboarding asks documents `findForClients`. Staff and onboarding each own a `PhotoStore`; both talk to `platform/storage.ts` rather than copying fetch calls.
 - Types and validation come from `@domain/<ctx>/model.ts`. Do not restate a shape or a limit inside `server/`.
 - A record with a password on it (`EmployeeRecord`, `AccountRecord`) stays inside its context. Publish `EmployeeAccount`, `EmployeeProfile`, or a `SessionUser`.
-- Prefer `postgrest()` over a new Supabase SDK. Do not change `public.users.password` into a second column; hashing, if added, stays in that column.
+- Prefer `postgrest()` over a new Supabase SDK. Do not change `public.clients.password` into a second column; hashing, if added, stays in that column. The portal accounts table is `clients` (renamed from `users`).
 - Do not "fix" `clients_applicatitons`.
-- `admin` is the super admin: a PIN session from `ADMIN_PIN`, not a row in `users`. It owns `/api/admin` only, and `requireClient` / `requireEmployee` reject it.
+- `admin` is the super admin: a password session from `ADMIN_PASS`, not a row in `clients`. It owns `/api/admin` only, and `requireClient` / `requireEmployee` reject it.

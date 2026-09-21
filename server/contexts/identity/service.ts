@@ -1,10 +1,12 @@
 import {
+  clientSessionPhotoUrl,
   isEmail,
   publicSession,
   PASSWORD_MIN,
   SUPER_ADMIN_ID,
   type SessionUser,
 } from "@domain/identity/model.ts";
+import { isClientPhotoFile } from "@domain/onboarding/model.ts";
 import { conventionPhotoFile, photoUrl, photoUrlFor } from "@domain/staff/model.ts";
 import { conflict, invalid, unauthorized, unavailable } from "../../platform/errors.ts";
 import { secretsMatch } from "../../platform/secrets.ts";
@@ -18,7 +20,7 @@ import type {
 
 export type IdentityService = ReturnType<typeof createIdentityService>;
 
-/** The super admin is a PIN session, not a row in `users`. */
+/** The super admin is a password session, not a row in `clients`. */
 function adminSession(): SessionUser {
   return { id: SUPER_ADMIN_ID, email: "", name: "Super admin", role: "admin" };
 }
@@ -35,7 +37,13 @@ function employeeSession(record: EmployeeRecord): SessionUser {
 }
 
 function accountSession(account: AccountRecord): SessionUser {
-  return { id: account.id, email: account.email, name: account.name, role: "advisor" };
+  return {
+    id: account.id,
+    email: account.email,
+    name: account.name,
+    role: "advisor",
+    photoUrl: clientSessionPhotoUrl(account.photoStoragePath),
+  };
 }
 
 /** An email or a blank in the name column is not a name to greet anyone by. */
@@ -98,13 +106,11 @@ export function createIdentityService(deps: {
       return employeeSession(record);
     },
 
-    /** The gate to the console. The PIN lives in `ADMIN_PIN`, never in code. */
-    async adminLogin(pin: string): Promise<SessionUser> {
-      const expected = String(process.env.ADMIN_PIN ?? "").trim();
-      if (!expected) throw unavailable("The admin PIN is not configured.");
-
-      const given = pin.trim();
-      if (!given || !secretsMatch(expected, given)) throw unauthorized("Incorrect PIN.");
+    /** The gate to the console. The password lives in `ADMIN_PASS`, never in code. */
+    async adminLogin(password: string): Promise<SessionUser> {
+      const expected = String(process.env.ADMIN_PASS ?? "").trim();
+      if (!expected) throw unavailable("The admin password is not configured.");
+      if (!password || !secretsMatch(expected, password)) throw unauthorized("Incorrect password.");
       return adminSession();
     },
 
@@ -117,6 +123,27 @@ export function createIdentityService(deps: {
       if (!needle) return null;
       const account = await accounts.findByEmail(needle);
       return account?.password ?? null;
+    },
+
+    /** Object name in the `clients` bucket, or null when this email holds no picture. */
+    async photoPathForEmail(email: string): Promise<string | null> {
+      const needle = email.trim().toLowerCase();
+      if (!needle) return null;
+      const account = await accounts.findByEmail(needle);
+      const file = account?.photoStoragePath?.trim();
+      return file || null;
+    },
+
+    /**
+     * The same object the console already stored. Identity does not read the
+     * applications table; the router copies the name across after a save.
+     */
+    async setPhotoPath(email: string, file: string): Promise<void> {
+      const needle = email.trim().toLowerCase();
+      if (!needle) throw invalid("That client record could not be found.");
+      if (!isClientPhotoFile(file)) throw invalid("That picture name is not allowed.");
+      if (!(await accounts.findByEmail(needle))) return;
+      await accounts.setPhotoPath(needle, file);
     },
 
     /**

@@ -12,6 +12,8 @@ export type PortalAccount = {
   name: string;
   email: string;
   createdAt: string;
+  /** Object name in the private `clients` bucket. Null until someone sets a picture. */
+  photoStoragePath: string | null;
 };
 
 export type ClientApplication = {
@@ -23,7 +25,10 @@ export type ClientApplication = {
   instructedPersonSlug: string | null;
   registered: boolean;
   portalAccount: PortalAccount | null;
-  /** Object name in the portraits bucket. Null until someone sets a picture. */
+  /**
+   * Object name in the private `clients` bucket. On a registered person this
+   * is the account portrait; otherwise the application one.
+   */
   photoStoragePath: string | null;
   documents: DocumentsMap;
 };
@@ -59,6 +64,23 @@ export function nextClientPhotoFile(id: string, at: number = Date.now()): string
 export function clientPhotoUrl(file: string | null | undefined): string {
   if (!file || !isClientPhotoFile(file)) return "";
   return `/api/admin/clients/photos/${encodeURIComponent(file)}`;
+}
+
+/**
+ * A signed-up client keeps their picture on `public.clients`. An applicant
+ * who never opened an account still has only the application row.
+ */
+export function withAccountPortrait(
+  application: ClientApplication,
+  account: PortalAccount | null | undefined,
+): ClientApplication {
+  if (!account) return application;
+  return {
+    ...application,
+    registered: true,
+    portalAccount: account,
+    photoStoragePath: account.photoStoragePath ?? application.photoStoragePath,
+  };
 }
 
 /** The console lists what is on file, not what is in it. */

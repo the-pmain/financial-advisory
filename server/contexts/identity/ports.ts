@@ -7,11 +7,14 @@ export type AccountRecord = {
   email: string;
   name: string;
   password: string;
+  /** Object name in the private `clients` bucket. Null until someone sets a picture. */
+  photoStoragePath: string | null;
 };
 
 export type AccountRepository = {
   findByEmail(email: string): Promise<AccountRecord | null>;
-  insert(account: Omit<AccountRecord, "id">): Promise<AccountRecord>;
+  insert(account: Omit<AccountRecord, "id" | "photoStoragePath">): Promise<AccountRecord>;
+  setPhotoPath(email: string, file: string): Promise<void>;
 };
 
 /** Who among these emails holds a portal account. Read by onboarding. */

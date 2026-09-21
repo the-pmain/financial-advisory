@@ -12,7 +12,7 @@ Vite React 19 client + Express 5 API, laid out by bounded context. One repo, thr
 | Employee | `/` | Applications, Clients |
 | Super admin (`admin`) | `/admin/employees` | Employees, Clients |
 
-Signup/login are custom cookie sessions (`sid` + `portal` hint), not Supabase Auth. The super admin is a PIN session: `ADMIN_PIN` from `.env`, entered on the `/admin` keypad, reachable from any auth screen by pressing A, D, M (Ctrl/Cmd optional, ignored while typing in a field). The server talks to Supabase with PostgREST when `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are set; otherwise every port falls back to a memory adapter. `GET /api/health` reports which.
+Signup/login are custom cookie sessions (`sid` + `portal` hint), not Supabase Auth. The super admin is a password session: `ADMIN_PASS` from `.env`, entered on `/admin`, reachable from any auth screen by pressing A, D, M (Ctrl/Cmd optional, ignored while typing in a field). The server talks to Supabase with PostgREST when `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are set; otherwise every port falls back to a memory adapter. `GET /api/health` reports which.
 
 ## Contexts
 
@@ -20,7 +20,7 @@ Four of them. Each owns its words and its tables.
 
 | Context | Owns | Model | Server |
 |---------|------|-------|--------|
-| identity | sessions, roles, portal accounts (`users`), the admin PIN | `src/domains/identity` | `server/contexts/identity` |
+| identity | sessions, roles, portal accounts (`clients`), the admin password | `src/domains/identity` | `server/contexts/identity` |
 | staff | employees, the public directory, portraits (`employees`) | `src/domains/staff` | `server/contexts/staff` |
 | onboarding | applications and the clients they become (`clients_applicatitons`) | `src/domains/onboarding` | `server/contexts/onboarding` |
 | documents | firm PDFs (`clients_documents`) and the engine in `src/js` | `src/domains/documents` | `server/contexts/documents` |
@@ -63,12 +63,12 @@ src/theme       design tokens
 
 | Surface | Source |
 |---------|--------|
-| Client / employee login | `users` / `employees` through identity and staff, or memory |
-| Super admin login | `ADMIN_PIN` env var only |
+| Client / employee login | `clients` / `employees` through identity and staff, or memory |
+| Super admin login | `ADMIN_PASS` env var only |
 | Applications / clients | `clients_applicatitons` (spelling is live) through onboarding |
 | Admin console | staff accounts joined with onboarding applications in `interfaces/http/adminConsole.ts`, from either end: `/api/admin/employees` or paged `GET /api/admin/clients`. Stored passwords only via `GET /api/admin/.../password`. |
 | Staff portraits | Supabase Storage bucket `employees`, served by `GET /api/staff/photos/:file` |
-| Client portraits | `photo_storage_path` on `clients_applicatitons`, private bucket `clients`, served by `GET /api/admin/clients/photos/:file` |
+| Client portraits | `photo_storage_path` on `clients` (the portal account) and on `clients_applicatitons`, private bucket `clients`. Admin reads `GET /api/admin/clients/photos/:file`; the signed-in client reads `GET /api/me/photo`. SQL: `supabase/clients.sql`. |
 | Firm legal docs | `clients_documents` + the `src/js` PDF engine |
 | Client KYC pack | `localStorage` key `portal.docs.v1.{userId}` — not the API |
 | Overview / Holdings / Messages | `src/sample/portal.ts` — labelled illustrative |
@@ -116,10 +116,10 @@ Never merge these catalogs. Pick one before adding a document type.
 - Import express, `postgrest`, or React from `src/domains`
 - Delete or rename `.sample-*` CSS because the class says sample — those styles power live pages
 - Introduce Supabase Auth, JWT libraries, or bcrypt unless the task is auth
-- Store a second password column or a raw-password workflow; the users table column is `password`
+- Store a second password column or a raw-password workflow; the `clients` table column is `password`
 - Import `@supabase/supabase-js` on the client
 - Add a new icon package
-- Commit a real `ADMIN_PIN` or give it a hardcoded fallback in code
+- Commit a real `ADMIN_PASS` or give it a hardcoded fallback in code
 - Give `/admin` a dark or bespoke theme; it is a white auth card like the other sign-in screens
 
 ## Commands

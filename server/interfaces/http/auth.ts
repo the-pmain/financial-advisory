@@ -9,6 +9,7 @@ import {
   signSession,
 } from "../../contexts/identity/session.ts";
 import type { IdentityService } from "../../contexts/identity/service.ts";
+import type { OnboardingService } from "../../contexts/onboarding/service.ts";
 import type { StaffService } from "../../contexts/staff/service.ts";
 import { route } from "../../platform/http.ts";
 
@@ -66,7 +67,7 @@ export function createAuthRouter(deps: { identity: IdentityService; staff: Staff
   router.post(
     "/admin",
     route(async (req, res) => {
-      const session = await identity.adminLogin(String(req.body?.pin ?? ""));
+      const session = await identity.adminLogin(String(req.body?.password ?? ""));
       writeAuthCookies(res, session);
       res.json(session);
     }, "Could not open the console."),
@@ -89,4 +90,31 @@ export function createAuthRouter(deps: { identity: IdentityService; staff: Staff
   );
 
   return router;
+}
+
+/**
+ * The signed-in client's own portrait. Mounted outside the auth rate-limit
+ * bucket so a page load that also hits `/me` does not spend two tokens.
+ */
+export function sessionPhotoHandler(deps: {
+  identity: IdentityService;
+  onboarding: OnboardingService;
+}) {
+  const { identity, onboarding } = deps;
+  return route(async (req, res) => {
+    const user = (req as AuthedRequest).user;
+    const fromAccount = await identity.photoPathForEmail(user.email);
+    const fromApplication = fromAccount
+      ? null
+      : (await onboarding.findByEmail(user.email))?.photoStoragePath;
+    const file = fromAccount || fromApplication || "";
+    const photo = file ? await onboarding.readPhoto(file) : null;
+    if (!photo) {
+      res.status(404).end();
+      return;
+    }
+    res.setHeader("Content-Type", photo.contentType);
+    res.setHeader("Cache-Control", "private, max-age=86400");
+    res.send(photo.body);
+  }, "Could not load this picture.");
 }

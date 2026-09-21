@@ -35,7 +35,7 @@ export function UserMenu() {
   const staff = isEmployee(user);
   const photoUrl = staff
     ? user.photoUrl || (user.slug ? `/api/staff/photos/${encodeURIComponent(user.slug)}.png` : "")
-    : "";
+    : (user.photoUrl ?? "");
 
   async function onLogout() {
     setPending(true);
@@ -58,7 +58,7 @@ export function UserMenu() {
         aria-label={`${user.name}, ${t.app.accountMenu}`}
         onClick={() => setOpen((next) => !next)}
       >
-        <Avatar name={user.name} photoUrl={photoUrl} size="header" placeholder={!staff} />
+        <Avatar name={user.name} photoUrl={photoUrl} size="header" placeholder={!staff && !photoUrl} />
         <span className="app-header__user">{user.name}</span>
         <Icon icon={ChevronDown} className={`app-header__chevron${open ? " is-open" : ""}`} />
       </button>

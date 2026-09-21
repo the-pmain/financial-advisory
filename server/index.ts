@@ -11,7 +11,7 @@ import { SERVER_VERSION } from "../src/version.ts";
 import { buildContainer } from "./container.ts";
 import { requireAdmin, requireAuth, requireClient, requireEmployee } from "./contexts/identity/guards.ts";
 import { createAdminConsoleRouter } from "./interfaces/http/adminConsole.ts";
-import { createAuthRouter } from "./interfaces/http/auth.ts";
+import { createAuthRouter, sessionPhotoHandler } from "./interfaces/http/auth.ts";
 import { createClientPortalRouter } from "./interfaces/http/clientPortal.ts";
 import { createEmployeePortalRouter } from "./interfaces/http/employeePortal.ts";
 import { createStaffRouter } from "./interfaces/http/staff.ts";
@@ -31,9 +31,10 @@ app.get("/api/health", (_req, res) => {
   res.json({ ok: true, serverVersion: SERVER_VERSION, store: container.store });
 });
 
-// A four digit PIN is guessable, so the admin gate gets a tighter bucket than the rest of auth.
+// The admin password is a single shared secret, so the gate gets a tighter bucket than the rest of auth.
 app.use("/api/auth/admin", rateLimit({ windowMs: 15 * 60 * 1000, max: 8 }));
 app.use("/api/auth", rateLimit({ windowMs: 15 * 60 * 1000, max: 20 }), createAuthRouter(container));
+app.get("/api/me/photo", requireAuth, requireClient, sessionPhotoHandler(container));
 app.use("/api/staff", createStaffRouter(container));
 app.use("/api/documents", requireAuth, requireClient, createClientPortalRouter(container));
 app.use("/api/employees", requireAuth, requireEmployee, createEmployeePortalRouter(container));

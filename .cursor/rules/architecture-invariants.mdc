@@ -13,7 +13,7 @@ Read `AGENTS.md` before adding a page, route, document type, or chart.
 - A service depends on `ports.ts`, never on a table or the environment. Every port has a PostgREST adapter and a memory adapter, and `server/container.ts` is the only file that picks between them.
 - Contexts do not read each other's tables. Cross-context reads go through a port the other context satisfies, wired in `container.ts`.
 - Express lives in `server/interfaces/http/` and `server/index.ts`. Routers may compose services; services may not know about HTTP.
-- Auth is HMAC cookies in `server/contexts/identity/session.ts`, not Supabase Auth. The super admin signs in with `ADMIN_PIN`, not a user row.
+- Auth is HMAC cookies in `server/contexts/identity/session.ts`, not Supabase Auth. The super admin signs in with `ADMIN_PASS`, not a user row. Portal accounts live in `public.clients` (renamed from `users`); the password column stays `password`.
 - Table `clients_applicatitons` spelling is live. Do not rename it.
 - Overview / Holdings / Messages read `src/sample/`. That is illustrative data, not a live ledger.
 - `.sample-*` CSS classes style real pages. Do not delete them as leftover demo code.

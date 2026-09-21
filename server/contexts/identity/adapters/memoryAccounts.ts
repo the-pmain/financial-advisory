@@ -13,6 +13,7 @@ export function memoryAccounts(): AccountRepository & PortalAccountDirectory {
     email: "clara.meier@example.com",
     name: "Clara Meier",
     password: "password12",
+    photoStoragePath: null,
     createdAt: "2026-09-18T09:12:00.000Z",
   });
 
@@ -21,14 +22,20 @@ export function memoryAccounts(): AccountRepository & PortalAccountDirectory {
       return rows.get(email.trim().toLowerCase()) ?? null;
     },
 
-    async insert(account: Omit<AccountRecord, "id">): Promise<AccountRecord> {
+    async insert(account: Omit<AccountRecord, "id" | "photoStoragePath">): Promise<AccountRecord> {
       const created: Row = {
         ...account,
         id: randomBytes(12).toString("hex"),
+        photoStoragePath: null,
         createdAt: new Date().toISOString(),
       };
       rows.set(account.email.trim().toLowerCase(), created);
       return created;
+    },
+
+    async setPhotoPath(email: string, file: string): Promise<void> {
+      const row = rows.get(email.trim().toLowerCase());
+      if (row) row.photoStoragePath = file;
     },
 
     async findByEmails(emails: string[]): Promise<Map<string, PortalAccount>> {
@@ -41,6 +48,7 @@ export function memoryAccounts(): AccountRepository & PortalAccountDirectory {
           email: row.email,
           name: row.name.trim() || row.email,
           createdAt: row.createdAt,
+          photoStoragePath: row.photoStoragePath,
         });
       }
       return held;

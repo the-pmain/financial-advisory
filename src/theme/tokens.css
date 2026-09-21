@@ -91,8 +91,8 @@
   --color-danger-focus: rgb(180 35 24 / 0.12);
   --color-positive: var(--color-signal-up);
   --color-negative: var(--color-signal-down);
-  /* Bright gold. Super admin gate only — the rest of the portal uses --color-accent. */
-  --color-admin-gold: var(--color-gold-300);
+  /* Super admin gate mark. Lighter than the wordmark gold so the key reads on white. */
+  --color-admin-gold: var(--color-gold-400);
 
   /* --------------------------------------------------------------------------
      Semantic color — vz-* brand-book aliases (do not remove)
@@ -257,10 +257,6 @@
   --viz-bar: 6px;
   --doc-card: 176px;
   --admin-card: 200px;
-  --admin-key: 54px;
-  --admin-dot: 10px;
   --admin-badge: 28px;
   --admin-badge-radius: 8px;
-  --admin-badge-glow: 0 0 6px rgb(229 165 10 / 0.7), 0 0 16px rgb(229 165 10 / 0.42);
-  --admin-dot-glow: 0 0 7px rgb(229 165 10 / 0.55);
 }

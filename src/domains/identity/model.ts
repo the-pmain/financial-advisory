@@ -2,7 +2,7 @@
  * Identity: who is signed in and what they may reach.
  *
  * Three ways in, one session shape. A client signs in with email and password,
- * an employee with a slug and password, and the super admin with a PIN that
+ * an employee with a slug and password, and the super admin with a password that
  * belongs to no row at all.
  */
 
@@ -18,7 +18,7 @@ export type SessionUser = {
   photoUrl?: string;
 };
 
-/** The PIN session has no user row, so it carries a fixed id instead. */
+/** The admin session has no user row, so it carries a fixed id instead. */
 export const SUPER_ADMIN_ID = "super-admin";
 export const PASSWORD_MIN = 8;
 
@@ -46,6 +46,13 @@ export type RevealedSecret = {
 /** Only the fields a session is allowed to publish. Never a password. */
 export function publicSession(user: SessionUser): SessionUser {
   const base = { id: user.id, email: user.email, name: user.name, role: user.role };
-  if (user.role !== "employee") return base;
-  return { ...base, slug: user.slug, photoUrl: user.photoUrl };
+  if (user.role === "employee") return { ...base, slug: user.slug, photoUrl: user.photoUrl };
+  if (user.role === "advisor") return { ...base, photoUrl: user.photoUrl };
+  return base;
+}
+
+/** The signed-in client reads their own file; the admin route is not for them. */
+export function clientSessionPhotoUrl(file: string | null | undefined): string {
+  const name = String(file ?? "").trim();
+  return name ? `/api/me/photo?v=${encodeURIComponent(name)}` : "/api/me/photo";
 }

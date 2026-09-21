@@ -6,9 +6,8 @@ import type { ApplicationRepository } from "../ports.ts";
 /** Live table name, including the schema spelling. */
 const TABLE = "clients_applicatitons";
 /**
- * Every column rather than a list: `photo_storage_path` only exists once
- * `supabase/client-portraits.sql` has run, and naming a column PostgREST
- * cannot find fails the whole read. Absent reads as no portrait.
+ * Every column rather than a list: `photo_storage_path` is on the live
+ * scheme (`supabase/clients.sql`). Absent still reads as no portrait.
  */
 const SELECT = "*";
 const ORDER = "order=created_at.desc,id.desc";

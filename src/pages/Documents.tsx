@@ -31,7 +31,13 @@ function recordFromUser(
     phone: "",
     instructedPersonSlug: null,
     registered: true,
-    portalAccount: { id: user.id, name: user.name, email: user.email, createdAt: "" },
+    portalAccount: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: "",
+      photoStoragePath: null,
+    },
     photoStoragePath: null,
     documents: emptyClientDocuments(),
   };

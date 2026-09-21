@@ -11,7 +11,7 @@ type AuthValue = {
   entering: boolean;
   login: (email: string, password: string) => Promise<void>;
   employeeLogin: (slug: string, password: string) => Promise<void>;
-  adminLogin: (pin: string) => Promise<void>;
+  adminLogin: (password: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -74,10 +74,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setEntering(true);
         setUser(next);
       },
-      async adminLogin(pin) {
+      async adminLogin(password) {
         const next = await api<SessionUser>("/api/auth/admin", {
           method: "POST",
-          body: JSON.stringify({ pin }),
+          body: JSON.stringify({ password }),
         });
         startedAt.current = performance.now();
         setEntering(true);
