@@ -54,7 +54,7 @@ export function ClientDocuments({
             </span>
           </>
         );
-        const canOpen = kind === "agreement" ? onOpen : undefined;
+        const canOpen = kind === "agreement" || (kind === "p2p" && filedAt) ? onOpen : undefined;
         return (
           <li key={kind}>
             {canOpen ? (

@@ -1,7 +1,8 @@
 import { ArrowLeft, Camera } from "lucide-react";
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
-import { emptyClientDocuments, prepareClientAgreement } from "@domain/documents/agreement.ts";
+import { emptyClientDocuments, prepareFirmDocument } from "@domain/documents/agreement.ts";
+import { kindSaved } from "@domain/documents/compose.ts";
 import type { ClientApplication } from "@domain/onboarding/model.ts";
 import type { ClientWithAdviser, EmployeeProfile } from "@domain/staff/model.ts";
 import { api } from "../api/client.ts";
@@ -295,15 +296,22 @@ function applicationFromAdminClient(client: ClientWithAdviser): ClientApplicatio
   };
 }
 
-function prepareAdminDocument(
+async function prepareAdminDocument(
   kind: keyof DocumentsMap,
   client: ClientWithAdviser,
   people: EmployeeProfile[],
 ): Promise<{ bytes: Uint8Array; filename: string }> {
-  if (kind !== "agreement") {
-    return Promise.reject(new Error("This workspace generates the client agreement only."));
+  const application = applicationFromAdminClient(client);
+  if (kind === "p2p") {
+    const payload = await api<{ documents: DocumentsMap }>(
+      `/api/admin/clients/${encodeURIComponent(client.id)}/documents`,
+    );
+    if (!kindSaved(payload.documents, "p2p")) {
+      return Promise.reject(new Error("This P2P agreement has not been filed yet."));
+    }
+    application.documents = payload.documents;
   }
-  return prepareClientAgreement(applicationFromAdminClient(client), people);
+  return prepareFirmDocument(kind, application, people);
 }
 
 function DocumentsTab({ client }: { client: ClientWithAdviser }) {
@@ -330,7 +338,6 @@ function DocumentsTab({ client }: { client: ClientWithAdviser }) {
   }, [client.adviser]);
 
   function open(kind: keyof DocumentsMap) {
-    if (kind !== "agreement") return;
     setPreview({
       kind,
       prepare: () => prepareAdminDocument(kind, client, people),
@@ -351,7 +358,9 @@ function DocumentsTab({ client }: { client: ClientWithAdviser }) {
         open={Boolean(preview)}
         copy={{
           ...adminPreviewCopy(preview ? DOCUMENT_KIND_LABELS[preview.kind] : ""),
-          ...(preview && preview.kind !== "agreement" ? { fail: shared.previewUnavailable } : {}),
+          ...(preview && preview.kind !== "agreement" && preview.kind !== "p2p"
+            ? { fail: shared.previewUnavailable }
+            : {}),
         }}
         prepare={preview?.prepare ?? null}
         runKey={preview ? `${client.id}:${preview.kind}` : undefined}

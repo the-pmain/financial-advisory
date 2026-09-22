@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { homePathForRole } from "../app/nav.ts";
 import { useAuth } from "../auth/AuthContext.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
+import { PasswordField } from "../components/ui/PasswordField.tsx";
 import { ButtonNavy, FormField, UnderlineLink } from "../components/ui/primitives.tsx";
 import { useAdminShortcut } from "../hooks/useAdminShortcut.ts";
 import { useI18n } from "../i18n/context.tsx";
@@ -66,9 +67,8 @@ export function SignupPage() {
             className="!mb-0"
             onChange={(event) => setEmail(event.target.value)}
           />
-          <FormField
+          <PasswordField
             label={t.signup.password}
-            type="password"
             value={password}
             required
             disabled={pending}

@@ -197,7 +197,7 @@ function firmSignatory(ctx, register) {
   const name = line.split('·')[0].trim() || ctx.keyContact;
   const person = (register?.people ?? []).find((item) => item.name === name || item.principal);
   const title = person?.role || 'Authorised representative';
-  return { name, printed: [name, title].filter(Boolean).join(', ') };
+  return { name, title };
 }
 
 export function agreementSignatories(ctx, register) {
@@ -205,7 +205,7 @@ export function agreementSignatories(ctx, register) {
   const client = recordedName(ctx.clientName);
   const cards = [
     { role: 'Client', name: client, printed: client, date: ctx.intakeDate },
-    { role: 'For the firm', name: firm.name, printed: firm.printed, date: ctx.intakeDate },
+    { role: 'For the firm', name: firm.name, printed: firm.name, title: firm.title, date: ctx.intakeDate },
   ];
   return cards;
 }

@@ -5,6 +5,7 @@ import { homePathForRole } from "../app/nav.ts";
 import { useAuth } from "../auth/AuthContext.tsx";
 import { StaffPicker } from "../components/employees/StaffPicker.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
+import { PasswordField } from "../components/ui/PasswordField.tsx";
 import { ButtonNavy, UnderlineButton } from "../components/ui/primitives.tsx";
 import type { EmployeeProfile } from "@domain/staff/model.ts";
 import { useI18n } from "../i18n/context.tsx";
@@ -88,27 +89,26 @@ export function EmployeeLoginPage({ onClientPortal }: { onClientPortal?: () => v
             autoComplete="off"
             data-form-type="other"
           >
-            <label className="appointment-form__field !mb-0">
-              <span className="appointment-form__label">{t.employee.login.password}</span>
-              <input
-                className={`appointment-form__control is-secret${error ? " is-invalid" : ""}`}
-                type="text"
-                name="staff-pin"
-                value={password}
-                required
-                disabled={pending || loadingStaff || !staff?.length}
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck={false}
-                inputMode="text"
-                data-lpignore="true"
-                data-1p-ignore="true"
-                data-bwignore="true"
-                data-form-type="other"
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </label>
+            <PasswordField
+              label={t.employee.login.password}
+              secret
+              name="staff-pin"
+              value={password}
+              required
+              disabled={pending || loadingStaff || !staff?.length}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
+              inputMode="text"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-bwignore="true"
+              data-form-type="other"
+              invalid={Boolean(error)}
+              className="!mb-0"
+              onChange={(event) => setPassword(event.target.value)}
+            />
             {error ? <p className="appointment-form__error !mt-0">{error}</p> : null}
             {noStaff ? <p className="appointment-form__error !mt-0">{t.employee.login.empty}</p> : null}
             <ButtonNavy className="mt-1" loading={pending} disabled={loadingStaff || !staff?.length}>

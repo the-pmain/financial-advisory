@@ -25,15 +25,30 @@ export function emptyFormValues(kind: string): Record<string, string>;
 export function showWhenMatches(spec: string | undefined, values: Record<string, string>): boolean;
 export function initialsFromName(name: string): string;
 export function todayIso(): string;
+export const P2P_DEFAULTS: Readonly<Record<string, string>>;
+export const BROCHURE_DEFAULTS: Readonly<Record<string, string>>;
+export const SELECT_DEFAULTS: Readonly<Record<string, string>>;
 export function agreementFromRecord(client: unknown, register: unknown): Record<string, string>;
+export function p2pFromRecord(client: unknown, register: unknown): Record<string, string>;
 export function valuesForCompose(
   kind: string,
   client: unknown,
   documents: unknown,
   register: unknown,
 ): Record<string, string>;
+export function fieldsForSave(
+  kind: string,
+  values: Record<string, string>,
+  register?: unknown,
+): Record<string, string>;
+export function applyDerivedFields(
+  kind: string,
+  values: Record<string, string>,
+  changed: string,
+): Record<string, string>;
 export function parseMoney(value: unknown): number | null;
 export function formatMoney(amount: number): string;
 export function formatUkDate(iso: string): string;
 export function addDaysIso(iso: string, days: number): string;
 export function addYearsIso(iso: string, years: number): string;
+export function addMonthsIso(iso: string, months: number): string;

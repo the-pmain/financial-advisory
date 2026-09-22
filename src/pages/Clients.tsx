@@ -1,18 +1,20 @@
-import { ScrollText } from "lucide-react";
+import { Handshake, ScrollText } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { emptyClientDocuments, prepareFirmDocument } from "@domain/documents/agreement.ts";
+import { kindSaved } from "@domain/documents/compose.ts";
+import type { ClientApplication } from "@domain/onboarding/model.ts";
+import type { EmployeeProfile } from "@domain/staff/model.ts";
 import { api } from "../api/client.ts";
 import {
   adminPreviewCopy,
   DocumentPreviewDialog,
   type PreviewPrepare,
 } from "../components/admin/DocumentPreviewDialog.tsx";
+import { DocumentComposeDialog } from "../components/documents/DocumentComposeDialog.tsx";
 import { DocCard } from "../components/documents/DocCard.tsx";
 import { DOC_CATALOG } from "../documents/catalog.ts";
-import { emptyClientDocuments, prepareClientAgreement } from "@domain/documents/agreement.ts";
-import type { ClientApplication } from "@domain/onboarding/model.ts";
-import type { EmployeeProfile } from "@domain/staff/model.ts";
 import { useI18n } from "../i18n/context.tsx";
-import { DOCUMENT_KIND_LABELS } from "../js/clients-documents-model.js";
+import { DOCUMENT_KIND_LABELS, type DocumentsMap } from "../js/clients-documents-model.js";
 
 function formatReceived(iso: string): string {
   const date = new Date(iso);
@@ -30,7 +32,12 @@ export function ClientsPage() {
   const [people, setPeople] = useState<EmployeeProfile[]>([]);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [preview, setPreview] = useState<{ runKey: string; prepare: PreviewPrepare } | null>(null);
+  const [preview, setPreview] = useState<{
+    runKey: string;
+    title: string;
+    prepare: PreviewPrepare;
+  } | null>(null);
+  const [compose, setCompose] = useState<"p2p" | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -64,6 +71,10 @@ export function ClientsPage() {
     [items, selectedId],
   );
 
+  useEffect(() => {
+    setCompose(null);
+  }, [selectedId]);
+
   const countLabel =
     items && items.length > 0
       ? t.employee.clients.count.replace("{n}", String(items.length))
@@ -72,8 +83,15 @@ export function ClientsPage() {
   function openAgreement(client: ClientApplication) {
     setPreview({
       runKey: `${client.id}:agreement`,
-      prepare: () => prepareClientAgreement(client, people),
+      title: DOCUMENT_KIND_LABELS.agreement,
+      prepare: () => prepareFirmDocument("agreement", client, people),
     });
+  }
+
+  function applySavedDocuments(documents: DocumentsMap) {
+    setItems((current) =>
+      (current ?? []).map((row) => (row.id === selectedId ? { ...row, documents } : row)),
+    );
   }
 
   return (
@@ -155,6 +173,20 @@ export function ClientsPage() {
                     onClick={() => openAgreement(selected)}
                   />
                 </li>
+                <li>
+                  <DocCard
+                    icon={Handshake}
+                    title={DOCUMENT_KIND_LABELS.p2p}
+                    hint={t.employee.clients.p2pHint}
+                    status={kindSaved(selected.documents, "p2p") ? "complete" : "empty"}
+                    statusLabel={
+                      kindSaved(selected.documents, "p2p")
+                        ? t.docs.compose.update
+                        : t.employee.clients.compose
+                    }
+                    onClick={() => setCompose("p2p")}
+                  />
+                </li>
               </ul>
 
               <h2 className="app-page__section">{t.employee.clients.personalDocuments}</h2>
@@ -179,12 +211,26 @@ export function ClientsPage() {
 
       <DocumentPreviewDialog
         open={Boolean(preview)}
-        copy={adminPreviewCopy(DOCUMENT_KIND_LABELS.agreement)}
+        copy={adminPreviewCopy(preview?.title ?? DOCUMENT_KIND_LABELS.agreement)}
         prepare={preview?.prepare ?? null}
         runKey={preview?.runKey}
         wait="close"
         onClose={() => setPreview(null)}
       />
+      {selected ? (
+        <DocumentComposeDialog
+          open={compose === "p2p"}
+          kind="p2p"
+          client={selected}
+          people={people}
+          copy={{
+            title: DOCUMENT_KIND_LABELS.p2p,
+            ...t.docs.compose,
+          }}
+          onClose={() => setCompose(null)}
+          onSaved={applySavedDocuments}
+        />
+      ) : null}
     </section>
   );
 }

@@ -5,7 +5,8 @@ import { KeyRound } from "lucide-react";
 import { useAuth } from "../auth/AuthContext.tsx";
 import { Icon } from "../components/ui/icon.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
-import { ButtonNavy, FormField, UnderlineButton } from "../components/ui/primitives.tsx";
+import { PasswordField } from "../components/ui/PasswordField.tsx";
+import { ButtonNavy, UnderlineButton } from "../components/ui/primitives.tsx";
 import { useI18n } from "../i18n/context.tsx";
 
 export function AdminGatePage() {
@@ -61,9 +62,8 @@ export function AdminGatePage() {
             aria-hidden="true"
             className="visually-hidden"
           />
-          <FormField
+          <PasswordField
             label={t.admin.gate.password}
-            type="password"
             name="password"
             value={password}
             required

@@ -1,4 +1,5 @@
 import { raw, Router } from "express";
+import { emptyDocuments } from "../../../src/js/clients-documents-model.js";
 import { toClientSummary, type ClientApplication } from "@domain/onboarding/model.ts";
 import { paginate, parsePageQuery } from "@domain/shared/page.ts";
 import {
@@ -136,6 +137,14 @@ export function createAdminConsoleRouter(deps: {
     route(async (req, res) => {
       res.json(await oneWithAdviser(await onboarding.find(param(req, "id"))));
     }, "Could not load this client."),
+  );
+
+  router.get(
+    "/clients/:id/documents",
+    route(async (req, res) => {
+      const application = await onboarding.find(param(req, "id"));
+      res.json({ documents: application.documents ?? emptyDocuments() });
+    }, "Could not load these documents."),
   );
 
   /**

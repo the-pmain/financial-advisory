@@ -445,65 +445,101 @@ function drawSignatures(ctx, cards) {
   const list = (cards ?? []).filter((card) => card && card.role);
   if (!list.length) return;
   const gap = 12;
-  const count = list.length;
-  const colW = (CONTENT_WIDTH - gap * Math.max(0, count - 1)) / count;
-  const h = 98;
-  ensure(ctx, h + 8);
-  const top = ctx.y;
-  list.forEach((card, index) => {
-    const x = MARGIN + index * (colW + gap);
-    ctx.page.drawRectangle({
-      x,
-      y: top - h,
-      width: colW,
-      height: h,
-      color: WASH,
+  const perRow = list.length <= 2 ? list.length : 2;
+
+  for (let start = 0; start < list.length; start += perRow) {
+    const row = list.slice(start, start + perRow);
+    const colW = (CONTENT_WIDTH - gap * Math.max(0, row.length - 1)) / row.length;
+    const inner = Math.max(48, colW - 20);
+    const prepared = row.map((card) => {
+      const name = displayName(card.name);
+      const printed = displayName(card.printed || card.name);
+      const title = displayName(card.title);
+      const date = displayName(card.date);
+      const roleLines = wrapLines(ctx.bold, card.role || '', 10, inner);
+      const nameLines = wrapLines(ctx.regular, printed ? `Name  ${printed}` : 'Name', 9, inner);
+      const extraTitle =
+        title && title !== printed && title !== name ? wrapLines(ctx.regular, title, 8, inner) : [];
+      const dateLines = wrapLines(ctx.regular, date ? `Date  ${date}` : 'Date', 9, inner);
+      const textH = nameLines.length * 11 + extraTitle.length * 10 + dateLines.length * 11;
+      return { card, name, roleLines, nameLines, extraTitle, dateLines, textH };
     });
-    ctx.page.drawText(toWinAnsi(card.role || ''), {
-      x: x + 10,
-      y: top - 16,
-      size: 11,
-      font: ctx.bold,
-      color: INK,
-    });
-    const ruleY = top - 46;
-    const mark = displayName(card.printed || card.name);
-    if (mark && ctx.script) {
-      const fitted = fitScript(ctx.script, mark, colW - 24);
-      if (fitted.text) {
-        ctx.page.drawText(fitted.text, {
+    const textH = Math.max(...prepared.map((item) => item.textH), 22);
+    const roleH = Math.max(...prepared.map((item) => item.roleLines.length * 12), 12);
+    const h = 16 + roleH + 36 + textH;
+    ensure(ctx, h + 12);
+    const top = ctx.y;
+    prepared.forEach((item, index) => {
+      const x = MARGIN + index * (colW + gap);
+      ctx.page.drawRectangle({
+        x,
+        y: top - h,
+        width: colW,
+        height: h,
+        color: WASH,
+      });
+      item.roleLines.forEach((line, lineIndex) => {
+        ctx.page.drawText(toWinAnsi(line), {
           x: x + 10,
-          y: ruleY + 3,
-          size: fitted.size,
-          font: ctx.script,
-          color: SCRIPT_INK,
+          y: top - 14 - lineIndex * 12,
+          size: 10,
+          font: ctx.bold,
+          color: INK,
         });
+      });
+      const ruleY = top - 16 - roleH - 22;
+      if (item.name && ctx.script) {
+        const fitted = fitScript(ctx.script, item.name, inner);
+        if (fitted.text) {
+          ctx.page.drawText(fitted.text, {
+            x: x + 10,
+            y: ruleY + 4,
+            size: fitted.size,
+            font: ctx.script,
+            color: SCRIPT_INK,
+          });
+        }
       }
-    }
-    ctx.page.drawLine({
-      start: { x: x + 10, y: ruleY },
-      end: { x: x + colW - 10, y: ruleY },
-      thickness: 0.6,
-      color: RULE,
+      ctx.page.drawLine({
+        start: { x: x + 10, y: ruleY },
+        end: { x: x + colW - 10, y: ruleY },
+        thickness: 0.6,
+        color: RULE,
+      });
+      let y = ruleY - 14;
+      item.nameLines.forEach((line) => {
+        ctx.page.drawText(toWinAnsi(line), {
+          x: x + 10,
+          y,
+          size: 9,
+          font: ctx.regular,
+          color: INK,
+        });
+        y -= 11;
+      });
+      item.extraTitle.forEach((line) => {
+        ctx.page.drawText(toWinAnsi(line), {
+          x: x + 10,
+          y,
+          size: 8,
+          font: ctx.regular,
+          color: MUTED,
+        });
+        y -= 10;
+      });
+      item.dateLines.forEach((line) => {
+        ctx.page.drawText(toWinAnsi(line), {
+          x: x + 10,
+          y,
+          size: 9,
+          font: ctx.regular,
+          color: INK,
+        });
+        y -= 11;
+      });
     });
-    const printed = displayName(card.printed || card.name);
-    const date = displayName(card.date);
-    ctx.page.drawText(toWinAnsi(`Name  ${printed}`), {
-      x: x + 10,
-      y: top - 68,
-      size: 10,
-      font: ctx.regular,
-      color: INK,
-    });
-    ctx.page.drawText(toWinAnsi(`Date  ${date}`), {
-      x: x + 10,
-      y: top - 84,
-      size: 10,
-      font: ctx.regular,
-      color: INK,
-    });
-  });
-  ctx.y = top - h - 10;
+    ctx.y = top - h - 12;
+  }
 }
 
 function drawBrochureHeader(ctx) {

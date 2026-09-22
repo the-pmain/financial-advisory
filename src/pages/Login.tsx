@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useAuth } from "../auth/AuthContext.tsx";
 import { Logo } from "../components/ui/Logo.tsx";
+import { PasswordField } from "../components/ui/PasswordField.tsx";
 import { ButtonNavy, FormField, UnderlineButton, UnderlineLink } from "../components/ui/primitives.tsx";
 import { useI18n } from "../i18n/context.tsx";
 
@@ -45,9 +46,8 @@ export function LoginPage({ onStaffPortal }: { onStaffPortal?: () => void }) {
             className="!mb-0"
             onChange={(event) => setEmail(event.target.value)}
           />
-          <FormField
+          <PasswordField
             label={t.login.password}
-            type="password"
             value={password}
             required
             disabled={pending}

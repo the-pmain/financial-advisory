@@ -65,8 +65,7 @@ export function validateDocument(kind, values, { people, register } = {}) {
   if (['agreement', 'brochure', 'claim', 'matter', 'tracing'].includes(kind)) rejectBadName('clientName', 'Client name');
   if (kind === 'release') rejectBadName('applicant', 'Applicant');
   if (kind === 'p2p') {
-    rejectBadName('sellerName', 'Seller name');
-    rejectBadName('buyerName', 'Buyer name');
+    rejectBadName('investorName', 'Investor name');
   }
 
   if (next.clientAddr !== undefined && ['claim', 'matter', 'release'].includes(kind)) {

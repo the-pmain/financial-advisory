@@ -5,6 +5,7 @@ import { ClientCard } from "../components/admin/ClientCard.tsx";
 import { SecretField } from "../components/admin/SecretField.tsx";
 import { Avatar } from "../components/ui/avatar.tsx";
 import { Icon } from "../components/ui/icon.tsx";
+import { PasswordField } from "../components/ui/PasswordField.tsx";
 import { ButtonNavy, FormField } from "../components/ui/primitives.tsx";
 import type { EmployeeAccountPatch, EmployeeAccountWithClients } from "@domain/staff/model.ts";
 import { useAdminEmployees } from "../hooks/useAdminEmployees.ts";
@@ -281,9 +282,8 @@ function AccountTab({
             autoComplete="off"
             onChange={(event) => setOrder(event.target.value)}
           />
-          <FormField
+          <PasswordField
             label={copy.password}
-            type="password"
             value={password}
             minLength={8}
             disabled={pending}

@@ -10,3 +10,6 @@ export function generateDocument(
 }>;
 export function documentFilename(kind: string, clientName: string, prefix?: string, ext?: string): string;
 export { buildAgreement } from './document-agreement.js';
+export { buildBrochure } from './document-brochure.js';
+export { buildClaim, buildMatter, buildRelease, buildTracing } from './document-claim.js';
+export { buildP2p } from './document-p2p.js';

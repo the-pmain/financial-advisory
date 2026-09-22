@@ -1,5 +1,9 @@
 export const en = {
   appName: "Client portal",
+  reveal: {
+    show: "Show password",
+    hide: "Hide password",
+  },
   login: {
     kicker: "Helfenstein Asset Management",
     title: "Sign in",
@@ -76,7 +80,19 @@ export const en = {
     otherLocked: "These papers open after your own documents are on file.",
     houseLead: "Papers the firm holds for you.",
     agreementHint: "Preview and download the same PDF",
+    p2pHint: "Peer-to-peer investment agreement your adviser prepares",
+    p2pPending: "Your adviser prepares this agreement. It opens here once it is on file.",
     preview: "Preview",
+    compose: {
+      mock: "Insert mock",
+      preview: "Preview",
+      save: "Save",
+      update: "Update",
+      replaceNote: "Saving will replace it.",
+      close: "Close",
+      saving: "Saving…",
+      fail: "The document could not be saved. Close this window and try again.",
+    },
     receivedCount: "received",
     back: "All documents",
     next: "Continue",
@@ -198,7 +214,9 @@ export const en = {
       houseDocuments: "Our documents",
       houseLead: "Papers the firm holds for this client.",
       agreementHint: "Preview and download the same PDF",
+      p2pHint: "Compose the peer-to-peer agreement from this client’s record",
       preview: "Preview",
+      compose: "Compose",
     },
   },
   admin: {
@@ -334,7 +352,7 @@ export const en = {
       documents: "Documents on file",
       documentsFiled: "Filed {date}",
       documentsPending: "Not filed",
-      previewUnavailable: "Only the client agreement can be opened here.",
+      previewUnavailable: "Only the client agreement and the P2P agreement can be opened here.",
       kycNote:
         "Identification papers a client uploads stay in that client’s browser and cannot be read here.",
     },

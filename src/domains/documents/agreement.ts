@@ -33,6 +33,7 @@ export function registerForClient(client: ClientApplication, people: EmployeePro
 
 export function clientRecordForAgreement(client: ClientApplication) {
   return {
+    id: client.id,
     name: client.name,
     email: client.email,
     phone: client.phone,
@@ -42,20 +43,45 @@ export function clientRecordForAgreement(client: ClientApplication) {
   };
 }
 
-export async function prepareClientAgreement(
+async function prepareKind(
+  kind: "agreement" | "p2p",
   client: ClientApplication,
   people: EmployeeProfile[],
 ): Promise<{ bytes: Uint8Array; filename: string }> {
   const register = registerForClient(client, people);
   const values = valuesForCompose(
-    "agreement",
+    kind,
     clientRecordForAgreement(client),
     client.documents ?? emptyDocuments(),
     register,
   );
-  const result = await generateDocument("agreement", values, {
+  const result = await generateDocument(kind, values, {
     register,
     people: register.people,
   });
   return { bytes: result.bytes, filename: result.filename };
+}
+
+export function prepareClientAgreement(
+  client: ClientApplication,
+  people: EmployeeProfile[],
+): Promise<{ bytes: Uint8Array; filename: string }> {
+  return prepareKind("agreement", client, people);
+}
+
+export function prepareP2pAgreement(
+  client: ClientApplication,
+  people: EmployeeProfile[],
+): Promise<{ bytes: Uint8Array; filename: string }> {
+  return prepareKind("p2p", client, people);
+}
+
+export function prepareFirmDocument(
+  kind: keyof DocumentsMap,
+  client: ClientApplication,
+  people: EmployeeProfile[],
+): Promise<{ bytes: Uint8Array; filename: string }> {
+  if (kind === "agreement") return prepareClientAgreement(client, people);
+  if (kind === "p2p") return prepareP2pAgreement(client, people);
+  return Promise.reject(new Error("This workspace generates the client agreement and the P2P agreement only."));
 }

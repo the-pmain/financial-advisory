@@ -6,4 +6,5 @@ import type { DocumentsMap } from "../../../src/js/clients-documents-model.js";
  */
 export type FiledDocumentsRepository = {
   findForClients(clientIds: string[]): Promise<Map<string, DocumentsMap>>;
+  saveKind(clientId: string, kind: string, fields: Record<string, string>): Promise<DocumentsMap>;
 };

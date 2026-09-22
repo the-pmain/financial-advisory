@@ -49,7 +49,7 @@ export function buildContainer(): Container {
     documents: filedDocuments,
     photos: clientPhotos,
   });
-  const documents = createDocumentsService();
+  const documents = createDocumentsService({ filed: filedDocuments });
   // Identity reads staff credentials and client names through them, not their tables.
   const identity = createIdentityService({ accounts, staff, clientNames: onboarding });
 

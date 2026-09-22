@@ -1,4 +1,4 @@
-import { ScrollText } from "lucide-react";
+import { Handshake, ScrollText } from "lucide-react";
 import { useMemo, useState } from "react";
 import {
   adminPreviewCopy,
@@ -8,7 +8,8 @@ import {
 import { DocCard } from "../components/documents/DocCard.tsx";
 import { DOC_CATALOG } from "../documents/catalog.ts";
 import { readDocPack } from "../documents/storage.ts";
-import { emptyClientDocuments, prepareClientAgreement } from "@domain/documents/agreement.ts";
+import { emptyClientDocuments, prepareFirmDocument } from "@domain/documents/agreement.ts";
+import { kindSaved } from "@domain/documents/compose.ts";
 import type { ClientApplication } from "@domain/onboarding/model.ts";
 import { useMandate } from "../hooks/useMandate.ts";
 import { useI18n } from "../i18n/context.tsx";
@@ -51,16 +52,25 @@ export function DocumentsPage() {
     [user],
   );
   const received = pack ? DOC_CATALOG.filter((item) => pack[item.slug].status === "complete").length : 0;
-  const [preview, setPreview] = useState<{ runKey: string; prepare: PreviewPrepare } | null>(null);
+  const [preview, setPreview] = useState<{
+    runKey: string;
+    title: string;
+    prepare: PreviewPrepare;
+  } | null>(null);
 
-  function openAgreement() {
+  function openFirm(kind: "agreement" | "p2p") {
     if (!user) return;
     const client = recordFromUser(user, mandate);
+    if (kind === "p2p" && !kindSaved(client.documents, "p2p")) return;
     setPreview({
-      runKey: `${client.id}:agreement`,
-      prepare: () => prepareClientAgreement(client, people),
+      runKey: `${client.id}:${kind}`,
+      title: DOCUMENT_KIND_LABELS[kind],
+      prepare: () => prepareFirmDocument(kind, client, people),
     });
   }
+
+  const clientRecord = user ? recordFromUser(user, mandate) : null;
+  const p2pReady = Boolean(clientRecord && mandateReady && kindSaved(clientRecord.documents, "p2p"));
 
   return (
     <section className="app-page">
@@ -100,7 +110,17 @@ export function DocumentsPage() {
             hint={t.docs.agreementHint}
             status={mandateReady ? "started" : "disabled"}
             statusLabel={mandateReady ? t.docs.preview : t.docs.status.disabled}
-            onClick={mandateReady ? openAgreement : undefined}
+            onClick={mandateReady ? () => openFirm("agreement") : undefined}
+          />
+        </li>
+        <li>
+          <DocCard
+            icon={Handshake}
+            title={DOCUMENT_KIND_LABELS.p2p}
+            hint={p2pReady ? t.docs.p2pHint : t.docs.p2pPending}
+            status={p2pReady ? "complete" : "disabled"}
+            statusLabel={p2pReady ? t.docs.preview : t.docs.status.disabled}
+            onClick={p2pReady ? () => openFirm("p2p") : undefined}
           />
         </li>
         {sampleDocuments.map((item) => (
@@ -118,7 +138,7 @@ export function DocumentsPage() {
 
       <DocumentPreviewDialog
         open={Boolean(preview)}
-        copy={adminPreviewCopy(DOCUMENT_KIND_LABELS.agreement)}
+        copy={adminPreviewCopy(preview?.title ?? DOCUMENT_KIND_LABELS.agreement)}
         prepare={preview?.prepare ?? null}
         runKey={preview?.runKey}
         wait="close"
