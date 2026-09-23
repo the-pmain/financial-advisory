@@ -175,9 +175,9 @@ export function getPageMeta(
 
   if (path === ROUTES.alternativeInvestments) {
     return {
-      title: 'Helfenstein Group - Alternative Investments | Private Equity, Hedge Funds & More',
+      title: `The Next Evolution of Investing | ${SITE_NAME}`,
       description:
-        'Expert guidance on alternative investments including private equity, hedge funds, real assets, and structured products for Swiss private clients.',
+        'An educational guide to cryptocurrency, blockchain tokenization, security token offerings and real-asset private projects.',
       robots: 'index, follow',
     };
   }

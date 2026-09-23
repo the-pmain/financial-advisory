@@ -9,6 +9,7 @@ import { AdminPage } from './pages/AdminPage';
 import { AboutPage } from './pages/AboutPage';
 import { HomePage } from './pages/HomePage';
 import { TopicPage } from './pages/TopicPage';
+import { AlternativeInvestmentsPage } from './pages/AlternativeInvestmentsPage';
 import { ArticlePage } from './pages/ArticlePage';
 import { ExpertisePage } from './pages/ExpertisePage';
 import { InsightsPage } from './pages/InsightsPage';
@@ -70,6 +71,7 @@ export function App() {
               <Route key={`art-${from}`} path={`${ROUTES.articles}/${from}`} element={<Navigate to={dest} replace />} />,
             ];
           })}
+          <Route path={ROUTES.alternativeInvestments} element={<AlternativeInvestmentsPage />} />
           <Route path={ROUTE_PATTERNS.aboutSub} element={<TopicPage />} />
           <Route path={ROUTE_PATTERNS.topic} element={<TopicPage />} />
           <Route path="*" element={<NotFoundPage />} />
