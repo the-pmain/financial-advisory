@@ -1,3 +1,4 @@
+import { isPortraitType, portraitExtension, sniffPortrait } from "@domain/shared/photo.ts";
 import { emptyDocuments } from "../../../src/js/clients-documents-model.js";
 import {
   isClientPhotoFile,
@@ -92,13 +93,16 @@ export function createOnboardingService(deps: {
      * A fresh object name each time, because the portrait route is cached.
      * The row only learns the new name once the bytes are safely stored.
      */
-    async replacePhoto(id: string, body: Buffer): Promise<ClientApplication> {
+    async replacePhoto(id: string, body: Buffer, contentType: string): Promise<ClientApplication> {
       const current = await applications.find(id);
       if (!current) throw notFound(NO_CLIENT);
-      if (body.length === 0) throw invalid("Upload a PNG image.");
+      const sniffed = sniffPortrait(body);
+      if (!sniffed || !isPortraitType(contentType) || sniffed !== contentType) {
+        throw invalid("That file is not a readable image.");
+      }
 
-      const file = nextClientPhotoFile(id);
-      await photos.write(file, body);
+      const file = nextClientPhotoFile(id, Date.now(), portraitExtension(sniffed));
+      await photos.write(file, body, sniffed);
 
       const saved = await applications.setPhotoPath(id, file);
       if (!saved) throw unavailable("Could not save this picture.");

@@ -2300,7 +2300,7 @@ select.appointment-form__control:disabled {
 .avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .avatar__initials {
@@ -2696,6 +2696,17 @@ select.appointment-form__control:disabled {
   display: inline-flex;
 }
 
+.admin-photo__img {
+  display: block;
+  max-width: min(100%, 24rem);
+  max-height: 18rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-ink-25);
+}
+
 .admin-photo__edit {
   position: absolute;
   right: 0;
@@ -2755,6 +2766,11 @@ select.appointment-form__control:disabled {
 .admin-ident__portrait .admin-photo__edit {
   width: 28px;
   height: 28px;
+}
+
+.admin-ident__portrait .admin-photo__img {
+  max-width: 9rem;
+  max-height: 9rem;
 }
 
 .admin-ident__name {

@@ -34,7 +34,7 @@ export type StoredPhoto = {
 export type PhotoStore = {
   read(file: string): Promise<StoredPhoto | null>;
   /** Throws when the store refuses, so a half-saved portrait is never recorded. */
-  write(file: string, body: Buffer): Promise<void>;
+  write(file: string, body: Buffer, contentType: string): Promise<void>;
   /** Best effort: a stale object is untidy, not a failure worth showing. */
   remove(file: string): Promise<void>;
 };

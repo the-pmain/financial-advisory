@@ -29,7 +29,7 @@ export function useAdminClient(id: string, loadError: string) {
       setClient(
         await api<ClientWithAdviser>(`${path}/photo`, {
           method: "PUT",
-          headers: { "Content-Type": "image/png" },
+          headers: { "Content-Type": photo.type },
           body: photo,
         }),
       );

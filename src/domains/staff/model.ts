@@ -7,6 +7,7 @@
 
 import type { ClientSummary } from "../onboarding/model.ts";
 import type { Paged } from "../shared/page.ts";
+import { isPortraitName, type PortraitExtension } from "../shared/photo.ts";
 
 /** What anyone signing in or reading the directory may see. */
 export type EmployeeProfile = {
@@ -136,10 +137,8 @@ export function parseEmployeeAccountPatch(input: unknown): ParseResult {
   return { ok: true, value: patch };
 }
 
-const PHOTO_FILE = /^[a-z0-9]+(?:-[a-z0-9]+)*\.png$/i;
-
 export function isPhotoFile(file: string): boolean {
-  return PHOTO_FILE.test(file);
+  return isPortraitName(file);
 }
 
 export function photoFileStem(slug: string): string {
@@ -150,9 +149,13 @@ export function photoFileStem(slug: string): string {
   return stem || "staff";
 }
 
-/** A fresh name per save: the photo route is cached for a day. */
-export function nextPhotoFile(slug: string, at: number = Date.now()): string {
-  return `${photoFileStem(slug)}-${at}.png`;
+/** A fresh name per save: the photo route is cached for a day. The extension is the file's own. */
+export function nextPhotoFile(
+  slug: string,
+  at: number = Date.now(),
+  extension: PortraitExtension = "png",
+): string {
+  return `${photoFileStem(slug)}-${at}.${extension}`;
 }
 
 /** The name portraits sat under before `photo_storage_path` existed. */

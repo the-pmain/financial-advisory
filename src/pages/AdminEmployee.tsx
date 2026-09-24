@@ -7,11 +7,11 @@ import { Avatar } from "../components/ui/avatar.tsx";
 import { Icon } from "../components/ui/icon.tsx";
 import { PasswordField } from "../components/ui/PasswordField.tsx";
 import { ButtonNavy, FormField } from "../components/ui/primitives.tsx";
+import { PORTRAIT_MAX_BYTES, isPortraitType } from "@domain/shared/photo.ts";
 import type { EmployeeAccountPatch, EmployeeAccountWithClients } from "@domain/staff/model.ts";
 import { useAdminEmployees } from "../hooks/useAdminEmployees.ts";
 import { useI18n } from "../i18n/context.tsx";
 import { plural } from "../lib/format.ts";
-import { squarePngBlob } from "../lib/image.ts";
 
 type Tab = "account" | "clients";
 
@@ -177,20 +177,16 @@ function AccountTab({
     event.target.value = "";
     if (!file) return;
 
-    setPhotoPending(true);
-    setPhotoError("");
-
-    let squared: Blob;
-    try {
-      squared = await squarePngBlob(file);
-    } catch {
+    if (!isPortraitType(file.type) || file.size === 0 || file.size > PORTRAIT_MAX_BYTES) {
       setPhotoError(copy.photoError);
-      setPhotoPending(false);
       return;
     }
 
+    setPhotoPending(true);
+    setPhotoError("");
+
     try {
-      await onSavePhoto(employee.slug, squared);
+      await onSavePhoto(employee.slug, file);
     } catch (err) {
       setPhotoError(err instanceof Error ? err.message : copy.error);
     } finally {
@@ -215,7 +211,11 @@ function AccountTab({
       <h2 className="app-page__section admin-section--first">{copy.photo}</h2>
       <div className="admin-photo">
         <span className="admin-photo__frame">
-          <Avatar name={employee.name} photoUrl={employee.photoUrl} size="xl" />
+          {employee.photoUrl ? (
+            <img className="admin-photo__img" src={employee.photoUrl} alt="" />
+          ) : (
+            <Avatar name={employee.name} photoUrl="" size="xl" />
+          )}
           <button
             type="button"
             className="admin-photo__edit"

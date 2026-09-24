@@ -6,6 +6,7 @@
  */
 
 import { DOCUMENT_KINDS, type DocumentsMap } from "../../js/clients-documents-model.js";
+import { isPortraitName, type PortraitExtension } from "../shared/photo.ts";
 
 export type PortalAccount = {
   id: string;
@@ -45,16 +46,18 @@ export type ClientSummary = Omit<ClientApplication, "documents" | "photoStorageP
 
 const KINDS = DOCUMENT_KINDS as readonly (keyof DocumentsMap)[];
 
-const PHOTO_FILE = /^[a-z0-9]+(?:-[a-z0-9]+)*\.png$/i;
-
 export function isClientPhotoFile(file: string): boolean {
-  return PHOTO_FILE.test(file);
+  return isPortraitName(file);
 }
 
-/** A fresh name per save: the portrait route is cached for a day. */
-export function nextClientPhotoFile(id: string, at: number = Date.now()): string {
+/** A fresh name per save: the portrait route is cached for a day. The extension is the file's own. */
+export function nextClientPhotoFile(
+  id: string,
+  at: number = Date.now(),
+  extension: PortraitExtension = "png",
+): string {
   const stem = id.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-  return `${stem || "client"}-${at}.png`;
+  return `${stem || "client"}-${at}.${extension}`;
 }
 
 /**

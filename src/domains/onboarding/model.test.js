@@ -12,13 +12,16 @@ import {
 describe("client portraits", () => {
   it("names a new object from the record id", () => {
     assert.equal(nextClientPhotoFile("Clara Meier", 1_700_000_000_000), "clara-meier-1700000000000.png");
+    assert.equal(nextClientPhotoFile("Clara Meier", 1_700_000_000_000, "jpg"), "clara-meier-1700000000000.jpg");
     assert.equal(nextClientPhotoFile("!!!", 9), "client-9.png");
   });
 
   it("accepts only the names the store writes", () => {
     assert.equal(isClientPhotoFile("clara-meier-1.png"), true);
+    assert.equal(isClientPhotoFile("clara-meier-1.jpg"), true);
+    assert.equal(isClientPhotoFile("clara-meier-1.webp"), true);
     assert.equal(isClientPhotoFile("../secret.png"), false);
-    assert.equal(isClientPhotoFile("clara.jpg"), false);
+    assert.equal(isClientPhotoFile("clara.gif"), false);
   });
 
   it("turns a missing path into an empty URL, not a placeholder path", () => {

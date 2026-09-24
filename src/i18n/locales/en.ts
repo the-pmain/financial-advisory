@@ -263,7 +263,7 @@ export const en = {
       photo: "Profile picture",
       photoAdd: "Add a picture",
       photoChange: "Change picture",
-      photoError: "Could not read that image file.",
+      photoError: "Use a PNG, JPEG, or WebP image under 8 MB.",
       name: "Full name",
       password: "New password",
       passwordHint: "Leave this blank to keep the current password.",
@@ -338,7 +338,7 @@ export const en = {
       pageOf: "Page {page} of {pages}",
       photoAdd: "Add a picture",
       photoChange: "Change picture",
-      photoError: "Could not read that image file.",
+      photoError: "Use a PNG, JPEG, or WebP image under 8 MB.",
     },
     client: {
       email: "Email",

@@ -10,8 +10,8 @@ export function memoryClientPhotos(): PhotoStore {
       return bucket.read(file);
     },
 
-    write(file: string, body: Buffer): Promise<void> {
-      return bucket.write(file, body, "image/png");
+    write(file: string, body: Buffer, contentType: string): Promise<void> {
+      return bucket.write(file, body, contentType);
     },
 
     remove(file: string): Promise<void> {

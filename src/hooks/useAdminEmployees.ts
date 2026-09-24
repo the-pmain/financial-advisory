@@ -49,7 +49,7 @@ export function useAdminEmployees(loadError: string) {
         slug,
         await api<EmployeeAccount>(`/api/admin/employees/${encodeURIComponent(slug)}/photo`, {
           method: "PUT",
-          headers: { "Content-Type": "image/png" },
+          headers: { "Content-Type": photo.type },
           body: photo,
         }),
       );

@@ -1,6 +1,7 @@
 import { raw, Router } from "express";
 import { emptyDocuments } from "../../../src/js/clients-documents-model.js";
 import { toClientSummary, type ClientApplication } from "@domain/onboarding/model.ts";
+import { PORTRAIT_MAX_BYTES, PORTRAIT_TYPES, sniffPortrait, type PortraitType } from "@domain/shared/photo.ts";
 import { paginate, parsePageQuery } from "@domain/shared/page.ts";
 import {
   countClientFilters,
@@ -20,20 +21,23 @@ import type { StaffService } from "../../contexts/staff/service.ts";
 import { invalid } from "../../platform/errors.ts";
 import { param, route } from "../../platform/http.ts";
 
-const PNG_MAGIC = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
-
 // Image bytes, not JSON: the app-wide parser ignores this content type and leaves the stream alone.
-const photoBody = raw({ type: "image/png", limit: "3mb" });
+const photoBody = raw({ type: [...PORTRAIT_TYPES], limit: PORTRAIT_MAX_BYTES });
 
-/** The browser squares and re-encodes the picture, so only PNG bytes arrive here. */
-function readPhoto(body: unknown): Buffer {
+/**
+ * The bytes are stored as uploaded. The declared type has to match the file,
+ * so a mislabeled upload is refused rather than rewritten.
+ */
+function readPhoto(body: unknown, header: string | undefined): { bytes: Buffer; contentType: PortraitType } {
   if (!Buffer.isBuffer(body) || body.length === 0) {
-    throw invalid("Upload a PNG image.");
+    throw invalid("Upload an image.");
   }
-  if (!body.subarray(0, PNG_MAGIC.length).equals(PNG_MAGIC)) {
-    throw invalid("That file is not a readable PNG image.");
+  const sniffed = sniffPortrait(body);
+  const declared = header?.split(";")[0]?.trim().toLowerCase();
+  if (!sniffed || declared !== sniffed) {
+    throw invalid("That file is not a readable image.");
   }
-  return body;
+  return { bytes: body, contentType: sniffed };
 }
 
 function toProfile(account: EmployeeAccount): EmployeeProfile {
@@ -164,7 +168,8 @@ export function createAdminConsoleRouter(deps: {
     "/clients/:id/photo",
     photoBody,
     route(async (req, res) => {
-      const saved = await onboarding.replacePhoto(param(req, "id"), readPhoto(req.body));
+      const photo = readPhoto(req.body, req.header("content-type"));
+      const saved = await onboarding.replacePhoto(param(req, "id"), photo.bytes, photo.contentType);
       if (saved.photoStoragePath) {
         await identity.setPhotoPath(saved.email, saved.photoStoragePath);
       }
@@ -193,7 +198,8 @@ export function createAdminConsoleRouter(deps: {
     "/employees/:slug/photo",
     photoBody,
     route(async (req, res) => {
-      res.json(await staff.replacePhoto(param(req, "slug"), readPhoto(req.body)));
+      const photo = readPhoto(req.body, req.header("content-type"));
+      res.json(await staff.replacePhoto(param(req, "slug"), photo.bytes, photo.contentType));
     }, "Could not save this picture."),
   );
 

@@ -1,3 +1,4 @@
+import { isPortraitType, portraitExtension, sniffPortrait } from "@domain/shared/photo.ts";
 import {
   conventionPhotoFile,
   isPhotoFile,
@@ -67,14 +68,18 @@ export function createStaffService(deps: { employees: EmployeeRepository; photos
      * Each save takes a fresh filename so the day-long photo cache cannot serve
      * the old face, and the file it replaces goes afterwards.
      */
-    async replacePhoto(slug: string, png: Buffer): Promise<EmployeeAccount> {
+    async replacePhoto(slug: string, body: Buffer, contentType: string): Promise<EmployeeAccount> {
       const current = await employees.find(slug);
       if (!current) throw notFound(MISSING);
+      const sniffed = sniffPortrait(body);
+      if (!sniffed || !isPortraitType(contentType) || sniffed !== contentType) {
+        throw invalid("That file is not a readable image.");
+      }
       const previous = current.photoStoragePath;
 
-      const file = nextPhotoFile(slug);
+      const file = nextPhotoFile(slug, Date.now(), portraitExtension(sniffed));
       try {
-        await photos.write(file, png);
+        await photos.write(file, body, sniffed);
       } catch (err) {
         console.error(err);
         throw unavailable("The photo store rejected this upload.");

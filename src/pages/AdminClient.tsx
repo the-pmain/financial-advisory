@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router";
 import { emptyClientDocuments, prepareFirmDocument } from "@domain/documents/agreement.ts";
 import { kindSaved } from "@domain/documents/compose.ts";
 import type { ClientApplication } from "@domain/onboarding/model.ts";
+import { PORTRAIT_MAX_BYTES, isPortraitType } from "@domain/shared/photo.ts";
 import type { ClientWithAdviser, EmployeeProfile } from "@domain/staff/model.ts";
 import { api } from "../api/client.ts";
 import { ClientDocuments, DOC_KINDS, filedCount, RegisteredTag } from "../components/admin/ClientCard.tsx";
@@ -19,7 +20,6 @@ import { useAdminClient } from "../hooks/useAdminClient.ts";
 import { useI18n } from "../i18n/context.tsx";
 import { DOCUMENT_KIND_LABELS, type DocumentsMap } from "../js/clients-documents-model.js";
 import { formatDay } from "../lib/format.ts";
-import { squarePngBlob } from "../lib/image.ts";
 
 type Tab = "profile" | "adviser" | "documents";
 
@@ -113,20 +113,16 @@ function ClientPortrait({
     event.target.value = "";
     if (!file) return;
 
-    setPending(true);
-    setError("");
-
-    let squared: Blob;
-    try {
-      squared = await squarePngBlob(file);
-    } catch {
+    if (!isPortraitType(file.type) || file.size === 0 || file.size > PORTRAIT_MAX_BYTES) {
       setError(copy.photoError);
-      setPending(false);
       return;
     }
 
+    setPending(true);
+    setError("");
+
     try {
-      await onSave(squared);
+      await onSave(file);
     } catch (err) {
       setError(err instanceof Error ? err.message : copy.error);
     } finally {
@@ -137,7 +133,11 @@ function ClientPortrait({
   return (
     <div className="admin-ident__portrait">
       <span className="admin-photo__frame">
-        <Avatar name={client.name} photoUrl={client.photoUrl} size="lg" />
+        {client.photoUrl ? (
+          <img className="admin-photo__img" src={client.photoUrl} alt="" />
+        ) : (
+          <Avatar name={client.name} photoUrl="" size="lg" />
+        )}
         <button
           type="button"
           className="admin-photo__edit"
