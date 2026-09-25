@@ -124,7 +124,7 @@ export function buildEnglishCatalog(ui: Translations['ui'], meta: Translations['
         investors: teamSections.find((s) => s.id === 'investors')!.title,
       },
       members: teamRecord(),
-      featuredLead: `${featuredMember.name} leads Helfenstein’s investment philosophy and long-term capital allocation.`,
+      featuredLead: `${featuredMember.name} leads Helfenstein’s investment strategy and long-term capital allocation.`,
     },
   };
 }

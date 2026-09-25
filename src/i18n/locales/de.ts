@@ -138,7 +138,7 @@ export const de: Translations = {
     team: 'Team',
     teamSubtitle: 'Unabhängige Beraterinnen und Berater, die nur ihren Kundinnen und Kunden verpflichtet sind',
     featuredMemberLead:
-      'Friedrich Hartmann leitet die Anlagephilosophie und die langfristige Kapitalallokation von Helfenstein.',
+      'Friedrich Hartmann leitet die Anlagestrategie und die langfristige Kapitalallokation von Helfenstein.',
     about: 'Über',
     results: 'Erfolge',
     colleagues: 'Kolleginnen und Kollegen',
@@ -833,226 +833,215 @@ export const de: Translations = {
       investors: 'Kundenberatung',
     },
     featuredLead:
-      'Friedrich Hartmann leitet die Anlagephilosophie und die langfristige Kapitalallokation von Helfenstein.',
+      'Friedrich Hartmann leitet die Anlagestrategie und die langfristige Kapitalallokation von Helfenstein.',
     members: {
       'friedrich-hartmann': {
         slug: 'friedrich-hartmann',
         role: 'Vorsitzender und CIO',
-        about:
-          'Friedrich Hartmann prägt die Anlagekultur von Helfenstein seit mehr als drei Jahrzehnten. Disziplinierter Leser und Langstreckenwanderer leitet er weiterhin den Portfolioaufbau und definiert den langfristigen Value-Rahmen des Hauses.',
-        results: [
-          'Hat die Leitaktienstrategie von Helfenstein von Anfang an aufgebaut; annualisierte Gesamtrendite von 11,4 % seit 2004.',
-          'Dreimal von unabhängigen Fondsratings zu Europas führenden Value-Managern gezählt.',
-          'Autor von In Long Horizon über patientes Kapital und zyklusbewusstes Investieren.',
-        ],
+        about: [
+          'Friedrich Hartmann leitet die Anlagestrategie von Helfenstein und bringt mehr als 30 Jahre Erfahrung in den Portfolioaufbau und die langfristige Kapitalallokation ein. Sein Ansatz stellt die Qualität der Unternehmen, disziplinierte Bewertungen und den Blick über wechselnde Marktphasen in den Mittelpunkt. Als Vorsitzender und CIO setzt er den Anlagerahmen und begleitet die Risikoeinschätzung des Teams. Besonderen Wert legt er auf klare Anlagebegründungen und auf die Geduld, Überzeugungen zu halten und zugleich für neue Evidenz offen zu bleiben.',
+          'Seine Anlagephilosophie beginnt mit einer einfachen Frage: Was macht ein Unternehmen über einen ganzen Marktzyklus hinweg besitzenswert? Er fordert das Team auf, die Annahmen hinter jedem Anlagefall zu prüfen und zu betrachten, wie einzelne Positionen im Portfolio zusammenwirken. In Kundengesprächen erklärt er den Zusammenhang von Bewertung, Unsicherheit und der Zeit, die eine Anlagethese zur Entfaltung braucht.',
+        ].join('\n\n'),
+        results: ['Mehr als 30 Jahre, in denen er den Anlageansatz des Hauses geprägt hat.'],
       },
       'karin-vogel': {
         slug: 'karin-vogel',
         role: 'Portfolio Managerin',
-        about:
-          'Karin Vogel kam von Boutique-Value-Häusern in Madrid und Saragossa zu Helfenstein. Sie deckt europäische Mid-Caps mit forensischem Bottom-up-Ansatz und ruhigem, direktem Kundenstil ab.',
+        about: [
+          'Karin Vogel ist auf europäische Mid-Cap-Aktien spezialisiert und verbindet detaillierte Unternehmensanalyse mit einer disziplinierten Bewertung. Ihre Erfahrung in spanischen Value-Boutiquen prägt ein praktisches Verständnis regionaler Unternehmen und ihrer Wettbewerbsposition. Als Lead Analystin des Continental Value Fund seit 2016 prüft sie Cash-Generierung, Managemententscheidungen und die Tragfähigkeit der Erträge. Karin hilft Kundinnen und Kunden zudem, die Begründung einzelner Positionen in klarer Sprache zu verstehen.',
+          'Ihre Analyse geht über das Wachstum der Schlagzeilen hinaus und untersucht, wie Unternehmen Expansion finanzieren, Margen schützen und Kapital einsetzen. Dem Zusammenhang von operativer Leistung und Cashflow gilt besondere Aufmerksamkeit, um optimistische Prognosen zu hinterfragen. In Portfoliogesprächen legt Karin sowohl die Chance als auch die Bedingungen dar, die den Anlagefall schwächen könnten.',
+        ].join('\n\n'),
         results: [
-          'CFA Charterholder; Lead Analystin beim Continental Value Fund seit 2016.',
-          'Portfolio übertraf den Benchmark in den letzten fünf Jahren annualisiert um 2,8 %.',
-          'Intern anerkannt dafür, drei übersehene Industriebeteiligungen in Kernpositionen zu verwandeln.',
+          'Lead Analystin des Continental Value Fund seit 2016.',
+          'Drei untersuchte Industriebeteiligungen zu langfristigen Kernpositionen entwickelt.',
         ],
       },
       'lukas-steiner': {
         slug: 'lukas-steiner',
         role: 'Portfolio Manager',
-        about:
-          'Lukas Steiner bildete sich in Wien und London aus, bevor er zu Helfenstein kam. Er verbindet fundamentale Aktienanalyse mit grossem Interesse an österreichischer Wirtschaftstheorie und Fussball – an Spieltagen meist in dieser Reihenfolge.',
-        results: [
-          'Verwaltet den iberischen Aktiensleeve des Hauses gemeinsam mit europäischen Co-Managern.',
-          'Senkte den durchschnittlichen Portfolio-Umschlag um 22 % bei verbesserter Trefferquote neuer Ideen.',
-          'Regelmässiger Referent am internen Research-Forum von Helfenstein zum Kapitalzyklus-Timing.',
-        ],
+        about: [
+          'Lukas Steiner konzentriert sich auf europäische Aktien, mit besonderer Verantwortung für die iberischen Beteiligungen des Hauses. Nach seiner Ausbildung in Wien und London verbindet er fundamentale Unternehmensanalyse mit dem Interesse an Kapitalzyklen und den wirtschaftlichen Kräften, die Unternehmensrenditen prägen. Seine Arbeit an der Portfoliodisziplin trug zu einer Senkung des durchschnittlichen Umschlags um 22 % bei. Er bevorzugt sorgfältig geprüfte Positionen und einen zurückhaltenden Handel und misst jede Entscheidung am langfristigen Anlagefall.',
+          'Ein zentrales Thema seiner Arbeit ist, wie Investitionen, Wettbewerb und Finanzierungsbedingungen die künftige Profitabilität beeinflussen. Er prüft, ob die laufenden Erträge eine tragfähige Position oder einen günstigen Punkt im Zyklus widerspiegeln. In Portfoliogesprächen betont er die Gründe für den Besitz eines Unternehmens, die Entwicklungen, die eine Neubewertung rechtfertigen, und die Kosten unnötiger Veränderungen etablierter Positionen.',
+        ].join('\n\n'),
+        results: ['Senkung des durchschnittlichen Portfolio-Umschlags um 22 %.'],
       },
       'maximilian-berger': {
         slug: 'maximilian-berger',
         role: 'Portfolio Manager',
-        about:
-          'Maximilian Berger wechselte vom Audit ins Portfolio Management und bringt einen skeptischen Blick für Bilanzqualität mit. Kolleginnen und Kollegen beschreiben ihn als ruhig in Meetings und unermüdlich in den Modellen.',
+        about: [
+          'Maximilian Berger bringt einen Audit-Hintergrund in die Aktienanlage ein, mit Schwerpunkt auf Bilanzqualität, Bilanzstärke und der Verlässlichkeit ausgewiesener Erträge. Er co-managt defensiv positionierte europäische Beteiligungen in der Global Value Range. 2023 leitete er die Überprüfung der Reporting-Standards im Anlageuniversum des Hauses. Sein Beitrag ist die genaue Prüfung dessen, was hinter den Schlagzeilenzahlen steht, damit das Team Annahmen hinterfragt und finanzielle Schwächen erkennt, bevor Kapital eingesetzt wird.',
+          'Sein analytischer Stil beruht auf der Abstimmung: Er prüft, ob Erfolgsrechnung, Bilanz und Geldflussrechnung dieselbe Geschichte erzählen. Er achtet auf Veränderungen des Nettoumlaufvermögens, Finanzierungsverpflichtungen und die Annahmen hinter ausgewiesenen Vermögenswerten. Diese Perspektive vertieft die Anlagedebatten des Teams, besonders wenn scheinbar attraktive Bewertungen gegen weniger sichtbare Finanz- oder Bilanzrisiken abzuwägen sind.',
+        ].join('\n\n'),
         results: [
-          'Identifizierte früh zwei Bilanzrisiken, die später am Markt breit diskutiert wurden.',
-          'Co-managiert defensiv positionierte europäische Beteiligungen in der Global Value Range.',
-          'Leitete die Helfenstein-Review 2023 zu Reporting-Standards im investierbaren Universum.',
+          'Leitete 2023 die Überprüfung der Reporting-Standards des Hauses.',
+          'Identifizierte zwei Bilanzrisiken, bevor sie breitere Marktaufmerksamkeit fanden.',
         ],
       },
       'julian-vogt': {
         slug: 'julian-vogt',
         role: 'Portfolio Manager',
-        about:
-          'Julian Vogt hat Abschlüsse in Recht und Betriebswirtschaft und ein tiefes Interesse an Kapitaltheorie. Ausserhalb des Büros ist er eher auf dem Golfplatz oder beim erneuten Ansehen eines Lieblingsfilms als beim Kurscheck.',
+        about: [
+          'Julian Vogt verbindet einen Hintergrund in Recht und Betriebswirtschaft mit dem Schwerpunkt Corporate Governance und Anlageentscheidungen. Er entwickelte die Governance-Checkliste, die vor neuen grossen Portfoliopositionen verwendet wird, und bringt Eigentümerstrukturen, Aktionärsrechte und Managementanreize in den Research-Prozess ein. Neben seiner Portfolioverantwortung begleitet er Junior-Analystinnen und -Analysten bei der Formulierung von Anlagethese und Positionsgrösse. Sein Ansatz verbindet die Stärke eines Unternehmens mit den Bedingungen, zu denen Anleger an seiner Zukunft teilhaben.',
+          'Er untersucht, wie Unternehmensstrukturen und Managemententscheidungen die Position der Aktionäre über die Zeit beeinflussen. Seine Analyse prüft, ob Anreize eine verantwortungsvolle Kapitalallokation fördern und ob die Governance die erklärte Strategie stützt. Im Austausch mit weniger erfahrenen Analystinnen und Analysten betont er knappe Begründung, explizite Annahmen und eine klare Darstellung der Evidenz, die eine Anlageauffassung ändern würde.',
+        ].join('\n\n'),
         results: [
-          'Strukturierte die Governance-Checkliste von Helfenstein, die vor jeder grossen Neuposition verwendet wird.',
-          'Half, rechtliche und regulatorische Reibungen in drei grenzüberschreitenden Beteiligungen zu reduzieren.',
-          'Mentort Junior-Analystinnen und -Analysten bei Theseformulierung und Positionsgrösse.',
+          'Unterstützte die Arbeit an rechtlicher und regulatorischer Komplexität in drei grenzüberschreitenden Beteiligungen.',
         ],
       },
       'ken-wagner': {
         slug: 'ken-wagner',
         role: 'Portfolio Manager',
-        about:
-          'Ken Wagner verbindet den europäischen Desk von Helfenstein mit asiatischen Börsen-Chancen. In Taipei geboren und in Barcelona ausgebildet, reist er häufig und liest Geschäftsberichte mit derselben Geduld.',
-        results: [
-          'Eröffnete 2019 die erste dedizierte Asien-Pazifik-Research-Abdeckung von Helfenstein.',
-          'Identifizierte vier Investitionen, die heute mehr als 8 % des Globalportfolios ausmachen.',
-          'Fliessend in Mandarin, Deutsch und Spanisch; Hauptkontakt für regionale Broker.',
-        ],
+        about: [
+          'Ken Wagner verbindet das europäische Anlageteam von Helfenstein mit Chancen bei in Asien kotierten Unternehmen. Er baute 2019 die dedizierte Asien-Pazifik-Research-Abdeckung des Hauses auf und entwickelte eine regionale Perspektive aus Geschäftsberichten und dem laufenden Austausch mit Marktteilnehmern. Fliessend in Mandarin, Deutsch und Spanisch unterstützt er die Kommunikation über Märkte und Research-Partner hinweg. Er identifizierte vier Investitionen, die mehr als 8 % des Globalportfolios ausmachten. Ken will Unternehmen in ihrem lokalen Kontext verstehen und zugleich prüfen, wie jede Chance in den Bewertungs- und Risikorahmen des Gesamtportfolios passt.',
+          'Seine Analyse berücksichtigt Unterschiede bei Offenlegung, Eigentümerstrukturen und den Wettbewerbsbedingungen in der Region. Diese Überlegungen bringt er in die Diskussion mit europäischen Kolleginnen und Kollegen ein. Sein Ansatz verbindet die genaue Lektüre finanzieller Informationen mit dem Interesse daran, wie Unternehmen Cash generieren, Expansion finanzieren und Minderheitsaktionäre behandeln.',
+        ].join('\n\n'),
+        results: ['Vier Investitionen identifiziert, die mehr als 8 % des Globalportfolios ausmachten.'],
       },
       'stefan-richter': {
         slug: 'stefan-richter',
         role: 'Portfolio Manager',
-        about:
-          'Stefan Richter verbrachte Jahre auf der Sell Side, bevor er zu Helfenstein kam. Bergläufer ausserhalb des Büros bevorzugt er Unternehmen, die leise über Zyklen hinweg wachsen können.',
-        results: [
-          'Ehemaliger Research-Chef eines börsennotierten Industriekonzerns; bei Helfenstein seit 2015.',
-          'Top-Quartil-Performance bei zyklischen Beteiligungen in der Periode 2020–2022.',
-          'Erstellte die Energiewende-Watchlist des Hauses, die vom gesamten Investment Committee übernommen wurde.',
-        ],
+        about: [
+          'Stefan Richter ist seit 2015 bei Helfenstein und bringt Erfahrung in der Anlageanalyse und der Beurteilung von Industrieunternehmen mit. Er konzentriert sich auf Unternehmen, deren Wettbewerbsstärken und Cashflows wechselnde wirtschaftliche Bedingungen überdauern können. Stefan entwickelte die Energiewende-Watchlist des Hauses und gab dem Investment Committee damit eine strukturierte Grundlage, um die von diesem langfristigen Wandel betroffenen Unternehmen zu prüfen. Seine Analyse verbindet Branchenentwicklungen mit Unternehmensfundamentaldaten, mit besonderem Blick auf das Kapital, das künftiges Wachstum trägt.',
+          'Er untersucht den Zusammenhang von industrieller Nachfrage, Produktionskapazität und den Investitionen, die nötig sind, um die Wettbewerbsposition zu halten. In der Energiewende-Analyse trennt er breite Branchenthemen von der Ökonomie einzelner Unternehmen. Sein Ansatz fragt, wie sich eine Chance in Ertrag und Cashflow übersetzt und ob die Bilanz die nötigen Investitionen auch in ungünstigeren Zyklusphasen tragen kann.',
+        ].join('\n\n'),
+        results: ['Mitglied des Helfenstein-Teams seit 2015.'],
       },
       'greta-keller': {
         slug: 'greta-keller',
         role: 'Junior Analystin',
-        about:
-          'Greta Keller kam nach einem Praktikum in Investor Relations zu Helfenstein und wechselte schnell auf den Investment Floor. Sie bringt frische Modellierungskompetenz und einen aussergewöhnlich scharfen Blick für Konsumententrends.',
+        about: [
+          'Greta Keller unterstützt die Analyse kleinerer Konsum- und Industrieunternehmen in Deutschland, Österreich und der Schweiz. Sie kam 2023 nach einem Praktikum in Investor Relations zu Helfenstein, mit einem Hintergrund in Betriebswirtschaft und einem starken Interesse an Finanzmodellen. Ihre Arbeit verbindet die Analyse von Unternehmenspublikationen mit der Beurteilung veränderten Kundenverhaltens. Gemeinsam mit den Portfolio Managern übersetzt sie entstehende Research-Ideen in klar strukturierte Anlagefälle und die laufende Unternehmensbeobachtung.',
+          'Ihr analytischer Ansatz beginnt bei den Treibern von Umsatz, Margen und Nettoumlaufvermögen. Sie interessiert sich besonders dafür, wie Nachfrageverschiebungen in den Ergebnissen sichtbar werden und ob die Erklärungen des Managements von den Zahlen getragen werden. Bei der Vorbereitung des Research legt sie Wert auf transparente Annahmen und gut geordnetes Material, damit erfahrene Kolleginnen und Kollegen ein Modell prüfen und seine Schlüsse hinterfragen können.',
+        ].join('\n\n'),
         results: [
-          'Absolvierte als Beste ihres Jahrgangs Betriebswirtschaft; trat 2023 dem Team bei.',
-          'Erste Analysten-Note erreichte das Portfolio innerhalb von sechs Wochen nach dem Start.',
-          'Unterstützt die Abdeckung von Small-Cap-Konsum- und Industrienamen in der DACH-Region.',
+          '2023 zum Anlageteam gestossen.',
+          'Erste Analysten-Note erreichte das Portfolio innerhalb von sechs Wochen.',
         ],
       },
       'tobias-brandt': {
         slug: 'tobias-brandt',
         role: 'Geschäftsführer',
-        about:
-          'Tobias Brandt leitet die Kundenentwicklung bei Helfenstein nach Stationen im Private Banking und im Aktienvertrieb. Meist ist er die erste Person, mit der Interessentinnen und Interessenten vor einem Erstgespräch sprechen.',
+        about: [
+          'Tobias Brandt leitet die Kundenentwicklung bei Helfenstein und bringt Erfahrung aus Private Banking und Aktienvertrieb mit. Er arbeitet mit Interessentinnen und Interessenten daran, ihre Prioritäten zu verstehen und sie mit den passenden Anlage- und Beratungsteams zusammenzubringen. Seine Arbeit trug in vier Jahren zu einem Wachstum der Privatkundenbasis um 40 % bei. Tobias startete zudem das Kundenbildungsprogramm des Hauses, das jährlich mehr als 600 Teilnehmende erreicht. Fliessend in Deutsch, Englisch und Spanisch stellt er klare Erklärungen und eindeutige Erwartungen in den Mittelpunkt der Kundenbeziehung.',
+          'Geschäftsentwicklung versteht er als Beginn einer dauerhaften Beratungsbeziehung. Frühe Gespräche klären, was Kundinnen und Kunden erreichen wollen, wie sie kommunizieren möchten und was sie von professioneller Anlageunterstützung erwarten. Über das Bildungsprogramm regt er informierte Fragen und ein besseres Verständnis des Ansatzes an, damit Interessierte und bestehende Kundschaft sicherer an Gesprächen über ihre Finanzen teilnehmen.',
+        ].join('\n\n'),
         results: [
-          'Vergrösserte die Privatkundenbasis von Helfenstein in vier Jahren um 40 %.',
-          'Startete das Kunden-Bildungsprogramm des Hauses, das jährlich von über 600 Personen besucht wird.',
-          'Leitete zuvor die Privatkundenbetreuung für Iberien auf einer europäischen Multi-Asset-Plattform.',
+          '40 % Wachstum der Privatkundenbasis in vier Jahren.',
+          'Jährlich mehr als 600 Teilnehmende am Kundenbildungsprogramm.',
         ],
       },
       'markus-engel': {
         slug: 'markus-engel',
         role: 'Direktor Kundenkommunikation',
-        about:
-          'Markus Engel leitet Kundenkommunikation und Marketing. Warm am Telefon und präzise im Follow-up hält er die externe Stimme von Helfenstein im Einklang mit der tatsächlichen Portfoliosteuerung.',
-        results: [
-          'Baute das Kundenreporting und die Korrespondenz für das gesamte Beratungsteam neu auf.',
-          'Führte das Quartalsbrief-Format ein, das heute von mehreren nationalen Wirtschaftsmedien zitiert wird.',
-          'Leitet das Team mit über 12 000 Kundenkontakten pro Jahr.',
-        ],
+        about: [
+          'Markus Engel leitet Kundenkommunikation und Marketing bei Helfenstein und übersetzt Anlageüberlegungen in klares Reporting und einheitliche Korrespondenz. Er gestaltete die Unterlagen des Beratungsteams neu und verantwortet Kommunikation, die mehr als 12 000 Kundeninteraktionen pro Jahr unterstützt. Im Mittelpunkt steht, dass Kundinnen und Kunden Portfolioentscheidungen, Marktentwicklungen und die für ihre Situation relevanten Informationen verstehen. Markus arbeitet eng mit Anlage- und Beratungskolleginnen und -kollegen, damit die externe Kommunikation präzise, nützlich und konsistent bleibt.',
+          'Jede Mitteilung betrachtet er aus der Sicht der Leserin oder des Lesers: Was ist geschehen, warum es wichtig ist und ob ein Gespräch mit einer Beraterin oder einem Berater nötig ist. Das prägt seine Arbeit an Reportingstruktur, redaktioneller Konsistenz und der Darstellung komplexer Themen. Er legt auch Wert darauf, Unsicherheit klar zu erklären, damit knappe Texte den Kontext behalten, den Kundinnen und Kunden für eine Anlageentscheidung brauchen.',
+        ].join('\n\n'),
+        results: ['Kommunikation für mehr als 12 000 Kundeninteraktionen pro Jahr.'],
       },
       'marc-weber': {
         slug: 'marc-weber',
         role: 'Managing Director, Client Operations',
-        about:
-          'Marc Weber koordiniert Client Operations und die Beziehungen zu unseren Depotbanken. Er kam aus dem Private Banking und sorgt dafür, dass Kundinnen und Kunden von der Bank, die ihre Vermögenswerte verwahrt, ein klares Reporting erhalten – aus Luzern und international.',
-        results: [
-          'Senkte die Verwahrungs- und Abwicklungskosten, die Helfenstein-Kundinnen und -Kunden ihren Banken zahlen, seit 2020 um 18 %.',
-          'Leitete die Überprüfung, die Kundinnen und Kunden auf segregierte Depots in ihrem eigenen Namen überführte.',
-          'Verhandelt Depotkonditionen mit Depotbanken im Namen der Privatkundschaft.',
-        ],
+        about: [
+          'Marc Weber verantwortet Client Operations und koordiniert die Beziehungen von Helfenstein zu den Depotbanken. Mit einem Hintergrund im Private Banking konzentriert er sich auf Kontoadministration, Depotstrukturen und die Klarheit des Kundenreportings. Seine Überprüfung der Verwahrungs- und Abwicklungskonditionen trug dazu bei, die entsprechenden Kundenkosten seit 2020 um 18 % zu senken. Auf Deutsch, Französisch und Englisch verbindet er Kundschaft, Beratung und Bankpartner zu einem geordneten und reaktionsschnellen Service.',
+          'Sein Ansatz macht die Verantwortlichkeiten von Beratung, Depotbank und Kundin oder Kunde verständlich. Er achtet auf die praktischen Details, die die Servicequalität bestimmen, darunter die Vollständigkeit der Kontoinformationen und die Bearbeitung offener Anfragen. Marc bringt auch eine kostenbewusste Sicht in die Bankbeziehungen ein und prüft, wie operative Arrangements das Gesamterlebnis und die laufende Administration beeinflussen.',
+        ].join('\n\n'),
+        results: ['Senkung der Verwahrungs- und Abwicklungskosten für Kundinnen und Kunden um 18 % seit 2020.'],
       },
       'anja-hoffmann': {
         slug: 'anja-hoffmann',
         role: 'Kundenberaterin',
-        about:
-          'Anja Hoffmann wechselte von der IR börsennotierter Unternehmen ins Asset Management. Kundinnen und Kunden schätzen ihren direkten Stil und die Art, komplexe Portfolio-Bewegungen in verständlicher Sprache zu erklären.',
+        about: [
+          'Anja Hoffmann nutzt ihren Hintergrund in der Investor Relations börsennotierter Unternehmen, um Portfolioentscheidungen klar zu erklären und in die weiteren finanziellen Prioritäten der Kundschaft einzuordnen. Sie betreut Beziehungen zu mehr als 180 Privatkundinnen, Privatkunden und Familien, mit Schwerpunkt auf Vorsorge und langfristiger Planung. In der letzten Jahresumfrage erreichte ihre Kundenzufriedenheit 4,8 von 5. Anja organisiert zudem die halbjährlichen Kundenseminare des Hauses in Luzern. Auf Deutsch und Englisch bringt sie einen direkten, strukturierten Stil in Gespräche, die sonst komplex wirken können.',
+          'Kundengespräche führt sie so, dass Anlageinformationen mit den Entscheidungen verbunden werden, vor denen ein Haushalt tatsächlich steht. Statt einer Sammlung von Marktbeobachtungen klärt sie, was diese Entwicklungen für das nächste Gespräch über die Pläne bedeuten. Ihre IR-Erfahrung zeigt sich in der sorgfältigen Wortwahl und darin, die Begründung von Entscheidungen einschliesslich Annahmen und Unsicherheiten zu erklären.',
+        ].join('\n\n'),
         results: [
-          'Betreut Beziehungen zu mehr als 180 Privatkundinnen, Privatkunden und Familien.',
-          'Kundenzufriedenheitswert von 4,8/5 in der letzten Jahresumfrage.',
-          'Organisiert die halbjährlichen Kundenseminare von Helfenstein in Luzern.',
+          'Beziehungen zu mehr als 180 Privatkundinnen, Privatkunden und Familien.',
+          'Kundenzufriedenheit von 4,8 von 5 in der letzten Jahresumfrage.',
         ],
       },
       'florian-bauer': {
         slug: 'florian-bauer',
         role: 'Kundenberater',
-        about:
-          'Florian Bauer betreut Kundinnen und Kunden, die Detail statt Drama erwarten. Ehemaliger Tennis-Enthusiast und Wochenend-Skifahrer ist er unter Druck zuverlässig und verpasst selten einen Rückruf.',
-        results: [
-          'Berät Haushalte zu Portfoliostruktur und jährlichem Rebalancing.',
-          'Reduzierte die durchschnittliche Antwortzeit auf Anfragen auf unter vier Geschäftsstunden.',
-          'Hauptkontakt für deutschsprachige Kundinnen und Kunden mit Wohnsitz ausserhalb der Schweiz.',
-        ],
+        about: [
+          'Florian Bauer berät Haushalte zu Portfoliostruktur und jährlichem Rebalancing, mit besonderer Verantwortung für deutschsprachige Kundinnen und Kunden mit Wohnsitz ausserhalb der Schweiz. Er setzt auf praktische Erklärungen, sorgfältiges Follow-up und Kontinuität zwischen den formellen Portfolioreviews. Seine Arbeit im Kundenservice senkte die durchschnittliche Antwortzeit auf Anfragen auf unter vier Geschäftsstunden. Florian ist eine klare Anlaufstelle für alltägliche Fragen und hält die Gespräche mit den übergeordneten Anlagezielen und veränderten Umständen verbunden.',
+          'Seine Reviews sind detailorientiert: wie ein Portfolio positioniert ist, ob sich die Umstände geändert haben und welche Punkte weitere Aufmerksamkeit brauchen. Für Kundinnen und Kunden im Ausland legt er besonderen Wert auf geordnete Kommunikation und klare Verantwortung für das Follow-up. Ziel ist ein verlässlicher Alltagsservice, damit Fragen zu Reports, Portfolioänderungen oder anstehenden Reviews mit dem richtigen Kontext und einem klaren nächsten Schritt bearbeitet werden.',
+        ].join('\n\n'),
+        results: ['Durchschnittliche Antwortzeit auf Kundenanfragen auf unter vier Geschäftsstunden gesenkt.'],
       },
       'andrew-ramsden': {
         slug: 'andrew-ramsden',
         role: 'Kundenberater',
-        about:
-          'Andrew Ramsden bringt drei Jahrzehnte Erfahrung in der Kundenbeziehung an den Beratungsdesk von Helfenstein. Abgewogen und zugänglich ist er die Person, die Kundinnen und Kunden anrufen, wenn eine Entscheidung Klarheit statt Spin braucht.',
+        about: [
+          'Andrew Ramsden bringt 30 Jahre Erfahrung in der Kundenbeziehung in die Vorsorge- und Anlageplanung ein. Er berät mehr als 40 Familien dabei, wie ihre Portfolios veränderte Einkommensbedürfnisse und langfristige Prioritäten tragen können. Zu seinem Hintergrund gehört die Leitung der Privatkundenbetreuung bei einem Londoner Vermögensverwalter. Andrew entwickelte die Vorpensionierungs-Analyse, die das Beratungsteam von Helfenstein verwendet, und schuf damit einen strukturierten Ausgangspunkt für Gespräche über Vorsorge, Bezüge und die Entscheidungen, die über die Zeit Aufmerksamkeit brauchen.',
+          'Seine Gespräche behandeln den Übergang vom Vermögensaufbau zum Bezug, einschliesslich des Gleichgewichts von regelmässigem Einkommen, verfügbaren Reserven und längerfristigen Anlagebedürfnissen. Besonderen Wert legt er darauf, Annahmen neu zu prüfen, wenn sich familiäre Umstände ändern. Sein Auftreten ist überlegt und zugänglich und gibt Raum, Abwägungen zu betrachten und einzelne Entscheidungen in einen breiteren Vorsorgeplan einzuordnen.',
+        ].join('\n\n'),
         results: [
-          'Berät mehr als 40 Familien zu Pensionierung und Kapitalbezugsplanung.',
-          'Entwickelte die schriftliche Vorpensionierungs-Analyse, die heute im gesamten Beratungsteam verwendet wird.',
-          'Ehemaliger Leiter Privatkundenbetreuung bei einem Londoner Vermögensverwalter; seit 2019 bei Helfenstein.',
+          '30 Jahre Erfahrung in der Kundenbeziehung.',
+          'Vorsorge- und Bezugsberatung für mehr als 40 Familien.',
         ],
       },
       'erik-schneider': {
         slug: 'erik-schneider',
         role: 'Kundenberater',
-        about:
-          'Erik Schneider ist seit zwei Jahrzehnten in Fonds- und Beratungsplattformen tätig. Ruhig und unhurried ist er oft die erste Person, nach der langjährige Kundinnen und Kunden fragen, wenn die Märkte unruhig werden.',
-        results: [
-          'Betreut das älteste Kundenbuch von Helfenstein, zurückgehend bis 2008.',
-          'Half, 98 % der Assets während des Volatilitätsanstiegs 2022 zu halten.',
-          'Ehemaliger Private-Banking-Direktor, bei Helfenstein seit 2016.',
-        ],
+        about: [
+          'Erik Schneider bringt 20 Jahre Erfahrung in Anlagefonds, Beratungsplattformen und Private Banking mit. Seit seinem Eintritt bei Helfenstein 2016 konzentriert er sich auf langfristige Kundenbeziehungen und Kontinuität in wechselnden Marktphasen. Seine Beziehungsarbeit half, während der Marktvolatilität 2022 98 % der Vermögenswerte zu halten. Als früherer Private-Banking-Direktor prägt er Portfoliogespräche und Kundenservice mit einem abgewogenen Ansatz. Erik hilft, kurzfristige Marktentwicklungen von dem zu unterscheiden, was für den finanziellen Plan zählt, und hält Gespräche an den individuellen Prioritäten fest.',
+          'Er legt Wert darauf, die Geschichte hinter den Entscheidungen einer Kundin oder eines Kunden zu verstehen, einschliesslich früherer Markterfahrungen und der Erwartungen an die Anlageunterstützung. Das hilft ihm, Gespräche in unsicheren Phasen zu führen, ohne die ursprünglichen Ziele aus dem Blick zu verlieren. Sein Ansatz verbindet zugängliche Erklärungen mit der Bereitschaft, frühere Annahmen zu überprüfen, weil auch eine langjährige Beziehung sich an veränderte Umstände anpassen muss.',
+        ].join('\n\n'),
+        results: ['Half, während der Marktvolatilität 2022 98 % der Vermögenswerte zu halten.'],
       },
       'andrew-savage': {
         slug: 'andrew-savage',
         role: 'Kundenberater',
-        about:
-          'Andrew Savage spezialisiert sich auf das Onboarding neuer Kundinnen und Kunden und ein präzises Reporting. Energetisch in Meetings und akribisch im Follow-up verbindet er Anlageteam und Kundschaft, ohne dass Details verloren gehen.',
+        about: [
+          'Andrew Savage konzentriert sich auf das Onboarding, das Anlagereporting und die Koordination von Beziehungen mit mehreren Depotbanken. Er begleitete das Onboarding von 110 Privatkundinnen und -kunden über zwei Jahre und half, das Quartalsreporting des Hauses neu zu gestalten; danach stieg der ausgewiesene Zufriedenheitswert um 8 Punkte. Auf Englisch und Französisch verbindet er die Kundschaft mit dem Anlageteam und hält das Follow-up geordnet. Sein Ansatz macht Informationen leicht navigierbar und sorgt dafür, dass Kundinnen und Kunden die nächsten Schritte in der Beziehung zum Haus verstehen.',
+          'Besondere Aufmerksamkeit gilt dem Beginn einer Beziehung, wenn Dokumentation, Verantwortlichkeiten und Kommunikationswege klar sein müssen. Sind mehrere Banken beteiligt, hilft er, die verfügbaren Informationen zu einem kohärenteren Bild zusammenzuführen. Reporting versteht er als Ausgangspunkt für das Gespräch und hilft, die Fragen zu erkennen, die beim nächsten Review Aufmerksamkeit verdienen.',
+        ].join('\n\n'),
         results: [
-          'Onboardete in den letzten zwei Jahren 110 neue Privatkundinnen und -kunden.',
-          'Baute das Quartalsreporting für alle Kundinnen und Kunden neu auf; die Zufriedenheit stieg um acht Punkte.',
-          'Hauptkontakt für Kundinnen und Kunden mit Vermögenswerten bei mehr als einer Depotbank.',
+          '110 neue Privatkundinnen und -kunden in zwei Jahren onboardet.',
+          'Anstieg des ausgewiesenen Zufriedenheitswerts um acht Punkte nach der Neugestaltung des Reportings.',
         ],
       },
       'birgit-schulz': {
         slug: 'birgit-schulz',
         role: 'Kundenberaterin',
-        about:
-          'Birgit Schulz kam nach einer Karriere in der Qualitätskontrolle in den Finanzdienstleistungssektor – ein Hintergrund, der sich in der akribischen Dokumentation jedes Kundenkontakts zeigt. Ruhig, gründlich und schwer aus der Ruhe zu bringen.',
-        results: [
-          'Baute die CRM-Hygienestandards des Teams neu auf; Datenvollständigkeit heute über 99 %.',
-          'Betreut nordische und Benelux-Kundinnen und -Kunden in drei Sprachen.',
-          'Anerkannt für die Lösung der komplexesten Legacy-Kontotransfers des Hauses.',
-        ],
+        about: [
+          'Birgit Schulz bringt einen Hintergrund in der Qualitätskontrolle in den Kundenservice ein, mit Stärken in Dokumentation, Kontotransfers und der Genauigkeit der Kundendaten. Sie half, die CRM-Standards des Teams neu aufzubauen, und hob die erfasste Datenvollständigkeit auf über 99 %. Für Kundinnen und Kunden in den nordischen Ländern und im Benelux geht sie komplexe administrative Fragen mit einer klaren Abfolge von Schritten und gründlichem Follow-up an. Ihre Arbeit stützt die Kontinuität im Beratungsteam und gibt während Kontoänderungen eine geordnete Ansprechperson.',
+          'Genaue Unterlagen versteht sie als wesentlichen Teil guten Services: Sie zeigen, was vereinbart wurde und was noch offen ist. Bei Kontotransfers identifiziert sie Abhängigkeiten früh und hält die Beteiligten informiert. Ihre Sorgfalt bei der Dokumentation erleichtert auch Übergaben, sodass Kundinnen und Kunden Hintergrundinformationen nicht wiederholen müssen, wenn mehrere Teams beteiligt sind.',
+        ].join('\n\n'),
+        results: ['Vollständigkeit der Kundendaten auf über 99 % erhöht.'],
       },
       'alexander-koch': {
         slug: 'alexander-koch',
         role: 'Senior Kundenberater',
-        about:
-          'Alexander Koch berät Kundinnen und Kunden mit komplexeren Verhältnissen – mehrere Banken, Vermögenswerte in verschiedenen Ländern oder ein Unternehmen, das in die Pensionierung überführt wird. Jung, aber in schwierigen Gesprächen bereits ein vertrauter Ansprechpartner.',
-        results: [
-          'Betreut seit 2022 die grenzüberschreitenden Privatkundenfälle des Hauses.',
-          'Entwickelte den Konsolidierungsprozess für Kundinnen und Kunden mit Vermögenswerten bei mehreren Depotbanken.',
-          'Koordiniert den Fragebogen zu Nachhaltigkeitspräferenzen nach FIDLEG.',
-        ],
+        about: [
+          'Alexander Koch arbeitet mit Kundinnen und Kunden, deren finanzielle Verhältnisse mehrere Banken, Länder oder Phasen der Unternehmenseigentümerschaft umfassen. Seit 2022 betreut er die grenzüberschreitenden Privatkundenfälle des Hauses und entwickelte einen Prozess, um Informationen mehrerer Depotbanken zusammenzuführen. Sein Schwerpunkt ist ein klareres Gesamtbild von Arrangements, die sonst fragmentiert bleiben. Alexander koordiniert die nötigen Gespräche und das Follow-up und hilft, Portfolioentscheidungen neben Unternehmenstransitionen und längerfristigen Vorsorgeprioritäten zu betrachten.',
+          'Er beginnt damit, zu verstehen, wie die verschiedenen Teile der Finanzen zusammenhängen, statt jedes Konto isoliert zu beurteilen. Wenn ein Unternehmensübergang den Zweck der angelegten Vermögen verändert, hilft er, die zu klärenden Fragen zu ordnen. Besonderen Wert legt er auf klare Information und eine definierte Abfolge von Entscheidungen, damit komplexe Arrangements leichter zu besprechen und zu überprüfen sind.',
+        ].join('\n\n'),
+        results: ['Verantwortlich für grenzüberschreitende Privatkundenfälle seit 2022.'],
       },
       'leon-roth': {
         slug: 'leon-roth',
         role: 'Kundenberater',
-        about:
-          'Leon Roth hält die Kundenservice-Maschine von Helfenstein am Laufen. Kolleginnen und Kollegen verlassen sich darauf, dass er zum richtigen Zeitpunkt den richtigen Desk verbindet, ohne dass Kundinnen und Kunden sich durchgereicht fühlen.',
+        about: [
+          'Leon Roth koordiniert den Kundenservice über die Beratungs- und Operationsteams von Helfenstein hinweg. Er unterstützt Anfragen zu mehr als 400 aktiven Kundendossiers, sorgt dafür, dass Anliegen die richtigen Kolleginnen und Kollegen erreichen, und hält das Follow-up auf Kurs. Leon führte gemeinsame Antwortvorlagen ein, die interne Übergabefehler um 50 % senkten und die Konsistenz verbesserten, wenn Anfragen zwischen Teams wechseln. Sein Beitrag ist praktisch und kundenorientiert: Kontext bewahren und Servicefragen mit klarer Kommunikation und verlässlicher Koordination führen.',
+          'Er behält Anfrage, Hintergrund und die für den nächsten Schritt verantwortliche Person im Blick. Das ist besonders nützlich, wenn eine Frage sowohl eine Beraterin oder einen Berater als auch eine operative Fachperson betrifft. Leon legt Wert auf Kontinuität in diesem Prozess, mit Updates, die den Fortschritt erklären und zeigen, welche Information oder welcher Schritt noch nötig ist.',
+        ].join('\n\n'),
         results: [
-          'Koordiniert teamübergreifende Anfragen für mehr als 400 aktive Kundendossiers.',
-          'Führte gemeinsame Antwortvorlagen ein, die interne Übergabefehler halbierten.',
-          'Bekannt dafür, schwierige Servicefälle in langfristige Kundenloyalität zu verwandeln.',
+          'Servicekoordination für mehr als 400 aktive Kundendossiers.',
+          'Senkung interner Übergabefehler um 50 % nach Einführung gemeinsamer Antwortvorlagen.',
         ],
       },
       'henrik-meier': {
         slug: 'henrik-meier',
         role: 'Kundenberater',
-        about:
-          'Henrik Meier verfasst die täglichen Kunden-Updates und unterstützt das Kommunikationsteam. Klar, prägnant und leicht musikalisch ausserhalb der Arbeit – er spielt Gitarre in einer Büroband, die besser klingt, als sie aussieht.',
+        about: [
+          'Henrik Meier verbindet Kundenservice mit dem Schwerpunkt schriftliche Kommunikation. Er verfasst den monatlichen Kundenbrief des Hauses für mehr als 8 000 Abonnentinnen und Abonnenten und unterstützt die Redaktion deutschsprachiger Publikationen. Seine Arbeit macht Beiträge des Anlageteams und Marktupdates zu knappen Erklärungen, denen die Kundschaft gut folgen kann. Klarere Betreffzeilen und eine bessere Struktur steigerten die E-Mail-Öffnungsraten um 19 %. Henrik achtet besonders auf Aufbau, Formulierung und Relevanz und hält so einen einheitlichen Standard in der laufenden Korrespondenz und den regelmässigen Kundenmitteilungen.',
+          'Klarheit bedeutet für ihn ebenso die Auswahl und Ordnung von Informationen wie die Vereinfachung der Sprache. In seinen Texten soll der Hauptpunkt leicht zu finden sein, ohne das nötige Detail zu verlieren. Seine Position zwischen Kundenservice und Kommunikation hilft ihm, die Fragen vorauszusehen, die Leserinnen und Leser zu den Updates und Erklärungen des Hauses haben können.',
+        ].join('\n\n'),
         results: [
-          'Erstellt den monatlichen Kundenbrief, der von über 8 000 Abonnentinnen und Abonnenten gelesen wird.',
-          'Half, E-Mail-Öffnungsraten um 19 % durch klarere Betreffzeilen und Struktur zu steigern.',
-          'Stellvertretender Redaktor für alle deutschsprachigen externen Publikationen.',
+          'Monatlicher Kundenbrief für mehr als 8 000 Abonnentinnen und Abonnenten.',
+          'Steigerung der E-Mail-Öffnungsraten um 19 % nach klareren Betreffzeilen und besserer Struktur.',
         ],
       },
     },

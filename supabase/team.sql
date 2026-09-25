@@ -111,8 +111,10 @@ values
     'investment',
     '/team/friedrich-hartmann.png',
     'friedrich-hartmann.png',
-    'Friedrich Hartmann has shaped Helfenstein’s investment culture for more than thirty years. A disciplined reader and long-distance walker, he still leads portfolio construction and sets the firm’s long-term value framework.',
-    ARRAY['Built Helfenstein’s flagship equity strategy from inception; compound annual return of 11.4% since 2004.', 'Named among Europe’s leading value managers three times by independent fund ratings.', 'Author of In Long Horizon, on patient capital and cycle-aware investing.'],
+    'Friedrich Hartmann leads Helfenstein’s investment strategy, bringing more than 30 years of experience to portfolio construction and long-term capital allocation. His approach centres on understanding business quality, paying disciplined valuations and maintaining perspective through changing market conditions. As Chairman and CIO, he sets the investment framework and guides the team’s assessment of risk. He places particular emphasis on clear investment reasoning and the patience to hold convictions while remaining open to new evidence.
+
+His investment philosophy starts with a straightforward question: what makes a business worth owning over a full market cycle? He encourages the team to test the assumptions behind each investment case and consider how individual holdings interact within the portfolio. In client discussions, his emphasis is on explaining the relationship between valuation, uncertainty and the time required for an investment thesis to develop.',
+    ARRAY['More than 30 years shaping the firm’s investment approach.'],
     ARRAY['Swiss banking diploma', 'CFA Charterholder'],
     ARRAY['German', 'English', 'French'],
     'Senior manager within Helfenstein Asset Management’s advisory organisation.',
@@ -129,8 +131,10 @@ values
     'investment',
     '/team/karin-vogel.png',
     'karin-vogel.png',
-    'Karin Vogel joined Helfenstein from boutique value houses in Madrid and Zaragoza. She covers European mid-caps with a forensic, bottom-up style and a calm, direct manner with clients.',
-    ARRAY['CFA Charterholder; lead analyst on the Continental Value fund since 2016.', 'Portfolio outperformed its benchmark by 2.8% annualised over the last five years.', 'Recognised internally for turning three overlooked industrial holdings into core long-term positions.'],
+    'Karin Vogel specialises in European mid-cap equities, combining detailed company research with a disciplined assessment of valuation. Her background with boutique value-investment firms in Spain informs a practical understanding of regional businesses and their competitive positions. A lead analyst on the Continental Value fund since 2016, she examines cash generation, management decisions and the durability of earnings. Karin also helps clients understand the reasoning behind portfolio holdings in clear, accessible language.
+
+Her research looks beyond headline growth to examine how companies fund expansion, protect margins and allocate capital. She gives particular attention to the relationship between operating performance and cash flow, using it to challenge optimistic forecasts. In portfolio discussions, Karin sets out both the opportunity and the conditions that could weaken the investment case, supporting a balanced assessment of each holding.',
+    ARRAY['Lead analyst on the Continental Value fund since 2016.', 'Three researched industrial holdings developed into core long-term positions.'],
     ARRAY['CFA Charterholder'],
     ARRAY['German', 'Spanish', 'English'],
     null,
@@ -147,8 +151,10 @@ values
     'investment',
     '/team/lukas-steiner.png',
     'lukas-steiner.png',
-    'Lukas Steiner trained in Vienna and London before settling at Helfenstein. He blends fundamental equity work with a keen interest in Austrian economics and football—usually in that order on match days.',
-    ARRAY['Manages the firm’s Iberian equity sleeve alongside European co-managers.', 'Cut average portfolio turnover by 22% while improving hit rate on new ideas.', 'Regular speaker at Helfenstein’s internal research forum on capital-cycle timing.'],
+    'Lukas Steiner focuses on European equities, with particular responsibility for the firm’s Iberian holdings. Having trained in Vienna and London, he combines fundamental company analysis with an interest in capital cycles and the economic forces shaping business returns. His work on portfolio discipline contributed to a 22% reduction in average turnover. Lukas favours carefully researched positions and a measured approach to trading, assessing each decision against the portfolio’s long-term investment case.
+
+A central theme in his work is how investment, competition and financing conditions influence future profitability. He considers whether current earnings reflect a sustainable position or a favourable point in the cycle. Within portfolio discussions, Lukas emphasises the reasons for owning a company, the developments that would justify a reassessment and the costs associated with unnecessary changes to established positions.',
+    ARRAY['22% reduction in average portfolio turnover.'],
     '{}',
     '{}',
     null,
@@ -165,8 +171,10 @@ values
     'investment',
     '/team/maximilian-berger.png',
     'maximilian-berger.png',
-    'Maximilian Berger moved from audit into portfolio management, bringing a sceptical eye for accounting quality. Colleagues describe him as quiet in meetings and relentless in the workbook.',
-    ARRAY['Flagged two balance-sheet risks early that later became widely discussed in the market.', 'Co-manages defensively positioned European holdings in the Global Value range.', 'Led Helfenstein’s 2023 review of reporting standards across the investable universe.'],
+    'Maximilian Berger brings an audit background to equity investing, with a particular focus on accounting quality, balance-sheet strength and the reliability of reported earnings. He co-manages defensively positioned European holdings within the Global Value range. In 2023, he led the firm’s review of reporting standards across its investment universe. His contribution is a detailed examination of what sits behind the headline figures, helping the team challenge assumptions and identify financial weaknesses before committing capital.
+
+His analytical style is grounded in reconciliation: checking whether the income statement, balance sheet and cash-flow statement tell a consistent story. He pays attention to working-capital movements, financing commitments and the assumptions underlying reported asset values. This perspective adds depth to the team’s investment debates, particularly when apparently attractive valuations need to be weighed against less visible financial or accounting risks.',
+    ARRAY['Led the firm’s reporting-standards review in 2023.', 'Identified two balance-sheet risks before they attracted wider market attention.'],
     '{}',
     '{}',
     null,
@@ -183,8 +191,10 @@ values
     'investment',
     '/team/julian-vogt.png',
     'julian-vogt.png',
-    'Julian Vogt holds degrees in law and business and a deep interest in capital theory. Outside the office he is more likely to be on a golf course or rewatching a favourite film than checking prices.',
-    ARRAY['Structured Helfenstein’s governance checklist now used before every new large position.', 'Helped reduce legal and regulatory friction in three cross-border holdings.', 'Mentors junior analysts on thesis writing and position sizing.'],
+    'Julian Vogt combines a background in law and business with a focus on corporate governance and investment decision-making. He developed the governance checklist used ahead of new large portfolio positions, bringing ownership structures, shareholder rights and management incentives into the research process. Alongside his portfolio responsibilities, he mentors junior analysts on investment-thesis writing and position sizing. Julian’s approach connects the strength of a business with the terms on which investors participate in its future.
+
+He examines how corporate structures and management decisions influence the position of shareholders over time. His research considers whether incentives encourage responsible capital allocation and whether a company’s governance supports its stated strategy. When working with less experienced analysts, Julian emphasises concise reasoning, explicit assumptions and a clear explanation of the evidence that would cause an investment view to change.',
+    ARRAY['Supported work on legal and regulatory complexity in three cross-border holdings.'],
     '{}',
     '{}',
     null,
@@ -201,8 +211,10 @@ values
     'investment',
     '/team/ken-wagner.png',
     'ken-wagner.png',
-    'Ken Wagner bridges Helfenstein’s European desk with Asian-listed opportunities. Born in Taipei and educated in Barcelona, he travels often and reads company filings with the same patience.',
-    ARRAY['Opened Helfenstein’s first dedicated Asia-Pacific research coverage in 2019.', 'Sourced four investments now representing more than 8% of the global portfolio.', 'Fluent in Mandarin, German and Spanish; primary contact for regional brokers.'],
+    'Ken Wagner connects Helfenstein’s European investment team with opportunities in Asian-listed companies. He established the firm’s dedicated Asia-Pacific research coverage in 2019, developing a regional perspective grounded in company filings and ongoing dialogue with market participants. Fluent in Mandarin, German and Spanish, he supports communication across markets and research partners. He sourced four investments that represented more than 8% of the global portfolio. Ken focuses on understanding businesses in their local context while assessing how each opportunity fits the wider portfolio’s valuation and risk framework.
+
+His research takes account of differences in disclosure practices, ownership structures and the competitive conditions facing companies across the region. He brings these considerations into discussions with European colleagues, helping them assess opportunities with appropriate local context. Ken’s approach combines close reading of financial information with an interest in how businesses generate cash, finance expansion and treat minority shareholders.',
+    ARRAY['Four investments sourced, representing more than 8% of the global portfolio.'],
     '{}',
     '{}',
     null,
@@ -219,8 +231,10 @@ values
     'investment',
     '/team/stefan-richter.png',
     'stefan-richter.png',
-    'Stefan Richter spent years on the sell side before joining Helfenstein. A mountain runner when not in the office, he prefers businesses that can compound quietly through cycles.',
-    ARRAY['Former head of research at a listed industrial group; joined Helfenstein in 2015.', 'Top-quartile performance on cyclical holdings during the 2020–2022 period.', 'Built the firm’s energy-transition watchlist adopted by the full investment committee.'],
+    'Stefan Richter joined Helfenstein in 2015, bringing experience in investment research and the analysis of industrial businesses. He focuses on companies whose competitive strengths and cash flows can endure changing economic conditions. Stefan developed the firm’s energy-transition watchlist, giving the investment committee a structured basis for examining the businesses affected by this long-term shift. His research connects industry developments with company fundamentals, with particular attention to the capital required to sustain future growth.
+
+He studies the relationship between industrial demand, production capacity and the investment needed to maintain a company’s competitive position. In energy-transition research, he distinguishes broad sector themes from the economics of individual businesses. Stefan’s approach asks how an opportunity translates into earnings and cash flow, and whether the balance sheet can support the investment required through less favourable phases of the cycle.',
+    ARRAY['Member of the Helfenstein team since 2015.'],
     '{}',
     '{}',
     null,
@@ -237,8 +251,10 @@ values
     'investment',
     '/team/greta-keller.png',
     'greta-keller.png',
-    'Greta Keller joined Helfenstein after an internship in investor relations and quickly moved onto the investment floor. She brings fresh modelling skills and an unusually sharp eye for consumer trends.',
-    ARRAY['Graduated top of her class in business administration; joined the team in 2023.', 'First analyst note to reach the portfolio within six weeks of starting.', 'Supports coverage of small-cap consumer and industrial names across the DACH region.'],
+    'Greta Keller supports research into smaller consumer and industrial companies across Germany, Austria and Switzerland. She joined Helfenstein in 2023 following an internship in investor relations, bringing a business-administration background and a strong interest in financial modelling. Her work combines analysis of company disclosures with an assessment of changing customer behaviour. Working alongside the portfolio managers, Greta helps translate emerging research ideas into clearly structured investment cases and ongoing company monitoring.
+
+Her analytical approach begins with the underlying drivers of revenue, margins and working capital. She is particularly interested in how shifts in demand become visible in company results and whether management’s explanations are supported by the figures. In preparing research, Greta emphasises transparent assumptions and well-organised supporting material, making it easier for senior colleagues to review a model and challenge its conclusions.',
+    ARRAY['Joined the investment team in 2023.', 'First analyst note reached the portfolio within six weeks.'],
     '{}',
     '{}',
     null,
@@ -255,8 +271,10 @@ values
     'business',
     '/team/tobias-brandt.png',
     'tobias-brandt.png',
-    'Tobias Brandt leads client development at Helfenstein after stints in private banking and equity sales. He is usually the first person a prospective client speaks to before a first meeting is arranged.',
-    ARRAY['Grew Helfenstein’s private client base by 40% in four years.', 'Launched the firm’s client-education programme, now attended by 600+ people yearly.', 'Previously directed private-client coverage for Iberia at a European multi-asset platform.'],
+    'Tobias Brandt leads client development at Helfenstein, drawing on experience in private banking and equity sales. He works with prospective clients to understand their priorities and introduce the investment and advisory teams best placed to support them. His client-development work contributed to 40% growth in the private-client base over four years. Tobias also launched the firm’s client-education programme, which attracts more than 600 attendees annually. Fluent in German, English and Spanish, he places clear explanations and well-defined expectations at the centre of the client relationship.
+
+He approaches business development as the beginning of an ongoing advisory relationship. Early conversations focus on what clients want to achieve, how they prefer to communicate and what they expect from professional investment support. Through the education programme, Tobias encourages informed questions and a better understanding of the firm’s approach, helping prospective and established clients participate more confidently in discussions about their finances.',
+    ARRAY['40% growth in the private-client base over four years.', 'More than 600 attendees annually at the client-education programme.'],
     '{}',
     ARRAY['German', 'English', 'Spanish'],
     null,
@@ -273,8 +291,10 @@ values
     'business',
     '/team/markus-engel.png',
     'markus-engel.png',
-    'Markus Engel runs client communications and marketing. Warm on calls and precise in follow-up, he keeps Helfenstein’s external voice consistent with how portfolios are actually run.',
-    ARRAY['Rebuilt the client reporting and correspondence used across the advisory team.', 'Introduced quarterly letter format now cited by several national business titles.', 'Leads the team that handles more than 12,000 client touchpoints per year.'],
+    'Markus Engel leads Helfenstein’s client communications and marketing, translating investment thinking into clear reporting and consistent correspondence. He redesigned the materials used across the advisory team and oversees communications supporting more than 12,000 client interactions each year. His focus is on helping clients understand portfolio decisions, market developments and the information relevant to their circumstances. Markus works closely with investment and advisory colleagues to keep the firm’s external communications precise, useful and consistent.
+
+He approaches each communication from the reader’s perspective: what has happened, why it matters and whether it calls for a discussion with an adviser. This shapes his work on reporting structure, editorial consistency and the presentation of complex topics. Markus also places emphasis on explaining uncertainty clearly, so that concise writing preserves the context clients need to understand an investment decision.',
+    ARRAY['Communications supporting more than 12,000 client interactions each year.'],
     '{}',
     '{}',
     null,
@@ -291,8 +311,10 @@ values
     'business',
     '/team/marc-weber.png',
     'marc-weber.png',
-    'Marc Weber coordinates client operations and the relationships with our custodian banks. He joined from private banking and makes sure clients get clear reporting from the bank that holds their assets, from Lucerne and internationally.',
-    ARRAY['Reduced the custody and settlement costs Helfenstein clients pay their banks by 18% since 2020.', 'Led the review that moved clients onto segregated custody accounts held in their own names.', 'Negotiates custody terms with custodian banks on behalf of private clients.'],
+    'Marc Weber oversees client operations and coordinates Helfenstein’s relationships with custodian banks. Drawing on a private-banking background, he focuses on account administration, custody arrangements and the clarity of client reporting. His review of custody and settlement terms helped reduce related client costs by 18% from 2020. Working in German, French and English, Marc connects clients, advisers and banking partners to support an orderly and responsive service.
+
+His approach is to make the responsibilities of the adviser, the custodian and the client easy to understand. He pays attention to the practical details that influence service quality, including the completeness of account information and the handling of outstanding requests. Marc also brings a cost-conscious perspective to banking relationships, considering how operational arrangements affect the client’s overall experience and ongoing administration.',
+    ARRAY['18% reduction in client custody and settlement costs since 2020.'],
     ARRAY['Swiss banking diploma'],
     ARRAY['German', 'French', 'English'],
     'Senior manager responsible for client operations and custody coordination.',
@@ -309,8 +331,10 @@ values
     'investors',
     '/team/andrew-ramsden.png',
     'andrew-ramsden.png',
-    'Andrew Ramsden brings three decades of client relationship experience to Helfenstein’s advisory desk. Measured and approachable, he is the person clients call when a decision needs clarity rather than spin.',
-    ARRAY['Advises more than 40 families on retirement and drawdown planning.', 'Built the written pre-retirement review now used across the advisory team.', 'Former head of private client coverage at a London-based manager before joining Helfenstein in 2019.'],
+    'Andrew Ramsden brings 30 years of client-relationship experience to retirement and investment planning. He advises more than 40 families, helping them consider how their portfolios can support changing income needs and long-term priorities. His background includes leading private-client coverage at a London-based investment manager. Andrew developed the pre-retirement review used across Helfenstein’s advisory team, creating a structured starting point for discussions about retirement readiness, withdrawals and the decisions that need attention over time.
+
+His conversations address the transition from accumulating wealth to drawing on it, including the balance between regular income, accessible reserves and longer-term investment needs. He places particular value on revisiting assumptions as family circumstances evolve. Andrew’s manner is deliberate and accessible, giving clients room to consider the trade-offs involved and understand how individual decisions fit into a broader retirement plan.',
+    ARRAY['30 years of client-relationship experience.', 'Retirement and drawdown guidance for more than 40 families.'],
     ARRAY['IMC', 'CFA Level II'],
     ARRAY['English', 'German'],
     null,
@@ -327,8 +351,10 @@ values
     'investors',
     '/team/andrew-savage.png',
     'andrew-savage.png',
-    'Andrew Savage specialises in onboarding new clients and keeping reporting sharp. Energetic in meetings and meticulous in follow-up, he bridges the investment team and clients without losing the detail.',
-    ARRAY['Onboarded 110 new private clients over the past two years.', 'Rebuilt the quarterly reporting pack sent to every client; satisfaction rose eight points.', 'Primary contact for clients with assets held across more than one custodian bank.'],
+    'Andrew Savage focuses on client onboarding, investment reporting and the coordination of relationships involving multiple custodian banks. He has supported the onboarding of 110 private clients over a two-year period and helped redesign the firm’s quarterly reporting pack, following which the reported client-satisfaction measure rose by 8 points. Working in English and French, Andrew connects clients with the investment team and keeps follow-up organised. His approach centres on making information easy to navigate and ensuring that clients understand the next steps in their relationship with the firm.
+
+He pays particular attention to the early stages of a relationship, when clients need a clear understanding of documentation, responsibilities and communication arrangements. Where several banks are involved, he helps bring the available information into a more coherent view. Andrew also treats reporting as a starting point for discussion, helping clients identify the questions that deserve attention at their next review.',
+    ARRAY['110 new private clients onboarded over two years.', 'Eight-point increase in the reported satisfaction measure after the reporting redesign.'],
     '{}',
     ARRAY['English', 'French'],
     null,
@@ -345,8 +371,10 @@ values
     'investors',
     '/team/anja-hoffmann.png',
     'anja-hoffmann.png',
-    'Anja Hoffmann moved into asset management from listed-company IR. Clients appreciate her direct style and the way she explains complex portfolio moves in plain language.',
-    ARRAY['Manages relationships with more than 180 private clients and families.', 'Client satisfaction score of 4.8/5 in last annual survey.', 'Organises Helfenstein’s twice-yearly client seminars in Lucerne.'],
+    'Anja Hoffmann draws on a background in listed-company investor relations to explain portfolio decisions clearly and place them in the context of clients’ wider financial priorities. She manages relationships with more than 180 private clients and families, with a focus on retirement and long-term planning. Her client-satisfaction score reached 4.8 out of 5 in the latest annual survey. Anja also organises the firm’s twice-yearly client seminars in Lucerne. Working in German and English, she brings a direct, structured approach to conversations that can otherwise feel complex.
+
+She approaches client meetings by connecting investment information to the decisions a household actually faces. Rather than leaving clients with a collection of market observations, she seeks to clarify what those developments mean for the next discussion about their plans. Her investor-relations experience informs a careful choice of language and a preference for explaining the reasoning behind decisions, including the assumptions and uncertainties involved.',
+    ARRAY['Relationships with more than 180 private clients and families.', 'Client-satisfaction score of 4.8 out of 5 in the latest annual survey.'],
     ARRAY['CFP®'],
     ARRAY['German', 'English'],
     null,
@@ -363,8 +391,10 @@ values
     'investors',
     '/team/florian-bauer.png',
     'florian-bauer.png',
-    'Florian Bauer looks after clients who expect detail, not drama. A former tennis addict turned weekend skier, he is reliable under pressure and rarely misses a callback.',
-    ARRAY['Advises households on portfolio structure and annual rebalancing.', 'Reduced average query response time to under four business hours.', 'Key contact for German-speaking clients resident outside Switzerland.'],
+    'Florian Bauer advises households on portfolio structure and annual rebalancing, with particular responsibility for German-speaking clients living outside Switzerland. He focuses on practical explanations, careful follow-up and continuity between formal portfolio reviews. His work on client service helped bring average query response times below four business hours. Florian’s approach gives clients a clear point of contact for everyday questions while keeping discussions connected to their broader investment objectives and changing circumstances.
+
+His review style is detail-oriented, covering how a portfolio is positioned, whether circumstances have changed and which matters require further attention. For clients living abroad, he places particular emphasis on organised communication and clear responsibility for follow-up. Florian aims to make routine service dependable, so that questions about reports, portfolio changes or upcoming reviews are handled with appropriate context and a clear next step.',
+    ARRAY['Average client-query response time reduced to under four business hours.'],
     '{}',
     '{}',
     null,
@@ -381,8 +411,10 @@ values
     'investors',
     '/team/erik-schneider.png',
     'erik-schneider.png',
-    'Erik Schneider has spent two decades around funds and advisory platforms. Steady and unhurried, he is often the first person long-standing clients ask for when markets turn noisy.',
-    ARRAY['Maintains Helfenstein’s longest-tenured client book, dating back to 2008.', 'Helped retain 98% of assets during the 2022 volatility spike.', 'Former private-banking director before joining Helfenstein in 2016.'],
+    'Erik Schneider brings 20 years of experience across investment funds, advisory platforms and private banking. Since joining Helfenstein in 2016, he has focused on maintaining long-term client relationships and providing continuity through changing market conditions. His relationship-management work helped retain 98% of assets during the market volatility of 2022. His background as a private-banking director informs a measured approach to portfolio discussions and client service. Erik helps clients distinguish short-term market developments from the considerations that matter to their financial plans, keeping conversations grounded in their individual priorities.
+
+He places value on understanding the history behind a client’s decisions, including previous market experiences and their expectations of investment support. This perspective helps him frame discussions during periods of uncertainty without losing sight of the original objectives. Erik’s approach combines accessible explanations with a willingness to revisit earlier assumptions, recognising that a long-standing relationship still needs to adapt as the client’s circumstances develop.',
+    ARRAY['Helped retain 98% of assets during the market volatility of 2022.'],
     '{}',
     '{}',
     null,
@@ -399,8 +431,10 @@ values
     'investors',
     '/team/birgit-schulz.png',
     'birgit-schulz.png',
-    'Birgit Schulz joined financial services after a career in quality control—a background that shows in how she documents every client interaction. Calm, thorough, and hard to fluster.',
-    ARRAY['Rebuilt the team’s CRM hygiene standards; data completeness now above 99%.', 'Supports Nordic and Benelux clients across three languages.', 'Recognised for resolving the firm’s most complex legacy account transfers.'],
+    'Birgit Schulz brings a quality-control background to client service, with particular strengths in documentation, account transfers and the accuracy of client records. She helped rebuild the team’s CRM standards, raising recorded data completeness above 99%. Supporting clients in the Nordic and Benelux regions, Birgit approaches complex administrative matters with a clear sequence of actions and thorough follow-through. Her work supports continuity across the advisory team and gives clients an organised point of contact during account changes.
+
+She treats accurate records as an essential part of good service: they allow colleagues to understand what has been agreed and what remains outstanding. In account-transfer matters, her approach is to identify dependencies early and keep the relevant parties informed. Birgit’s attention to documentation also supports smoother handovers, reducing the need for clients to repeat background information when several teams are involved.',
+    ARRAY['Client-record completeness increased to above 99%.'],
     '{}',
     '{}',
     null,
@@ -417,8 +451,10 @@ values
     'investors',
     '/team/alexander-koch.png',
     'alexander-koch.png',
-    'Alexander Koch advises clients with more complex affairs — several banks, assets in more than one country, or a business being wound down into retirement. Young but already trusted in difficult conversations.',
-    ARRAY['Handles the firm’s cross-border private client cases since 2022.', 'Built the consolidation process for clients holding assets at several custodians.', 'Coordinates Helfenstein’s sustainability preference questionnaire under FinSA.'],
+    'Alexander Koch works with clients whose financial affairs span several banks, countries or stages of business ownership. Since 2022, he has handled the firm’s cross-border private-client cases and developed a process for consolidating information from multiple custodians. His focus is on bringing a clearer overall view to arrangements that can otherwise become fragmented. Alexander coordinates the relevant discussions and follow-up, helping clients consider portfolio decisions alongside business transitions and their longer-term retirement priorities.
+
+He begins by understanding how the different parts of a client’s finances relate to one another, rather than assessing each account in isolation. Where a business transition changes the purpose of invested assets, he helps organise the questions that need to be addressed. Alexander places particular value on clear information sharing and a defined sequence of decisions, making complex arrangements easier to discuss and review.',
+    ARRAY['Responsible for cross-border private-client cases since 2022.'],
     '{}',
     '{}',
     null,
@@ -435,8 +471,10 @@ values
     'investors',
     '/team/leon-roth.png',
     'leon-roth.png',
-    'Leon Roth keeps Helfenstein’s client service machine running smoothly. Colleagues rely on him to connect the right desk at the right moment without clients feeling passed around.',
-    ARRAY['Coordinates cross-team requests for more than 400 active client files.', 'Introduced shared response templates that halved internal handoff errors.', 'Known for turning difficult service cases into long-term client loyalty.'],
+    'Leon Roth focuses on coordinating client service across Helfenstein’s advisory and operational teams. He supports requests associated with more than 400 active client files, helping enquiries reach the appropriate colleagues and keeping follow-up on track. Leon introduced shared response templates that reduced internal handover errors by 50%, improving consistency as requests moved between teams. His contribution is practical and client-focused: maintaining context as requests move between teams and helping clients navigate service matters with clear communication and dependable coordination.
+
+He approaches service coordination by keeping track of the request, its background and the person responsible for the next action. This is especially useful when a client’s question involves both an adviser and an operational specialist. Leon’s emphasis is on maintaining continuity throughout that process, with updates that explain progress clearly and help clients understand what information or action may still be needed.',
+    ARRAY['Service coordination across more than 400 active client files.', '50% reduction in internal handover errors after shared response templates were introduced.'],
     '{}',
     '{}',
     null,
@@ -453,8 +491,10 @@ values
     'investors',
     '/team/henrik-meier.png',
     'henrik-meier.png',
-    'Henrik Meier writes the day-to-day client updates and supports the communications team. Clear, concise and slightly musical outside work—he plays guitar in a office band that is better than it sounds.',
-    ARRAY['Produces the monthly client letter read by more than 8,000 subscribers.', 'Helped lift email open rates by 19% through clearer subject lines and structure.', 'Backup editor for all German-language external publications.'],
+    'Henrik Meier combines client-service responsibilities with a focus on written communications. He produces the firm’s monthly client letter for more than 8,000 subscribers and supports the editing of German-language publications. His work turns investment-team input and market updates into concise explanations that clients can readily follow. Improvements to subject lines and content structure helped increase email open rates by 19%. Henrik pays particular attention to structure, wording and relevance, helping maintain a consistent standard across everyday correspondence and the firm’s regular client communications.
+
+He considers clarity a matter of selecting and ordering information as much as simplifying language. In his writing, he aims to make the main point easy to identify while preserving the detail needed to understand it. His position between client service and communications brings a useful perspective to editorial work, helping him anticipate the questions readers may have about the firm’s updates and explanations.',
+    ARRAY['Monthly client letter reaching more than 8,000 subscribers.', '19% increase in email open rates after improvements to subject lines and structure.'],
     '{}',
     '{}',
     null,

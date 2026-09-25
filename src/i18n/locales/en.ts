@@ -43,7 +43,7 @@ const ui: Translations['ui'] = {
   team: 'Team',
   teamSubtitle: 'Independent advisers who answer only to their clients',
   featuredMemberLead:
-    'Friedrich Hartmann leads Helfenstein’s investment philosophy and long-term capital allocation.',
+    'Friedrich Hartmann leads Helfenstein’s investment strategy and long-term capital allocation.',
   about: 'About',
   results: 'Results',
   colleagues: 'Colleagues',

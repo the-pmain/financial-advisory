@@ -104,7 +104,7 @@ export function TeamPage() {
         </Link>
         <div className="flex min-w-0 flex-col justify-center">
           <p className="text-vz-ink m-0 text-[17px] leading-[1.5]">
-            {featuredMember.name} leads Helfenstein’s investment philosophy and long-term capital
+            {featuredMember.name} leads Helfenstein’s investment strategy and long-term capital
             allocation.
           </p>
           <p className="mt-5 mb-0">

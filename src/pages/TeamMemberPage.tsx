@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router';
 import { ROUTES, teamMemberPath } from '../constants/routes';
 import { company } from '../data/company';
-import { cfaDirectoryUrl, finmaAdviserNoFor } from '../data/team';
+import { cfaDirectoryUrl, finmaAdviserNoFor, teamBySlug } from '../data/team';
 import { useEmployees } from '../hooks/useEmployees';
 import { PhoneRichText } from '../components/ui/PhoneNumberDisplay';
 import { SectionTitle } from '../components/ui/primitives';
@@ -23,6 +23,11 @@ export function TeamMemberPage() {
   const peers = (sections.find((s) => s.id === member.section)?.members ?? []).filter(
     (m) => m.slug !== member.slug,
   );
+  const paragraphs = member.about
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+  const focus = (member.focus?.length ? member.focus : teamBySlug.get(member.slug)?.focus) ?? [];
 
   return (
     <>
@@ -119,10 +124,25 @@ export function TeamMemberPage() {
       <div className="mt-10 max-w-[802px]">
         <section>
           <h2 className="text-vz-ink mb-3 text-[22px] leading-[1.3] font-bold">About</h2>
-          <p className="text-vz-ink m-0 text-[19px] leading-[1.55] max-mob:text-[18px]">
-            <PhoneRichText text={member.about} />
-          </p>
+          <div className="text-vz-ink space-y-4 text-[19px] leading-[1.55] max-mob:text-[18px]">
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph} className="m-0">
+                <PhoneRichText text={paragraph} />
+              </p>
+            ))}
+          </div>
         </section>
+
+        {focus.length > 0 && (
+          <section className="mt-8">
+            <h2 className="text-vz-ink mb-3 text-[22px] leading-[1.3] font-bold">Professional focus</h2>
+            <ul className="text-vz-ink m-0 list-disc space-y-2 pl-5 text-[17px] leading-[1.5] max-mob:text-[16px]">
+              {focus.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {member.results.length > 0 && (
           <section className="mt-8">
