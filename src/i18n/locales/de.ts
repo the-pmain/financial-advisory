@@ -39,7 +39,7 @@ const navPaths = {
         { label: 'Märkte & Analysen', to: ROUTES.stockExchangesAndMarkets },
         { label: 'Depot & Bankpartner', to: ROUTES.banking },
         { label: 'Immobilien & Hypotheken', to: ROUTES.realEstate },
-        { label: 'Helfenstein Financial Portal', to: ROUTES.financialPortal },
+        { label: 'Helfenstein Finanzportal', to: ROUTES.financialPortal },
       ],
     },
     {
@@ -77,11 +77,11 @@ const navPaths = {
       ],
     },
     { label: 'Termine', to: ROUTES.appointments },
-    { label: 'Insights', to: ROUTES.insights },
-    { label: 'Helfenstein Financial Portal', to: ROUTES.financialPortal },
+    { label: 'Analysen', to: ROUTES.insights },
+    { label: 'Helfenstein Finanzportal', to: ROUTES.financialPortal },
   ],
   actionLinks: [
-    { label: 'Jobs', to: ROUTES.aboutJobs },
+    { label: 'Karriere', to: ROUTES.aboutJobs },
     { label: 'Kontakt & Hilfe', to: ROUTES.aboutContact },
     { label: 'Newsletter abonnieren', to: ROUTES.newsletter },
   ],
@@ -175,7 +175,7 @@ export const de: Translations = {
     clientStories: 'Kundenbeispiele',
     verifyAuthorisation: 'Autorisierung prüfen',
     relatedService: 'Zugehörige Dienstleistung',
-    allInsights: 'Alle Insights',
+    allInsights: 'Alle Analysen',
     meetSpecialists: 'Unsere Spezialisten',
     regulatoryChallenges: 'Regulatorische Herausforderungen',
     howWeHelp: 'Wie wir helfen',
@@ -192,6 +192,25 @@ export const de: Translations = {
     verifiedHelp: 'Verifiziert — öffnet das HELP.ch-Firmenverzeichnis',
     verifiedOsfin: 'Verifiziert — öffnet die OSFINcontrol-Aufsichtsseite',
     verifiedAudit: 'Verifiziert — öffnet den Zefix-Eintrag (Revisionsstelle)',
+    portalShort: 'Portal',
+    finmaCardTitle: 'FINMA-Vermögensverwalter',
+    leiCardTitle: 'Rechtsträger-Kennung',
+    helpCardTitle: 'HELP.ch-Verzeichnis',
+    auditCardTitle: 'Revisionsstelle',
+    auditCardDetail: 'Prüfung und Einreichungen | Revisionsstelle im Zefix eingetragen',
+    authorisationNo: 'Nr.',
+    professionalFocus: 'Fachlicher Schwerpunkt',
+    languages: 'Sprachen',
+    finmaAdviserLabel: 'FINMA-Registrierungsnummer Berater',
+    cfaRegistryLabel: 'CFA-Registernummer',
+    advisesUnder: 'Berät im Rahmen der FINMA-Bewilligung {no} der {firm}.',
+    verifyFinmaRegister: 'Prüfen Sie das Unternehmen im FINMA-Register',
+    confirmCfa: 'bestätigen Sie die CFA-Charter im Verzeichnis des CFA Institute',
+    loading: 'Wird geladen…',
+    loadingTeam: 'Team wird geladen…',
+    teamUnavailable: 'Die Teamliste konnte nicht geladen werden.',
+    clearSearch: 'Suche löschen',
+    searchHint: 'Geben Sie mindestens zwei Zeichen ein, um die Website zu durchsuchen.',
   },
   nav: navPaths,
   home: {
@@ -532,7 +551,7 @@ export const de: Translations = {
       subtitle: 'Wir freuen uns auf Ihre Nachricht.',
       intro: [
         'Rufen Sie uns an, schreiben Sie uns oder vereinbaren Sie ein kostenloses Erstgespräch in unserem Büro in Luzern oder per Videokonferenz. Unsere Beraterinnen und Berater sprechen Deutsch, Französisch, Italienisch und Englisch – und keine und keiner von ihnen hat Ihnen etwas zu verkaufen.',
-        'Bei Fragen zum Helfenstein Financial Portal steht unser Support-Team werktags während der Bürozeiten zur Verfügung.',
+        'Bei Fragen zum Helfenstein Finanzportal steht unser Support-Team werktags während der Bürozeiten zur Verfügung.',
       ],
       highlights: [
         { title: 'Telefon', text: '+41 41 211 29 29, wochentags 08:00–18:00 Uhr.' },
@@ -569,18 +588,18 @@ export const de: Translations = {
       ],
       highlights: [
         { title: 'Horizon-Report 2026', text: 'Entwicklungen bei Vorsorge, Hypotheken und FIDLEG in verständlicher Sprache.' },
-        { title: 'Insights-Verzeichnis', text: 'Alle Artikel nach Datum sortiert, mit Themen-Tags.' },
+        { title: 'Analysen-Verzeichnis', text: 'Alle Artikel nach Datum sortiert, mit Themen-Tags.' },
         { title: 'Faktenblätter', text: 'Kompakte gedruckte Ratgeber, kostenlos zugestellt.' },
         { title: 'Kostenloses Erstgespräch', text: 'Eine Stunde mit einer Beraterin oder einem Berater, in Luzern oder per Video.' },
       ],
     },
     [ROUTES.financialPortal]: {
       path: ROUTES.financialPortal,
-      breadcrumb: ['Helfenstein Financial Portal'],
-      title: 'Helfenstein Financial Portal',
+      breadcrumb: ['Helfenstein Finanzportal'],
+      title: 'Helfenstein Finanzportal',
       subtitle: 'Ihr Portfolio, Ihre Dokumente, Ihre Märkte.',
       intro: [
-        'Das Helfenstein Financial Portal bietet Ihnen eine konsolidierte Sicht auf die Konten und Portfolios, die Sie bei Ihrer Depotbank halten, zusammen mit allen Ihren Dokumenten und aktuellen Marktdaten.',
+        'Das Helfenstein Finanzportal bietet Ihnen eine konsolidierte Sicht auf die Konten und Portfolios, die Sie bei Ihrer Depotbank halten, zusammen mit allen Ihren Dokumenten und aktuellen Marktdaten.',
         'Ihre Vermögenswerte bleiben bei Ihrer Bank – das Portal ist Ihr Fenster darauf und kein Ort, an dem Geld verwahrt wird.',
       ],
       highlights: [
@@ -838,10 +857,18 @@ export const de: Translations = {
       'friedrich-hartmann': {
         slug: 'friedrich-hartmann',
         role: 'Vorsitzender und CIO',
+        regulatoryNote:
+          'Leitende Funktion in der Beratungsorganisation von Helfenstein Asset Management.',
         about: [
           'Friedrich Hartmann leitet die Anlagestrategie von Helfenstein und bringt mehr als 30 Jahre Erfahrung in den Portfolioaufbau und die langfristige Kapitalallokation ein. Sein Ansatz stellt die Qualität der Unternehmen, disziplinierte Bewertungen und den Blick über wechselnde Marktphasen in den Mittelpunkt. Als Vorsitzender und CIO setzt er den Anlagerahmen und begleitet die Risikoeinschätzung des Teams. Besonderen Wert legt er auf klare Anlagebegründungen und auf die Geduld, Überzeugungen zu halten und zugleich für neue Evidenz offen zu bleiben.',
           'Seine Anlagephilosophie beginnt mit einer einfachen Frage: Was macht ein Unternehmen über einen ganzen Marktzyklus hinweg besitzenswert? Er fordert das Team auf, die Annahmen hinter jedem Anlagefall zu prüfen und zu betrachten, wie einzelne Positionen im Portfolio zusammenwirken. In Kundengesprächen erklärt er den Zusammenhang von Bewertung, Unsicherheit und der Zeit, die eine Anlagethese zur Entfaltung braucht.',
         ].join('\n\n'),
+        focus: [
+          'Anlagestrategie und langfristige Kapitalallokation',
+          'Portfolioaufbau und Risikobeurteilung',
+          'Fundamentale Bewertung und Anlagedisziplin',
+          'Leitung des Investment-Research',
+        ],
         results: ['Mehr als 30 Jahre, in denen er den Anlageansatz des Hauses geprägt hat.'],
       },
       'karin-vogel': {
@@ -851,6 +878,12 @@ export const de: Translations = {
           'Karin Vogel ist auf europäische Mid-Cap-Aktien spezialisiert und verbindet detaillierte Unternehmensanalyse mit einer disziplinierten Bewertung. Ihre Erfahrung in spanischen Value-Boutiquen prägt ein praktisches Verständnis regionaler Unternehmen und ihrer Wettbewerbsposition. Als Lead Analystin des Continental Value Fund seit 2016 prüft sie Cash-Generierung, Managemententscheidungen und die Tragfähigkeit der Erträge. Karin hilft Kundinnen und Kunden zudem, die Begründung einzelner Positionen in klarer Sprache zu verstehen.',
           'Ihre Analyse geht über das Wachstum der Schlagzeilen hinaus und untersucht, wie Unternehmen Expansion finanzieren, Margen schützen und Kapital einsetzen. Dem Zusammenhang von operativer Leistung und Cashflow gilt besondere Aufmerksamkeit, um optimistische Prognosen zu hinterfragen. In Portfoliogesprächen legt Karin sowohl die Chance als auch die Bedingungen dar, die den Anlagefall schwächen könnten.',
         ].join('\n\n'),
+        focus: [
+          'Research zu europäischen Mid-Cap-Unternehmen',
+          'Cashflow-Analyse und Ertragsqualität',
+          'Bewertung und Managementbeurteilung',
+          'Klare Erklärungen zu Portfoliopositionen',
+        ],
         results: [
           'Lead Analystin des Continental Value Fund seit 2016.',
           'Drei untersuchte Industriebeteiligungen zu langfristigen Kernpositionen entwickelt.',
@@ -863,6 +896,12 @@ export const de: Translations = {
           'Lukas Steiner konzentriert sich auf europäische Aktien, mit besonderer Verantwortung für die iberischen Beteiligungen des Hauses. Nach seiner Ausbildung in Wien und London verbindet er fundamentale Unternehmensanalyse mit dem Interesse an Kapitalzyklen und den wirtschaftlichen Kräften, die Unternehmensrenditen prägen. Seine Arbeit an der Portfoliodisziplin trug zu einer Senkung des durchschnittlichen Umschlags um 22 % bei. Er bevorzugt sorgfältig geprüfte Positionen und einen zurückhaltenden Handel und misst jede Entscheidung am langfristigen Anlagefall.',
           'Ein zentrales Thema seiner Arbeit ist, wie Investitionen, Wettbewerb und Finanzierungsbedingungen die künftige Profitabilität beeinflussen. Er prüft, ob die laufenden Erträge eine tragfähige Position oder einen günstigen Punkt im Zyklus widerspiegeln. In Portfoliogesprächen betont er die Gründe für den Besitz eines Unternehmens, die Entwicklungen, die eine Neubewertung rechtfertigen, und die Kosten unnötiger Veränderungen etablierter Positionen.',
         ].join('\n\n'),
+        focus: [
+          'Analyse europäischer und iberischer Aktien',
+          'Research zu Kapitalzyklen',
+          'Langfristige Bewertung und Anlagezeitpunkt',
+          'Portfolio-Umschlag und Handelsdisziplin',
+        ],
         results: ['Senkung des durchschnittlichen Portfolio-Umschlags um 22 %.'],
       },
       'maximilian-berger': {
@@ -872,6 +911,12 @@ export const de: Translations = {
           'Maximilian Berger bringt einen Audit-Hintergrund in die Aktienanlage ein, mit Schwerpunkt auf Bilanzqualität, Bilanzstärke und der Verlässlichkeit ausgewiesener Erträge. Er co-managt defensiv positionierte europäische Beteiligungen in der Global Value Range. 2023 leitete er die Überprüfung der Reporting-Standards im Anlageuniversum des Hauses. Sein Beitrag ist die genaue Prüfung dessen, was hinter den Schlagzeilenzahlen steht, damit das Team Annahmen hinterfragt und finanzielle Schwächen erkennt, bevor Kapital eingesetzt wird.',
           'Sein analytischer Stil beruht auf der Abstimmung: Er prüft, ob Erfolgsrechnung, Bilanz und Geldflussrechnung dieselbe Geschichte erzählen. Er achtet auf Veränderungen des Nettoumlaufvermögens, Finanzierungsverpflichtungen und die Annahmen hinter ausgewiesenen Vermögenswerten. Diese Perspektive vertieft die Anlagedebatten des Teams, besonders wenn scheinbar attraktive Bewertungen gegen weniger sichtbare Finanz- oder Bilanzrisiken abzuwägen sind.',
         ].join('\n\n'),
+        focus: [
+          'Abschlussanalyse und Bilanzqualität',
+          'Bilanzstärke und Finanzierungsrisiken',
+          'Research zu defensiven europäischen Aktien',
+          'Überprüfung von Berichtsstandards',
+        ],
         results: [
           'Leitete 2023 die Überprüfung der Reporting-Standards des Hauses.',
           'Identifizierte zwei Bilanzrisiken, bevor sie breitere Marktaufmerksamkeit fanden.',
@@ -884,6 +929,12 @@ export const de: Translations = {
           'Julian Vogt verbindet einen Hintergrund in Recht und Betriebswirtschaft mit dem Schwerpunkt Corporate Governance und Anlageentscheidungen. Er entwickelte die Governance-Checkliste, die vor neuen grossen Portfoliopositionen verwendet wird, und bringt Eigentümerstrukturen, Aktionärsrechte und Managementanreize in den Research-Prozess ein. Neben seiner Portfolioverantwortung begleitet er Junior-Analystinnen und -Analysten bei der Formulierung von Anlagethese und Positionsgrösse. Sein Ansatz verbindet die Stärke eines Unternehmens mit den Bedingungen, zu denen Anleger an seiner Zukunft teilhaben.',
           'Er untersucht, wie Unternehmensstrukturen und Managemententscheidungen die Position der Aktionäre über die Zeit beeinflussen. Seine Analyse prüft, ob Anreize eine verantwortungsvolle Kapitalallokation fördern und ob die Governance die erklärte Strategie stützt. Im Austausch mit weniger erfahrenen Analystinnen und Analysten betont er knappe Begründung, explizite Annahmen und eine klare Darstellung der Evidenz, die eine Anlageauffassung ändern würde.',
         ].join('\n\n'),
+        focus: [
+          'Corporate Governance und Aktionärsinteressen',
+          'Eigentümerstrukturen und Managementanreize',
+          'Entwicklung von Anlagethese',
+          'Mentoring und Gespräche zur Positionsgrösse',
+        ],
         results: [
           'Unterstützte die Arbeit an rechtlicher und regulatorischer Komplexität in drei grenzüberschreitenden Beteiligungen.',
         ],
@@ -895,6 +946,12 @@ export const de: Translations = {
           'Ken Wagner verbindet das europäische Anlageteam von Helfenstein mit Chancen bei in Asien kotierten Unternehmen. Er baute 2019 die dedizierte Asien-Pazifik-Research-Abdeckung des Hauses auf und entwickelte eine regionale Perspektive aus Geschäftsberichten und dem laufenden Austausch mit Marktteilnehmern. Fliessend in Mandarin, Deutsch und Spanisch unterstützt er die Kommunikation über Märkte und Research-Partner hinweg. Er identifizierte vier Investitionen, die mehr als 8 % des Globalportfolios ausmachten. Ken will Unternehmen in ihrem lokalen Kontext verstehen und zugleich prüfen, wie jede Chance in den Bewertungs- und Risikorahmen des Gesamtportfolios passt.',
           'Seine Analyse berücksichtigt Unterschiede bei Offenlegung, Eigentümerstrukturen und den Wettbewerbsbedingungen in der Region. Diese Überlegungen bringt er in die Diskussion mit europäischen Kolleginnen und Kollegen ein. Sein Ansatz verbindet die genaue Lektüre finanzieller Informationen mit dem Interesse daran, wie Unternehmen Cash generieren, Expansion finanzieren und Minderheitsaktionäre behandeln.',
         ].join('\n\n'),
+        focus: [
+          'Aktienresearch Asien-Pazifik',
+          'Regionale Unternehmens- und Branchenanalyse',
+          'Research-Koordination über Märkte hinweg',
+          'Mehrsprachige Kommunikation mit Research-Partnern',
+        ],
         results: ['Vier Investitionen identifiziert, die mehr als 8 % des Globalportfolios ausmachten.'],
       },
       'stefan-richter': {
@@ -904,6 +961,12 @@ export const de: Translations = {
           'Stefan Richter ist seit 2015 bei Helfenstein und bringt Erfahrung in der Anlageanalyse und der Beurteilung von Industrieunternehmen mit. Er konzentriert sich auf Unternehmen, deren Wettbewerbsstärken und Cashflows wechselnde wirtschaftliche Bedingungen überdauern können. Stefan entwickelte die Energiewende-Watchlist des Hauses und gab dem Investment Committee damit eine strukturierte Grundlage, um die von diesem langfristigen Wandel betroffenen Unternehmen zu prüfen. Seine Analyse verbindet Branchenentwicklungen mit Unternehmensfundamentaldaten, mit besonderem Blick auf das Kapital, das künftiges Wachstum trägt.',
           'Er untersucht den Zusammenhang von industrieller Nachfrage, Produktionskapazität und den Investitionen, die nötig sind, um die Wettbewerbsposition zu halten. In der Energiewende-Analyse trennt er breite Branchenthemen von der Ökonomie einzelner Unternehmen. Sein Ansatz fragt, wie sich eine Chance in Ertrag und Cashflow übersetzt und ob die Bilanz die nötigen Investitionen auch in ungünstigeren Zyklusphasen tragen kann.',
         ].join('\n\n'),
+        focus: [
+          'Analyse industrieller und zyklischer Unternehmen',
+          'Research zur Energiewende',
+          'Beurteilung von Investitionen und Cashflows',
+          'Widerstandsfähigkeit über Konjunkturzyklen',
+        ],
         results: ['Mitglied des Helfenstein-Teams seit 2015.'],
       },
       'greta-keller': {
@@ -913,6 +976,12 @@ export const de: Translations = {
           'Greta Keller unterstützt die Analyse kleinerer Konsum- und Industrieunternehmen in Deutschland, Österreich und der Schweiz. Sie kam 2023 nach einem Praktikum in Investor Relations zu Helfenstein, mit einem Hintergrund in Betriebswirtschaft und einem starken Interesse an Finanzmodellen. Ihre Arbeit verbindet die Analyse von Unternehmenspublikationen mit der Beurteilung veränderten Kundenverhaltens. Gemeinsam mit den Portfolio Managern übersetzt sie entstehende Research-Ideen in klar strukturierte Anlagefälle und die laufende Unternehmensbeobachtung.',
           'Ihr analytischer Ansatz beginnt bei den Treibern von Umsatz, Margen und Nettoumlaufvermögen. Sie interessiert sich besonders dafür, wie Nachfrageverschiebungen in den Ergebnissen sichtbar werden und ob die Erklärungen des Managements von den Zahlen getragen werden. Bei der Vorbereitung des Research legt sie Wert auf transparente Annahmen und gut geordnetes Material, damit erfahrene Kolleginnen und Kollegen ein Modell prüfen und seine Schlüsse hinterfragen können.',
         ].join('\n\n'),
+        focus: [
+          'Small-Cap-Research Konsum und Industrie',
+          'Finanzmodelle und Unternehmenspublikationen',
+          'Konsumententrends und operative Leistung',
+          'Research-Unterstützung in der DACH-Region',
+        ],
         results: [
           '2023 zum Anlageteam gestossen.',
           'Erste Analysten-Note erreichte das Portfolio innerhalb von sechs Wochen.',
@@ -925,6 +994,12 @@ export const de: Translations = {
           'Tobias Brandt leitet die Kundenentwicklung bei Helfenstein und bringt Erfahrung aus Private Banking und Aktienvertrieb mit. Er arbeitet mit Interessentinnen und Interessenten daran, ihre Prioritäten zu verstehen und sie mit den passenden Anlage- und Beratungsteams zusammenzubringen. Seine Arbeit trug in vier Jahren zu einem Wachstum der Privatkundenbasis um 40 % bei. Tobias startete zudem das Kundenbildungsprogramm des Hauses, das jährlich mehr als 600 Teilnehmende erreicht. Fliessend in Deutsch, Englisch und Spanisch stellt er klare Erklärungen und eindeutige Erwartungen in den Mittelpunkt der Kundenbeziehung.',
           'Geschäftsentwicklung versteht er als Beginn einer dauerhaften Beratungsbeziehung. Frühe Gespräche klären, was Kundinnen und Kunden erreichen wollen, wie sie kommunizieren möchten und was sie von professioneller Anlageunterstützung erwarten. Über das Bildungsprogramm regt er informierte Fragen und ein besseres Verständnis des Ansatzes an, damit Interessierte und bestehende Kundschaft sicherer an Gesprächen über ihre Finanzen teilnehmen.',
         ].join('\n\n'),
+        focus: [
+          'Privatkundenentwicklung und Beziehungsaufbau',
+          'Erste Gespräche zu Bedarf und Erwartungen',
+          'Kundenbildung und Anlagekommunikation',
+          'Koordination zwischen Interessenten und Beraterinnen und Beratern',
+        ],
         results: [
           '40 % Wachstum der Privatkundenbasis in vier Jahren.',
           'Jährlich mehr als 600 Teilnehmende am Kundenbildungsprogramm.',
@@ -937,15 +1012,29 @@ export const de: Translations = {
           'Markus Engel leitet Kundenkommunikation und Marketing bei Helfenstein und übersetzt Anlageüberlegungen in klares Reporting und einheitliche Korrespondenz. Er gestaltete die Unterlagen des Beratungsteams neu und verantwortet Kommunikation, die mehr als 12 000 Kundeninteraktionen pro Jahr unterstützt. Im Mittelpunkt steht, dass Kundinnen und Kunden Portfolioentscheidungen, Marktentwicklungen und die für ihre Situation relevanten Informationen verstehen. Markus arbeitet eng mit Anlage- und Beratungskolleginnen und -kollegen, damit die externe Kommunikation präzise, nützlich und konsistent bleibt.',
           'Jede Mitteilung betrachtet er aus der Sicht der Leserin oder des Lesers: Was ist geschehen, warum es wichtig ist und ob ein Gespräch mit einer Beraterin oder einem Berater nötig ist. Das prägt seine Arbeit an Reportingstruktur, redaktioneller Konsistenz und der Darstellung komplexer Themen. Er legt auch Wert darauf, Unsicherheit klar zu erklären, damit knappe Texte den Kontext behalten, den Kundinnen und Kunden für eine Anlageentscheidung brauchen.',
         ].join('\n\n'),
+        focus: [
+          'Kundenreporting und redaktionelle Leitung',
+          'Kommunikation zu Anlagen und Märkten',
+          'Konsistenz der Kundenkorrespondenz',
+          'Abstimmung mit Anlage- und Beratungsteams',
+        ],
         results: ['Kommunikation für mehr als 12 000 Kundeninteraktionen pro Jahr.'],
       },
       'marc-weber': {
         slug: 'marc-weber',
         role: 'Managing Director, Client Operations',
+        regulatoryNote:
+          'Leitende Funktion für Client Operations und die Koordination der Verwahrung.',
         about: [
           'Marc Weber verantwortet Client Operations und koordiniert die Beziehungen von Helfenstein zu den Depotbanken. Mit einem Hintergrund im Private Banking konzentriert er sich auf Kontoadministration, Depotstrukturen und die Klarheit des Kundenreportings. Seine Überprüfung der Verwahrungs- und Abwicklungskonditionen trug dazu bei, die entsprechenden Kundenkosten seit 2020 um 18 % zu senken. Auf Deutsch, Französisch und Englisch verbindet er Kundschaft, Beratung und Bankpartner zu einem geordneten und reaktionsschnellen Service.',
           'Sein Ansatz macht die Verantwortlichkeiten von Beratung, Depotbank und Kundin oder Kunde verständlich. Er achtet auf die praktischen Details, die die Servicequalität bestimmen, darunter die Vollständigkeit der Kontoinformationen und die Bearbeitung offener Anfragen. Marc bringt auch eine kostenbewusste Sicht in die Bankbeziehungen ein und prüft, wie operative Arrangements das Gesamterlebnis und die laufende Administration beeinflussen.',
         ].join('\n\n'),
+        focus: [
+          'Client Operations und Kontoadministration',
+          'Koordination der Depotbankbeziehungen',
+          'Prüfung von Depotkonditionen und Abwicklungskosten',
+          'Klarheit im Reporting und operatives Follow-up',
+        ],
         results: ['Senkung der Verwahrungs- und Abwicklungskosten für Kundinnen und Kunden um 18 % seit 2020.'],
       },
       'anja-hoffmann': {
@@ -955,6 +1044,12 @@ export const de: Translations = {
           'Anja Hoffmann nutzt ihren Hintergrund in der Investor Relations börsennotierter Unternehmen, um Portfolioentscheidungen klar zu erklären und in die weiteren finanziellen Prioritäten der Kundschaft einzuordnen. Sie betreut Beziehungen zu mehr als 180 Privatkundinnen, Privatkunden und Familien, mit Schwerpunkt auf Vorsorge und langfristiger Planung. In der letzten Jahresumfrage erreichte ihre Kundenzufriedenheit 4,8 von 5. Anja organisiert zudem die halbjährlichen Kundenseminare des Hauses in Luzern. Auf Deutsch und Englisch bringt sie einen direkten, strukturierten Stil in Gespräche, die sonst komplex wirken können.',
           'Kundengespräche führt sie so, dass Anlageinformationen mit den Entscheidungen verbunden werden, vor denen ein Haushalt tatsächlich steht. Statt einer Sammlung von Marktbeobachtungen klärt sie, was diese Entwicklungen für das nächste Gespräch über die Pläne bedeuten. Ihre IR-Erfahrung zeigt sich in der sorgfältigen Wortwahl und darin, die Begründung von Entscheidungen einschliesslich Annahmen und Unsicherheiten zu erklären.',
         ].join('\n\n'),
+        focus: [
+          'Beziehungen zu Privatkundinnen, Privatkunden und Familien',
+          'Gespräche zu Vorsorge und langfristiger Planung',
+          'Erklärung von Portfolioentscheidungen',
+          'Kundenseminare und finanzielle Bildung',
+        ],
         results: [
           'Beziehungen zu mehr als 180 Privatkundinnen, Privatkunden und Familien.',
           'Kundenzufriedenheit von 4,8 von 5 in der letzten Jahresumfrage.',
@@ -967,6 +1062,12 @@ export const de: Translations = {
           'Florian Bauer berät Haushalte zu Portfoliostruktur und jährlichem Rebalancing, mit besonderer Verantwortung für deutschsprachige Kundinnen und Kunden mit Wohnsitz ausserhalb der Schweiz. Er setzt auf praktische Erklärungen, sorgfältiges Follow-up und Kontinuität zwischen den formellen Portfolioreviews. Seine Arbeit im Kundenservice senkte die durchschnittliche Antwortzeit auf Anfragen auf unter vier Geschäftsstunden. Florian ist eine klare Anlaufstelle für alltägliche Fragen und hält die Gespräche mit den übergeordneten Anlagezielen und veränderten Umständen verbunden.',
           'Seine Reviews sind detailorientiert: wie ein Portfolio positioniert ist, ob sich die Umstände geändert haben und welche Punkte weitere Aufmerksamkeit brauchen. Für Kundinnen und Kunden im Ausland legt er besonderen Wert auf geordnete Kommunikation und klare Verantwortung für das Follow-up. Ziel ist ein verlässlicher Alltagsservice, damit Fragen zu Reports, Portfolioänderungen oder anstehenden Reviews mit dem richtigen Kontext und einem klaren nächsten Schritt bearbeitet werden.',
         ].join('\n\n'),
+        focus: [
+          'Portfolio-Reviews für Haushalte',
+          'Gespräche zum jährlichen Rebalancing',
+          'Betreuung deutschsprachiger Kundinnen und Kunden im Ausland',
+          'Reaktionsschneller Service und geordnetes Follow-up',
+        ],
         results: ['Durchschnittliche Antwortzeit auf Kundenanfragen auf unter vier Geschäftsstunden gesenkt.'],
       },
       'andrew-ramsden': {
@@ -976,6 +1077,12 @@ export const de: Translations = {
           'Andrew Ramsden bringt 30 Jahre Erfahrung in der Kundenbeziehung in die Vorsorge- und Anlageplanung ein. Er berät mehr als 40 Familien dabei, wie ihre Portfolios veränderte Einkommensbedürfnisse und langfristige Prioritäten tragen können. Zu seinem Hintergrund gehört die Leitung der Privatkundenbetreuung bei einem Londoner Vermögensverwalter. Andrew entwickelte die Vorpensionierungs-Analyse, die das Beratungsteam von Helfenstein verwendet, und schuf damit einen strukturierten Ausgangspunkt für Gespräche über Vorsorge, Bezüge und die Entscheidungen, die über die Zeit Aufmerksamkeit brauchen.',
           'Seine Gespräche behandeln den Übergang vom Vermögensaufbau zum Bezug, einschliesslich des Gleichgewichts von regelmässigem Einkommen, verfügbaren Reserven und längerfristigen Anlagebedürfnissen. Besonderen Wert legt er darauf, Annahmen neu zu prüfen, wenn sich familiäre Umstände ändern. Sein Auftreten ist überlegt und zugänglich und gibt Raum, Abwägungen zu betrachten und einzelne Entscheidungen in einen breiteren Vorsorgeplan einzuordnen.',
         ].join('\n\n'),
+        focus: [
+          'Vorsorge und Einkommensplanung',
+          'Portfolioentnahmen und veränderte Liquiditätsbedürfnisse',
+          'Langfristige Familienbeziehungen',
+          'Strukturierte Vorpensionierungs-Analysen',
+        ],
         results: [
           '30 Jahre Erfahrung in der Kundenbeziehung.',
           'Vorsorge- und Bezugsberatung für mehr als 40 Familien.',
@@ -988,6 +1095,12 @@ export const de: Translations = {
           'Erik Schneider bringt 20 Jahre Erfahrung in Anlagefonds, Beratungsplattformen und Private Banking mit. Seit seinem Eintritt bei Helfenstein 2016 konzentriert er sich auf langfristige Kundenbeziehungen und Kontinuität in wechselnden Marktphasen. Seine Beziehungsarbeit half, während der Marktvolatilität 2022 98 % der Vermögenswerte zu halten. Als früherer Private-Banking-Direktor prägt er Portfoliogespräche und Kundenservice mit einem abgewogenen Ansatz. Erik hilft, kurzfristige Marktentwicklungen von dem zu unterscheiden, was für den finanziellen Plan zählt, und hält Gespräche an den individuellen Prioritäten fest.',
           'Er legt Wert darauf, die Geschichte hinter den Entscheidungen einer Kundin oder eines Kunden zu verstehen, einschliesslich früherer Markterfahrungen und der Erwartungen an die Anlageunterstützung. Das hilft ihm, Gespräche in unsicheren Phasen zu führen, ohne die ursprünglichen Ziele aus dem Blick zu verlieren. Sein Ansatz verbindet zugängliche Erklärungen mit der Bereitschaft, frühere Annahmen zu überprüfen, weil auch eine langjährige Beziehung sich an veränderte Umstände anpassen muss.',
         ].join('\n\n'),
+        focus: [
+          'Langfristige Privatkundenbeziehungen',
+          'Portfoliogespräche in unsicheren Marktphasen',
+          'Erfahrung mit Fonds und Beratungsplattformen',
+          'Laufende Überprüfung der Kundenprioritäten',
+        ],
         results: ['Half, während der Marktvolatilität 2022 98 % der Vermögenswerte zu halten.'],
       },
       'andrew-savage': {
@@ -997,6 +1110,12 @@ export const de: Translations = {
           'Andrew Savage konzentriert sich auf das Onboarding, das Anlagereporting und die Koordination von Beziehungen mit mehreren Depotbanken. Er begleitete das Onboarding von 110 Privatkundinnen und -kunden über zwei Jahre und half, das Quartalsreporting des Hauses neu zu gestalten; danach stieg der ausgewiesene Zufriedenheitswert um 8 Punkte. Auf Englisch und Französisch verbindet er die Kundschaft mit dem Anlageteam und hält das Follow-up geordnet. Sein Ansatz macht Informationen leicht navigierbar und sorgt dafür, dass Kundinnen und Kunden die nächsten Schritte in der Beziehung zum Haus verstehen.',
           'Besondere Aufmerksamkeit gilt dem Beginn einer Beziehung, wenn Dokumentation, Verantwortlichkeiten und Kommunikationswege klar sein müssen. Sind mehrere Banken beteiligt, hilft er, die verfügbaren Informationen zu einem kohärenteren Bild zusammenzuführen. Reporting versteht er als Ausgangspunkt für das Gespräch und hilft, die Fragen zu erkennen, die beim nächsten Review Aufmerksamkeit verdienen.',
         ].join('\n\n'),
+        focus: [
+          'Onboarding neuer Kundinnen und Kunden und Follow-up',
+          'Quartalsreporting und Erklärungen',
+          'Koordination über mehrere Depotbanken',
+          'Kommunikation zwischen Kundschaft und Anlageteam',
+        ],
         results: [
           '110 neue Privatkundinnen und -kunden in zwei Jahren onboardet.',
           'Anstieg des ausgewiesenen Zufriedenheitswerts um acht Punkte nach der Neugestaltung des Reportings.',
@@ -1009,6 +1128,12 @@ export const de: Translations = {
           'Birgit Schulz bringt einen Hintergrund in der Qualitätskontrolle in den Kundenservice ein, mit Stärken in Dokumentation, Kontotransfers und der Genauigkeit der Kundendaten. Sie half, die CRM-Standards des Teams neu aufzubauen, und hob die erfasste Datenvollständigkeit auf über 99 %. Für Kundinnen und Kunden in den nordischen Ländern und im Benelux geht sie komplexe administrative Fragen mit einer klaren Abfolge von Schritten und gründlichem Follow-up an. Ihre Arbeit stützt die Kontinuität im Beratungsteam und gibt während Kontoänderungen eine geordnete Ansprechperson.',
           'Genaue Unterlagen versteht sie als wesentlichen Teil guten Services: Sie zeigen, was vereinbart wurde und was noch offen ist. Bei Kontotransfers identifiziert sie Abhängigkeiten früh und hält die Beteiligten informiert. Ihre Sorgfalt bei der Dokumentation erleichtert auch Übergaben, sodass Kundinnen und Kunden Hintergrundinformationen nicht wiederholen müssen, wenn mehrere Teams beteiligt sind.',
         ].join('\n\n'),
+        focus: [
+          'Kundendokumentation und Genauigkeit der Akten',
+          'Koordination von Kontotransfers',
+          'CRM-Standards und Vollständigkeit der Informationen',
+          'Service für Kundinnen und Kunden in Nordeuropa und im Benelux',
+        ],
         results: ['Vollständigkeit der Kundendaten auf über 99 % erhöht.'],
       },
       'alexander-koch': {
@@ -1018,6 +1143,12 @@ export const de: Translations = {
           'Alexander Koch arbeitet mit Kundinnen und Kunden, deren finanzielle Verhältnisse mehrere Banken, Länder oder Phasen der Unternehmenseigentümerschaft umfassen. Seit 2022 betreut er die grenzüberschreitenden Privatkundenfälle des Hauses und entwickelte einen Prozess, um Informationen mehrerer Depotbanken zusammenzuführen. Sein Schwerpunkt ist ein klareres Gesamtbild von Arrangements, die sonst fragmentiert bleiben. Alexander koordiniert die nötigen Gespräche und das Follow-up und hilft, Portfolioentscheidungen neben Unternehmenstransitionen und längerfristigen Vorsorgeprioritäten zu betrachten.',
           'Er beginnt damit, zu verstehen, wie die verschiedenen Teile der Finanzen zusammenhängen, statt jedes Konto isoliert zu beurteilen. Wenn ein Unternehmensübergang den Zweck der angelegten Vermögen verändert, hilft er, die zu klärenden Fragen zu ordnen. Besonderen Wert legt er auf klare Information und eine definierte Abfolge von Entscheidungen, damit komplexe Arrangements leichter zu besprechen und zu überprüfen sind.',
         ].join('\n\n'),
+        focus: [
+          'Komplexe Privatkundenbeziehungen',
+          'Grenzüberschreitende Koordination',
+          'Zusammenführung von Informationen mehrerer Depotbanken',
+          'Gespräche zu Unternehmenstransition und Vorsorge',
+        ],
         results: ['Verantwortlich für grenzüberschreitende Privatkundenfälle seit 2022.'],
       },
       'leon-roth': {
@@ -1027,6 +1158,12 @@ export const de: Translations = {
           'Leon Roth koordiniert den Kundenservice über die Beratungs- und Operationsteams von Helfenstein hinweg. Er unterstützt Anfragen zu mehr als 400 aktiven Kundendossiers, sorgt dafür, dass Anliegen die richtigen Kolleginnen und Kollegen erreichen, und hält das Follow-up auf Kurs. Leon führte gemeinsame Antwortvorlagen ein, die interne Übergabefehler um 50 % senkten und die Konsistenz verbesserten, wenn Anfragen zwischen Teams wechseln. Sein Beitrag ist praktisch und kundenorientiert: Kontext bewahren und Servicefragen mit klarer Kommunikation und verlässlicher Koordination führen.',
           'Er behält Anfrage, Hintergrund und die für den nächsten Schritt verantwortliche Person im Blick. Das ist besonders nützlich, wenn eine Frage sowohl eine Beraterin oder einen Berater als auch eine operative Fachperson betrifft. Leon legt Wert auf Kontinuität in diesem Prozess, mit Updates, die den Fortschritt erklären und zeigen, welche Information oder welcher Schritt noch nötig ist.',
         ].join('\n\n'),
+        focus: [
+          'Teamübergreifende Servicekoordination',
+          'Nachverfolgung von Anfragen',
+          'Konsistente interne Übergaben',
+          'Lösung komplexer Serviceanfragen',
+        ],
         results: [
           'Servicekoordination für mehr als 400 aktive Kundendossiers.',
           'Senkung interner Übergabefehler um 50 % nach Einführung gemeinsamer Antwortvorlagen.',
@@ -1039,6 +1176,12 @@ export const de: Translations = {
           'Henrik Meier verbindet Kundenservice mit dem Schwerpunkt schriftliche Kommunikation. Er verfasst den monatlichen Kundenbrief des Hauses für mehr als 8 000 Abonnentinnen und Abonnenten und unterstützt die Redaktion deutschsprachiger Publikationen. Seine Arbeit macht Beiträge des Anlageteams und Marktupdates zu knappen Erklärungen, denen die Kundschaft gut folgen kann. Klarere Betreffzeilen und eine bessere Struktur steigerten die E-Mail-Öffnungsraten um 19 %. Henrik achtet besonders auf Aufbau, Formulierung und Relevanz und hält so einen einheitlichen Standard in der laufenden Korrespondenz und den regelmässigen Kundenmitteilungen.',
           'Klarheit bedeutet für ihn ebenso die Auswahl und Ordnung von Informationen wie die Vereinfachung der Sprache. In seinen Texten soll der Hauptpunkt leicht zu finden sein, ohne das nötige Detail zu verlieren. Seine Position zwischen Kundenservice und Kommunikation hilft ihm, die Fragen vorauszusehen, die Leserinnen und Leser zu den Updates und Erklärungen des Hauses haben können.',
         ].join('\n\n'),
+        focus: [
+          'Monatliche Kundenbriefe und Updates',
+          'Redaktion deutschsprachiger Texte',
+          'Verständliche Anlageerklärungen',
+          'Einheitliche Struktur schriftlicher Kommunikation',
+        ],
         results: [
           'Monatlicher Kundenbrief für mehr als 8 000 Abonnentinnen und Abonnenten.',
           'Steigerung der E-Mail-Öffnungsraten um 19 % nach klareren Betreffzeilen und besserer Struktur.',

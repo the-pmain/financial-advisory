@@ -8,35 +8,44 @@ import {
 import { legalBySlug } from '../../data/legal';
 import { findArticle } from '../../data/content';
 import { useEmployees } from '../../hooks/useEmployees';
+import { useT } from '../../i18n';
 import { topicByPath } from '../../data/topics';
 
 /** Derives the trail from the current route so every page carries a breadcrumb. */
 function useTrail(): { label: string; to?: string }[] {
   const { pathname } = useLocation();
   const { bySlug } = useEmployees();
-  const trail: { label: string; to?: string }[] = [{ label: 'Home', to: ROUTES.home }];
+  const t = useT();
+  const aboutLabel =
+    t.nav.mainNavigation.find((group) => group.to === ROUTES.about)?.label ?? t.ui.about;
+  const teamLabel =
+    t.nav.mainNavigation
+      .flatMap((group) => group.children)
+      .find((link) => link.to === ROUTES.aboutTeam)?.label ?? t.ui.team;
+  const trail: { label: string; to?: string }[] = [{ label: t.ui.home, to: ROUTES.home }];
 
   if (pathname === ROUTES.home) return trail;
 
   if (pathname === ROUTES.aboutTeam) {
-    trail.push({ label: 'About us', to: ROUTES.about });
-    trail.push({ label: 'Our team' });
+    trail.push({ label: aboutLabel, to: ROUTES.about });
+    trail.push({ label: teamLabel });
     return trail;
   }
 
   const memberSlug = matchTeamMemberSlug(pathname);
   if (memberSlug) {
     const member = bySlug.get(memberSlug);
-    trail.push({ label: 'About us', to: ROUTES.about });
-    trail.push({ label: 'Our team', to: ROUTES.aboutTeam });
-    trail.push({ label: member?.name ?? 'Team' });
+    trail.push({ label: aboutLabel, to: ROUTES.about });
+    trail.push({ label: teamLabel, to: ROUTES.aboutTeam });
+    trail.push({ label: member?.name ?? t.ui.team });
     return trail;
   }
 
   const topic = topicByPath.get(pathname);
   if (topic) {
-    topic.breadcrumb.forEach((label, i) => {
-      const last = i === topic.breadcrumb.length - 1;
+    const crumbs = t.topics[pathname]?.breadcrumb ?? topic.breadcrumb;
+    crumbs.forEach((label, i) => {
+      const last = i === crumbs.length - 1;
       trail.push(last ? { label } : { label, to: i === 0 ? ROUTES.about : undefined });
     });
     return trail;
@@ -44,15 +53,15 @@ function useTrail(): { label: string; to?: string }[] {
 
   const articleSlug = matchKnowledgeHubSlug(pathname);
   if (articleSlug) {
-    const article = findArticle(articleSlug);
-    trail.push({ label: 'Knowledge hub' });
+    const article = t.content.articles[articleSlug] ?? findArticle(articleSlug);
+    trail.push({ label: t.ui.knowledgeHub });
     if (article) trail.push({ label: article.title });
     return trail;
   }
 
   const legalSlug = matchLegalSlug(pathname);
   if (legalSlug) {
-    const page = legalBySlug.get(legalSlug);
+    const page = t.legal[legalSlug] ?? legalBySlug.get(legalSlug);
     if (page) trail.push({ label: page.title });
     return trail;
   }

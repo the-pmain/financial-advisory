@@ -10,13 +10,8 @@ import { TrustSignals } from './TrustSignals';
 import { VersionStamp } from '../ui/VersionStamp';
 import { Breadcrumb } from './Breadcrumb';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import {
-  actionLinks,
-  legalLinks,
-  mainNavigation,
-  portalLinks,
-} from '../../data/navigation';
-import type { NavGroup } from '../../data/navigation';
+import { useT } from '../../i18n';
+import type { NavGroupT } from '../../i18n';
 
 /**
  * The footer sits outside the white page card, on the grey body colour, but
@@ -29,7 +24,9 @@ import type { NavGroup } from '../../data/navigation';
  * 1271px and collapses into accordions below 861px.
  */
 export function Footer() {
+  const t = useT();
   const collapsible = useMediaQuery('(width < 861px)');
+  const { mainNavigation, actionLinks, legalLinks } = t.nav;
 
   return (
     <footer
@@ -38,7 +35,7 @@ export function Footer() {
     >
       <div className="mb-[38px] flex flex-wrap items-center justify-between gap-6 max-tab:mb-[31px] max-tab:flex-col max-tab:items-start max-tab:gap-[30px]">
         <Breadcrumb />
-        <AppointmentButton>Make an appointment</AppointmentButton>
+        <AppointmentButton>{t.ui.makeAppointment}</AppointmentButton>
       </div>
 
       <TrustSignals className="mb-[50px] max-tab:mb-[40px]" />
@@ -46,14 +43,14 @@ export function Footer() {
       <div className="relative grid grid-cols-[minmax(0,836fr)_257px] items-start gap-x-[36px] gap-y-[44px] pl-[91px] max-tab:grid-cols-1 max-tab:gap-y-[43px] max-tab:pl-0">
         <Link
           to={ROUTES.home}
-          aria-label="Home"
+          aria-label={t.ui.home}
           className="absolute top-0 left-0 block size-[55px] opacity-100 transition-opacity duration-250 hover:opacity-70 max-tab:hidden"
         >
           <LogoMark className="size-[55px]" />
         </Link>
 
         <nav
-          aria-label="Footer navigation"
+          aria-label={t.ui.footerNav}
           className="grid grid-cols-3 gap-[36px] max-mast:grid-cols-2 max-tab:grid-cols-1 max-tab:gap-0"
         >
           {mainNavigation.map((group) =>
@@ -76,19 +73,7 @@ export function Footer() {
         </nav>
 
         <div className="max-lap:max-w-[257px] max-tab:max-w-none">
-          {portalLinks.length > 0 && (
-            <ul className="m-0 list-none p-0">
-              {portalLinks.map((link) => (
-                <li key={link.to}>
-                  <FooterUtilityLink label={link.label} to={link.to} external={link.external} />
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {/* Only the newsletter row shows on wide screens; the others duplicate
-              links already present in the menu columns. */}
-          <ul className={`list-none p-0 ${portalLinks.length > 0 ? 'mt-[44px] max-tab:mt-0' : 'mt-0'}`}>
+          <ul className="mt-0 list-none p-0">
             {actionLinks.map((link, i) => (
               <li
                 key={link.to}
@@ -106,7 +91,7 @@ export function Footer() {
       {/* Legal row. Social icons live in the trust band; languages sit first
           on small screens, then the legal links. */}
       <div className="mt-[28px] grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-4 max-tab:mt-[17px] max-tab:grid-cols-1">
-        <nav aria-label="Legal" className="max-tab:order-3">
+        <nav aria-label={t.ui.legalNav} className="max-tab:order-3">
           <ul className="m-0 flex list-none flex-wrap gap-4 p-0 max-tab:flex-col max-tab:gap-1">
             {legalLinks.map((link) => (
               <li key={link.to}>
@@ -129,7 +114,7 @@ export function Footer() {
   );
 }
 
-function FooterGroupLinks({ group }: { group: NavGroup }) {
+function FooterGroupLinks({ group }: { group: NavGroupT }) {
   return (
     <ul className="mt-[18px] list-none p-0 max-tab:mt-0">
       {group.children.map((child) => (
@@ -147,7 +132,7 @@ function FooterGroupLinks({ group }: { group: NavGroup }) {
 }
 
 /** Below 861px each group becomes a 52px row that opens on tap. */
-function FooterAccordion({ group }: { group: NavGroup }) {
+function FooterAccordion({ group }: { group: NavGroupT }) {
   const [open, setOpen] = useState(false);
   const panelId = `footer-group-${group.label.replace(/\W+/g, '-').toLowerCase()}`;
 
@@ -187,6 +172,7 @@ function FooterUtilityLink({
   external?: boolean;
   ruled?: boolean;
 }) {
+  const t = useT();
   const className = `text-vz-slate hover:text-vz-orange group flex items-center justify-between gap-3 py-[10px] text-[16px] leading-[19px] transition-colors duration-250 ${
     ruled ? 'shadow-[inset_0_0.5px_0_rgba(0,0,0,0.4)]' : ''
   }`;
@@ -204,7 +190,7 @@ function FooterUtilityLink({
       <a href={to} target="_blank" rel="noreferrer noopener" className={className}>
         <span>
           {label}
-          <span className="visually-hidden"> (external link)</span>
+          <span className="visually-hidden"> {t.ui.externalLink}</span>
         </span>
         {arrow}
       </a>

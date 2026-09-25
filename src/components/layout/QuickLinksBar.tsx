@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router';
 import { ROUTES } from '../../constants/routes';
-import { dropdownsFirst, quickLinks } from '../../data/navigation';
+import { dropdownsFirst } from '../../data/navigation';
+import { useT } from '../../i18n';
 import { NavDropdown } from './NavDropdown';
 
 const triggerClass = (isActive: boolean) =>
@@ -12,11 +13,12 @@ const triggerClass = (isActive: boolean) =>
  * The second header row. Items with a real page tree open as dropdowns.
  */
 export function QuickLinksBar() {
-  const links = dropdownsFirst(quickLinks);
+  const t = useT();
+  const links = dropdownsFirst(t.nav.quickLinks);
 
   return (
     <div className="relative min-h-[54px] overflow-x-auto overflow-y-visible max-desk:min-h-[48px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-      <nav aria-label="Quick links" className="vz-scroll-x pt-3">
+      <nav aria-label={t.ui.quickLinks} className="vz-scroll-x pt-3">
         <ul className="inline-flex w-full items-center gap-6 whitespace-nowrap max-desk:gap-5 max-mob:gap-4">
           {links.map((link, i) => (
             <li key={link.to + link.label} className="inline-block whitespace-nowrap">

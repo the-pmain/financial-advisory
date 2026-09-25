@@ -49,7 +49,14 @@ function teamRecord(): Record<string, TeamMemberT> {
   return Object.fromEntries(
     teamMembers.map((m) => [
       m.slug,
-      { slug: m.slug, role: m.role, about: m.about, results: m.results },
+      {
+        slug: m.slug,
+        role: m.role,
+        about: m.about,
+        results: m.results,
+        focus: m.focus,
+        regulatoryNote: m.regulatoryNote,
+      },
     ]),
   );
 }

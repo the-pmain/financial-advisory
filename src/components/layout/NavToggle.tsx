@@ -1,3 +1,5 @@
+import { useT } from '../../i18n';
+
 /**
  * The reference's labelled burger button. Four 2px bars morph into a cross:
  * the first and last collapse to zero width while the middle pair rotate.
@@ -13,6 +15,7 @@ export function NavToggle({
   controls: string;
   tone?: 'default' | 'hero';
 }) {
+  const t = useT();
   const bar =
     'absolute left-0 right-0 mx-auto block h-[2px] bg-current transition-all duration-250 ease-in-out';
   const hero = tone === 'hero';
@@ -48,7 +51,7 @@ export function NavToggle({
           style={open ? { top: 7, width: 0, left: '50%' } : { top: 14, width: '100%' }}
         />
       </span>
-      Menu
+      {t.ui.menu}
     </button>
   );
 }

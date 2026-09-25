@@ -51,6 +51,8 @@ export type TeamMemberT = {
   role: string;
   about: string;
   results: string[];
+  focus?: string[];
+  regulatoryNote?: string;
 };
 
 export type Translations = {
@@ -142,6 +144,25 @@ export type Translations = {
     verifiedHelp: string;
     verifiedOsfin: string;
     verifiedAudit: string;
+    portalShort: string;
+    finmaCardTitle: string;
+    leiCardTitle: string;
+    helpCardTitle: string;
+    auditCardTitle: string;
+    auditCardDetail: string;
+    authorisationNo: string;
+    professionalFocus: string;
+    languages: string;
+    finmaAdviserLabel: string;
+    cfaRegistryLabel: string;
+    advisesUnder: string;
+    verifyFinmaRegister: string;
+    confirmCfa: string;
+    loading: string;
+    loadingTeam: string;
+    teamUnavailable: string;
+    clearSearch: string;
+    searchHint: string;
   };
   nav: {
     mainNavigation: NavGroupT[];

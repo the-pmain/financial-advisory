@@ -75,7 +75,7 @@ export function TopicPage() {
             {ctaLabel}
           </ButtonOrange>
         ) : (
-          <AppointmentButton className="mt-2">{ctaLabel ?? 'Make an appointment'}</AppointmentButton>
+          <AppointmentButton className="mt-2">{ctaLabel ?? t.ui.makeAppointment}</AppointmentButton>
         )}
       </div>
 

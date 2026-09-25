@@ -77,7 +77,7 @@ const navPaths = {
       ],
     },
     { label: 'Appuntamenti', to: ROUTES.appointments },
-    { label: 'Insights', to: ROUTES.insights },
+    { label: 'Analisi', to: ROUTES.insights },
     { label: 'Portale finanziario Helfenstein', to: ROUTES.financialPortal },
   ],
   actionLinks: [
@@ -175,7 +175,7 @@ export const it: Translations = {
     clientStories: 'Storie di clienti',
     verifyAuthorisation: 'Verificare la nostra autorizzazione',
     relatedService: 'Servizio correlato',
-    allInsights: 'Tutti gli insights',
+    allInsights: 'Tutte le analisi',
     meetSpecialists: 'I nostri specialisti',
     regulatoryChallenges: 'Sfide normative',
     howWeHelp: 'Come aiutiamo',
@@ -192,6 +192,25 @@ export const it: Translations = {
     verifiedHelp: 'Verificato — apre l’elenco HELP.ch',
     verifiedOsfin: 'Verificato — apre la pagina di vigilanza OSFINcontrol',
     verifiedAudit: 'Verificato — apre l’estratto Zefix (ufficio di revisione)',
+    portalShort: 'Portale',
+    finmaCardTitle: 'Gestore patrimoniale FINMA',
+    leiCardTitle: 'Identificativo della persona giuridica',
+    helpCardTitle: 'Elenco HELP.ch',
+    auditCardTitle: 'Revisore legale',
+    auditCardDetail: 'Revisione e depositi | Revisore iscritto a Zefix',
+    authorisationNo: 'N.',
+    professionalFocus: 'Focus professionale',
+    languages: 'Lingue',
+    finmaAdviserLabel: 'N. consulente registrato FINMA',
+    cfaRegistryLabel: 'N. registro CFA',
+    advisesUnder: 'Consiglia nell’ambito dell’autorizzazione FINMA {no} di {firm}.',
+    verifyFinmaRegister: 'Verificate la società nel registro FINMA',
+    confirmCfa: 'confermate la charter CFA nell’elenco del CFA Institute',
+    loading: 'Caricamento…',
+    loadingTeam: 'Caricamento del team…',
+    teamUnavailable: 'Impossibile caricare l’elenco del team.',
+    clearSearch: 'Cancella ricerca',
+    searchHint: 'Inserite almeno due caratteri per cercare nel sito.',
   },
   nav: navPaths,
   home: {
@@ -838,10 +857,18 @@ export const it: Translations = {
       'friedrich-hartmann': {
         slug: 'friedrich-hartmann',
         role: 'Presidente e CIO',
+        regulatoryNote:
+          'Responsabile senior nell’organizzazione di consulenza di Helfenstein Asset Management.',
         about: [
           'Friedrich Hartmann guida la strategia d\'investimento di Helfenstein e porta più di 30 anni di esperienza nella costruzione del portafoglio e nell\'allocazione del capitale a lungo termine. Il suo approccio si concentra sulla qualità delle imprese, su valutazioni disciplinate e sulla capacità di mantenere la prospettiva quando le condizioni di mercato cambiano. Come presidente e CIO definisce il quadro di investimento e orienta la valutazione del rischio del team. Dà particolare importanza a un ragionamento chiaro e alla pazienza di tenere una convinzione restando aperti a nuove evidenze.',
           'La sua filosofia parte da una domanda semplice: che cosa rende un\'impresa degna di essere posseduta lungo un intero ciclo di mercato? Incoraggia il team a verificare le ipotesi di ogni tesi e a considerare come le singole posizioni interagiscono nel portafoglio. Nei colloqui con i clienti spiega il rapporto tra valutazione, incertezza e il tempo necessario perché una tesi si sviluppi.',
         ].join('\n\n'),
+        focus: [
+          'Strategia di investimento e allocazione del capitale a lungo termine',
+          'Costruzione del portafoglio e valutazione del rischio',
+          'Valutazione fondamentale e disciplina di investimento',
+          'Guida del processo di ricerca di investimento',
+        ],
         results: ['Più di 30 anni a plasmare l\'approccio di investimento della società.'],
       },
       'karin-vogel': {
@@ -851,6 +878,12 @@ export const it: Translations = {
           'Karin Vogel è specializzata nelle azioni europee a media capitalizzazione e unisce ricerca dettagliata sulle società e una valutazione disciplinata. L\'esperienza in boutique value in Spagna le dà una comprensione pratica delle imprese regionali e delle loro posizioni competitive. Analista principale del fondo Continental Value dal 2016, esamina generazione di cassa, decisioni del management e tenuta degli utili. Aiuta inoltre i clienti a capire, in un linguaggio chiaro, il ragionamento dietro le posizioni del portafoglio.',
           'La sua ricerca va oltre la crescita di superficie per esaminare come le società finanziano l\'espansione, proteggono i margini e allocano il capitale. Presta particolare attenzione al rapporto tra risultato operativo e flusso di cassa, per mettere in discussione previsioni troppo ottimistiche. Nelle discussioni di portafoglio presenta sia l\'opportunità sia le condizioni che potrebbero indebolire la tesi.',
         ].join('\n\n'),
+        focus: [
+          'Ricerca sulle mid cap europee',
+          'Analisi dei flussi di cassa e qualità degli utili',
+          'Valutazione e analisi del management',
+          'Spiegazioni chiare delle posizioni di portafoglio',
+        ],
         results: [
           'Analista principale del fondo Continental Value dal 2016.',
           'Tre partecipazioni industriali studiate diventate posizioni di lungo periodo.',
@@ -863,6 +896,12 @@ export const it: Translations = {
           'Lukas Steiner si concentra sulle azioni europee, con una responsabilità particolare per le partecipazioni iberiche della società. Formatosi a Vienna e a Londra, unisce l\'analisi fondamentale a un interesse per i cicli del capitale e per le forze economiche che determinano i rendimenti. Il suo lavoro sulla disciplina di portafoglio ha contribuito a una riduzione del 22% del turnover medio. Privilegia posizioni studiate con cura e un approccio misurato alle negoziazioni, valutando ogni decisione rispetto alla tesi di lungo periodo.',
           'Un tema centrale del suo lavoro è il modo in cui investimento, concorrenza e condizioni di finanziamento influenzano la redditività futura. Considera se gli utili correnti riflettono una posizione sostenibile o un momento favorevole del ciclo. Nelle discussioni di portafoglio sottolinea le ragioni per detenere una società, gli sviluppi che giustificherebbero una revisione e i costi di cambiamenti non necessari.',
         ].join('\n\n'),
+        focus: [
+          'Analisi delle azioni europee e iberiche',
+          'Ricerca sui cicli del capitale',
+          'Valutazione di lungo periodo e tempistica',
+          'Rotazione del portafoglio e disciplina di negoziazione',
+        ],
         results: ['Riduzione del 22% del turnover medio di portafoglio.'],
       },
       'maximilian-berger': {
@@ -872,6 +911,12 @@ export const it: Translations = {
           'Maximilian Berger porta un\'esperienza di revisione nell\'investimento azionario, con particolare attenzione alla qualità contabile, alla solidità di bilancio e all\'affidabilità degli utili riportati. Co-gestisce partecipazioni europee difensive nella gamma Global Value. Nel 2023 ha guidato la revisione degli standard di reporting dell\'universo investibile. Il suo contributo è l\'esame di ciò che sta dietro le cifre di superficie, per aiutare il team a mettere in discussione le ipotesi e a individuare debolezze finanziarie prima di impiegare capitale.',
           'Il suo stile analitico si fonda sulla riconciliazione: verifica se conto economico, stato patrimoniale e rendiconto finanziario raccontano la stessa storia. Osserva i movimenti del capitale circolante, gli impegni di finanziamento e le ipotesi alla base dei valori delle attività. Questa prospettiva arricchisce i dibattiti di investimento, soprattutto quando valutazioni apparentemente attraenti vanno pesate rispetto a rischi finanziari o contabili meno visibili.',
         ].join('\n\n'),
+        focus: [
+          'Analisi di bilancio e qualità contabile',
+          'Solidità patrimoniale e rischi di finanziamento',
+          'Ricerca su azioni europee difensive',
+          'Revisione degli standard di reporting',
+        ],
         results: [
           'Ha guidato nel 2023 la revisione degli standard di reporting della società.',
           'Ha individuato due rischi di bilancio prima che attirassero un\'attenzione più ampia del mercato.',
@@ -884,6 +929,12 @@ export const it: Translations = {
           'Julian Vogt unisce una formazione in diritto e in economia a un lavoro centrato sulla governance e sulle decisioni di investimento. Ha elaborato la checklist di governance usata prima delle nuove posizioni rilevanti, portando nel processo di ricerca strutture proprietarie, diritti degli azionisti e incentivi del management. Accanto alle responsabilità di portafoglio, affianca gli analisti junior nella stesura delle tesi e nel dimensionamento delle posizioni. Il suo approccio collega la solidità di un\'impresa alle condizioni con cui gli investitori partecipano al suo futuro.',
           'Esamina come strutture societarie e decisioni del management influenzino nel tempo la posizione degli azionisti. La sua ricerca considera se gli incentivi favoriscano un\'allocazione responsabile del capitale e se la governance sostenga la strategia dichiarata. Con gli analisti meno esperti insiste su un ragionamento conciso, ipotesi esplicite e una spiegazione chiara delle evidenze che farebbero cambiare una view.',
         ].join('\n\n'),
+        focus: [
+          'Governance e interessi degli azionisti',
+          'Strutture proprietarie e incentivi del management',
+          'Sviluppo delle tesi di investimento',
+          'Affiancamento degli analisti e discussioni sul dimensionamento',
+        ],
         results: [
           'Ha contribuito al lavoro sulla complessità legale e regolamentare di tre partecipazioni transfrontaliere.',
         ],
@@ -895,6 +946,12 @@ export const it: Translations = {
           'Ken Wagner collega il team di investimento europeo di Helfenstein alle opportunità quotate in Asia. Nel 2019 ha avviato la copertura di ricerca Asia-Pacifico della società, con una prospettiva regionale fondata sui documenti societari e sul dialogo con gli operatori di mercato. Parla mandarino, tedesco e spagnolo e sostiene la comunicazione tra mercati e partner di ricerca. Ha individuato quattro investimenti che rappresentavano più dell\'8% del portafoglio globale. Cerca di capire le imprese nel loro contesto locale e, allo stesso tempo, come ogni opportunità si inserisca nel quadro di valutazione e di rischio del portafoglio.',
           'La sua ricerca tiene conto delle differenze di informativa, delle strutture proprietarie e delle condizioni competitive nella regione. Porta questi elementi nelle discussioni con i colleghi europei. Il suo approccio unisce una lettura attenta delle informazioni finanziarie e un interesse per il modo in cui le imprese generano cassa, finanziano l\'espansione e trattano gli azionisti di minoranza.',
         ].join('\n\n'),
+        focus: [
+          'Ricerca azionaria Asia-Pacifico',
+          'Analisi regionale di imprese e settori',
+          'Coordinamento della ricerca tra mercati',
+          'Comunicazione multilingue con i partner di ricerca',
+        ],
         results: ['Quattro investimenti individuati, pari a più dell\'8% del portafoglio globale.'],
       },
       'stefan-richter': {
@@ -904,6 +961,12 @@ export const it: Translations = {
           'Stefan Richter è in Helfenstein dal 2015 e porta esperienza di ricerca di investimento e di analisi delle imprese industriali. Si concentra su società i cui vantaggi competitivi e flussi di cassa possono resistere a condizioni economiche mutevoli. Ha sviluppato la watchlist sulla transizione energetica, che dà al comitato investimenti una base strutturata per esaminare le imprese interessate da questo cambiamento di lungo periodo. La sua ricerca collega gli sviluppi di settore ai fondamentali, con particolare attenzione al capitale necessario per sostenere la crescita futura.',
           'Studia il rapporto tra domanda industriale, capacità produttiva e investimento richiesto per mantenere la posizione competitiva. Nella ricerca sulla transizione energetica distingue i temi di settore ampi dall\'economia della singola impresa. Il suo approccio chiede come un\'opportunità si traduca in utili e flusso di cassa e se il bilancio possa sostenere l\'investimento necessario nelle fasi meno favorevoli del ciclo.',
         ].join('\n\n'),
+        focus: [
+          'Analisi di imprese industriali e cicliche',
+          'Ricerca sulla transizione energetica',
+          'Valutazione di investimenti e flussi di cassa',
+          'Resilienza delle imprese attraverso i cicli',
+        ],
         results: ['Nel team Helfenstein dal 2015.'],
       },
       'greta-keller': {
@@ -913,6 +976,12 @@ export const it: Translations = {
           'Greta Keller supporta la ricerca sulle imprese più piccole dei settori dei consumi e industriale in Germania, Austria e Svizzera. È entrata in Helfenstein nel 2023 dopo un tirocinio in investor relations, con una formazione in economia aziendale e un forte interesse per la modellizzazione finanziaria. Il suo lavoro unisce l\'analisi dei documenti societari e la valutazione dei cambiamenti nel comportamento dei clienti. Accanto ai gestori, aiuta a trasformare idee di ricerca in tesi strutturate e in un monitoraggio continuo.',
           'Il suo approccio parte dai driver di ricavi, margini e capitale circolante. Le interessa in particolare come i cambiamenti della domanda compaiano nei risultati e se le spiegazioni del management siano sostenute dai numeri. Nella preparazione della ricerca insiste su ipotesi trasparenti e su materiale ben organizzato, così che i colleghi più esperti possano rivedere un modello e discuterne le conclusioni.',
         ].join('\n\n'),
+        focus: [
+          'Ricerca small cap consumi e industria',
+          'Modelli finanziari e documenti societari',
+          'Tendenze di consumo e performance operativa',
+          'Supporto di ricerca nella regione DACH',
+        ],
         results: [
           'Entrata nel team di investimento nel 2023.',
           'Prima nota analitica arrivata al portafoglio entro sei settimane.',
@@ -925,6 +994,12 @@ export const it: Translations = {
           'Tobias Brandt guida lo sviluppo della clientela di Helfenstein, con esperienza in private banking e vendita azionaria. Lavora con i potenziali clienti per capire le loro priorità e metterli in contatto con i team di investimento e di consulenza più adatti. Il suo lavoro ha contribuito a una crescita del 40% della clientela privata in quattro anni. Ha inoltre avviato il programma di formazione per i clienti, che raggiunge più di 600 partecipanti all\'anno. Parla tedesco, inglese e spagnolo e mette spiegazioni chiare e aspettative definite al centro della relazione.',
           'Considera lo sviluppo commerciale come l\'inizio di una relazione di consulenza duratura. I primi colloqui riguardano ciò che i clienti vogliono ottenere, come preferiscono comunicare e che cosa si aspettano da un supporto professionale. Attraverso il programma di formazione incoraggia domande informate e una migliore comprensione dell\'approccio della società.',
         ].join('\n\n'),
+        focus: [
+          'Sviluppo della clientela privata e delle relazioni',
+          'Primi colloqui su bisogni e aspettative',
+          'Formazione dei clienti e comunicazione sugli investimenti',
+          'Coordinamento tra potenziali clienti e consulenti',
+        ],
         results: [
           'Crescita del 40% della clientela privata in quattro anni.',
           'Più di 600 partecipanti all\'anno al programma di formazione per i clienti.',
@@ -937,15 +1012,29 @@ export const it: Translations = {
           'Markus Engel dirige la comunicazione con la clientela e il marketing di Helfenstein. Traduce il ragionamento di investimento in reporting chiaro e corrispondenza coerente. Ha ridisegnato i materiali usati dal team di consulenza e segue comunicazioni che accompagnano più di 12\'000 interazioni con i clienti all\'anno. Il suo obiettivo è aiutare i clienti a capire le decisioni di portafoglio, gli sviluppi di mercato e le informazioni rilevanti per la loro situazione. Lavora a stretto contatto con i colleghi di investimento e consulenza perché la comunicazione esterna resti precisa, utile e coerente.',
           'Affronta ogni comunicazione dal punto di vista di chi legge: che cosa è successo, perché conta e se serve un confronto con un consulente. Questo orienta il lavoro su struttura del reporting, coerenza editoriale e presentazione di temi complessi. Dà anche importanza a spiegare l\'incertezza con chiarezza, così che un testo conciso conservi il contesto di cui i clienti hanno bisogno.',
         ].join('\n\n'),
+        focus: [
+          'Reporting alla clientela e direzione editoriale',
+          'Comunicazione su investimenti e mercati',
+          'Coerenza della corrispondenza con i clienti',
+          'Coordinamento con i team di investimento e consulenza',
+        ],
         results: ['Comunicazioni a supporto di più di 12\'000 interazioni con i clienti all\'anno.'],
       },
       'marc-weber': {
         slug: 'marc-weber',
         role: 'Managing Director, Client Operations',
+        regulatoryNote:
+          'Responsabile senior delle operazioni clienti e del coordinamento della custodia.',
         about: [
           'Marc Weber sovrintende alle operazioni clienti e coordina i rapporti di Helfenstein con le banche depositarie. Con un\'esperienza di private banking, si concentra sull\'amministrazione dei conti, sugli assetti di custodia e sulla chiarezza del reporting. La sua revisione delle condizioni di custodia e regolamento ha contribuito a ridurre i relativi costi dei clienti del 18% dal 2020. Lavora in tedesco, francese e inglese e collega clienti, consulenti e partner bancari per un servizio ordinato e reattivo.',
           'Il suo approccio rende comprensibili le responsabilità del consulente, della banca depositaria e del cliente. Presta attenzione ai dettagli pratici che influenzano la qualità del servizio, tra cui la completezza delle informazioni di conto e la gestione delle richieste aperte. Porta anche uno sguardo attento ai costi nei rapporti bancari, considerando come gli assetti operativi incidano sull\'esperienza complessiva del cliente.',
         ].join('\n\n'),
+        focus: [
+          'Operazioni clienti e amministrazione dei conti',
+          'Coordinamento dei rapporti con le banche depositarie',
+          'Revisione di condizioni di custodia e costi di regolamento',
+          'Chiarezza del reporting e follow-up operativo',
+        ],
         results: ['Riduzione del 18% dei costi di custodia e regolamento dei clienti dal 2020.'],
       },
       'anja-hoffmann': {
@@ -955,6 +1044,12 @@ export const it: Translations = {
           'Anja Hoffmann attinge a un\'esperienza di investor relations di società quotate per spiegare con chiarezza le decisioni di portafoglio e collocarle nelle priorità finanziarie più ampie dei clienti. Gestisce relazioni con più di 180 clienti privati e famiglie, con un\'attenzione a previdenza e pianificazione di lungo periodo. Il suo punteggio di soddisfazione ha raggiunto 4,8 su 5 nell\'ultimo sondaggio annuale. Organizza inoltre i seminari semestrali della società a Lucerna. In tedesco e in inglese porta un approccio diretto e strutturato a conversazioni che altrimenti possono sembrare complesse.',
           'Nei colloqui collega le informazioni di investimento alle decisioni che una famiglia deve davvero prendere. Invece di lasciare i clienti con una raccolta di osservazioni di mercato, chiarisce che cosa quegli sviluppi significano per la discussione successiva sui loro piani. L\'esperienza di investor relations si vede nella scelta attenta delle parole e nella spiegazione del ragionamento, comprese ipotesi e incertezze.',
         ].join('\n\n'),
+        focus: [
+          'Relazioni con clienti privati e famiglie',
+          'Colloqui su pensione e pianificazione di lungo periodo',
+          'Spiegazione delle decisioni di portafoglio',
+          'Seminari per i clienti e educazione finanziaria',
+        ],
         results: [
           'Relazioni con più di 180 clienti privati e famiglie.',
           'Punteggio di soddisfazione di 4,8 su 5 nell\'ultimo sondaggio annuale.',
@@ -967,6 +1062,12 @@ export const it: Translations = {
           'Florian Bauer consiglia le famiglie sulla struttura del portafoglio e sul ribilanciamento annuale, con una responsabilità particolare per i clienti di lingua tedesca che vivono fuori dalla Svizzera. Privilegia spiegazioni pratiche, un follow-up attento e continuità tra le revisioni formali. Il suo lavoro sul servizio ha portato il tempo medio di risposta alle richieste sotto le quattro ore lavorative. Offre un riferimento chiaro per le domande quotidiane e tiene i colloqui collegati agli obiettivi di investimento e al cambiamento delle circostanze.',
           'Le sue revisioni sono orientate al dettaglio: come è posizionato il portafoglio, se le circostanze sono cambiate e quali temi richiedono ulteriore attenzione. Per i clienti all\'estero dà particolare importanza a una comunicazione organizzata e a una responsabilità chiara del follow-up. Mira a un servizio ordinario affidabile, così che le domande su report, cambiamenti di portafoglio o revisioni imminenti siano trattate con il contesto giusto e un passo successivo chiaro.',
         ].join('\n\n'),
+        focus: [
+          'Revisioni di portafoglio per le famiglie',
+          'Discussioni sul ribilanciamento annuale',
+          'Supporto ai clienti di lingua tedesca all’estero',
+          'Servizio reattivo e follow-up organizzato',
+        ],
         results: ['Tempo medio di risposta alle richieste dei clienti ridotto a meno di quattro ore lavorative.'],
       },
       'andrew-ramsden': {
@@ -976,6 +1077,12 @@ export const it: Translations = {
           'Andrew Ramsden porta 30 anni di esperienza nella relazione con la clientela alla pianificazione previdenziale e degli investimenti. Consiglia più di 40 famiglie e le aiuta a considerare come i portafogli possano sostenere bisogni di reddito che cambiano e priorità di lungo periodo. Ha diretto la copertura della clientela privata presso un gestore di Londra. Ha sviluppato la revisione pre-pensionamento usata dal team di consulenza di Helfenstein, un punto di partenza strutturato per discutere preparazione, prelievi e decisioni da seguire nel tempo.',
           'I suoi colloqui affrontano il passaggio dall\'accumulo al prelievo, compreso l\'equilibrio tra reddito regolare, riserve disponibili e bisogni di investimento di più lungo periodo. Dà particolare valore alla revisione delle ipotesi quando cambiano le circostanze familiari. Il suo modo è misurato e accessibile: lascia ai clienti lo spazio per considerare i trade-off e capire come ogni decisione entri in un piano previdenziale più ampio.',
         ].join('\n\n'),
+        focus: [
+          'Preparazione alla pensione e pianificazione del reddito',
+          'Prelievi di portafoglio e bisogni di liquidità',
+          'Relazioni di consulenza familiari di lungo periodo',
+          'Revisioni strutturate pre-pensionamento',
+        ],
         results: [
           '30 anni di esperienza nella relazione con la clientela.',
           'Consulenza su previdenza e prelievi per più di 40 famiglie.',
@@ -988,6 +1095,12 @@ export const it: Translations = {
           'Erik Schneider porta 20 anni di esperienza tra fondi, piattaforme di consulenza e private banking. Da quando è entrato in Helfenstein nel 2016 si concentra su relazioni di lungo periodo e sulla continuità al cambiare delle condizioni di mercato. Il suo lavoro di relazione ha contribuito a trattenere il 98% degli asset durante la volatilità di mercato del 2022. Il passato da direttore di private banking informa un approccio misurato ai colloqui di portafoglio e al servizio. Aiuta i clienti a distinguere gli sviluppi di breve periodo da ciò che conta per i loro piani, tenendo le conversazioni ancorate alle priorità individuali.',
           'Dà valore a capire la storia delle decisioni di un cliente, comprese le esperienze di mercato precedenti e le aspettative verso il supporto agli investimenti. Questa prospettiva lo aiuta a inquadrare le discussioni nei periodi di incertezza senza perdere di vista gli obiettivi originari. Il suo approccio unisce spiegazioni accessibili e la disponibilità a rivedere ipotesi precedenti, perché anche una relazione di lunga data deve adattarsi.',
         ].join('\n\n'),
+        focus: [
+          'Relazioni di lungo periodo con la clientela privata',
+          'Discussioni di portafoglio nell’incertezza di mercato',
+          'Esperienza di fondi e piattaforme di consulenza',
+          'Revisioni continuative delle priorità dei clienti',
+        ],
         results: ['Ha contribuito a trattenere il 98% degli asset durante la volatilità di mercato del 2022.'],
       },
       'andrew-savage': {
@@ -997,6 +1110,12 @@ export const it: Translations = {
           'Andrew Savage si concentra sull\'onboarding dei clienti, sul reporting degli investimenti e sul coordinamento delle relazioni che coinvolgono più banche depositarie. Ha accompagnato l\'ingresso di 110 clienti privati in due anni e ha contribuito a ridisegnare il reporting trimestrale; in seguito la misura di soddisfazione riportata è salita di 8 punti. Lavora in inglese e francese, collega i clienti al team di investimento e tiene ordinato il follow-up. Il suo approccio rende le informazioni facili da consultare e fa sì che i clienti capiscano i passi successivi nel rapporto con la società.',
           'Presta particolare attenzione alle prime fasi della relazione, quando i clienti hanno bisogno di capire con chiarezza documenti, responsabilità e modalità di comunicazione. Dove sono coinvolte più banche, aiuta a riunire le informazioni disponibili in una visione più coerente. Considera inoltre il reporting come punto di partenza della discussione, per individuare le domande che meritano attenzione alla revisione successiva.',
         ].join('\n\n'),
+        focus: [
+          'Onboarding dei nuovi clienti e follow-up',
+          'Reporting trimestrale e spiegazioni ai clienti',
+          'Coordinamento tra più depositari',
+          'Comunicazione tra clienti e colleghi di investimento',
+        ],
         results: [
           '110 nuovi clienti privati accolti in due anni.',
           'Aumento di otto punti della misura di soddisfazione dopo la revisione del reporting.',
@@ -1009,6 +1128,12 @@ export const it: Translations = {
           'Birgit Schulz porta un\'esperienza di controllo qualità nel servizio alla clientela, con punti di forza in documentazione, trasferimenti di conto e accuratezza dei dati. Ha contribuito a ricostruire gli standard CRM del team e ha portato la completezza dei dati registrati sopra il 99%. Segue clienti nei Paesi nordici e nel Benelux e affronta le questioni amministrative complesse con una sequenza chiara di azioni e un follow-up accurato. Il suo lavoro sostiene la continuità nel team di consulenza e offre un riferimento organizzato durante i cambi di conto.',
           'Considera registrazioni accurate una parte essenziale di un buon servizio: permettono ai colleghi di capire che cosa è stato concordato e che cosa resta aperto. Nei trasferimenti individua presto le dipendenze e tiene informate le parti coinvolte. L\'attenzione alla documentazione facilita anche i passaggi di consegne, così i clienti non devono ripetere il contesto quando intervengono più team.',
         ].join('\n\n'),
+        focus: [
+          'Documentazione clienti e accuratezza dei dati',
+          'Coordinamento dei trasferimenti di conto',
+          'Standard CRM e completezza delle informazioni',
+          'Servizio per clienti nordici e del Benelux',
+        ],
         results: ['Completezza dei dati clienti portata sopra il 99%.'],
       },
       'alexander-koch': {
@@ -1018,6 +1143,12 @@ export const it: Translations = {
           'Alexander Koch lavora con clienti i cui affari riguardano più banche, più Paesi o fasi della proprietà di un\'impresa. Dal 2022 segue i casi di clientela privata transfrontaliera della società e ha sviluppato un processo per consolidare le informazioni di più depositari. Il suo obiettivo è dare una visione d\'insieme più chiara ad assetti che altrimenti restano frammentati. Coordina discussioni e follow-up e aiuta i clienti a considerare le decisioni di portafoglio insieme alle transizioni d\'impresa e alle priorità previdenziali.',
           'Parte dal capire come le diverse parti delle finanze di un cliente si collegano, invece di valutare ogni conto isolatamente. Quando una transizione d\'impresa cambia lo scopo degli asset investiti, aiuta a ordinare le domande da affrontare. Dà particolare valore a un\'informazione chiara e a una sequenza definita di decisioni, così che assetti complessi siano più semplici da discutere e rivedere.',
         ].join('\n\n'),
+        focus: [
+          'Relazioni di clientela privata complesse',
+          'Coordinamento transfrontaliero',
+          'Consolidamento delle informazioni multi-depositario',
+          'Discussioni su transizione d’impresa e pensione',
+        ],
         results: ['Responsabile dei casi di clientela privata transfrontaliera dal 2022.'],
       },
       'leon-roth': {
@@ -1027,6 +1158,12 @@ export const it: Translations = {
           'Leon Roth coordina il servizio clienti tra i team di consulenza e quelli operativi di Helfenstein. Segue richieste legate a più di 400 dossier clienti attivi, indirizza le domande ai colleghi giusti e tiene il follow-up in carreggiata. Ha introdotto modelli di risposta condivisi che hanno ridotto del 50% gli errori di passaggio interno e migliorato la coerenza quando le richieste passano da un team all\'altro. Il suo contributo è pratico: mantenere il contesto e aiutare i clienti a orientarsi con una comunicazione chiara.',
           'Tiene traccia della richiesta, del suo contesto e della persona responsabile del passo successivo. È particolarmente utile quando una domanda coinvolge sia un consulente sia uno specialista operativo. Punta alla continuità, con aggiornamenti che spiegano l\'avanzamento e che cosa può ancora servire.',
         ].join('\n\n'),
+        focus: [
+          'Coordinamento del servizio clienti tra team',
+          'Tracciamento delle richieste e follow-up',
+          'Passaggi interni coerenti',
+          'Risoluzione di richieste di servizio complesse',
+        ],
         results: [
           'Coordinamento del servizio su più di 400 dossier clienti attivi.',
           'Riduzione del 50% degli errori di passaggio interno dopo l\'introduzione di modelli di risposta condivisi.',
@@ -1039,6 +1176,12 @@ export const it: Translations = {
           'Henrik Meier unisce responsabilità di servizio clienti e un lavoro sulla comunicazione scritta. Produce la lettera mensile della società per più di 8\'000 abbonati e supporta l\'editing delle pubblicazioni in tedesco. Trasforma i contributi del team di investimento e gli aggiornamenti di mercato in spiegazioni concise. Oggetti e struttura più chiari hanno aumentato i tassi di apertura delle e-mail del 19%. Presta particolare attenzione a struttura, formulazione e rilevanza, per mantenere uno standard coerente nella corrispondenza quotidiana e nelle comunicazioni periodiche.',
           'Per lui la chiarezza è tanto una questione di scelta e ordine delle informazioni quanto di semplificazione del linguaggio. Nei testi cerca di rendere il punto principale facile da individuare, conservando il dettaglio necessario. La sua posizione tra servizio clienti e comunicazione lo aiuta ad anticipare le domande che i lettori possono avere sugli aggiornamenti della società.',
         ].join('\n\n'),
+        focus: [
+          'Lettere e aggiornamenti mensili ai clienti',
+          'Editing in lingua tedesca',
+          'Spiegazioni di investimento accessibili',
+          'Struttura coerente delle comunicazioni scritte',
+        ],
         results: [
           'Lettera mensile ai clienti per più di 8\'000 abbonati.',
           'Aumento del 19% dei tassi di apertura dopo oggetti e struttura più chiari.',

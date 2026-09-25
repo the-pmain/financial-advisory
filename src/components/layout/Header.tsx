@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { dropdownsFirst, topMenu } from '../../data/navigation';
+import { dropdownsFirst } from '../../data/navigation';
+import { ROUTES } from '../../constants/routes';
+import { useT } from '../../i18n';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useEscape, useScrollLock } from '../../hooks/useScrollLock';
 import { SearchIcon } from '../ui/Icons';
@@ -26,6 +28,7 @@ export function Header() {
   const spacerRef = useRef<HTMLDivElement>(null);
   const overlayOpen = menuOpen || searchOpen;
 
+  const t = useT();
   const closeAll = useCallback(() => {
     setMenuOpen(false);
     setSearchOpen(false);
@@ -122,16 +125,16 @@ export function Header() {
               type="button"
               aria-expanded={searchOpen}
               aria-controls={SEARCH_ID}
-              aria-label="Search"
+              aria-label={t.ui.search}
               onClick={toggleSearch}
               className="text-vz-blue hover:text-vz-orange flex size-11 shrink-0 cursor-pointer items-center justify-center bg-transparent transition-colors duration-250 active:opacity-75"
             >
               <SearchIcon className="h-6 w-6" stroke="currentColor" />
             </button>
 
-            <nav aria-label="Top navigation" className="max-lap:hidden">
+            <nav aria-label={t.ui.topNav} className="max-lap:hidden">
               <ul className="flex items-center gap-6 leading-[17px] max-desk:gap-5">
-                {dropdownsFirst(topMenu).map((link) => (
+                {dropdownsFirst(t.nav.topMenu).map((link) => (
                   <li key={link.to}>
                     {link.children?.length ? (
                       <NavDropdown
@@ -149,10 +152,10 @@ export function Header() {
                         to={link.to}
                         className="text-vz-blue hover:text-vz-orange tracking-vz-02 inline-block text-[15px] leading-[17px]"
                       >
-                        {link.label === 'Helfenstein Financial Portal' ? (
+                        {link.to === ROUTES.financialPortal ? (
                           <>
                             <span className="max-desk:hidden">{link.label}</span>
-                            <span className="hidden max-desk:inline">Portal</span>
+                            <span className="hidden max-desk:inline">{t.ui.portalShort}</span>
                           </>
                         ) : (
                           link.label

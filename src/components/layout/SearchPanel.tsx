@@ -8,58 +8,73 @@ import {
 import { allArticles } from '../../data/content';
 import { legalPages } from '../../data/legal';
 import { type TeamMember } from '../../data/team';
+import { localizedMember } from '../../i18n/localizeTeam';
 import { topics } from '../../data/topics';
 import { useEmployees } from '../../hooks/useEmployees';
+import { useT, type Translations } from '../../i18n';
 import { CloseIcon, SearchIcon } from '../ui/Icons';
 
 type Result = { label: string; to: string; context: string; weight: number; haystack: string };
 
-function buildIndex(members: TeamMember[]): Result[] {
+function buildIndex(members: TeamMember[], t: Translations): Result[] {
   const items: Result[] = [
-    ...topics.map((topic) => ({
-      label: topic.title,
-      to: topic.path,
-      context: topic.breadcrumb.join(' › '),
-      weight: 3,
-      haystack: [
-        topic.title,
-        topic.subtitle,
-        ...topic.intro,
-        ...topic.highlights.flatMap((h) => [h.title, h.text]),
-      ]
-        .join(' ')
-        .toLowerCase(),
-    })),
-    ...allArticles.map((article) => ({
-      label: article.title,
-      to: knowledgeHubArticlePath(article.slug),
-      context: article.tagline,
-      weight: 2,
-      haystack: [article.title, article.tagline, article.teaser, ...(article.body ?? [])]
-        .join(' ')
-        .toLowerCase(),
-    })),
-    ...members.map((member) => ({
-      label: member.name,
-      to: teamMemberPath(member.slug),
-      context: member.role,
-      weight: 2,
-      haystack: [member.name, member.role, member.about, ...(member.credentials ?? [])]
-        .join(' ')
-        .toLowerCase(),
-    })),
-    ...legalPages.map((page) => ({
-      label: page.title,
-      to: legalPagePath(page.slug),
-      context: 'Legal',
-      weight: 1,
-      haystack: [
-        page.title,
-        ...page.sections.flatMap((s) => [s.heading ?? '', ...s.paragraphs]),
-      ]
-        .join(' ')
-        .toLowerCase(),
-    })),
+    ...topics.map((topic) => {
+      const copy = t.topics[topic.path];
+      const title = copy?.title ?? topic.title;
+      const subtitle = copy?.subtitle ?? topic.subtitle;
+      const breadcrumb = copy?.breadcrumb ?? topic.breadcrumb;
+      const intro = copy?.intro ?? topic.intro;
+      const highlights = copy?.highlights ?? topic.highlights;
+      return {
+        label: title,
+        to: topic.path,
+        context: breadcrumb.join(' › '),
+        weight: 3,
+        haystack: [title, subtitle, ...intro, ...highlights.flatMap((h) => [h.title, h.text])]
+          .join(' ')
+          .toLowerCase(),
+      };
+    }),
+    ...allArticles.map((article) => {
+      const copy = t.content.articles[article.slug];
+      const title = copy?.title ?? article.title;
+      const tagline = copy?.tagline ?? article.tagline;
+      const teaser = copy?.teaser ?? article.teaser;
+      const body = copy?.body ?? article.body ?? [];
+      return {
+        label: title,
+        to: knowledgeHubArticlePath(article.slug),
+        context: tagline,
+        weight: 2,
+        haystack: [title, tagline, teaser, ...body].join(' ').toLowerCase(),
+      };
+    }),
+    ...members.map((member) => {
+      const copy = localizedMember(member, t.team.members);
+      return {
+        label: copy.name,
+        to: teamMemberPath(copy.slug),
+        context: copy.role,
+        weight: 2,
+        haystack: [copy.name, copy.role, copy.about, ...(copy.focus ?? []), ...copy.results]
+          .join(' ')
+          .toLowerCase(),
+      };
+    }),
+    ...legalPages.map((page) => {
+      const copy = t.legal[page.slug];
+      const title = copy?.title ?? page.title;
+      const sections = copy?.sections ?? page.sections;
+      return {
+        label: title,
+        to: legalPagePath(page.slug),
+        context: t.ui.legalNav,
+        weight: 1,
+        haystack: [title, ...sections.flatMap((s) => [s.heading ?? '', ...s.paragraphs])]
+          .join(' ')
+          .toLowerCase(),
+      };
+    }),
   ];
   return items;
 }
@@ -76,10 +91,11 @@ export function SearchPanel({
   open: boolean;
   onClose: () => void;
 }) {
+  const t = useT();
   const [query, setQuery] = useState('');
   const input = useRef<HTMLInputElement>(null);
   const { employees } = useEmployees();
-  const index = useMemo(() => buildIndex(employees), [employees]);
+  const index = useMemo(() => buildIndex(employees, t), [employees, t]);
 
   useEffect(() => {
     if (open) input.current?.focus({ preventScroll: true });
@@ -113,7 +129,7 @@ export function SearchPanel({
     >
       <form role="search" onSubmit={(event) => event.preventDefault()}>
         <label htmlFor="vz-search-input" className="visually-hidden">
-          Search the website
+          {t.ui.searchWebsite}
         </label>
         <div className="border-vz-rule bg-vz-blue-panel-faint focus-within:border-vz-blue focus-within:shadow-[0_0_0_3px_rgba(7,14,24,0.08)] flex min-h-12 items-center gap-3 rounded-[4px] border px-3.5 transition-[border-color,box-shadow,background-color] duration-250 focus-within:bg-white">
           <SearchIcon className="text-vz-blue-soft pointer-events-none h-5 w-5 shrink-0" />
@@ -122,7 +138,7 @@ export function SearchPanel({
             id="vz-search-input"
             type="search"
             value={query}
-            placeholder="What are you looking for?"
+            placeholder={t.ui.searchPlaceholder}
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
@@ -137,7 +153,7 @@ export function SearchPanel({
                 setQuery('');
                 input.current?.focus();
               }}
-              aria-label="Clear search"
+              aria-label={t.ui.clearSearch}
               className="text-vz-gray-mid hover:text-vz-blue flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white/80 transition-colors duration-250"
             >
               <CloseIcon className="h-3 w-3" />
@@ -148,7 +164,7 @@ export function SearchPanel({
 
       {query.trim().length < 2 && (
         <p className="text-vz-gray-mid mt-3 mb-0 hidden text-[14px] leading-[1.4] max-lap:block">
-          Type at least two characters to search the site.
+          {t.ui.searchHint}
         </p>
       )}
 
@@ -176,7 +192,9 @@ export function SearchPanel({
       )}
 
       {query.trim().length >= 2 && results.length === 0 && (
-        <p className="text-vz-gray mt-3 mb-0 text-[15px]">No results for “{query.trim()}”.</p>
+        <p className="text-vz-gray mt-3 mb-0 text-[15px]">
+          {t.ui.noResults} “{query.trim()}”
+        </p>
       )}
     </div>
   );

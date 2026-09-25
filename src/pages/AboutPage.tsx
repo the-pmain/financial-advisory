@@ -67,7 +67,7 @@ export function AboutPage() {
             <PhoneRichText text={paragraph} />
           </p>
         ))}
-        <AppointmentButton className="mt-2">Make an appointment</AppointmentButton>
+        <AppointmentButton className="mt-2">{t.ui.makeAppointment}</AppointmentButton>
       </div>
 
       <div className="mt-12 max-lap:mt-10">

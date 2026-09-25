@@ -15,6 +15,7 @@ import {
   ownershipFlow,
 } from '../data/alternativeEducation';
 import { AppointmentButton } from '../components/appointments/AppointmentModal';
+import { useT } from '../i18n';
 import { SectionTitle } from '../components/ui/primitives';
 import { AdviceDisclaimer } from '../components/widgets/AdviceDisclaimer';
 import { ArticleSlim } from '../components/widgets/ArticleTeaser';
@@ -80,6 +81,7 @@ function useReadingSection() {
  * The site header and footer stay in place; this is the article only.
  */
 export function AlternativeInvestmentsPage() {
+  const t = useT();
   const currentNav = useReadingSection();
   const topic = topicByPath.get(ROUTES.alternativeInvestments);
   const related = (topic?.relatedSlugs ?? [])
@@ -412,7 +414,7 @@ export function AlternativeInvestmentsPage() {
           Separate issuer, platform and custody arrangements must be understood. Curation does not guarantee
           performance or suitability.
         </p>
-        <AppointmentButton className="mt-2">Make an appointment</AppointmentButton>
+        <AppointmentButton className="mt-2">{t.ui.makeAppointment}</AppointmentButton>
       </section>
 
       <section
